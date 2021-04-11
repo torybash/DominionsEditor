@@ -38,12 +38,12 @@ public class ProvinceGizmo : Gizmo
 		switch (elem)
 		{
 			case Commander commander:
-				var commanderGizmo = Man.Create<CommanderGizmo>(rosterGroup);
+				var commanderGizmo = Ui.Create<CommanderGizmo>(rosterGroup);
 				commanderGizmo.Initialize(commander);
 				gizmo = commanderGizmo;
 				break;
 			case Units units:
-				var unitsGizmo = Man.Create<UnitsGizmo>(rosterGroup);
+				var unitsGizmo = Ui.Create<UnitsGizmo>(rosterGroup);
 				unitsGizmo.Initialize(units);
 				gizmo = unitsGizmo;
 
@@ -74,7 +74,7 @@ public class ProvinceGizmo : Gizmo
 	
 	private void CreateNationGizmo (SpecStart specStart)
 	{
-		_nationGizmo = Man.Create<NationGizmo>(transform);
-		_nationGizmo.Initialize(specStart.NationNum);
+		_nationGizmo = Ui.Create<NationGizmo>(transform);
+		_nationGizmo.SetPlayerNumber(specStart.NationNum);
 	}
 }

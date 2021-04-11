@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.IO;
-using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,8 +20,12 @@ public class LoadMapMenu : Menu
 		var mapFilePath = mapPathField.text;
 		
 		Man.ParseMap(mapFilePath);
-	}
-	
+		
+		Ui.GetMenu<LoadMapMenu>().Hide();
+		Ui.GetMenu<MapMenu>().Show();
+		Ui.GetMenu<PlayersMenu>().Show();
 
+		Game.Initialize();
+	}
 
 }

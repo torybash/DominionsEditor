@@ -2,29 +2,27 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using UnityEngine;
 using Debug = UnityEngine.Debug;
-using Object = UnityEngine.Object;
 
 public class MapManager
 {
 	public Searcher Searcher { get; }
-	public MapManager (Searcher searcher)
-	{
-		Searcher = searcher;
-	}
+
 	public string MapFolderPath { get; private set; }
 	public string SavedGamesFolderPath => @"C:\Users\toryb\AppData\Roaming\Dominions5\savedgames\"; //TODO Set paths in dynamic way. Store in prefs.
 	public List<MapElement> MapElements { get; private set; } = new List<MapElement>();
-	public Menu[] Menus { get; set; }
-	public Gizmo[] GizmoTemplates { get; set; }
+
 	public MonstersTable Monsters { get; set; }
 	public string MapFilePath { get; set; }
 	public string SavedMapFileName  { get; set; }
 	public NationsTable Nations { get; set; }
 
-	public T GetMenu<T> () => Menus.OfType<T>().SingleOrDefault();
 
+	public MapManager (Searcher searcher)
+	{
+		Searcher = searcher;
+	}
+	
 	public void ParseMap (string mapFilePath)
 	{
 		Debug.Log($"Loading map at {mapFilePath}");
@@ -43,23 +41,6 @@ public class MapManager
 		Debug.Log("SavedMapFileName: " + SavedMapFileName);
 		
 		MapElements = mapLoader.LoadMap(mapFilePath);
-
-		GetMenu<LoadMapMenu>().Hide();
-		GetMenu<MapMenu>().Show();
-	}
-
-	public T Create<T> (Transform parent = null) where T : Component
-	{
-		var template = (Component) GizmoTemplates.OfType<T>().Single();
-		
-		var instance = Object.Instantiate(template, parent != null ? parent : template.transform.parent);
-		if (instance is Gizmo gizmo)
-		{
-			gizmo.Man = this;
-		}
-		instance.gameObject.SetActive(true);
-
-		return (T)instance;
 	}
 	
 	public MonstersTable.Entry GetMonster(int monsterId)
@@ -75,8 +56,7 @@ public class MapManager
 	public void AddMapElement (MapElement elem)
 	{
 		MapElements.Add(elem);
-
-
+		
 		switch (elem)
 		{
 			case IOwnedByCommander ownedByCommander:
@@ -100,13 +80,16 @@ public class MapManager
 				}
 				int landIdx = MapElements.IndexOf(landOwner);
 				MapElements.Remove(elem);
-				MapElements.Insert(landIdx + 1, elem);
+				if (landIdx + 1 >= MapElements.Count)
+				{
+					MapElements.Add(elem);
+				} else
+				{
+					MapElements.Insert(landIdx + 1, elem);
+				}
 				break;
 			}
 		}
-
-
-
 	}
 	
 	public void RemoveMapElement (MapElement elem)
@@ -121,11 +104,5 @@ public class MapManager
 		int extIdx = MapFilePath.LastIndexOf('.');
 		var savePath = MapFilePath.Insert(extIdx, Constants.EditedMapTag);
 		mapSaver.SaveMap(savePath);
-	}
-	
-	public void RunMap ()
-	{
-		var mapRunner = new MapRunner(this);
-		mapRunner.Run();
 	}
 }

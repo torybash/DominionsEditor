@@ -28,12 +28,11 @@ public class MapMenu : Menu
 		runButton.onClick.AddListener(OnRunClicked);
 		selectedSprite.gameObject.SetActive(false);
 	}
+	
 	private void OnRunClicked ()
 	{
 		Man.SaveMap();
-		Man.RunMap();
-		
-		
+		Game.RunMap();
 	}
 
 	private void OnSaveClicked ()
@@ -76,7 +75,6 @@ public class MapMenu : Menu
 		// mapImage.texture = mapTex;
 
 		mapImage.gameObject.SetActive(true);
-		
 		CreateProvinceGizmos();
 	}
 	
@@ -192,7 +190,7 @@ public class MapMenu : Menu
 	{
 		foreach (var searchResult in results)
 		{
-			var searchResultGizmo = Man.Create<SearchResultGizmo>();
+			var searchResultGizmo = Ui.Create<SearchResultGizmo>();
 			searchResultGizmo.Initialize(searchResult, searchText);
 			searchGizmos.Add(searchResultGizmo);
 		}
@@ -221,7 +219,7 @@ public class MapMenu : Menu
 	
 	private void CreateProvinceGizmo (int provinceNum, Vector2 centerPos)
 	{
-		var gizmo = Man.Create<ProvinceGizmo>();
+		var gizmo = Ui.Create<ProvinceGizmo>();
 		gizmo.Initialize(provinceNum, centerPos);
 	}
 

@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class Boot : MonoBehaviour
@@ -8,16 +9,26 @@ public class Boot : MonoBehaviour
 	{
 		var searcher = new Searcher();
 		var mapMan = new MapManager(searcher);
-
-		var menus = FindObjectsOfType<Menu>();
-		foreach (var menu in menus) menu.Initialize(mapMan);
-		var gizmoTemplates = FindObjectsOfType<Gizmo>();
-		foreach (var gizmoTemplate in gizmoTemplates) gizmoTemplate.InitializeTemplate(mapMan);
+		var uiMan = new UiManager();
+		var gameSetup = new GameSetup(mapMan, uiMan);
+		
+		var canvas = FindObjectOfType<Canvas>();
+		
+		var menus = canvas.GetComponentsInChildren<Menu>(true);
+		foreach (var menu in menus) menu.Initialize(mapMan, uiMan, gameSetup);
+		var gizmoTemplates = canvas.GetComponentsInChildren<Gizmo>(true);
+		foreach (var gizmoTemplate in gizmoTemplates)
+		{
+			gizmoTemplate.Init(mapMan, uiMan, gameSetup);
+			gizmoTemplate.gameObject.SetActive(false);
+		}
 
 		mapMan.Monsters = monsters;
 		mapMan.Nations = nations;
-		mapMan.GizmoTemplates = gizmoTemplates;
-		mapMan.Menus = menus;
+		uiMan.GizmoTemplates = gizmoTemplates;
+		uiMan.Menus = menus;
 		searcher.Monsters = monsters;
+		
+		menus.OfType<LoadMapMenu>().Single().Show();
 	}
 }

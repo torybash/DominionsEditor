@@ -1,19 +1,19 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class NationGizmo : Gizmo
 {
 	[SerializeField] private Image flagImage;
 	[SerializeField] private TMP_Text nameLabel;
-		
-		
+
 	public int NationNum { get; private set; }
 	
-	public void Initialize (int specStartNationNum)
+	public void SetPlayerNumber (int nationNum)
 	{
-		NationNum = specStartNationNum;
+		NationNum = nationNum;
 		
-		var entry = Man.Nations.GetNationEntry(specStartNationNum);
+		var entry = Man.Nations.GetNationEntry(nationNum);
 		flagImage.sprite = entry.Sprite;
 		nameLabel.text = entry.Name;
 	}
