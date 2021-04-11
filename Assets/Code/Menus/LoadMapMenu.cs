@@ -19,7 +19,7 @@ public class LoadMapMenu : Menu
 	{
 		var mapFilePath = mapPathField.text;
 		
-		Man.ParseMap(mapFilePath);
+		Map.ParseMap(mapFilePath);
 		
 		Ui.GetMenu<LoadMapMenu>().Hide();
 		Ui.GetMenu<MapMenu>().Show();

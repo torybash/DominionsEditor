@@ -68,16 +68,7 @@ public class MapManager
 			}
 			case IOwnedByProvince ownedByProvince:
 			{
-				var landOwner = MapElements.OfType<Land>().SingleOrDefault(x => x.ProvinceNum == ownedByProvince.ProvinceNum);
-				if (landOwner == null)
-				{
-					landOwner = new Land
-					{
-						Man = this,
-						ProvinceNum = ownedByProvince.ProvinceNum
-					};
-					MapElements.Add(landOwner);
-				}
+				var landOwner = GetLand(ownedByProvince.ProvinceNum);
 				int landIdx = MapElements.IndexOf(landOwner);
 				MapElements.Remove(elem);
 				if (landIdx + 1 >= MapElements.Count)
@@ -91,7 +82,21 @@ public class MapManager
 			}
 		}
 	}
-	
+	public Land GetLand (int provinceNum)
+	{
+
+		var landOwner = MapElements.OfType<Land>().SingleOrDefault(x => x.ProvinceNum == provinceNum);
+		if (landOwner == null)
+		{
+			landOwner = new Land
+			{
+				ProvinceNum = provinceNum
+			};
+			MapElements.Add(landOwner);
+		}
+		return landOwner;
+	}
+
 	public void RemoveMapElement (MapElement elem)
 	{
 		MapElements.Remove(elem);

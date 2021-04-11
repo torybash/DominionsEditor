@@ -64,4 +64,11 @@ public class GameSetup
 		var mapRunner = new MapRunner(Map, this);
 		mapRunner.Run();
 	}
+	
+	public GamePlayer GetPlayer (int number)
+	{
+		int idx = number - 1;
+		if (idx < 0 || idx >= Players.Count) return null;
+		return Players[idx];
+	}
 }

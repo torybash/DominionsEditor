@@ -69,7 +69,6 @@ public class MapLoader
 			if (mapElemType == null) continue;
 
 			var mapElem = (MapElement)Activator.CreateInstance(mapElemType);
-			mapElem.Man = _mapManager;
 			mapElem.ParseArgs(mapLineData.Args.ToArray());
 			mapElements.Add(mapElem);
 

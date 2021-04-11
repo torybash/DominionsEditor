@@ -46,6 +46,7 @@ public class MapRunner
 		args.Add($"--newgame {Constants.GameName}");
 		args.Add($"--mapfile {_man.SavedMapFileName}");
 		args.Add($"--era {HARDCODED_ERA_NUMBER_TODO}");
+		args.Add($"--conqall"); // Win by eliminating all opponents only
 		
 		foreach (var player in _game.Players)
 		{

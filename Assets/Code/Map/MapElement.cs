@@ -3,7 +3,6 @@ using System.Globalization;
 using UnityEngine;
 public abstract class MapElement
 {
-	public MapManager Man { get; set; }
 	
 	public abstract void ParseArgs (string[] args);
 	public abstract string[] SaveArgs ();
@@ -77,13 +76,14 @@ public class ImageFile : MapElement
 
 	public Texture2D GetTexture ()
 	{
-		string mapImagePath = $"{Man.MapFolderPath}{_mapImageName}";
-		Debug.Log($"GetTexture mapImagePath: {mapImagePath}");
-		var texture2D = TGALoader.LoadTGA(mapImagePath);
-		Debug.Log($"GetTexture tex: {texture2D}, (w,h): ({texture2D.width}, {texture2D.height})");
-		return texture2D;
+		// string mapImagePath = $"{Map.MapFolderPath}{_mapImageName}";
+		// Debug.Log($"GetTexture mapImagePath: {mapImagePath}");
+		// var texture2D = TGALoader.LoadTGA(mapImagePath);
+		// Debug.Log($"GetTexture tex: {texture2D}, (w,h): ({texture2D.width}, {texture2D.height})");
+		// return texture2D;
 		// byte[] mapImageBytes = File.ReadAllBytes(mapImagePath);
 		// return mapImageBytes;
+		return null;
 	}
 	
 	public override void ParseArgs (string[] args) => _mapImageName = args[0];
@@ -112,10 +112,10 @@ public class AllowedPlayer : MapElement
 }
 
 [MapKeyName("specstart")]
-public class SpecStart : MapElement
+public class StartLocation : MapElement
 {
-	public int NationNum { get; private set; }
-	public int ProvinceNum { get; private set; }
+	public int NationNum { get; set; }
+	public int ProvinceNum { get; set; }
 
 	public override void ParseArgs (string[] args)
 	{
@@ -254,6 +254,20 @@ public abstract class ProvinceDataElement : MapElement, IOwnedByProvince
 	public int ProvinceNum { get; set; }
 }
 
+[MapKeyName("owner")]
+public class ProvinceOwner : ProvinceDataElement
+{
+	public int NationNum { get; set; }
+	
+	public override void ParseArgs (string[] args)
+	{
+		NationNum = int.Parse(args[0]);
+	}
+	public override string[] SaveArgs ()
+	{
+		return new[] { NationNum.ToString() };
+	}
+}	
 
 public abstract class MonsterElement : ProvinceDataElement
 {
