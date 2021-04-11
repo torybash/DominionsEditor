@@ -24,47 +24,16 @@ public class MapMenu : Menu
 	{
 		searchField.onValueChanged.AddListener(OnSearchChanged);
 		clearSearchButton.onClick.AddListener(() => searchField.text = "");
-		saveMapButton.onClick.AddListener(OnRunClicked);
-		// runButton.onClick.AddListener(OnRunClicked);
+		saveMapButton.onClick.AddListener(OnSaveClicked);
+		runButton.onClick.AddListener(OnRunClicked);
 		selectedSprite.gameObject.SetActive(false);
 	}
 	private void OnRunClicked ()
 	{
 		Man.SaveMap();
-		// Prepare the process to run
-		var start = new ProcessStartInfo
-		{
-			Arguments = "--newgame Arenaye --mapfile Arena_edited.map --era 3",
-			FileName = @"G:\Games\steamapps\common\Dominions5\Dominions5.exe",
-			// WindowStyle = ProcessWindowStyle.Hidden,
-			// CreateNoWindow = true
-		};
-
-		int exitCode;
-		
-		using (Process proc = Process.Start(start)) // Run the external process & wait for it to finish
-		{
-			proc.WaitForExit();
-			exitCode = proc.ExitCode;
-		}
-		Debug.Log("Create game process. ExitCode: "+ exitCode);
-
+		Man.RunMap();
 		
 		
-		var start2 = new ProcessStartInfo
-		{
-			Arguments = "Arenaye",
-			FileName = @"G:\Games\steamapps\common\Dominions5\Dominions5.exe",
-			// WindowStyle = ProcessWindowStyle.Hidden,
-			// CreateNoWindow = true
-		};
-		
-		using (Process proc = Process.Start(start2)) // Run the external process & wait for it to finish
-		{
-			proc.WaitForExit();
-			exitCode = proc.ExitCode;
-		}
-		Debug.Log("Run game process. ExitCode: "+ exitCode);
 	}
 
 	private void OnSaveClicked ()
@@ -210,7 +179,6 @@ public class MapMenu : Menu
 	private void OnSearchChanged (string searchText)
 	{
 		var results = Man.Searcher.Search(searchText);
-		Debug.Log($"Search: {searchText}, results:\n{string.Join("\n", results.Select(x => x.Name))}");
 
 		foreach (var searchGizmo in searchGizmos) Destroy(searchGizmo.gameObject);
 		searchGizmos.Clear();
