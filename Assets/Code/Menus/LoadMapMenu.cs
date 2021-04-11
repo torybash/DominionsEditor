@@ -4,7 +4,8 @@ using UnityEngine.UI;
 
 public class LoadMapMenu : Menu
 {
-	[SerializeField] private string defaultMapPath = @"C:\Users\toryb\AppData\Roaming\Dominions5\maps\Arena\Arena.map";
+	
+	private const string DefaultMapPath = @"maps\Arena\Arena.map";
 	
 	[SerializeField] private TMP_InputField mapPathField;
 	[SerializeField] private Button button;
@@ -12,7 +13,9 @@ public class LoadMapMenu : Menu
 	private void Awake ()
 	{
 		button.onClick.AddListener(OnClickButton);
-		mapPathField.text = defaultMapPath;
+
+		var mapPath = PrefManager.DataFolderPath.Get() + DefaultMapPath;
+		mapPathField.text = mapPath;
 	}
 	
 	private void OnClickButton ()
@@ -21,9 +24,9 @@ public class LoadMapMenu : Menu
 		
 		Map.ParseMap(mapFilePath);
 		
-		Ui.GetMenu<LoadMapMenu>().Hide();
-		Ui.GetMenu<MapMenu>().Show();
-		Ui.GetMenu<PlayersMenu>().Show();
+		Ui.Get<LoadMapMenu>().Hide();
+		Ui.Get<MapMenu>().Show();
+		Ui.Get<PlayersMenu>().Show();
 
 		Game.Initialize();
 	}

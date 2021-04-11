@@ -30,5 +30,6 @@ public class Boot : MonoBehaviour
 		searcher.Monsters = monsters;
 		
 		menus.OfType<LoadMapMenu>().Single().Show();
+		menus.OfType<ControlButtonsMenu>().Single().Show();
 	}
 }

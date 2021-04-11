@@ -61,7 +61,8 @@ public class MapRunner
 		{
 			Arguments = string.Join(" ", args),
 			// Arguments = $"--newgame {Constants.GameName} --mapfile {_man.SavedMapFileName} --era 3 {playerAiArgs}", // ", --easyai 102
-			FileName = @"G:\Games\steamapps\common\Dominions5\Dominions5.exe",
+			// FileName = @"G:\Games\steamapps\common\Dominions5\Dominions5.exe",
+			FileName = PrefManager.ExecutablePath.Get(),
 		};
 
 		int exitCode;
@@ -80,7 +81,7 @@ public class MapRunner
 		var start = new ProcessStartInfo
 		{
 			Arguments = $"{Constants.GameName}",
-			FileName = @"G:\Games\steamapps\common\Dominions5\Dominions5.exe",
+			FileName = PrefManager.ExecutablePath.Get(),
 		};
 
 		int exitCode;

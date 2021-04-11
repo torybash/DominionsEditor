@@ -65,13 +65,11 @@ public class MapMenu : Menu
 		if (Input.mouseScrollDelta.y != 0)
 		{
 			int change = (int)Input.mouseScrollDelta.y;
-			if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) change *= 10;
+			if (InputHelper.IsShiftPressed) change *= 10;
 			ChangeUnitCount(change);
 		}
 	}
-
-
-
+	
 	public override void Show ()
 	{
 		base.Show();
@@ -180,24 +178,40 @@ public class MapMenu : Menu
 		int nationNum = player.NationNum;
 		
 		var startLocation = Map.MapElements.OfType<StartLocation>().SingleOrDefault(x => x.ProvinceNum == provinceGizmo.ProvinceNum);
-		if (startLocation != null)
-		{
-			if (startLocation.NationNum != nationNum)
-			{
-				startLocation.NationNum = nationNum;
-				provinceGizmo.SetOwner(nationNum);
-			}
-			return;
-		}
-		
 		var provinceOwner = Map.MapElements.OfType<ProvinceOwner>().SingleOrDefault(x => x.ProvinceNum == provinceGizmo.ProvinceNum);
-		if (provinceOwner == null)
+
+		if (InputHelper.IsShiftPressed)
 		{
-			provinceOwner = new ProvinceOwner { ProvinceNum = provinceGizmo.ProvinceNum };
-			Map.AddMapElement(provinceOwner);
+			if (provinceOwner != null)
+			{
+				Map.RemoveMapElement(provinceOwner);
+			}
+			
+			if (startLocation == null)
+			{
+				startLocation = new StartLocation { ProvinceNum = provinceGizmo.ProvinceNum };
+				Map.AddMapElement(provinceOwner);
+			}
+			
+			startLocation.NationNum = nationNum;
+			provinceGizmo.SetOwner(nationNum, true);
+		} 
+		else
+		{
+			if (startLocation != null)
+			{
+				Map.RemoveMapElement(startLocation);
+			}
+
+			if (provinceOwner == null)
+			{
+				provinceOwner = new ProvinceOwner { ProvinceNum = provinceGizmo.ProvinceNum };
+				Map.AddMapElement(provinceOwner);
+			}
+			
+			provinceOwner.NationNum = nationNum;
+			provinceGizmo.SetOwner(nationNum);
 		}
-		provinceOwner.NationNum = nationNum;
-		provinceGizmo.SetOwner(provinceOwner.NationNum);
 	}
 
 	private void ClearProvinceOwner (ProvinceGizmo provinceGizmo)

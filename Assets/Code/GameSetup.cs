@@ -29,7 +29,7 @@ public class GameSetup
 		Players.Add(player);
 
 		var playerIdx = Players.IndexOf(player);
-		Ui.GetMenu<PlayersMenu>().CreateGizmo(playerIdx, player);
+		Ui.Get<PlayersMenu>().CreateGizmo(playerIdx, player);
 	}
 
 	public void RemovePlayer (int playerIdx)
@@ -37,7 +37,7 @@ public class GameSetup
 		var player = Players[playerIdx];
 		Players.Remove(player);
 		
-		Ui.GetMenu<PlayersMenu>().DestroyGizmo(player);
+		Ui.Get<PlayersMenu>().DestroyGizmo(player);
 	}
 
 	public void ChangeNation (int playerIdx, int nationNum)
@@ -45,7 +45,7 @@ public class GameSetup
 		var player = Players[playerIdx];
 		player.NationNum = nationNum;
 		
-		Ui.GetMenu<PlayersMenu>().UpdateGizmo(player);
+		Ui.Get<PlayersMenu>().UpdateGizmo(player);
 	}
 	
 	public void IncrementType (int playerIdx, int change)
@@ -53,9 +53,10 @@ public class GameSetup
 		var player = Players[playerIdx];
 		var newType = player.Type;
 		int newTypeInt = ((int)newType + change) % Enum.GetValues(typeof(PlayerType)).Length;
+		if (newTypeInt < 0) newTypeInt += Enum.GetValues(typeof(PlayerType)).Length;
 		player.Type = (PlayerType) newTypeInt;
 		
-		Ui.GetMenu<PlayersMenu>().UpdateGizmo(player);
+		Ui.Get<PlayersMenu>().UpdateGizmo(player);
 	}
 	
 

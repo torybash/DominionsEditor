@@ -6,7 +6,7 @@ public class UiManager
 	public Menu[] Menus { get; set; }
 	public Gizmo[] GizmoTemplates { get; set; }
 
-	public T GetMenu<T> () => Menus.OfType<T>().SingleOrDefault();
+	public T Get<T> () where T : Menu => Menus.OfType<T>().SingleOrDefault();
 
 	public T Create<T> (Transform parent = null) where T : Component
 	{

@@ -28,7 +28,13 @@ public class ProvinceGizmo : Gizmo
 		var specStart = Man.MapElements.OfType<StartLocation>().SingleOrDefault(x => x.ProvinceNum == provinceNum);
 		if (specStart != null)
 		{
-			SetOwner(specStart.NationNum);
+			SetOwner(specStart.NationNum, true);
+		}
+		
+		var provinceOwner = Man.MapElements.OfType<ProvinceOwner>().SingleOrDefault(x => x.ProvinceNum == provinceNum);
+		if (provinceOwner != null)
+		{
+			SetOwner(provinceOwner.NationNum);
 		}
 	}
 
@@ -72,13 +78,15 @@ public class ProvinceGizmo : Gizmo
 		}
 	}
 	
-	public void SetOwner (int nationNum)
+	public void SetOwner (int nationNum, bool isStartLocation = false)
 	{
+		
 		if (_nationGizmo == null)
 		{
 			_nationGizmo = Ui.Create<NationGizmo>(transform);
 		}
 		_nationGizmo.SetPlayerNumber(nationNum);
+		_nationGizmo.ShowCapitalMarker(isStartLocation);
 	}
 
 	public void ClearOwner ()

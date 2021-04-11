@@ -18,4 +18,5 @@ internal static class InputHelper
 
 		return numberPressed >= 0;
 	}
+	public static bool IsShiftPressed => Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
 }

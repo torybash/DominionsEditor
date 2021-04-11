@@ -18,12 +18,10 @@ MonoBehaviour:
     nationNum: 102
     pretenderFileName: late_phlegra
     sprite: {fileID: 21300000, guid: 7c3516463a7304b42beb6f0ee384ee6e, type: 3}
-    samplePretenderFilePath: C:\Users\toryb\UnityProjects\DominionsEditor\Assets\Data\pretender
-      samples\late_phlegra.2h
+    samplePretenderFilePath: Assets\Data\pretender samples\late_phlegra.2h
   - name: Arcoscephale
     name2: Sibylline Guidance
     nationNum: 80
     pretenderFileName: late_arcoscephale
     sprite: {fileID: 21300000, guid: fa8d0dc8f8bfd224b8ace722dbc44053, type: 3}
-    samplePretenderFilePath: C:\Users\toryb\UnityProjects\DominionsEditor\Assets\Data\pretender
-      samples\late_arcoscephale.2h
+    samplePretenderFilePath: Assets\Data\pretender samples\late_arcoscephale.2h

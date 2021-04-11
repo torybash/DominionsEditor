@@ -8,8 +8,7 @@ public class MapManager
 {
 	public Searcher Searcher { get; }
 
-	public string MapFolderPath { get; private set; }
-	public string SavedGamesFolderPath => @"C:\Users\toryb\AppData\Roaming\Dominions5\savedgames\"; //TODO Set paths in dynamic way. Store in prefs.
+	public string SavedGamesFolderPath => $@"{PrefManager.DataFolderPath.Get()}savedgames/";
 	public List<MapElement> MapElements { get; private set; } = new List<MapElement>();
 
 	public MonstersTable Monsters { get; set; }
@@ -31,10 +30,7 @@ public class MapManager
 
 		MapFilePath = mapFilePath;
 		int lastSepIdx = mapFilePath.LastIndexOf('\\');
-
-		MapFolderPath = mapFilePath.Substring(0, lastSepIdx + 1);
-		Debug.Log("MapFolderPath: "+ MapFolderPath);
-
+		
 		SavedMapFileName = mapFilePath.Substring(lastSepIdx + 1);
 		int extIdx = SavedMapFileName.LastIndexOf('.');
 		SavedMapFileName = SavedMapFileName.Insert(extIdx, Constants.EditedMapTag);
@@ -55,31 +51,34 @@ public class MapManager
 
 	public void AddMapElement (MapElement elem)
 	{
-		MapElements.Add(elem);
 		
 		switch (elem)
 		{
 			case IOwnedByCommander ownedByCommander:
-			{
 				int commanderIdx = MapElements.IndexOf(ownedByCommander.Commander);
-				MapElements.Remove(elem);
 				MapElements.Insert(commanderIdx + 1, elem);
 				break;
-			}
 			case IOwnedByProvince ownedByProvince:
-			{
-				var landOwner = GetLand(ownedByProvince.ProvinceNum);
-				int landIdx = MapElements.IndexOf(landOwner);
-				MapElements.Remove(elem);
-				if (landIdx + 1 >= MapElements.Count)
+				var land = GetLand(ownedByProvince.ProvinceNum);
+				int insertIdx = MapElements.IndexOf(land) + 1;
+
+				var provinceOwner = MapElements.OfType<ProvinceOwner>().SingleOrDefault(x => x.ProvinceNum == ownedByProvince.ProvinceNum);
+				if (provinceOwner != null)
 				{
-					MapElements.Add(elem);
-				} else
-				{
-					MapElements.Insert(landIdx + 1, elem);
+					insertIdx = MapElements.IndexOf(provinceOwner) + 1;
 				}
+				
+				// if (landIdx + 1 >= MapElements.Count)
+				// {
+				// 	MapElements.Add(elem);
+				// } else
+				// {
+					MapElements.Insert(insertIdx, elem);
+				// }
 				break;
-			}
+			default:
+				MapElements.Add(elem);
+				break;
 		}
 	}
 	public Land GetLand (int provinceNum)

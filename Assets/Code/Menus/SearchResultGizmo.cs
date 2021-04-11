@@ -17,7 +17,7 @@ public class SearchResultGizmo : Gizmo
 	
 	private void OnClicked ()
 	{
-		Ui.GetMenu<MapMenu>().SetSelected(_monster);
+		Ui.Get<MapMenu>().SetSelected(_monster);
 	}
 
 	public void Initialize (MonstersTable.Entry monster, string searchText)
