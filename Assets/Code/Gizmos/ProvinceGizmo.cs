@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -9,91 +10,89 @@ public class ProvinceGizmo : Gizmo
 
 	private List<MonsterGizmo> monsterGizmos = new List<MonsterGizmo>();
 	private NationGizmo _nationGizmo;
-	public int ProvinceNum { get; private set; }
-	
-	public void Initialize (int provinceNum, Vector2 centerPos)
+	public Province Province { get; private set; }
+
+	public void Initialize (Province province)
 	{
-		ProvinceNum = provinceNum;
-		numLabel.text = provinceNum.ToString();
-		RectTrans.anchoredPosition = centerPos;
-
-		// Debug.Log($"Province {provinceNum}, centerPos {centerPos}");
-
-		var provinceElements = Man.MapElements.OfType<ProvinceDataElement>().Where(x => x.ProvinceNum == provinceNum);
-		foreach (var elem in provinceElements)
+		Province = province;
+		
+		foreach (var monster in Province.Monsters)
 		{
-			CreateElementGizmo(elem);
+			switch (monster)
+			{
+				case Commander commander:
+					CreateCommanderGizmo(commander);
+					break;
+				case Unit unit:
+					CreateUnitGizmo(unit);
+					break;
+				default:
+					throw new ArgumentOutOfRangeException(nameof(monster));
+
+			}
 		}
 		
-		var specStart = Man.MapElements.OfType<StartLocation>().SingleOrDefault(x => x.ProvinceNum == provinceNum);
-		if (specStart != null)
-		{
-			SetOwner(specStart.NationNum, true);
-		}
-		
-		var provinceOwner = Man.MapElements.OfType<ProvinceOwner>().SingleOrDefault(x => x.ProvinceNum == provinceNum);
-		if (provinceOwner != null)
-		{
-			SetOwner(provinceOwner.NationNum);
-		}
+		Refresh();
 	}
 
-	public MonsterGizmo CreateElementGizmo (ProvinceDataElement elem)
+	public void Refresh ()
 	{
-		MonsterGizmo gizmo = null;
-		switch (elem)
-		{
-			case Commander commander:
-				var commanderGizmo = Ui.Create<CommanderGizmo>(rosterGroup);
-				commanderGizmo.Initialize(commander);
-				gizmo = commanderGizmo;
-				break;
-			case Units units:
-				var unitsGizmo = Ui.Create<UnitsGizmo>(rosterGroup);
-				unitsGizmo.Initialize(units);
-				gizmo = unitsGizmo;
-
-				var ownerCommanderGizmo = monsterGizmos.Single(x => x.Element == units.Commander);
-				int commanderIdx = ownerCommanderGizmo.transform.GetSiblingIndex();
-				unitsGizmo.transform.SetSiblingIndex(commanderIdx + 1);
-					
-				break;
-		}
-		if (gizmo == null)
-		{
-			Debug.LogWarning($"No gizmo for element {elem}");
-			return null;
-		}
-		monsterGizmos.Add(gizmo);
+		numLabel.text = Province.ProvinceNumber.ToString();
+		RectTrans.anchoredPosition = Province.CenterPos;
 		
-		return gizmo;
+		SetOwner(Province.Owner);
 	}
 
-	public void RemoveElementGizmo (ProvinceDataElement elem)
+	public void RemoveElementGizmo (Monster elem)
 	{
-		var elemGizmo = monsterGizmos.SingleOrDefault(x => x.Element == elem);
+		var elemGizmo = monsterGizmos.SingleOrDefault(x => x.MonsterData == elem);
 		if (elemGizmo != null)
 		{
 			Destroy(elemGizmo.gameObject);
 		}
 	}
 	
-	public void SetOwner (int nationNum, bool isStartLocation = false)
+	public void SetOwner (Nation nation)
 	{
-		
+		if (nation.Equals(Nation.Independents))
+		{
+			if (_nationGizmo != null)
+			{
+				Destroy(_nationGizmo.gameObject);
+			}
+			return;
+		}
+
 		if (_nationGizmo == null)
 		{
 			_nationGizmo = Ui.Create<NationGizmo>(transform);
 		}
-		_nationGizmo.SetPlayerNumber(nationNum);
+			
+		_nationGizmo.SetNation(nation);
+
+		bool isStartLocation = Map.Players.Any(x => x.CapitalProvinceNum == Province.ProvinceNumber);
 		_nationGizmo.ShowCapitalMarker(isStartLocation);
 	}
 
-	public void ClearOwner ()
+	public void CreateCommanderGizmo (Commander commander)
 	{
-		if (_nationGizmo != null)
+		var commanderGizmo = Ui.Create<CommanderGizmo>(rosterGroup);
+		commanderGizmo.Initialize(commander);
+		monsterGizmos.Add(commanderGizmo);
+	}
+	
+	public void CreateUnitGizmo (Unit unit)
+	{
+		var unitGizmo = Ui.Create<UnitGizmo>(rosterGroup);
+		unitGizmo.Initialize(unit);
+		monsterGizmos.Add(unitGizmo);
+
+		var ownerCommander = Province.Monsters.OfType<Commander>().SingleOrDefault(x => x.UnitsUnderCommand.Contains(unit));
+		if (ownerCommander != null)
 		{
-			Destroy(_nationGizmo.gameObject);
+			var ownerCommanderGizmo = monsterGizmos.OfType<CommanderGizmo>().Single(x => x.Data == ownerCommander);
+			int commanderIdx = ownerCommanderGizmo.transform.GetSiblingIndex();
+			unitGizmo.transform.SetSiblingIndex(commanderIdx + 1);
 		}
 	}
 }

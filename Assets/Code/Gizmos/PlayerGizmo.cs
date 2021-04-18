@@ -42,7 +42,7 @@ public class PlayerGizmo : Gizmo, IPointerDownHandler
 	{
 		numberText.text = (Index + 1).ToString();
 
-		_nationGizmo.SetPlayerNumber(Player.NationNum);
+		_nationGizmo.SetNation(Player.NationNum);
 		typeText.text = Player.Type.ToString();
 	}
 	

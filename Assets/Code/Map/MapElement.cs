@@ -98,7 +98,7 @@ public class WinterImageFile : ImageFile
 [MapKeyName("allowedplayer")]
 public class AllowedPlayer : MapElement
 {
-	public int NationNum { get; private set; }
+	public int NationNum { get; set; }
 	
 	public override void ParseArgs (string[] args)
 	{
@@ -271,12 +271,12 @@ public class ProvinceOwner : ProvinceDataElement
 
 public abstract class MonsterElement : ProvinceDataElement
 {
-	public int UnitId { get; set; }
-	public string UnitName { get; protected set; }
+	public int MonsterId { get; set; }
+	public string MonsterName { get; protected set; }
 	
 	public override string[] SaveArgs ()
 	{
-		return new[] { UnitId.ToString() };
+		return new[] { MonsterId.ToString() };
 	}
 }
 
@@ -298,72 +298,89 @@ public class PopType : ProvinceDataElement
 }
 	
 [MapKeyName("commander")]
-public class Commander : MonsterElement
+public class CommanderElement : MonsterElement
 {
 	public override void ParseArgs (string[] args)
 	{
 		if (int.TryParse(args[0], out int unitId))
 		{
-			UnitId = unitId;
+			MonsterId = unitId;
 		} else
 		{
-			UnitName = args[0];
+			MonsterName = args[0];
 		}
 	}
 }
 
 [MapKeyName("units")]
-public class Units : MonsterElement, IOwnedByCommander
+public class UnitsElement : MonsterElement, IOwnedByCommander
 {
 	public int Amount { get; set; }
-	public Commander Commander { get; set; }
+	public CommanderElement Commander { get; set; }
 
 	public override void ParseArgs (string[] args)
 	{
 		Amount = int.Parse(args[0]);
 		if (int.TryParse(args[1], out int unitId))
 		{
-			UnitId = unitId;
+			MonsterId = unitId;
 		} else
 		{
-			UnitName = args[1];
+			MonsterName = args[1];
 		}
 	}
 
 	public override string[] SaveArgs ()
 	{
-		return new[] { Amount.ToString(), UnitId.ToString() };
+		return new[] { Amount.ToString(), MonsterId.ToString() };
 	}
 }
 
 [MapKeyName("bodyguards")]
-public class Bodyguards : MonsterElement, IOwnedByCommander
+public class BodyguardsElement : MonsterElement, IOwnedByCommander
 {
 	public int Amount { get; private set; }
-	public Commander Commander { get; set; }
+	public CommanderElement Commander { get; set; }
 
 	public override void ParseArgs (string[] args)
 	{
 		Amount = int.Parse(args[0]);
 		if (int.TryParse(args[1], out int unitId))
 		{
-			UnitId = unitId;
+			MonsterId = unitId;
 		} else
 		{
-			UnitName = args[1];
+			MonsterName = args[1];
 		}
 	}
 	
 	public override string[] SaveArgs ()
 	{
-		return new[] { Amount.ToString(), UnitId.ToString() };
+		return new[] { Amount.ToString(), MonsterId.ToString() };
+	}
+}
+
+[MapKeyName("additem")]
+public class ItemElement : MapElement, IOwnedByCommander
+{
+	public string ItemName { get; private set; }
+	public CommanderElement Commander { get; set; }
+
+	public override void ParseArgs (string[] args)
+	{
+		ItemName = args[0];
+	}
+	
+	public override string[] SaveArgs ()
+	{
+		return new[] { ItemName };
 	}
 }
 
 
 public interface IOwnedByCommander
 {
-	Commander Commander { get; set; }
+	CommanderElement Commander { get; set; }
 }
 
 public interface IOwnedByProvince

@@ -1,4 +1,4 @@
-# Dom Tool Notes
+# DomEdit Notes
 
 ## Files
 
@@ -109,3 +109,35 @@ d6 ?
 	- REMEMBER: Rename 2h files, and remove "_##"
 - Run game with Command Line Options
 	- Dominions5.exe --newgame Arenaye --mapfile Arena.map --era 3 && Dominions5.exe Arenaye 
+
+
+
+
+
+
+
+
+
+
+## Tasks
+
+- Handle spawning 2 nations on same province (for instant fight)
+- Commander:
+	- Magic
+	- Items
+	- Bodyguard
+- Nation editing, adding/removing nation
+- Game settings (research speed, magic site freq etc.)
+- Fix map graphics loading
+- Show units info 
+	- In search results show nation
+	- Show extra unit when double-clicking(?) unit
+- Display button and/or change button-scheme
+- Fill in nations table
+
+
+## Next steps
+
+- Pretender creation/editing
+- Check if unit or commander
+- Enable casting spells at limited levels. Dynamically change dominions mod file 

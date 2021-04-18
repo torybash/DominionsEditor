@@ -15,7 +15,7 @@ public class UiManager
 		var instance = Object.Instantiate(template, parent != null ? parent : template.transform.parent);
 		if (instance is Gizmo gizmo && template is Gizmo templateGizmo)
 		{
-			gizmo.Init(templateGizmo.Man, templateGizmo.Ui, templateGizmo.Game);
+			gizmo.Init(templateGizmo.Map, templateGizmo.Ui, templateGizmo.Game);
 		}
 		instance.gameObject.SetActive(true);
 

@@ -1,7 +1,6 @@
 using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.GameCenter;
 using UnityEngine.UI;
 
 public class NationGizmo : Gizmo
@@ -10,18 +9,18 @@ public class NationGizmo : Gizmo
 	[SerializeField] private TMP_Text nameLabel;
 	[SerializeField] private GameObject capitalMarker;
 
-	public int NationNum { get; private set; }
+	public Nation Nation { get; private set; }
 
 	private void Awake ()
 	{
 		ShowCapitalMarker(false);
 	}
 	
-	public void SetPlayerNumber (int nationNum)
+	public void SetNation (Nation nation)
 	{
-		NationNum = nationNum;
+		Nation = nation;
 		
-		var entry = Man.Nations.GetNationEntry(nationNum);
+		var entry = Map.Nations.GetNationEntry(nation);
 		flagImage.sprite = entry.Sprite;
 		nameLabel.text = entry.Name;
 	}

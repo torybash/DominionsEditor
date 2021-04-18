@@ -13,23 +13,15 @@ public class GameSetup
 		Ui = ui;
 	}
 
-	public List<GamePlayer> Players { get; } = new List<GamePlayer>();
+	public List<GamePlayer> Players  => Map.Players;
 
 	public void Initialize ()
 	{
-		foreach (var allowedPlayer in Map.MapElements.OfType<AllowedPlayer>())
+		for (int i = 0; i < Map.Players.Count; i++)
 		{
-			AddPlayer(allowedPlayer.NationNum);		
+			var player = Map.Players[i];
+			Ui.Get<PlayersMenu>().CreateGizmo(i, player);
 		}
-	}
-	
-	public void AddPlayer(int nationNum)
-	{
-		var player = new GamePlayer(PlayerType.Human, nationNum);
-		Players.Add(player);
-
-		var playerIdx = Players.IndexOf(player);
-		Ui.Get<PlayersMenu>().CreateGizmo(playerIdx, player);
 	}
 
 	public void RemovePlayer (int playerIdx)

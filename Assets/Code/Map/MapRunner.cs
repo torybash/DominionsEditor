@@ -6,8 +6,8 @@ using System.Linq;
 using Debug = UnityEngine.Debug;
 public class MapRunner
 {
-	private MapManager _man;
-	private GameSetup _game;
+	private readonly MapManager _man;
+	private readonly GameSetup _game;
 
 	public MapRunner (MapManager man, GameSetup gameSetup)
 	{
@@ -24,14 +24,13 @@ public class MapRunner
 
 	private void CreateGameFolder ()
 	{
-		var allowedPlayers = _man.MapElements.OfType<AllowedPlayer>();
 		var folderPath = _man.SavedGamesFolderPath + Constants.GameName;
 		Directory.Delete(folderPath, true);
 		Directory.CreateDirectory(folderPath);
 
-		foreach (var allowedPlayer in allowedPlayers)
+		foreach (var player in _man.Players)
 		{
-			var nationEntry = _man.Nations.GetNationEntry(allowedPlayer.NationNum);
+			var nationEntry = _man.Nations.GetNationEntry(player.NationNum);
 			var nationPath = $"{_man.SavedGamesFolderPath}{Constants.GameName}\\{nationEntry.PretenderFileName}.2h";
 
 			File.Copy(nationEntry.SamplePretenderFilePath, nationPath);

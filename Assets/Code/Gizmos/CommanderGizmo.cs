@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CommanderGizmo : MonsterGizmo
+public class CommanderGizmo : MonsterGizmo<Commander>
 {
 
 }

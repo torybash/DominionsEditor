@@ -1,11 +1,9 @@
+using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using Debug = UnityEngine.Debug;
 
 public class MapMenu : Menu
 {
@@ -30,7 +28,6 @@ public class MapMenu : Menu
 	
 	private void OnRunClicked ()
 	{
-		Map.SaveMap();
 		Game.RunMap();
 	}
 
@@ -85,10 +82,11 @@ public class MapMenu : Menu
 	{
 		RaycastGizmos(out var monsterGizmo, out var provinceGizmo);
 
-		if (!(monsterGizmo is UnitsGizmo unitsGizmo)) return;
+		if (!(monsterGizmo is UnitGizmo unitsGizmo)) return;
 
-		unitsGizmo.UnitsElement.Amount = Mathf.Clamp(unitsGizmo.UnitsElement.Amount + sign, 1, 100000);
-		unitsGizmo.Initialize(unitsGizmo.UnitsElement);
+		unitsGizmo.Data.Amount = Mathf.Clamp(unitsGizmo.Data.Amount + sign, 1, 100000);
+
+		unitsGizmo.Initialize(unitsGizmo.Data);
 	}
 
 	private void AddCommander ()
@@ -97,38 +95,34 @@ public class MapMenu : Menu
 
 		if (provinceGizmo == null) return;
 
-		var commandElem = new Commander
-		{
-			UnitId = _selectedMonster.Id
-		};
-		AddMonster(commandElem, provinceGizmo);
+		var province = provinceGizmo.Province;
+		var commander = Commander.Create(_selectedMonster.Id, province.Owner);
+		
+		province.Monsters.Add(commander);
+		
+		provinceGizmo.CreateCommanderGizmo(commander);;
 	}
-
 
 	private void AddUnit ()
 	{
 		RaycastGizmos(out var monsterGizmo, out var provinceGizmo);
 
-		if (!(monsterGizmo is CommanderGizmo commanderGizmo)) return;
+		if (provinceGizmo == null) return;
 
-		var unitsElem = new Units()
+		var province = provinceGizmo.Province;
+		var unit = Unit.Create(_selectedMonster.Id, 1, province.Owner);
+
+		if (monsterGizmo is CommanderGizmo commanderGizmo)
 		{
-			UnitId = _selectedMonster.Id,
-			Amount = 1,
-			Commander = (Commander)commanderGizmo.Element
-		};
-
-		AddMonster(unitsElem, provinceGizmo);
+			commanderGizmo.Data.UnitsUnderCommand.Add(unit);
+		} 
+		else
+		{
+			province.Monsters.Add(unit);
+		}
+		provinceGizmo.CreateUnitGizmo(unit);
 	}
 	
-	private void AddMonster (ProvinceDataElement provinceDataElement, ProvinceGizmo provinceGizmo)
-	{
-		var land = Map.MapElements.OfType<Land>().SingleOrDefault(x => x.ProvinceNum == provinceGizmo.ProvinceNum);
-		provinceDataElement.ProvinceNum = provinceGizmo.ProvinceNum;
-		Map.AddMapElement(provinceDataElement);
-		provinceGizmo.CreateElementGizmo(provinceDataElement);
-	}
-
 	private void Remove ()
 	{
 		RaycastGizmos(out var monsterGizmo, out var provinceGizmo);
@@ -142,27 +136,23 @@ public class MapMenu : Menu
 		}
 	}
 	
-	private void RemoveMonster (MonsterGizmo monsterGizmo, ProvinceGizmo provinceGizmo)
+	private void RemoveMonster(MonsterGizmo monsterGizmo, ProvinceGizmo provinceGizmo)
 	{
+		provinceGizmo.Province.Monsters.Remove(monsterGizmo.MonsterData);
+		
+		provinceGizmo.RemoveElementGizmo(monsterGizmo.MonsterData);
 
-		Map.RemoveMapElement(monsterGizmo.Element);
-		provinceGizmo.RemoveElementGizmo(monsterGizmo.Element);
-
-		if (monsterGizmo.Element is Commander commander)
+		if (monsterGizmo.MonsterData is Commander commander)
 		{
-			RemoveAllCommanderElements(monsterGizmo, provinceGizmo, commander);
+			RemoveAllCommanderElements(provinceGizmo, commander);
 		}
 	}
 	
-	private void RemoveAllCommanderElements (MonsterGizmo monsterGizmo, ProvinceGizmo provinceGizmo, Commander commander)
+	private void RemoveAllCommanderElements (ProvinceGizmo provinceGizmo, Commander commander)
 	{
-
-		foreach (var mapElement in Map.MapElements.ToList())
+		foreach (var unit in commander.UnitsUnderCommand)
 		{
-			if (!(mapElement is IOwnedByCommander ownedByCommander) || ownedByCommander.Commander != commander) continue;
-
-			Map.RemoveMapElement(monsterGizmo.Element);
-			provinceGizmo.RemoveElementGizmo(monsterGizmo.Element);
+			provinceGizmo.RemoveElementGizmo(unit);
 		}
 	}
 
@@ -174,61 +164,18 @@ public class MapMenu : Menu
 		
 		var player = Game.GetPlayer(numberPressed);
 		if (player == null) return;
-		
-		int nationNum = player.NationNum;
-		
-		var startLocation = Map.MapElements.OfType<StartLocation>().SingleOrDefault(x => x.ProvinceNum == provinceGizmo.ProvinceNum);
-		var provinceOwner = Map.MapElements.OfType<ProvinceOwner>().SingleOrDefault(x => x.ProvinceNum == provinceGizmo.ProvinceNum);
 
-		if (InputHelper.IsShiftPressed)
-		{
-			if (provinceOwner != null)
-			{
-				Map.RemoveMapElement(provinceOwner);
-			}
-			
-			if (startLocation == null)
-			{
-				startLocation = new StartLocation { ProvinceNum = provinceGizmo.ProvinceNum };
-				Map.AddMapElement(provinceOwner);
-			}
-			
-			startLocation.NationNum = nationNum;
-			provinceGizmo.SetOwner(nationNum, true);
-		} 
-		else
-		{
-			if (startLocation != null)
-			{
-				Map.RemoveMapElement(startLocation);
-			}
-
-			if (provinceOwner == null)
-			{
-				provinceOwner = new ProvinceOwner { ProvinceNum = provinceGizmo.ProvinceNum };
-				Map.AddMapElement(provinceOwner);
-			}
-			
-			provinceOwner.NationNum = nationNum;
-			provinceGizmo.SetOwner(nationNum);
-		}
+		var province = provinceGizmo.Province;
+		province.Owner = player.NationNum;
+		provinceGizmo.Refresh();
 	}
 
 	private void ClearProvinceOwner (ProvinceGizmo provinceGizmo)
 	{
-		var startLocation = Map.MapElements.OfType<StartLocation>().SingleOrDefault(x => x.ProvinceNum == provinceGizmo.ProvinceNum);
-		if (startLocation != null)
-		{
-			Map.RemoveMapElement(startLocation);
-		}
-		
-		var provinceOwner = Map.MapElements.OfType<ProvinceOwner>().SingleOrDefault(x => x.ProvinceNum == provinceGizmo.ProvinceNum);
-		if (provinceOwner != null)
-		{
-			Map.RemoveMapElement(provinceOwner);
-		}
-		
-		provinceGizmo.ClearOwner();
+		var province = provinceGizmo.Province;
+
+		province.Owner = Nation.Independents;
+		provinceGizmo.Refresh();
 	}
 	
 	private void RaycastGizmos (out MonsterGizmo monsterGizmo, out ProvinceGizmo provinceGizmo)
@@ -282,28 +229,11 @@ public class MapMenu : Menu
 	
 	private void CreateProvinceGizmos ()
 	{
-		int provinceCount = Map.MapElements.OfType<Terrain>().Max(x => x.ProvinceNum);
-		for (int num = 1; num <= provinceCount; num++)
+		foreach (var province in Map.ProvinceMap.Values)
 		{
-			var pbs = Map.MapElements.OfType<ProvinceBorders>().Where(x => x.ProvinceNum == num).ToList();
-			if (pbs.Count == 0) continue;
-
-			var centerPos = Vector2.zero;
-			foreach (var pb in pbs)
-			{
-				centerPos.x += pb.X;
-				centerPos.y += pb.Y;
-			}
-			centerPos /= pbs.Count();
-
-			CreateProvinceGizmo(num, centerPos);
+			var gizmo = Ui.Create<ProvinceGizmo>();
+			gizmo.Initialize(province);
 		}
-	}
-	
-	private void CreateProvinceGizmo (int provinceNum, Vector2 centerPos)
-	{
-		var gizmo = Ui.Create<ProvinceGizmo>();
-		gizmo.Initialize(provinceNum, centerPos);
 	}
 
 	public void SetSelected (MonstersTable.Entry entry)

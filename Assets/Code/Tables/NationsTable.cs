@@ -9,14 +9,14 @@ public class NationsTable : ScriptableObject
 	public class Entry
 	{
 		[SerializeField] private string name;
-		[SerializeField] private string name2;
+		[SerializeField] private string epithet;
 		[SerializeField] private int nationNum;
 		[SerializeField] private string pretenderFileName;
 		[SerializeField] private Sprite sprite;
 		[SerializeField] private string samplePretenderFilePath;
 
 		public string Name => name;
-		public string Name2 => name2;
+		public string Epithet => epithet;
 		public int NationNum => nationNum;
 		public string PretenderFileName => pretenderFileName;
 		public Sprite Sprite => sprite;
@@ -25,8 +25,8 @@ public class NationsTable : ScriptableObject
 	
 	[SerializeField] private List<Entry> nations;
 
-	public Entry GetNationEntry (int specStartNationNum)
+	public Entry GetNationEntry (Nation nation)
 	{
-		return nations.SingleOrDefault(x => x.NationNum == specStartNationNum);
+		return nations.Single(x => x.NationNum == nation.Number);
 	}
 }
