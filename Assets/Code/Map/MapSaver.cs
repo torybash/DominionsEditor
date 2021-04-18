@@ -36,7 +36,7 @@ public class MapSaver
 		//Provinces
 		foreach (var province in _map.ProvinceMap.Values)
 		{
-			bool isIndieProvince = province.Owner.Equals(Nation.Independents);
+			bool isIndieProvince = province.Owner == Nation.Independents;
 			bool hasIndieMonsters = isIndieProvince && province.Monsters.Any();
 			if (!isIndieProvince || hasIndieMonsters)
 			{
@@ -52,29 +52,45 @@ public class MapSaver
 		//Monsters
 		foreach (var province in _map.ProvinceMap.Values.Where(x => x.Monsters.Any()))
 		{
-
 			elems.Add(new SetLand{ProvinceNum = province.ProvinceNumber});
 
-			foreach (var monster in province.Monsters)
+			var nationalityMonsterGroups = province.Monsters.GroupBy(x => x.Nationality);
+
+			foreach (var group in nationalityMonsterGroups)
 			{
-				switch (monster)
+				var nation = group.Key;
+
+				// if (nation != Nation.Independents)
+				// {
+					elems.Add(new ProvinceOwner{NationNum = nation.Number});
+				// }
+
+				foreach (var monster in group)
 				{
-					case Commander commander:
-						elems.Add(new CommanderElement{MonsterId = commander.MonsterId, ProvinceNum = province.ProvinceNumber});
+					switch (monster)
+					{
+						case Commander commander:
+							elems.Add(new CommanderElement{MonsterId = commander.MonsterId, ProvinceNum = province.ProvinceNumber});
 
-						foreach (var unit in commander.UnitsUnderCommand)
-						{
-							elems.Add(new UnitsElement{MonsterId = unit.MonsterId, Amount = unit.Amount, ProvinceNum = province.ProvinceNumber});
-						}
+							foreach (var unit in commander.UnitsUnderCommand)
+							{
+								elems.Add(new UnitsElement{MonsterId = unit.MonsterId, Amount = unit.Amount, ProvinceNum = province.ProvinceNumber});
+							}
 						
-						break;
-					case Unit unit:
-						elems.Add(new UnitsElement{MonsterId = unit.MonsterId, Amount = unit.Amount, ProvinceNum = province.ProvinceNumber});
-						break;
-					default:
-						throw new ArgumentOutOfRangeException(nameof(monster));
+							break;
+						case Unit unit:
+							elems.Add(new UnitsElement{MonsterId = unit.MonsterId, Amount = unit.Amount, ProvinceNum = province.ProvinceNumber});
+							break;
+						default:
+							throw new ArgumentOutOfRangeException(nameof(monster));
 
+					}
 				}
+			}
+			
+			if (province.Owner != Nation.Independents)
+			{
+				elems.Add(new ProvinceOwner{NationNum = province.Owner.Number});
 			}
 		}
 

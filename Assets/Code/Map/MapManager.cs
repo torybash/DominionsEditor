@@ -48,52 +48,6 @@ public class MapManager
 		return Monsters.GetMonster(unitName);
 	}
 
-	// public void AddMapElement (MapElement elem)
-	// {
-	// 	switch (elem)
-	// 	{
-	// 		case IOwnedByCommander ownedByCommander:
-	// 			int commanderIdx = MapElements.IndexOf(ownedByCommander.Commander);
-	// 			MapElements.Insert(commanderIdx + 1, elem);
-	// 			break;
-	// 		case IOwnedByProvince ownedByProvince:
-	// 			var land = GetLand(ownedByProvince.ProvinceNum);
-	// 			int insertIdx = MapElements.IndexOf(land) + 1;
-	//
-	// 			var provinceOwner = MapElements.OfType<ProvinceOwner>().SingleOrDefault(x => x.ProvinceNum == ownedByProvince.ProvinceNum);
-	// 			if (provinceOwner != null)
-	// 			{
-	// 				insertIdx = MapElements.IndexOf(provinceOwner) + 1;
-	// 			}
-	// 			
-	// 			// if (landIdx + 1 >= MapElements.Count)
-	// 			// {
-	// 			// 	MapElements.Add(elem);
-	// 			// } else
-	// 			// {
-	// 				MapElements.Insert(insertIdx, elem);
-	// 			// }
-	// 			break;
-	// 		default:
-	// 			MapElements.Add(elem);
-	// 			break;
-	// 	}
-	// }
-	// public Land GetLand (int provinceNum)
-	// {
-	//
-	// 	var landOwner = MapElements.OfType<Land>().SingleOrDefault(x => x.ProvinceNum == provinceNum);
-	// 	if (landOwner == null)
-	// 	{
-	// 		landOwner = new Land
-	// 		{
-	// 			ProvinceNum = provinceNum
-	// 		};
-	// 		MapElements.Add(landOwner);
-	// 	}
-	// 	return landOwner;
-	// }
-
 	public void SaveMap ()
 	{
 		var mapSaver = new MapSaver(this);
@@ -105,7 +59,7 @@ public class MapManager
 			savePath = savePath.Insert(extIdx, Constants.EditedMapTag);
 			
 			int lastSepIdx = savePath.LastIndexOf('\\');
-			SavedMapFileName = SavedMapFileName.Substring(lastSepIdx + 1);
+			SavedMapFileName = savePath.Substring(lastSepIdx + 1);
 		}
 
 		mapSaver.SaveMap(savePath);

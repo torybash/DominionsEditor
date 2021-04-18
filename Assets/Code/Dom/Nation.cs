@@ -18,6 +18,15 @@ public struct Nation
 		return nation;
 	}
 
+	public static bool operator== (Nation first, Nation second)
+	{
+		return first.Equals(second);
+	}
+	public static bool operator != (Nation first, Nation second)
+	{
+		return !first.Equals(second);
+	}
+
 	public bool Equals (Nation other)
 	{
 		return Number == other.Number;

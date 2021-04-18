@@ -14,14 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nations:
   - name: Phlegra
-    name2: Sleeping Giants
+    epithet: 
     nationNum: 102
     pretenderFileName: late_phlegra
     sprite: {fileID: 21300000, guid: 7c3516463a7304b42beb6f0ee384ee6e, type: 3}
     samplePretenderFilePath: Assets\Data\pretender samples\late_phlegra.2h
+    tintColor: {r: 1, g: 0.78384435, b: 0.4481132, a: 1}
   - name: Arcoscephale
-    name2: Sibylline Guidance
+    epithet: 
     nationNum: 80
     pretenderFileName: late_arcoscephale
     sprite: {fileID: 21300000, guid: fa8d0dc8f8bfd224b8ace722dbc44053, type: 3}
     samplePretenderFilePath: Assets\Data\pretender samples\late_arcoscephale.2h
+    tintColor: {r: 0.47668213, g: 0.9811321, b: 0.77720547, a: 1}

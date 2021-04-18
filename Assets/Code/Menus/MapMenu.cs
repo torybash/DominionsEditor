@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -138,8 +139,17 @@ public class MapMenu : Menu
 	
 	private void RemoveMonster(MonsterGizmo monsterGizmo, ProvinceGizmo provinceGizmo)
 	{
-		provinceGizmo.Province.Monsters.Remove(monsterGizmo.MonsterData);
-		
+		var province = provinceGizmo.Province;
+		var ownerCommander = province.Monsters.OfType<Commander>().SingleOrDefault(x => x.UnitsUnderCommand.Contains(monsterGizmo.MonsterData));
+		if (ownerCommander != null)
+		{
+			ownerCommander.UnitsUnderCommand.Remove((Unit)monsterGizmo.MonsterData);
+		} 
+		else
+		{
+			province.Monsters.Remove(monsterGizmo.MonsterData);
+		}
+
 		provinceGizmo.RemoveElementGizmo(monsterGizmo.MonsterData);
 
 		if (monsterGizmo.MonsterData is Commander commander)

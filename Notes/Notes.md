@@ -121,8 +121,8 @@ d6 ?
 
 ## Tasks
 
-- Handle spawning 2 nations on same province (for instant fight)
-- Commander:
+X Handle spawning 2 nations on same province (for instant fight)
+- Commander
 	- Magic
 	- Items
 	- Bodyguard
@@ -134,6 +134,11 @@ d6 ?
 	- Show extra unit when double-clicking(?) unit
 - Display button and/or change button-scheme
 - Fill in nations table
+
+
+## Nice to haves
+
+- Improve ux for spawning 2 nations on same province
 
 
 ## Next steps

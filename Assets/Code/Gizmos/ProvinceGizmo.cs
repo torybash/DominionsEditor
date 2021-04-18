@@ -22,6 +22,11 @@ public class ProvinceGizmo : Gizmo
 			{
 				case Commander commander:
 					CreateCommanderGizmo(commander);
+
+					foreach (var unit in commander.UnitsUnderCommand)
+					{
+						CreateUnitGizmo(unit);
+					}
 					break;
 				case Unit unit:
 					CreateUnitGizmo(unit);

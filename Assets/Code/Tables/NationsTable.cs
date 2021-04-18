@@ -14,6 +14,7 @@ public class NationsTable : ScriptableObject
 		[SerializeField] private string pretenderFileName;
 		[SerializeField] private Sprite sprite;
 		[SerializeField] private string samplePretenderFilePath;
+		[SerializeField] private Color tintColor;
 
 		public string Name => name;
 		public string Epithet => epithet;
@@ -21,6 +22,7 @@ public class NationsTable : ScriptableObject
 		public string PretenderFileName => pretenderFileName;
 		public Sprite Sprite => sprite;
 		public string SamplePretenderFilePath => samplePretenderFilePath;
+		public Color TintColor => tintColor;
 	}
 	
 	[SerializeField] private List<Entry> nations;

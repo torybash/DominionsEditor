@@ -10,6 +10,9 @@ public abstract class MonsterGizmo<T> : MonsterGizmo where T : Monster
 {
 	[SerializeField] protected TMP_Text nameLabel;
 	[SerializeField] protected Image spritePicture;
+	[SerializeField] protected Image background;
+	
+	private Color? defaultColor;
 
 	public T Data { get; private set; }
 
@@ -22,5 +25,13 @@ public abstract class MonsterGizmo<T> : MonsterGizmo where T : Monster
 		var monster = Map.GetMonster(data.MonsterId);
 		spritePicture.sprite = monster.Sprite;
 		nameLabel.text = monster.Name;
+		
+		if (data.Nationality != Nation.Independents)
+		{
+			if (defaultColor == null) defaultColor = background.color;
+			
+			var nationEntry = Map.Nations.GetNationEntry(data.Nationality);
+			background.color = defaultColor.Value * nationEntry.TintColor;
+		}
 	}
 }
