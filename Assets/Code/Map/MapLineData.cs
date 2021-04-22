@@ -11,6 +11,8 @@ public class MapLineData
 		
 	public void AddArg (string arg)
 	{
+		arg = arg.Trim('"');
+
 		Args.Add(arg);
 	}
 

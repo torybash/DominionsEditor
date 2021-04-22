@@ -76,6 +76,11 @@ public class MapSaver
 							{
 								elems.Add(new UnitsElement{MonsterId = unit.MonsterId, Amount = unit.Amount, ProvinceNum = province.ProvinceNumber});
 							}
+							
+							foreach (var item in commander.Items)
+							{
+								elems.Add(new ItemElement{ItemName = item.ItemName});
+							}
 						
 							break;
 						case Unit unit:

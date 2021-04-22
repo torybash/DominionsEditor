@@ -8,6 +8,9 @@ public abstract class MonsterGizmo : Gizmo
 
 public abstract class MonsterGizmo<T> : MonsterGizmo where T : Monster
 {
+	public const float DEFAULT_HEIGHT = 30f;
+	public const float EXPANDED_HEIGHT = 55f;
+	
 	[SerializeField] protected TMP_Text nameLabel;
 	[SerializeField] protected Image spritePicture;
 	[SerializeField] protected Image background;
@@ -18,7 +21,7 @@ public abstract class MonsterGizmo<T> : MonsterGizmo where T : Monster
 
 	public override Monster MonsterData => Data;
 
-	public virtual void Initialize (Monster data)
+	public virtual void SetData (Monster data)
 	{
 		Data = (T)data;
 		

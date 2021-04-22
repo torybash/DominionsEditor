@@ -16,7 +16,7 @@ public class MapMenu : Menu
 	[SerializeField] private Image selectedSprite;
 
 	private readonly List<SearchResultGizmo> searchGizmos = new List<SearchResultGizmo>();
-	private MonstersTable.Entry _selectedMonster;
+	private SearchableEntry _selectedEntry;
 
 	private void Awake ()
 	{
@@ -40,14 +40,19 @@ public class MapMenu : Menu
 	private void Update ()
 	{
 		//TODO // if (_selectedMonster.IS_COMMANDER) 
-		if (Input.GetKeyDown(KeyCode.U) && _selectedMonster != null)
+		if (Input.GetKeyDown(KeyCode.U))
 		{
 			AddUnit();
 		}
 
-		if (Input.GetKeyDown(KeyCode.C) && _selectedMonster != null)
+		if (Input.GetKeyDown(KeyCode.C))
 		{
 			AddCommander();
+		}
+		
+		if (Input.GetKeyDown(KeyCode.I))
+		{
+			AddItem();
 		}
 
 		if (Input.GetKeyDown(KeyCode.R))
@@ -87,17 +92,19 @@ public class MapMenu : Menu
 
 		unitsGizmo.Data.Amount = Mathf.Clamp(unitsGizmo.Data.Amount + sign, 1, 100000);
 
-		unitsGizmo.Initialize(unitsGizmo.Data);
+		unitsGizmo.SetData(unitsGizmo.Data);
 	}
 
 	private void AddCommander ()
 	{
+		if (!(_selectedEntry is MonsterEntry monsterEntry)) return;
+		
 		RaycastGizmos(out var monsterGizmo, out var provinceGizmo);
 
 		if (provinceGizmo == null) return;
 
 		var province = provinceGizmo.Province;
-		var commander = Commander.Create(_selectedMonster.Id, province.Owner);
+		var commander = Commander.Create(monsterEntry.Id, province.Owner);
 		
 		province.Monsters.Add(commander);
 		
@@ -106,12 +113,14 @@ public class MapMenu : Menu
 
 	private void AddUnit ()
 	{
+		if (!(_selectedEntry is MonsterEntry monsterEntry)) return;
+
 		RaycastGizmos(out var monsterGizmo, out var provinceGizmo);
 
 		if (provinceGizmo == null) return;
 
 		var province = provinceGizmo.Province;
-		var unit = Unit.Create(_selectedMonster.Id, 1, province.Owner);
+		var unit = Unit.Create(monsterEntry.Id, 1, province.Owner);
 
 		if (monsterGizmo is CommanderGizmo commanderGizmo)
 		{
@@ -122,6 +131,21 @@ public class MapMenu : Menu
 			province.Monsters.Add(unit);
 		}
 		provinceGizmo.CreateUnitGizmo(unit);
+	}
+
+	private void AddItem ()
+	{
+		if (!(_selectedEntry is ItemEntry itemEntry)) return;
+
+		RaycastGizmos(out var monsterGizmo, out var provinceGizmo);
+
+		if (provinceGizmo == null) return;
+		if (!(monsterGizmo is CommanderGizmo commanderGizmo)) return;
+
+		var item = Item.Create(itemEntry.Name);
+		
+		commanderGizmo.Data.Items.Add(item);
+		commanderGizmo.SetData(commanderGizmo.Data);
 	}
 	
 	private void Remove ()
@@ -227,7 +251,7 @@ public class MapMenu : Menu
 		
 	}
 	
-	private void CreateSearchGizmos (string searchText, List<MonstersTable.Entry> results)
+	private void CreateSearchGizmos (string searchText, List<SearchableEntry> results)
 	{
 		foreach (var searchResult in results)
 		{
@@ -246,9 +270,9 @@ public class MapMenu : Menu
 		}
 	}
 
-	public void SetSelected (MonstersTable.Entry entry)
+	public void SetSelected (SearchableEntry entry)
 	{
-		_selectedMonster = entry;
+		_selectedEntry = entry;
 		selectedSprite.gameObject.SetActive(true);
 		selectedSprite.sprite = entry.Sprite;
 	}

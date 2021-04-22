@@ -1,8 +1,8 @@
 public class UnitGizmo : MonsterGizmo<Unit>
 {
-	public override void Initialize (Monster data)
+	public override void SetData (Monster data)
 	{
-		base.Initialize(data);
+		base.SetData(data);
 		
 		nameLabel.text += $" ({Data.Amount})";
 	}

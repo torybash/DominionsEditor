@@ -13,6 +13,7 @@ public class MapManager
 	public Province this [int provinceNum] => ProvinceMap[provinceNum];
 	
 	public MonstersTable Monsters { get; set; }
+	public ItemsTable Items { get; set; }
 	public string MapFilePath { get; set; }
 	public string SavedMapFileName  { get; set; }
 	public NationsTable Nations { get; set; }
@@ -38,12 +39,12 @@ public class MapManager
 		ProvinceMap = MapLoader.CreateMapProvinces(mapElements);
 	}
 	
-	public MonstersTable.Entry GetMonster(int monsterId)
+	public MonsterEntry GetMonster(int monsterId)
 	{
 		return Monsters.GetMonster(monsterId);
 	}
 	
-	public MonstersTable.Entry GetMonster (string unitName)
+	public MonsterEntry GetMonster (string unitName)
 	{
 		return Monsters.GetMonster(unitName);
 	}

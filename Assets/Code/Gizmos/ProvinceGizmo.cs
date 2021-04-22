@@ -82,14 +82,14 @@ public class ProvinceGizmo : Gizmo
 	public void CreateCommanderGizmo (Commander commander)
 	{
 		var commanderGizmo = Ui.Create<CommanderGizmo>(rosterGroup);
-		commanderGizmo.Initialize(commander);
+		commanderGizmo.SetData(commander);
 		monsterGizmos.Add(commanderGizmo);
 	}
 	
 	public void CreateUnitGizmo (Unit unit)
 	{
 		var unitGizmo = Ui.Create<UnitGizmo>(rosterGroup);
-		unitGizmo.Initialize(unit);
+		unitGizmo.SetData(unit);
 		monsterGizmos.Add(unitGizmo);
 
 		var ownerCommander = Province.Monsters.OfType<Commander>().SingleOrDefault(x => x.UnitsUnderCommand.Contains(unit));

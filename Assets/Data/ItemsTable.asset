@@ -1,0 +1,1350 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bec9b89d7736487fb0bb846aa29fae9c, type: 3}
+  m_Name: ItemsTable
+  m_EditorClassIdentifier: 
+  entries:
+  - id: 1
+    name: Fire Sword
+    sprite: {fileID: 21300000, guid: 9452cbf1135b34a44b358fd40a622fd0, type: 3}
+  - id: 2
+    name: Burning Blade
+    sprite: {fileID: 21300000, guid: df3d3584f14bc0f4bb46d346e90fc090, type: 3}
+  - id: 3
+    name: Holy Scourge
+    sprite: {fileID: 21300000, guid: e4ab478a1cfcb624281ff1b6cccfaddb, type: 3}
+  - id: 4
+    name: Mace of Eruption
+    sprite: {fileID: 21300000, guid: 4263f8f9a01c9b949939a83541060d99, type: 3}
+  - id: 5
+    name: Sword of the Five Elements
+    sprite: {fileID: 21300000, guid: 05321b30b99bf2a45b0ce8bf47e6cc3b, type: 3}
+  - id: 6
+    name: Spear of the Morrigan
+    sprite: {fileID: 21300000, guid: 4a8409648bbf2024797f63bda0845863, type: 3}
+  - id: 7
+    name: Flambeau
+    sprite: {fileID: 21300000, guid: 7a208642c4cde17459ce481c66f6e0bf, type: 3}
+  - id: 8
+    name: Fire Brand
+    sprite: {fileID: 21300000, guid: d4f65b785269d234a9dca8f34101553a, type: 3}
+  - id: 9
+    name: Mercybrand
+    sprite: {fileID: 21300000, guid: ae2510220b1435e47bffdda23f26b168, type: 3}
+  - id: 10
+    name: Ice Sword
+    sprite: {fileID: 21300000, guid: 5409c157ab0364c40837b449647d4d1b, type: 3}
+  - id: 11
+    name: Ice Lance
+    sprite: {fileID: 21300000, guid: 2253fdad3bd9bf644adac19df5096f23, type: 3}
+  - id: 12
+    name: Ice Mist Scimitar
+    sprite: {fileID: 21300000, guid: a0c11519fc01ec0479dbeef593d33111, type: 3}
+  - id: 13
+    name: Coral Blade
+    sprite: {fileID: 21300000, guid: 7c9f00bc5ad41a748b32e3a901dd79e6, type: 3}
+  - id: 14
+    name: Frost Brand
+    sprite: {fileID: 21300000, guid: 102359504d78bf1449613942f98f3ca8, type: 3}
+  - id: 15
+    name: Sword of Swiftness
+    sprite: {fileID: 21300000, guid: f4f25a29dcc10194fa4cdf1bd2e1553b, type: 3}
+  - id: 16
+    name: Rime Hammer
+    sprite: {fileID: 21300000, guid: bea334213f3e83d4397d9a6082d3dcb4, type: 3}
+  - id: 17
+    name: Sling of Accuracy
+    sprite: {fileID: 21300000, guid: aef41d03bc016fb459e76c02bf906857, type: 3}
+  - id: 18
+    name: Blacksteel Sword
+    sprite: {fileID: 21300000, guid: 74da4ad9482b0f843b86af500a6232b1, type: 3}
+  - id: 19
+    name: Black Halberd
+    sprite: {fileID: 21300000, guid: d0efb6a9f326ecf42826cb1dd4b955e1, type: 3}
+  - id: 20
+    name: Stinger
+    sprite: {fileID: 21300000, guid: 1812acd328349854ba63729322cec8f4, type: 3}
+  - id: 21
+    name: Sword of Sharpness
+    sprite: {fileID: 21300000, guid: 18effdfc4c39e7f499088d3047266a52, type: 3}
+  - id: 22
+    name: Axe of Sharpness
+    sprite: {fileID: 21300000, guid: 4276982e69981bd4a9f2aa20e6b08f28, type: 3}
+  - id: 23
+    name: Greatsword of Sharpness
+    sprite: {fileID: 21300000, guid: aa8973a3d9e08d44ea3f5ea7fea82742, type: 3}
+  - id: 24
+    name: Main Gauche of Parrying
+    sprite: {fileID: 21300000, guid: 5ce14fc7e85d9d14382436bdf630028b, type: 3}
+  - id: 25
+    name: Halberd of Might
+    sprite: {fileID: 21300000, guid: dc264fe0d8420264ba11fad5c4ce86f9, type: 3}
+  - id: 26
+    name: Smasher
+    sprite: {fileID: 21300000, guid: 59b6dc1a32155704b8ae51567cf3a245, type: 3}
+  - id: 27
+    name: Hammer of the Mountains
+    sprite: {fileID: 21300000, guid: ca6d4ffec31dc8a43b261f026578c585, type: 3}
+  - id: 28
+    name: Lightning Rod
+    sprite: {fileID: 21300000, guid: be5213faa54d15f4b82512d0f26b8415, type: 3}
+  - id: 29
+    name: Star of Heroes
+    sprite: {fileID: 21300000, guid: 844b2605ae45bf24290516f42aa6c0ce, type: 3}
+  - id: 30
+    name: Dwarven Hammer
+    sprite: {fileID: 21300000, guid: 840a2470d86f91c468d53f04c14a89bf, type: 3}
+  - id: 31
+    name: Eyecatcher
+    sprite: {fileID: 21300000, guid: 50e5aea899ec9d14cb75eee4fc2d59cd, type: 3}
+  - id: 32
+    name: Faithful
+    sprite: {fileID: 21300000, guid: ce2a4899e215bd844aff57863646564d, type: 3}
+  - id: 33
+    name: Midget Masher
+    sprite: {fileID: 21300000, guid: 2aa704e033c0f2043bb8508985517ecf, type: 3}
+  - id: 34
+    name: Elf Bane
+    sprite: {fileID: 21300000, guid: f4e96b025364bb245b155864cd59bec7, type: 3}
+  - id: 35
+    name: Implementor Axe
+    sprite: {fileID: 21300000, guid: f7a091ed3e14253449071623f487993e, type: 3}
+  - id: 36
+    name: Enchanted Sword
+    sprite: {fileID: 21300000, guid: 708814b4db88b9c4aa19eb12ee507966, type: 3}
+  - id: 37
+    name: Enchanted Spear
+    sprite: {fileID: 21300000, guid: f5d9b8b738149f948a6759850aae6fe4, type: 3}
+  - id: 38
+    name: Enchanted Pike
+    sprite: {fileID: 21300000, guid: 1f01a50bca5a3b840849dceb6ca513e6, type: 3}
+  - id: 39
+    name: Herald Lance
+    sprite: {fileID: 21300000, guid: c84c147b134814c49a8927c58854200d, type: 3}
+  - id: 40
+    name: Bane Blade
+    sprite: {fileID: 21300000, guid: 2294051385b5d8c46b74b04fb87477a5, type: 3}
+  - id: 41
+    name: Bane Blade
+    sprite: {fileID: 21300000, guid: c332571e92308a24d8283fc56dff6a2b, type: 3}
+  - id: 42
+    name: Doom Glaive
+    sprite: {fileID: 21300000, guid: 41e3ac5aa649e3543acaa045f5c1e737, type: 3}
+  - id: 43
+    name: Hardwood Club
+    sprite: {fileID: 21300000, guid: bf4fcd48adddfca418ba318e757f2e05, type: 3}
+  - id: 44
+    name: Hunter's Knife
+    sprite: {fileID: 21300000, guid: 7872bb9daf2ee2140b911fbe05a6c81c, type: 3}
+  - id: 45
+    name: Thorn Spear
+    sprite: {fileID: 21300000, guid: de5c2c2cf56d4f842bf6d8902750e258, type: 3}
+  - id: 46
+    name: Thorn Staff
+    sprite: {fileID: 21300000, guid: e124d3e4fe19593459c83512a079a322, type: 3}
+  - id: 47
+    name: Shillelagh
+    sprite: {fileID: 21300000, guid: 3e6f652e861d92c4bab07a8aa0302b0c, type: 3}
+  - id: 48
+    name: Vine Whip
+    sprite: {fileID: 21300000, guid: e861d4d7d82f95946b9966b70d800c52, type: 3}
+  - id: 49
+    name: Gloves of the Gladiator
+    sprite: {fileID: 21300000, guid: d62876f2bcf07344a9882ba9bce1d379, type: 3}
+  - id: 50
+    name: Knife of the Damned
+    sprite: {fileID: 21300000, guid: d3a8731f1fe1377449ad5ad3b7cfb380, type: 3}
+  - id: 51
+    name: Jade Knife
+    sprite: {fileID: 21300000, guid: c60c742008f2c8b48ae7bcbd5ee6212f, type: 3}
+  - id: 52
+    name: Anemone Mace
+    sprite: {fileID: 21300000, guid: 00d9382e56cab0743aa15d16d0474eb4, type: 3}
+  - id: 53
+    name: Serpent Kryss
+    sprite: {fileID: 21300000, guid: a0b2f7fe4f96f9a4da1b3db8462ed77e, type: 3}
+  - id: 54
+    name: Snake Bladder Stick
+    sprite: {fileID: 21300000, guid: 859d0c1f6a6aa8a47b6d7b518b7c6b3d, type: 3}
+  - id: 55
+    name: Thistle Mace
+    sprite: {fileID: 21300000, guid: df683c8856dc5c842839414e56b265d5, type: 3}
+  - id: 56
+    name: Whip of Command
+    sprite: {fileID: 21300000, guid: babfc797cab7c424594079211b136b4e, type: 3}
+  - id: 57
+    name: Rat Tail
+    sprite: {fileID: 21300000, guid: 0575d8e1e1d59d448b17885bc6039f90, type: 3}
+  - id: 58
+    name: Skull Standard
+    sprite: {fileID: 21300000, guid: d6c22780f2a7e0049afe73bd535681e6, type: 3}
+  - id: 59
+    name: Summer Sword
+    sprite: {fileID: 21300000, guid: 71892098c8c90554fbfdc9a1bbb09b0d, type: 3}
+  - id: 60
+    name: Axe of Hate
+    sprite: {fileID: 21300000, guid: 8023957f00036874e8096395c6ff383f, type: 3}
+  - id: 61
+    name: Treelord's Staff
+    sprite: {fileID: 21300000, guid: 8ee9230c1481cdc43adf80314513b33c, type: 3}
+  - id: 62
+    name: Sceptre of Authority
+    sprite: {fileID: 21300000, guid: 5a2f65d6e0d5a974fafb9497ba34d254, type: 3}
+  - id: 63
+    name: Just Man's Cross
+    sprite: {fileID: 21300000, guid: 1050403113cb0124485ad9921460d605, type: 3}
+  - id: 64
+    name: Thunder Whip
+    sprite: {fileID: 21300000, guid: 3f02fe82f1009fa4ca95ff073398d495, type: 3}
+  - id: 65
+    name: Trueshot Longbow
+    sprite: {fileID: 21300000, guid: d65e2a2667822244c8ff2e8b11a871d0, type: 3}
+  - id: 66
+    name: Ice Pebble Staff
+    sprite: {fileID: 21300000, guid: 2892f7a8c81b88541b9da7656070e3b0, type: 3}
+  - id: 67
+    name: Piercer
+    sprite: {fileID: 21300000, guid: bda3d768d7173a44492cc9472b0059dd, type: 3}
+  - id: 68
+    name: Rod of the Leper King
+    sprite: {fileID: 21300000, guid: 76d1d91f27a5c324d85b4d932574dad4, type: 3}
+  - id: 69
+    name: Duskdagger
+    sprite: {fileID: 21300000, guid: 70881b2a82eb1874a9c3771d79f5413c, type: 3}
+  - id: 70
+    name: Black Bow of Botulf
+    sprite: {fileID: 21300000, guid: 34ee7dbe097766c409afff4e5c09d387, type: 3}
+  - id: 71
+    name: Staff of Flame Focus
+    sprite: {fileID: 21300000, guid: 6ba3e5365c3ebcf4b92262c915751a03, type: 3}
+  - id: 72
+    name: Fire Bola
+    sprite: {fileID: 21300000, guid: c364fb46711c395498f0002d5acf36b9, type: 3}
+  - id: 73
+    name: Wand of Wild Fire
+    sprite: {fileID: 21300000, guid: 3dc875e3961cf8c43bc78c7ad0adea0c, type: 3}
+  - id: 74
+    name: Cockerel Scepter
+    sprite: {fileID: 21300000, guid: 5cc362d4b2b762749bb19b4c21979812, type: 3}
+  - id: 75
+    name: Lightning Spear
+    sprite: {fileID: 21300000, guid: a6c5d49fc2c72444a8c6331aa86a6717, type: 3}
+  - id: 76
+    name: Vajra
+    sprite: {fileID: 21300000, guid: 137fafcc47538ee49abace7dd6044d1f, type: 3}
+  - id: 77
+    name: Thunder Bow
+    sprite: {fileID: 21300000, guid: 304980eef987c7446ae4325260c7bfa4, type: 3}
+  - id: 78
+    name: Golden Arbalest
+    sprite: {fileID: 21300000, guid: ad1c8d256b74b7e4b958928065ab0d5e, type: 3}
+  - id: 79
+    name: Vision's Foe
+    sprite: {fileID: 21300000, guid: 1630007d50b1689488a0a81c3d3bd731, type: 3}
+  - id: 80
+    name: Staff of Corrosion
+    sprite: {fileID: 21300000, guid: dcac5237b9508ce43bacd9a23dc24e98, type: 3}
+  - id: 81
+    name: Rune Smasher
+    sprite: {fileID: 21300000, guid: a53373db12b11ed4f9b00e86d11b61c7, type: 3}
+  - id: 82
+    name: Starfire Staff
+    sprite: {fileID: 21300000, guid: b1a1b559c18325f4d8582f05270d1fa9, type: 3}
+  - id: 83
+    name: Wraith Sword
+    sprite: {fileID: 21300000, guid: ef6d7855a7e2ab24ca8815283d3afdf6, type: 3}
+  - id: 84
+    name: Skull Staff
+    sprite: {fileID: 21300000, guid: bea0c0ca94ac8e84d954ed63666877db, type: 3}
+  - id: 85
+    name: Vine Bow
+    sprite: {fileID: 21300000, guid: afe675ea4f1ec4e4a8b6b5ef01235967, type: 3}
+  - id: 86
+    name: Flesh Eater
+    sprite: {fileID: 21300000, guid: 81b2aca344a6250409993008c9674383, type: 3}
+  - id: 87
+    name: Heart Finder Sword
+    sprite: {fileID: 21300000, guid: cab433d69eef615489325b3564d1dcb9, type: 3}
+  - id: 88
+    name: Dragon Sceptre
+    sprite: {fileID: 21300000, guid: 8ad1462e69fd3bb4cbbcea663b3ae771, type: 3}
+  - id: 89
+    name: Rod of the Phoenix
+    sprite: {fileID: 21300000, guid: 85f8833aebbcf2f4ca8158ea7229c88f, type: 3}
+  - id: 90
+    name: Staff of Elemental Mastery
+    sprite: {fileID: 21300000, guid: bcad99885d915984dab6d420e3ed2ffd, type: 3}
+  - id: 91
+    name: Carmine Cleaver
+    sprite: {fileID: 21300000, guid: f6bfa1445bf4e574f91cd4db4616f742, type: 3}
+  - id: 92
+    name: Evening Star
+    sprite: {fileID: 21300000, guid: 466bb1e96885b3c41bd50cb5c491521d, type: 3}
+  - id: 93
+    name: Bow of War
+    sprite: {fileID: 21300000, guid: 8dfe75f937dd7474e9ba67c90b6347c6, type: 3}
+  - id: 94
+    name: Staff of Storms
+    sprite: {fileID: 21300000, guid: 36201fecb399d1646a2a305b4267f882, type: 3}
+  - id: 95
+    name: Star of Thraldom
+    sprite: {fileID: 21300000, guid: 500158d5c5053a240bedf630f6d3b5ec, type: 3}
+  - id: 96
+    name: Staff of Elemental Mastery
+    sprite: {fileID: 21300000, guid: 206c12411e8bad74cbd11c8e5208afae, type: 3}
+  - id: 97
+    name: Demon Bane
+    sprite: {fileID: 21300000, guid: edd952520022f0b429943a4c3e2327a2, type: 3}
+  - id: 98
+    name: Wave Breaker
+    sprite: {fileID: 21300000, guid: a6bd00b1d4a340b4786b30ff0699410e, type: 3}
+  - id: 99
+    name: Gate Cleaver
+    sprite: {fileID: 21300000, guid: f270a18b89ef132458e3205a838075c0, type: 3}
+  - id: 100
+    name: Moon Blade
+    sprite: {fileID: 21300000, guid: f22e9e5bb7adc924c9a42b64ed44a763, type: 3}
+  - id: 101
+    name: Ethereal Crossbow
+    sprite: {fileID: 21300000, guid: ad117fa4e19808740a4c592c3e3e49ea, type: 3}
+  - id: 102
+    name: Jellyberd
+    sprite: {fileID: 21300000, guid: d33742a04c9566342ac1e7343849869f, type: 3}
+  - id: 103
+    name: Banefire Crossbow
+    sprite: {fileID: 21300000, guid: 33a18d334e600af429e3ce0046a5c348, type: 3}
+  - id: 104
+    name: Shadow Brand
+    sprite: {fileID: 21300000, guid: 588304e4365e78047b3733485ed3c7c6, type: 3}
+  - id: 105
+    name: Ivory Bow
+    sprite: {fileID: 21300000, guid: b123d16be16bb00488ce16230ef8dc6c, type: 3}
+  - id: 106
+    name: Standard of the Damned
+    sprite: {fileID: 21300000, guid: befa04b5379c44b42b418ac2d7a4156a, type: 3}
+  - id: 107
+    name: Banner of the Northern Star
+    sprite: {fileID: 21300000, guid: d8145dae2bcb3c141a4f8f1a625bf30a, type: 3}
+  - id: 108
+    name: Blood Thorn
+    sprite: {fileID: 21300000, guid: 2f14d1d541de1744c95e9379a77fdd6d, type: 3}
+  - id: 109
+    name: Hell Sword
+    sprite: {fileID: 21300000, guid: dcdd52494e1712042b8ac6d58d77f055, type: 3}
+  - id: 110
+    name: Demon Whip
+    sprite: {fileID: 21300000, guid: 0c67fa4f3158e5f4da2540a3b8ab81ad, type: 3}
+  - id: 111
+    name: O'al Kan's Sceptre
+    sprite: {fileID: 21300000, guid: d6ba23f295b260d4492872e012f9793c, type: 3}
+  - id: 112
+    name: Unquenched Sword
+    sprite: {fileID: 21300000, guid: f6db8e0c42c36a6478e294726d309d66, type: 3}
+  - id: 113
+    name: Ember
+    sprite: {fileID: 21300000, guid: fa1b7d9f9f077b84ab47b2b2d7da4b51, type: 3}
+  - id: 114
+    name: Sword of Justice
+    sprite: {fileID: 21300000, guid: 992d543f17f94eb489ecb75eec3a851e, type: 3}
+  - id: 115
+    name: Bow of the Titans
+    sprite: {fileID: 21300000, guid: 6566889db9f72f64d9c92c2019ae8edc, type: 3}
+  - id: 116
+    name: Tempest
+    sprite: {fileID: 21300000, guid: 804508992db82624e8d4af82e74a9857, type: 3}
+  - id: 117
+    name: Winter Bringer
+    sprite: {fileID: 21300000, guid: 9deb70f453b422d4388cb53fc828b18b, type: 3}
+  - id: 118
+    name: Trident from Beyond
+    sprite: {fileID: 21300000, guid: 99bf5bb990f8f6f479a7f74a7b926200, type: 3}
+  - id: 119
+    name: Dawn Fang
+    sprite: {fileID: 21300000, guid: 61c02b3e88b196246a4dd62db8f74736, type: 3}
+  - id: 120
+    name: The Summit
+    sprite: {fileID: 21300000, guid: 3762cdb3fb4ff424cbced158f8693d1b, type: 3}
+  - id: 121
+    name: The Stone Sword
+    sprite: {fileID: 21300000, guid: c5b12116511c8bc488dddd1db564462d, type: 3}
+  - id: 122
+    name: Mage Bane
+    sprite: {fileID: 21300000, guid: 3fcb1e2dc14d92844ac7caa2439a28bf, type: 3}
+  - id: 123
+    name: Hammer of the Forge Lord
+    sprite: {fileID: 21300000, guid: 1f323d55c7f09c3488af5f385a6a9b30, type: 3}
+  - id: 124
+    name: The Tartarian Chains
+    sprite: {fileID: 21300000, guid: aa5d5da4dbfc2f64691937e53f5e8e16, type: 3}
+  - id: 125
+    name: The Sword of Many Colors
+    sprite: {fileID: 21300000, guid: 564cfdc05bffcb64faf9b7c0d98a094a, type: 3}
+  - id: 126
+    name: Twin Spear
+    sprite: {fileID: 21300000, guid: feca240c7bf733e4180c177dc4ac63f4, type: 3}
+  - id: 127
+    name: Twin Spear
+    sprite: {fileID: 21300000, guid: 35e8707d2aefc37488d3ff95ae27295e, type: 3}
+  - id: 128
+    name: The Oath Rod of Kurgi
+    sprite: {fileID: 21300000, guid: 0ca658251f1ac4842b12d7219f23d9ed, type: 3}
+  - id: 129
+    name: The Sword of Aurgelmer
+    sprite: {fileID: 21300000, guid: 4b85e27286ffa1344bd93cd455ae39f2, type: 3}
+  - id: 130
+    name: Rod of Death
+    sprite: {fileID: 21300000, guid: 9022820b032d803499b732b79b7714dc, type: 3}
+  - id: 131
+    name: The Flailing Hands
+    sprite: {fileID: 21300000, guid: 877d84a498c1da44da5f740c2a294f16, type: 3}
+  - id: 132
+    name: The Sickle whose Crop is Pain
+    sprite: {fileID: 21300000, guid: 2f81a5550cfde414cb930d64f4ed439f, type: 3}
+  - id: 133
+    name: Sceptre of Dark Regency
+    sprite: {fileID: 21300000, guid: 6e202b7c807195b47a92e647065d7d06, type: 3}
+  - id: 134
+    name: Sword of Injustice
+    sprite: {fileID: 21300000, guid: 2e0c3c6a44334b7488a179451005f4c1, type: 3}
+  - id: 135
+    name: Woundflame
+    sprite: {fileID: 21300000, guid: b44c70bf35c079e4b9c2e88580d2cd56, type: 3}
+  - id: 136
+    name: Sun Slayer
+    sprite: {fileID: 21300000, guid: 0fe15fa2f8649f948aa0c5d97d688333, type: 3}
+  - id: 137
+    name: Picus's Axe of Rulership
+    sprite: {fileID: 21300000, guid: 6b7c106217ae3274585a1882807711ec, type: 3}
+  - id: 138
+    name: The Sharpest Tooth
+    sprite: {fileID: 21300000, guid: 57b4505e81773a44883f0fcf3c4065c1, type: 3}
+  - id: 139
+    name: Sceptre of Corruption
+    sprite: {fileID: 21300000, guid: 0228c38d54abf6e49bb95604be4edf3d, type: 3}
+  - id: 140
+    name: Procas's Axe of Rulership
+    sprite: {fileID: 21300000, guid: dc6b947565d874145abebd6a8bc1b077, type: 3}
+  - id: 141
+    name: Harvest Blade
+    sprite: {fileID: 21300000, guid: e2d81f930b6586f40b300b7d2c14ad54, type: 3}
+  - id: 142
+    name: Dimensional Rod
+    sprite: {fileID: 21300000, guid: 28529c6b932af6940b31668864aaafdf, type: 3}
+  - id: 143
+    name: Infernal Sword
+    sprite: {fileID: 21300000, guid: 4e0fb785584263a49a082c91336222f0, type: 3}
+  - id: 144
+    name: The Staff from the Sun
+    sprite: {fileID: 21300000, guid: 37a966ef8cae8ad4f8f2a25b75bfb34e, type: 3}
+  - id: 145
+    name: Blacksteel Tower Shield
+    sprite: {fileID: 21300000, guid: a37159601f0a8c9478ecbb65340694b3, type: 3}
+  - id: 146
+    name: Blacksteel Kite Shield
+    sprite: {fileID: 21300000, guid: 268493926bd0958498fa63a7ff90a6b6, type: 3}
+  - id: 147
+    name: Enchanted Shield
+    sprite: {fileID: 21300000, guid: 57a9daf85301eb24698e50499b035154, type: 3}
+  - id: 148
+    name: Raw Hide Shield
+    sprite: {fileID: 21300000, guid: be585a025bd68af40806712afe555250, type: 3}
+  - id: 149
+    name: Weightless Tower Shield
+    sprite: {fileID: 21300000, guid: 035e197f8aa72f640b57529df444777c, type: 3}
+  - id: 150
+    name: Weightless Kite Shield
+    sprite: {fileID: 21300000, guid: d2d9926b25e9a0544832eb87507e5d9e, type: 3}
+  - id: 151
+    name: Lead Shield
+    sprite: {fileID: 21300000, guid: 9189251c1bbf955489f681e4bfddfbaf, type: 3}
+  - id: 152
+    name: Shield of Valor
+    sprite: {fileID: 21300000, guid: 7162f6e5e040c8d4da783fe5299e3bf8, type: 3}
+  - id: 153
+    name: Crystal Shield
+    sprite: {fileID: 21300000, guid: c5a8ea028c676f04495ee45e43ba2a0d, type: 3}
+  - id: 154
+    name: Eye Shield
+    sprite: {fileID: 21300000, guid: 342f1191a04851247b16d9e6373a1ee6, type: 3}
+  - id: 155
+    name: Golden Hoplon
+    sprite: {fileID: 21300000, guid: 49b98f6284568c944ad596cb0b0455ee, type: 3}
+  - id: 156
+    name: Charcoal Shield
+    sprite: {fileID: 21300000, guid: 87a9b1c1afa97c34ab01ffe5b3dccd77, type: 3}
+  - id: 157
+    name: Lucky Coin
+    sprite: {fileID: 21300000, guid: 70ad94a4ccf9a754181e3cfaff167ad8, type: 3}
+  - id: 158
+    name: Shield of the Accursed
+    sprite: {fileID: 21300000, guid: 4726ae2fa0ae8ca438cae46280b2fb9f, type: 3}
+  - id: 159
+    name: Vine Shield
+    sprite: {fileID: 21300000, guid: 72959399351f4984db19c9ef392791c5, type: 3}
+  - id: 160
+    name: Totem Shield
+    sprite: {fileID: 21300000, guid: 6485ca89d04317249bb6559a9c89f969, type: 3}
+  - id: 161
+    name: Shield of Gleaming Gold
+    sprite: {fileID: 21300000, guid: 3515a0c9739744a4997b8dcad86dfded, type: 3}
+  - id: 162
+    name: Scutata Volturnus
+    sprite: {fileID: 21300000, guid: 7b9230c405013e8449c078fd39ec2cb9, type: 3}
+  - id: 163
+    name: Lantern Shield
+    sprite: {fileID: 21300000, guid: 72d8cfd107ba92f4bbb1b414d6e2baee, type: 3}
+  - id: 164
+    name: Immaculate Shield
+    sprite: {fileID: 21300000, guid: bfe025664c4cf364fa5e88731b3108bd, type: 3}
+  - id: 165
+    name: Barrier
+    sprite: {fileID: 21300000, guid: 847309d7dda97c8489c9eec9e7638a11, type: 3}
+  - id: 166
+    name: The Aegis
+    sprite: {fileID: 21300000, guid: 07bacc1a068319a4392442c917419fe8, type: 3}
+  - id: 167
+    name: Shield of the Dawn
+    sprite: {fileID: 21300000, guid: 5891855c59cea8048a2c5f68c258b0af, type: 3}
+  - id: 168
+    name: Blacksteel Helmet
+    sprite: {fileID: 21300000, guid: 78abedc5cd94efe4f96e5a480ec4cb50, type: 3}
+  - id: 169
+    name: Enchanted Helmet
+    sprite: {fileID: 21300000, guid: b07836555f735ca46bb65c177e0a3f41, type: 3}
+  - id: 170
+    name: Dragon Helmet
+    sprite: {fileID: 21300000, guid: 4b683d18f27d1c14fa0518bebe9e5661, type: 3}
+  - id: 171
+    name: Crown of the Shah
+    sprite: {fileID: 21300000, guid: 6dc831ecb13ac2c4abfd9358de009dbf, type: 3}
+  - id: 172
+    name: Crown of Lead
+    sprite: {fileID: 21300000, guid: a746e334ed8d1ed4aa22258f3ae5b347, type: 3}
+  - id: 173
+    name: Horror Helmet
+    sprite: {fileID: 21300000, guid: f1f7552a29d2eca4b80258ae1ad90559, type: 3}
+  - id: 174
+    name: Black Laurel
+    sprite: {fileID: 21300000, guid: 13e183e0f33c03c459383efe4baecef4, type: 3}
+  - id: 175
+    name: Ivy Crown
+    sprite: {fileID: 21300000, guid: 94bdfa338a7489e45a10004c041f982c, type: 3}
+  - id: 176
+    name: Horned Helmet
+    sprite: {fileID: 21300000, guid: 5ce3218aba3f92b44bc0cdeeef59554a, type: 3}
+  - id: 177
+    name: Flame Helmet
+    sprite: {fileID: 21300000, guid: a3733c99d866399479ca796546276e4a, type: 3}
+  - id: 178
+    name: Huaca Headdress
+    sprite: {fileID: 21300000, guid: 67cee4b12146b764f83826e24a916864, type: 3}
+  - id: 179
+    name: Helmet of Heroes
+    sprite: {fileID: 21300000, guid: 0fd88287be80a0543b1eaf63fdbc7634, type: 3}
+  - id: 180
+    name: Winged Helmet
+    sprite: {fileID: 21300000, guid: de3209ca165cdf1449ea2649fbea31ce, type: 3}
+  - id: 181
+    name: Crown of Command
+    sprite: {fileID: 21300000, guid: 85543fdbc12c03644b5a2b7291175aad, type: 3}
+  - id: 182
+    name: Spirit Mask
+    sprite: {fileID: 21300000, guid: 9817b06f7081b2c45ae913f3ecdfc5f2, type: 3}
+  - id: 183
+    name: Mistletoe Garland
+    sprite: {fileID: 21300000, guid: 2f6d345c732db3643abfd3e45332aaa5, type: 3}
+  - id: 184
+    name: Headdress of the Bull
+    sprite: {fileID: 21300000, guid: 89fd2ce4782957d408c4754853782468, type: 3}
+  - id: 185
+    name: Spirit Helmet
+    sprite: {fileID: 21300000, guid: 1570f64f5847e7045995dd3b65a1f2a4, type: 3}
+  - id: 186
+    name: Iron Face
+    sprite: {fileID: 21300000, guid: ef27514e748aef7478762c5d8c9b796e, type: 3}
+  - id: 187
+    name: Crown of the Titans
+    sprite: {fileID: 21300000, guid: 391b96e65ca16b642a751f4e0777a7f6, type: 3}
+  - id: 188
+    name: Starshine Skullcap
+    sprite: {fileID: 21300000, guid: 0abdbf01a3b391647a31a78579074d40, type: 3}
+  - id: 189
+    name: Crown of the Magi
+    sprite: {fileID: 21300000, guid: b94377acb1d7ab54bac36e61e0ba8c9d, type: 3}
+  - id: 190
+    name: Skullface
+    sprite: {fileID: 21300000, guid: 80b50b5424225af4db641137876db436, type: 3}
+  - id: 191
+    name: Wraith Crown
+    sprite: {fileID: 21300000, guid: 30b333cc277edf1489b77af773ebf6d3, type: 3}
+  - id: 192
+    name: Crown of Overmight
+    sprite: {fileID: 21300000, guid: 0c8110d850d3177439a15b856f3f6ac3, type: 3}
+  - id: 193
+    name: Amon Hotep
+    sprite: {fileID: 21300000, guid: e4205be2ff97b474eb488d79974701c9, type: 3}
+  - id: 194
+    name: Helmet of Perfection
+    sprite: {fileID: 21300000, guid: 71462fc5ad07a6746a6c21b5b4a7ec87, type: 3}
+  - id: 195
+    name: Helmet of the Dawn
+    sprite: {fileID: 21300000, guid: bce189c92163a51439e06a2c9a6673e3, type: 3}
+  - id: 196
+    name: The Jade Mask
+    sprite: {fileID: 21300000, guid: 39fd2995b9c2174409d722e08e4803d9, type: 3}
+  - id: 197
+    name: Crown of the Ivy King
+    sprite: {fileID: 21300000, guid: 5acd820c01e1a1c4895b309a58bc7717, type: 3}
+  - id: 198
+    name: The Crown of Despair
+    sprite: {fileID: 21300000, guid: 3decb10f8356f6e40b9d9fab0c51a092, type: 3}
+  - id: 199
+    name: Blacksteel Plate
+    sprite: {fileID: 21300000, guid: 8e0a0f4d75b6f7a488f7328be3c8196b, type: 3}
+  - id: 200
+    name: Blacksteel Full Plate
+    sprite: {fileID: 21300000, guid: e67483cd6f85ac04cb71c7f45853eb8c, type: 3}
+  - id: 201
+    name: Berserker Pelt
+    sprite: {fileID: 21300000, guid: c7b0908c1e8cf2a459b79b2a9a834363, type: 3}
+  - id: 202
+    name: Fire Plate
+    sprite: {fileID: 21300000, guid: 7797d48348bec894cbbe0a15e0f43092, type: 3}
+  - id: 203
+    name: Robe of Missile Protection
+    sprite: {fileID: 21300000, guid: b99ca6f9415fcf1448e80ac73032e6c0, type: 3}
+  - id: 204
+    name: Lightweight Scale Mail
+    sprite: {fileID: 21300000, guid: a5bfca7dc9b764a40a0462ce9d8def41, type: 3}
+  - id: 205
+    name: Mirror Armor
+    sprite: {fileID: 21300000, guid: 6251c23d4b9c4264ab17cf00764aa1c9, type: 3}
+  - id: 206
+    name: Weightless Scale Mail
+    sprite: {fileID: 21300000, guid: 0d397d4fe8320eb498b672f166c17275, type: 3}
+  - id: 207
+    name: Copper Plate
+    sprite: {fileID: 21300000, guid: eda8b005cf4cdc04d8318e7c9846398f, type: 3}
+  - id: 208
+    name: Shambler Skin Armor
+    sprite: {fileID: 21300000, guid: 23a689b1c498a89478bd0cb6b48e264f, type: 3}
+  - id: 209
+    name: Enchanted Ring Mail Armor
+    sprite: {fileID: 21300000, guid: fd3ef95bb42320645a1b023ade48c0cd, type: 3}
+  - id: 210
+    name: Dire Wolf Pelt
+    sprite: {fileID: 21300000, guid: d5a6a7b782df72a4fa0bbd3c4ed093c9, type: 3}
+  - id: 211
+    name: Kithaironic Lion Pelt
+    sprite: {fileID: 21300000, guid: 7c7c17c280c51a345a25f5939a476c06, type: 3}
+  - id: 212
+    name: Armor of Souls
+    sprite: {fileID: 21300000, guid: e3757451f1445ce44a3b9fff742191a8, type: 3}
+  - id: 213
+    name: Ranger's Cloak
+    sprite: {fileID: 21300000, guid: a37c823e332db7147a92a055fe209cce, type: 3}
+  - id: 214
+    name: Armor of the Five Elements
+    sprite: {fileID: 21300000, guid: 2468698a9d7bcf74cb8602775ff9fb7d, type: 3}
+  - id: 215
+    name: Red Dragon Scale Mail
+    sprite: {fileID: 21300000, guid: ce68d4a0d6cb6f245a96b42d36935876, type: 3}
+  - id: 216
+    name: Chain Mail of Displacement
+    sprite: {fileID: 21300000, guid: 18269975eb6e1cc40834264955125880, type: 3}
+  - id: 217
+    name: Silver Hauberk
+    sprite: {fileID: 21300000, guid: 95aa77cfefe20fa4eb7c0c3fd7b59493, type: 3}
+  - id: 218
+    name: Brightmail Haubergeon
+    sprite: {fileID: 21300000, guid: 2bdd893b002de164599a415c9095db05, type: 3}
+  - id: 219
+    name: Elemental Armor
+    sprite: {fileID: 21300000, guid: 1be60377ff1bc0742a7f3f824c1873e9, type: 3}
+  - id: 220
+    name: Blue Dragon Scale Mail
+    sprite: {fileID: 21300000, guid: ecd091209c7f0a84a93949044083f97a, type: 3}
+  - id: 221
+    name: Robe of the Sea
+    sprite: {fileID: 21300000, guid: 404218931d06aa24194fe5b0e1baa7ac, type: 3}
+  - id: 222
+    name: Shroud of the Battle Saint
+    sprite: {fileID: 21300000, guid: 997ee31ca9d9dd44f9724919a6e770fa, type: 3}
+  - id: 223
+    name: Robe of Shadows
+    sprite: {fileID: 21300000, guid: 8f450848f894c194e9f1763acc531ba0, type: 3}
+  - id: 224
+    name: Shademail Haubergeon
+    sprite: {fileID: 21300000, guid: 2d54b687e6aed8242adafc07ad265131, type: 3}
+  - id: 225
+    name: Green Dragon Scale Mail
+    sprite: {fileID: 21300000, guid: ea686a87b05302f438d528bb9cda05ad, type: 3}
+  - id: 226
+    name: Armor of Twisting Thorns
+    sprite: {fileID: 21300000, guid: ce0190bda8f707d41a7b410711365ff4, type: 3}
+  - id: 227
+    name: Armor of Knights
+    sprite: {fileID: 21300000, guid: b877854ec0d59c848b819de180613640, type: 3}
+  - id: 228
+    name: Marble Armor
+    sprite: {fileID: 21300000, guid: ee168ecd977401b469ebf6353114de49, type: 3}
+  - id: 229
+    name: Stymphalian Wings
+    sprite: {fileID: 21300000, guid: d757d9118eb7c8744a097d36001804d0, type: 3}
+  - id: 230
+    name: Rainbow Armor
+    sprite: {fileID: 21300000, guid: ed6157e6eccec16418ad7843b9b1f9a8, type: 3}
+  - id: 231
+    name: Robe of the Magi
+    sprite: {fileID: 21300000, guid: 772b000153a8b384f908bf3d200ad477, type: 3}
+  - id: 232
+    name: Robe of Invulnerability
+    sprite: {fileID: 21300000, guid: 96ce0a2026341b047953459b48d4f86d, type: 3}
+  - id: 233
+    name: Rime Hauberk
+    sprite: {fileID: 21300000, guid: 871a546fa3b00b04687cbc67e08f7e10, type: 3}
+  - id: 234
+    name: Jade Armor
+    sprite: {fileID: 21300000, guid: 2ecfd4d206b4f434494011e8f5a0084d, type: 3}
+  - id: 235
+    name: Bone Armor
+    sprite: {fileID: 21300000, guid: a6b732b809a52b940958860aaec0e0dc, type: 3}
+  - id: 236
+    name: Hydra Skin Armor
+    sprite: {fileID: 21300000, guid: e0c7b9e00790c3943ad3f6ff8a561887, type: 3}
+  - id: 237
+    name: Aseftik's Armor
+    sprite: {fileID: 21300000, guid: d26111523abd4a04f93ea5c8be37ad04, type: 3}
+  - id: 238
+    name: Monolith Armor
+    sprite: {fileID: 21300000, guid: 5539b149082b07242aa9993fcc06604f, type: 3}
+  - id: 239
+    name: Armor of the Dawn
+    sprite: {fileID: 21300000, guid: 1b9ba01fdbe7a3b47ad94087603e2d8c, type: 3}
+  - id: 240
+    name: Robe of Calius the Druid
+    sprite: {fileID: 21300000, guid: b325e23182cf8a9418535c18235faa2f, type: 3}
+  - id: 241
+    name: Fenris' Pelt
+    sprite: {fileID: 21300000, guid: ac354d8b86f8aa6418d588011c4a1ac4, type: 3}
+  - id: 242
+    name: Armor of Virtue
+    sprite: {fileID: 21300000, guid: 4f8e606051ca8324d9aa2c8eed6082c3, type: 3}
+  - id: 243
+    name: Flesh Ward
+    sprite: {fileID: 21300000, guid: 686dc1e6cf18e3241ad9c0c2a0c02248, type: 3}
+  - id: 244
+    name: Pebble Skin Suit
+    sprite: {fileID: 21300000, guid: 464530d28a7df3944bc487e8dc2abf44, type: 3}
+  - id: 245
+    name: Boots of Long Strides
+    sprite: {fileID: 21300000, guid: 6b898207b17e1094caf2924d91ea0006, type: 3}
+  - id: 246
+    name: Chi Shoes
+    sprite: {fileID: 21300000, guid: f8892924a7f5f8343ac08d0f3d6af555, type: 3}
+  - id: 247
+    name: Boots of the Behemoth
+    sprite: {fileID: 21300000, guid: 47a58a062bc31374b9f678a4e50c7cb1, type: 3}
+  - id: 248
+    name: Boots of Giant Strength
+    sprite: {fileID: 21300000, guid: 36e538a3cadd72f429d8f8ffc86a97d7, type: 3}
+  - id: 249
+    name: Birch Boots
+    sprite: {fileID: 21300000, guid: da483ffab467aa94fa3ee89dd1203109, type: 3}
+  - id: 250
+    name: Ranger's Boots
+    sprite: {fileID: 21300000, guid: 377b5237491209542b765984f0f7796b, type: 3}
+  - id: 251
+    name: Brimstone Boots
+    sprite: {fileID: 21300000, guid: 4dac0042b6b727e438d56a44e76d5a57, type: 3}
+  - id: 252
+    name: Winged Shoes
+    sprite: {fileID: 21300000, guid: 42feb23e6168ad2448ec137dbac6c8d3, type: 3}
+  - id: 253
+    name: Earth Boots
+    sprite: {fileID: 21300000, guid: 2470461bc38aa4f4cb414f64d00a6c7d, type: 3}
+  - id: 254
+    name: Boots of the Messenger
+    sprite: {fileID: 21300000, guid: 89fa5ec54cb0ac6439555afa44e980d7, type: 3}
+  - id: 255
+    name: Boots of Quickness
+    sprite: {fileID: 21300000, guid: 2c03ccb59f04336499c1d8fb116a3ca1, type: 3}
+  - id: 256
+    name: Boots of Stone
+    sprite: {fileID: 21300000, guid: 81a06464ddfdd5547b83e3fa7f821dd0, type: 3}
+  - id: 257
+    name: Boots of Youth
+    sprite: {fileID: 21300000, guid: 8dbddd5a8846d6549a80021ca4d10ab2, type: 3}
+  - id: 258
+    name: Boots of Antaeus
+    sprite: {fileID: 21300000, guid: 383b06f0a5f24c640b867c0537b253ec, type: 3}
+  - id: 259
+    name: Sandals of the Crane
+    sprite: {fileID: 21300000, guid: de573f5950ebfa74492c5659515b2c83, type: 3}
+  - id: 260
+    name: Boots of the Planes
+    sprite: {fileID: 21300000, guid: e263445a0e190fa40800ea92969ccaa5, type: 3}
+  - id: 261
+    name: The Boots of Calius the Druid
+    sprite: {fileID: 21300000, guid: aaf58f1357f0dd64eb7be7c7d243f9f7, type: 3}
+  - id: 262
+    name: Ring of Fire
+    sprite: {fileID: 21300000, guid: 36d91648c397c894a9bb9c1e8d25ef5b, type: 3}
+  - id: 263
+    name: Ring of Tamed Lightning
+    sprite: {fileID: 21300000, guid: 38f86e35f7898a74fb99d317f50c2cca, type: 3}
+  - id: 264
+    name: Ring of Frost
+    sprite: {fileID: 21300000, guid: c889cb20b72b0f64181eb9d35344dd84, type: 3}
+  - id: 265
+    name: Bear Claw Talisman
+    sprite: {fileID: 21300000, guid: 6108e48556fa075488c3224ac27cbce0, type: 3}
+  - id: 266
+    name: Rabbit Foot Charm
+    sprite: {fileID: 21300000, guid: 4307e3e28b3c7d84391e1bbf41329f69, type: 3}
+  - id: 267
+    name: Skull Talisman
+    sprite: {fileID: 21300000, guid: 27fac0dfad917c549bfcf1c4055738fa, type: 3}
+  - id: 268
+    name: Snake Ring
+    sprite: {fileID: 21300000, guid: bb96629b10c8bc5429ef6c800d5da31e, type: 3}
+  - id: 269
+    name: Slave Collar
+    sprite: {fileID: 21300000, guid: 58ebb14037d4bfe4eb6180aa5cd62c44, type: 3}
+  - id: 270
+    name: Burning Pearl
+    sprite: {fileID: 21300000, guid: 96b663db148bb904682b43d231f1c250, type: 3}
+  - id: 271
+    name: Fire in a Jar
+    sprite: {fileID: 21300000, guid: 42001bedbfca646488602e99620659ec, type: 3}
+  - id: 272
+    name: Ring of Warning
+    sprite: {fileID: 21300000, guid: 29119ecfb3c2cd5429af8386ad998b5e, type: 3}
+  - id: 273
+    name: Ring of Levitation
+    sprite: {fileID: 21300000, guid: 532606cc0ea0e3f46b79615d569c7150, type: 3}
+  - id: 274
+    name: Owl Quill
+    sprite: {fileID: 21300000, guid: ad646bae8fa863746b9ad5dacd3f9052, type: 3}
+  - id: 275
+    name: Eye of Aiming
+    sprite: {fileID: 21300000, guid: 6e2b32003c35d204e9cac2a620d2c2a6, type: 3}
+  - id: 276
+    name: Amulet of Missile Protection
+    sprite: {fileID: 21300000, guid: db015e7b90f035946a279ede42008eab, type: 3}
+  - id: 277
+    name: Amulet of Breathing
+    sprite: {fileID: 21300000, guid: 89d9031d7fa71e14685f45c8f4767a3d, type: 3}
+  - id: 278
+    name: Gossamer Cloth
+    sprite: {fileID: 21300000, guid: 1e3969c5a793d4c4e8ebbe89b0e98992, type: 3}
+  - id: 279
+    name: Ring of Water Breathing
+    sprite: {fileID: 21300000, guid: 3154e486a98bea9438b48f4f8ccc3240, type: 3}
+  - id: 280
+    name: Flask of Holy Water
+    sprite: {fileID: 21300000, guid: 4a7d2bbefb8fbf64fbba6d4331960ad2, type: 3}
+  - id: 281
+    name: Clam of Pearls
+    sprite: {fileID: 21300000, guid: beb4eb95ba657794e9863842c41a737f, type: 3}
+  - id: 282
+    name: Bracers of Protection
+    sprite: {fileID: 21300000, guid: 56f430204fa32be49b1ea3d085a19242, type: 3}
+  - id: 283
+    name: Lodestone Amulet
+    sprite: {fileID: 21300000, guid: 8ac718f5e640e0a4cbc95b2ba9bd2980, type: 3}
+  - id: 284
+    name: Wound Fend Amulet
+    sprite: {fileID: 21300000, guid: f569e2a7ce4457a448738b507d6eef0e, type: 3}
+  - id: 285
+    name: The Pebble Pouch
+    sprite: {fileID: 21300000, guid: 3e465ee3f7eaf0149a96044adee267f3, type: 3}
+  - id: 286
+    name: Stone Bird
+    sprite: {fileID: 21300000, guid: 41059fc1afe0be54bba41c028ba92458, type: 3}
+  - id: 287
+    name: Cat's Eye Amulet
+    sprite: {fileID: 21300000, guid: 9a01fb6b2cb701441b35a7d296d0283f, type: 3}
+  - id: 288
+    name: Pendant of Luck
+    sprite: {fileID: 21300000, guid: 4a7a698447dd3ca4aa95271cbde7497a, type: 3}
+  - id: 289
+    name: Champion's Skull
+    sprite: {fileID: 21300000, guid: 71a57f6fabec6ea43b3e4760e49b7731, type: 3}
+  - id: 290
+    name: Effigy of War
+    sprite: {fileID: 21300000, guid: 7e154100f06c0424297b447c0c181d86, type: 3}
+  - id: 291
+    name: Handful of Acorns
+    sprite: {fileID: 21300000, guid: 33ab972368a16fc45a7260b64761ad03, type: 3}
+  - id: 292
+    name: Barkskin Amulet
+    sprite: {fileID: 21300000, guid: 415a18786106b324d8011aa83848a5ae, type: 3}
+  - id: 293
+    name: Cat Charm
+    sprite: {fileID: 21300000, guid: 9bb350a614b6be54e8ff8377b6ba1624, type: 3}
+  - id: 294
+    name: Enormous Cauldron of Broth
+    sprite: {fileID: 21300000, guid: 7d82a2b1e922946469880dc8fcb0bfa3, type: 3}
+  - id: 295
+    name: Ring of the Warrior
+    sprite: {fileID: 21300000, guid: 9ba20b17134f653478501287a41c4b19, type: 3}
+  - id: 296
+    name: Imp Familiar
+    sprite: {fileID: 21300000, guid: dfe6dbcc66c5eab47b3bee6e0a90d427, type: 3}
+  - id: 297
+    name: Soul Contract
+    sprite: {fileID: 21300000, guid: 7ef5b5916e36c6f478e75332112c79d9, type: 3}
+  - id: 298
+    name: Medallion of Vengeance
+    sprite: {fileID: 21300000, guid: 576d290451eda954a892bb93a2183aca, type: 3}
+  - id: 299
+    name: Pills of Water Breathing
+    sprite: {fileID: 21300000, guid: 487d83bffd0cdf34395ef7d882b32a1b, type: 3}
+  - id: 300
+    name: Dancing Trident
+    sprite: {fileID: 21300000, guid: 11505d64b0ef2ba49beaaf32ed3a2879, type: 3}
+  - id: 301
+    name: Storm Spool
+    sprite: {fileID: 21300000, guid: 4db4e2191cca71145a07393859995331, type: 3}
+  - id: 302
+    name: Wall Shaker
+    sprite: {fileID: 21300000, guid: 589cccbaf8f2dbb4eb987a13ffa05739, type: 3}
+  - id: 303
+    name: Bag of Winds
+    sprite: {fileID: 21300000, guid: fa3ca764c3d636c449284f7650fec400, type: 3}
+  - id: 304
+    name: Flying Carpet
+    sprite: {fileID: 21300000, guid: c77f932834b0c5a40b18d177d1c9d8d4, type: 3}
+  - id: 305
+    name: Dancing Shield
+    sprite: {fileID: 21300000, guid: 731e11a9b2ace3d47a4e4abda93c0b6b, type: 3}
+  - id: 306
+    name: Enchanted Mirror
+    sprite: {fileID: 21300000, guid: ce8b7563be29db54086f944656f23d93, type: 3}
+  - id: 307
+    name: Cauldron of the Elven Halls
+    sprite: {fileID: 21300000, guid: b1a4795edb1dbda43a605e1f946d2de7, type: 3}
+  - id: 308
+    name: Amulet of the Fish
+    sprite: {fileID: 21300000, guid: 987a0386f00cd944a8b0502f83c8f907, type: 3}
+  - id: 309
+    name: Manual of Water Breathing
+    sprite: {fileID: 21300000, guid: ace0a4320bdc1f147abd8a02b89dd898, type: 3}
+  - id: 310
+    name: Girdle of Might
+    sprite: {fileID: 21300000, guid: 2496f6795c0b3c847b643b50cebdba64, type: 3}
+  - id: 311
+    name: Crystal Matrix
+    sprite: {fileID: 21300000, guid: 78ec849a802a74b408f31d8e2b2e446d, type: 3}
+  - id: 312
+    name: Slave Matrix
+    sprite: {fileID: 21300000, guid: f675c7be2b5967b4fb2def0e33bfcbd7, type: 3}
+  - id: 313
+    name: Amulet of Antimagic
+    sprite: {fileID: 21300000, guid: 95012d5232be1054782f936ffbbd7069, type: 3}
+  - id: 314
+    name: Spell Focus
+    sprite: {fileID: 21300000, guid: dd047008d788c9e4d99130000c007a71, type: 3}
+  - id: 315
+    name: Eye of the Void
+    sprite: {fileID: 21300000, guid: 80066222db72e274dba2a3d627dd2371, type: 3}
+  - id: 316
+    name: Stone Sphere
+    sprite: {fileID: 21300000, guid: 05f81406c2b3b284eb7b160e3d4710c7, type: 3}
+  - id: 317
+    name: Crystal Coin
+    sprite: {fileID: 21300000, guid: 29e7588107153374aae974b01166f973, type: 3}
+  - id: 318
+    name: Amulet of the Dead
+    sprite: {fileID: 21300000, guid: 663be041ca5abdd438f2c94a5b8e3a7c, type: 3}
+  - id: 319
+    name: Skull Mentor
+    sprite: {fileID: 21300000, guid: 47e9de346078128409fd5ac7b7b1666e, type: 3}
+  - id: 320
+    name: Bane Venom Charm
+    sprite: {fileID: 21300000, guid: 8489d0ff4c3c4ce4c9657bfd50a87dbb, type: 3}
+  - id: 321
+    name: Horn of Valor
+    sprite: {fileID: 21300000, guid: 925849ba72638764ab443982e470a8c5, type: 3}
+  - id: 322
+    name: Acorn Necklace
+    sprite: {fileID: 21300000, guid: 8d63138bdfae07f48ae5ffaf724c3d0c, type: 3}
+  - id: 323
+    name: Endless Bag of Wine
+    sprite: {fileID: 21300000, guid: 349dc031740c24a45862783ef293b096, type: 3}
+  - id: 324
+    name: Amulet of Giants
+    sprite: {fileID: 21300000, guid: 004370fb7cd36544294e9599f089ccbb, type: 3}
+  - id: 325
+    name: Lychantropos' Amulet
+    sprite: {fileID: 21300000, guid: 0baa9af08061cfd408b2a546c42f0405, type: 3}
+  - id: 326
+    name: Ring of Regeneration
+    sprite: {fileID: 21300000, guid: d52343fb2eca87b4082c5c271e49f1a9, type: 3}
+  - id: 327
+    name: Amulet of Resilience
+    sprite: {fileID: 21300000, guid: f3f397f159ca5a349bace8f19f3d2d14, type: 3}
+  - id: 328
+    name: Cornucopia
+    sprite: {fileID: 21300000, guid: 6f73ef7c3ae0a544c931a3bc10967bf4, type: 3}
+  - id: 329
+    name: Miraculous Cure All Elixir
+    sprite: {fileID: 21300000, guid: 9376c64a820584d43b2989d6545afc7b, type: 3}
+  - id: 330
+    name: Astral Serpent
+    sprite: {fileID: 21300000, guid: c76f09c234e9f524f96b5a6ad560a15a, type: 3}
+  - id: 331
+    name: Sanguine Dowsing Rod
+    sprite: {fileID: 21300000, guid: 708ff5118bc68ba45bc51de2bfdad651, type: 3}
+  - id: 332
+    name: Brazen Vessel
+    sprite: {fileID: 21300000, guid: ee78da411194f6642a99493dda728ae2, type: 3}
+  - id: 333
+    name: The Heart of Life
+    sprite: {fileID: 21300000, guid: 16b348af10790fa45b86ec308e420c9b, type: 3}
+  - id: 334
+    name: Lifelong Protection
+    sprite: {fileID: 21300000, guid: 7185a730ec8e130419ddcc3424adb89a, type: 3}
+  - id: 335
+    name: Blood Stone
+    sprite: {fileID: 21300000, guid: 57fa1c56a5f0cfb4aaf024f7e8e19b37, type: 3}
+  - id: 336
+    name: Water Lens
+    sprite: {fileID: 21300000, guid: f106f35ebcf6027488bf6940790fdae4, type: 3}
+  - id: 337
+    name: Lightless Lantern
+    sprite: {fileID: 21300000, guid: 728c4156648a0c643af27b0156029623, type: 3}
+  - id: 338
+    name: Skull of Fire
+    sprite: {fileID: 21300000, guid: 9acad42c42ef9e14fba13b7ca081183a, type: 3}
+  - id: 339
+    name: Barrel of Air
+    sprite: {fileID: 21300000, guid: 115ebc997ad422e498fa08f4d855934a, type: 3}
+  - id: 340
+    name: Mirror of False Impressions
+    sprite: {fileID: 21300000, guid: f30b55d1eaa1bb347bab6d671fdd170a, type: 3}
+  - id: 341
+    name: Water Bracelet
+    sprite: {fileID: 21300000, guid: 5bf3b4ce0540f5349aa8f02593db9e75, type: 3}
+  - id: 342
+    name: Bottle of Living Water
+    sprite: {fileID: 21300000, guid: 6aada6f14c932054aa4e7a9c0caf3b62, type: 3}
+  - id: 343
+    name: Sea King's Goblet
+    sprite: {fileID: 21300000, guid: 430c1936f21643f45a6d80fdd77352ba, type: 3}
+  - id: 344
+    name: Mercury Barrel
+    sprite: {fileID: 21300000, guid: c996bdf75c5281b4da071d984b86151f, type: 3}
+  - id: 345
+    name: The Copper Arm
+    sprite: {fileID: 21300000, guid: db81dcfff58f27c4ca3c61ba1b3d2841, type: 3}
+  - id: 346
+    name: Crystal Heart
+    sprite: {fileID: 21300000, guid: e5778d66944da2148967bc5121c35778, type: 3}
+  - id: 347
+    name: Stone Idol
+    sprite: {fileID: 21300000, guid: 2492b69be2b02674eaaca9c4cad2e6e0, type: 3}
+  - id: 348
+    name: Eye Pendant
+    sprite: {fileID: 21300000, guid: 6fa9b7038136eea4ea4aecc60a1b49b0, type: 3}
+  - id: 349
+    name: Arcane Lens
+    sprite: {fileID: 21300000, guid: 360dc3cf73863d54f9dfe4a6555690e9, type: 3}
+  - id: 350
+    name: Eye of Innocence
+    sprite: {fileID: 21300000, guid: 9c967574e50074f4da180a929e548753, type: 3}
+  - id: 351
+    name: Ring of Wizardry
+    sprite: {fileID: 21300000, guid: f3020e7458ee23c45863719b0eedfb67, type: 3}
+  - id: 352
+    name: Ring of Sorcery
+    sprite: {fileID: 21300000, guid: f2446706abd7ede40921796054942657, type: 3}
+  - id: 353
+    name: Elixir of Life
+    sprite: {fileID: 21300000, guid: 937e2c4270634bc49ac2d6700635c698, type: 3}
+  - id: 354
+    name: Pocket Ship
+    sprite: {fileID: 21300000, guid: 6377b465d4115db428ef96e8de84ae10, type: 3}
+  - id: 355
+    name: Moonvine Bracelet
+    sprite: {fileID: 21300000, guid: b15d16fa4a2a02b49b303d8c6f034492, type: 3}
+  - id: 356
+    name: The Black Heart
+    sprite: {fileID: 21300000, guid: 0d6383eaefcc2844090b7f474a899c33, type: 3}
+  - id: 357
+    name: Blood Pendant
+    sprite: {fileID: 21300000, guid: ed6a7c5407980144faf8ef23884345ee, type: 3}
+  - id: 358
+    name: The Ruby Eye
+    sprite: {fileID: 21300000, guid: 353f965d202684b40ac147908b743dc2, type: 3}
+  - id: 359
+    name: Fever Fetish
+    sprite: {fileID: 21300000, guid: 1a0c433d04f7f9f4485789161bce8c93, type: 3}
+  - id: 360
+    name: The Ark
+    sprite: {fileID: 21300000, guid: 8c66ab1055c0dee48adec1d96190ab0f, type: 3}
+  - id: 361
+    name: Amulet of the Doppelganger
+    sprite: {fileID: 21300000, guid: 7105819f9ef18ff4b852eda9fd6210a9, type: 3}
+  - id: 362
+    name: The Flying Ship
+    sprite: {fileID: 21300000, guid: 83a171f97bd98994694f3eadabdc0e02, type: 3}
+  - id: 363
+    name: "Igor K\xF6nhelm's Tome"
+    sprite: {fileID: 21300000, guid: f7b4cfbaf5393a24495ea23e59423e2e, type: 3}
+  - id: 364
+    name: Tome of High Power
+    sprite: {fileID: 21300000, guid: 06c22780328ceda4a9c0fd3a340ae138, type: 3}
+  - id: 365
+    name: The Magic Lamp
+    sprite: {fileID: 21300000, guid: e23605d7fb8291c479d2d0dc3bd28c89, type: 3}
+  - id: 366
+    name: Krupp's Bracers
+    sprite: {fileID: 21300000, guid: 9e60034a5ebca2d46a41a5e3acc00ba4, type: 3}
+  - id: 367
+    name: Draupnir
+    sprite: {fileID: 21300000, guid: cf19c749d365d84489721199341e2b3f, type: 3}
+  - id: 368
+    name: The First Anvil
+    sprite: {fileID: 21300000, guid: f82a8568e27835e4d96b7fb9fe8bb85a, type: 3}
+  - id: 369
+    name: Holger the Head
+    sprite: {fileID: 21300000, guid: 9225d2d5e6a61e245894e070ffe75ae3, type: 3}
+  - id: 370
+    name: Percival the Pocket Knight
+    sprite: {fileID: 21300000, guid: 2798f3793e542524f86c10df32ca995c, type: 3}
+  - id: 371
+    name: Alchemist's Stone
+    sprite: {fileID: 21300000, guid: 9c185556ef63d94428b4c630a86b0fd0, type: 3}
+  - id: 372
+    name: Gate Stone
+    sprite: {fileID: 21300000, guid: dd4c66d272ee72c4a93ebf06ac0f332d, type: 3}
+  - id: 373
+    name: Atlas of Creation
+    sprite: {fileID: 21300000, guid: 02c9011ce607dca4e91803cdfab5306e, type: 3}
+  - id: 374
+    name: Bell of Cleansing
+    sprite: {fileID: 21300000, guid: 37fda8f568bc80941891c1dae01f1bfb, type: 3}
+  - id: 375
+    name: Orb of Atlantis
+    sprite: {fileID: 21300000, guid: e36722d896c1ece4884b6cbc34320e78, type: 3}
+  - id: 376
+    name: The Astral Harpoon
+    sprite: {fileID: 21300000, guid: 067887f3b7ba5c54a8c815f72d0519cb, type: 3}
+  - id: 377
+    name: The Forbidden Light
+    sprite: {fileID: 21300000, guid: d121ca4de84fcf847ba1171f743fc40d, type: 3}
+  - id: 378
+    name: Nethgul
+    sprite: {fileID: 21300000, guid: f9bca90d645e53e4eb6e5918b041842e, type: 3}
+  - id: 379
+    name: The Black Mirror
+    sprite: {fileID: 21300000, guid: 42979cedb6610a1419e84f1f6362d26d, type: 3}
+  - id: 380
+    name: The Horror Harmonica
+    sprite: {fileID: 21300000, guid: d8deabf264e94ae44aa180b9613560eb, type: 3}
+  - id: 381
+    name: Tome of the Lower Planes
+    sprite: {fileID: 21300000, guid: 36f62debf3572e94798138e23bd21912, type: 3}
+  - id: 382
+    name: Carcator the Pocket Lich
+    sprite: {fileID: 21300000, guid: ae2c059a0b6d89243bdb1205d99a672c, type: 3}
+  - id: 383
+    name: The Ankh
+    sprite: {fileID: 21300000, guid: bdcfa927322b81e468bb870b241e3be2, type: 3}
+  - id: 384
+    name: Disease Grinder
+    sprite: {fileID: 21300000, guid: c3336b3ca58642247a2f88a95156833d, type: 3}
+  - id: 385
+    name: The Black Book of Secrets
+    sprite: {fileID: 21300000, guid: 29c11faecb49a6848bf69755047dff54, type: 3}
+  - id: 386
+    name: The Green Eye
+    sprite: {fileID: 21300000, guid: 0dd1887b37cbe76459f9d73c2ca48910, type: 3}
+  - id: 387
+    name: Wondrous Box of Monsters
+    sprite: {fileID: 21300000, guid: 68c4a5c5243cd3b4c99df00e38ac1a8e, type: 3}
+  - id: 388
+    name: Fountain of Youth
+    sprite: {fileID: 21300000, guid: 2543f0e53eb99934981eb60eba8f8b4a, type: 3}
+  - id: 389
+    name: Midget's Revenge
+    sprite: {fileID: 21300000, guid: 7548c54609a4e824582c2d46269c1fb4, type: 3}
+  - id: 390
+    name: Soulstone of the Wolves
+    sprite: {fileID: 21300000, guid: 5559e90314e156140b16bcea1c08298c, type: 3}
+  - id: 391
+    name: The Chalice
+    sprite: {fileID: 21300000, guid: 696c1ef7492a55b47889cfd5424d0bdf, type: 3}
+  - id: 392
+    name: The Tome of Gaia
+    sprite: {fileID: 21300000, guid: af13141f612efd04f8845641e161297c, type: 3}
+  - id: 393
+    name: The Protection of Geryon
+    sprite: {fileID: 21300000, guid: f7fec25b41f8f244daaddbc9b41898e1, type: 3}
+  - id: 394
+    name: The Manual of Cross Breeding
+    sprite: {fileID: 21300000, guid: e857f23406054624b90d7a8c866e2e4b, type: 3}
+  - id: 395
+    name: The Gift of Kurgi
+    sprite: {fileID: 21300000, guid: 4be55bd222ed2bb4297627913508bd8f, type: 3}
+  - id: 396
+    name: Ardmon's Soul Trap
+    sprite: {fileID: 21300000, guid: be12a9036a31d3948a6202e11dffdedf, type: 3}
+  - id: 397
+    name: Shortsword
+    sprite: {fileID: 21300000, guid: d1adafe657d24e341a4b2fd3c2968232, type: 3}
+  - id: 398
+    name: Hammer of the Cyclops
+    sprite: {fileID: 21300000, guid: 589da6595c6554e4dab33a26652da50d, type: 3}
+  - id: 399
+    name: The Admiral's Sword
+    sprite: {fileID: 21300000, guid: 131d21f06aee2cd4a8a2c0f8060dc8e7, type: 3}
+  - id: 400
+    name: Precious
+    sprite: {fileID: 21300000, guid: 5a85ace1998b4fe43a3149d1cc1cd628, type: 3}
+  - id: 401
+    name: Vial of Frozen Tears
+    sprite: {fileID: 21300000, guid: 66f50162908e82f41b4eb0a43497223a, type: 3}
+  - id: 402
+    name: Crown of Katafagus
+    sprite: {fileID: 21300000, guid: 10380ad7dd06b0b4b96c0860b046e39f, type: 3}
+  - id: 403
+    name: Crown of Ptah
+    sprite: {fileID: 21300000, guid: 6a707d6537113b044805eb979aa4d273, type: 3}
+  - id: 404
+    name: Robe of the Sorceress
+    sprite: {fileID: 21300000, guid: c287d12d046a4d549a8f1a48abc0a9e1, type: 3}
+  - id: 405
+    name: Sun Armor
+    sprite: {fileID: 21300000, guid: 68aa66d430ccb814cacdcde311a5cc05, type: 3}
+  - id: 406
+    name: Sun Helmet
+    sprite: {fileID: 21300000, guid: 2863e121da196034eada1a16dbd1cdaf, type: 3}
+  - id: 407
+    name: Sun Sword
+    sprite: {fileID: 21300000, guid: a62c716781daa0f49a937ac2ee6d9148, type: 3}
+  - id: 408
+    name: Sun Shield
+    sprite: {fileID: 21300000, guid: 7449c5a59f6359c4a8709a52ef429b42, type: 3}
+  - id: 409
+    name: Greenstone Armor
+    sprite: {fileID: 21300000, guid: 7d934eb4719d52f468539a22c83e69da, type: 3}
+  - id: 410
+    name: Dragon Pearl
+    sprite: {fileID: 21300000, guid: 2255a07a676cd4b4eb4a1d3e775fe233, type: 3}
+  - id: 411
+    name: Dragon Pearl
+    sprite: {fileID: 21300000, guid: 8c7d32e5bbc247f4a86cec7f5261a59c, type: 3}
+  - id: 412
+    name: Pearl of Light
+    sprite: {fileID: 21300000, guid: 6870177c5673bc74cb370c4f483c98e4, type: 3}
+  - id: 413
+    name: Ring of Dwarven Gold
+    sprite: {fileID: 21300000, guid: 3c28c003363017341b5eba1591d05237, type: 3}
+  - id: 414
+    name: Helmet of Invisibility
+    sprite: {fileID: 21300000, guid: cd91413096e37ba448b148c21dcc7048, type: 3}
+  - id: 415
+    name: Champion's Trident
+    sprite: {fileID: 21300000, guid: 20ab009f8ea860d4f832301bbe13ba63, type: 3}
+  - id: 416
+    name: Champion's Cuirass
+    sprite: {fileID: 21300000, guid: 97895b2f01ff56b409e3d28d4df2f3ba, type: 3}
+  - id: 417
+    name: Champion's Helmet
+    sprite: {fileID: 21300000, guid: 15b0ad619875e6c48ac338d6b4f49435, type: 3}
+  - id: 418
+    name: Champion's Gladius
+    sprite: {fileID: 21300000, guid: 89e768b303e072e49bd86e8771456e6c, type: 3}
+  - id: 419
+    name: Golden Sandals
+    sprite: {fileID: 21300000, guid: 2b5b857bc22c1df40b1f4cd5387dd4ce, type: 3}
+  - id: 420
+    name: Ice Aegis
+    sprite: {fileID: 21300000, guid: 9efa935612facb74aa45ce72ac30fcbc, type: 3}
+  - id: 421
+    name: Ice Helmet
+    sprite: {fileID: 21300000, guid: c30f9fa45e6460b4fa086cbf656fde77, type: 3}
+  - id: 422
+    name: Ring of Returning
+    sprite: {fileID: 21300000, guid: 358d5bccbe5790543905765d96535b1f, type: 3}
+  - id: 423
+    name: The Heart of Quickness
+    sprite: {fileID: 21300000, guid: 6d9cd6fef8eeff841bca5cc95fa0fbbb, type: 3}
+  - id: 424
+    name: Boots of the Spider
+    sprite: {fileID: 21300000, guid: 6f39c07b851b9ac44bea2f209e637d77, type: 3}
+  - id: 425
+    name: Boots of Seven Mile Strides
+    sprite: {fileID: 21300000, guid: fa16b926ed54b98488c543a5590517e9, type: 3}
+  - id: 426
+    name: Crown of the Fire King
+    sprite: {fileID: 21300000, guid: 4efa1b925be3f14448d39dc98dc76452, type: 3}
+  - id: 427
+    name: Crown of the Frost King
+    sprite: {fileID: 21300000, guid: 6187c7cb151da064ba814acfe0af587f, type: 3}
+  - id: 428
+    name: The First Crown
+    sprite: {fileID: 21300000, guid: cec59b1c4a323424281b5c19061f86ec, type: 3}
+  - id: 429
+    name: Crown of Bones
+    sprite: {fileID: 21300000, guid: 8f7f18f5601338c4e9f12716fd3d4ffb, type: 3}
+  - id: 430
+    name: Tome of the Forgotten Masons
+    sprite: {fileID: 21300000, guid: 0766abf541d9ac04aacf93fd2d3c4716, type: 3}
+  - id: 431
+    name: God-Slayer Spear
+    sprite: {fileID: 21300000, guid: e2552ad6aad22d149b2b2ff1f13efa66, type: 3}
+  - id: 432
+    name: Boots of Water Walking
+    sprite: {fileID: 21300000, guid: 1174742952b519c4abed02c54d2d7422, type: 3}
+  - id: 433
+    name: Champion's Medal
+    sprite: {fileID: 21300000, guid: 2903cd8bc56c7ed448fbfc5bf428d2b4, type: 3}
+  - id: 434
+    name: Champion's Headband
+    sprite: {fileID: 21300000, guid: edd820d4380f19a4880237f5d60b8fb8, type: 3}
+  - id: 435
+    name: Oppressors Headband
+    sprite: {fileID: 21300000, guid: 3c766b8490f983f4783509d7556faec4, type: 3}
+  - id: 436
+    name: Purple Silk Garments
+    sprite: {fileID: 21300000, guid: 5a7bfe1f47426af4bab8c336415572a8, type: 3}
+  - id: 437
+    name: Silver Silk Garments
+    sprite: {fileID: 21300000, guid: 8133545c41dd5e64c90d1b9eea473320, type: 3}
+  - id: 438
+    name: Windcatcher Sail
+    sprite: {fileID: 21300000, guid: ba37be61406726541baea4a028087cea, type: 3}
+  - id: 439
+    name: Golden Apple
+    sprite: {fileID: 21300000, guid: effbc63ddd1eb48489b7ccfa878f9c24, type: 3}
+  - id: 440
+    name: Eye of the Grey Ones
+    sprite: {fileID: 21300000, guid: b3a037642d6ec98459afa5fa40c41c49, type: 3}
+  - id: 441
+    name: Salamander Silk Garments
+    sprite: {fileID: 21300000, guid: 2cb1f819ab54dfc4a81793a42aa12c75, type: 3}
+  - id: 442
+    name: Holy Thing
+    sprite: {fileID: 21300000, guid: 1b142f87c87a8284aadaf35443aa96f8, type: 3}
+  - id: 443
+    name: Companion Bracelet
+    sprite: {fileID: 21300000, guid: e0c15135f1c1e164e8fab31453af955f, type: 3}
+  - id: 444
+    name: Enchanted Salt
+    sprite: {fileID: 21300000, guid: 87f50025c8ebb3c43bf1c9f9fa78081e, type: 3}
+  - id: 445
+    name: Jinn Bottle
+    sprite: {fileID: 21300000, guid: 040e5da9cc6de0f4d80c032f77293f2f, type: 3}

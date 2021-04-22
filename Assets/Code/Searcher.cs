@@ -5,20 +5,37 @@ public class Searcher
 {
 	private const int MaxResults = 10;
 	
+	private SearchFilter _searchFilter = SearchFilter.All;
+	
 	public MonstersTable Monsters { get; set; }
+	public ItemsTable Items { get; set; }
 
-	public List<MonstersTable.Entry> Search (string searchText)
+	public List<SearchableEntry> Search (string searchText)
 	{
-		var foundEntries = new List<MonstersTable.Entry>();
-		foreach (var monster in Monsters.Entries)
+		var foundEntries = new List<SearchableEntry>();
+		var entriesToSearchIn = new List<SearchableEntry>();
+		if (_searchFilter.HasFlag(SearchFilter.Monsters)) entriesToSearchIn.AddRange(Monsters.Entries);
+		if (_searchFilter.HasFlag(SearchFilter.Items)) entriesToSearchIn.AddRange(Items.Entries);
+		
+		foreach (var entry in entriesToSearchIn)
 		{
-			if (monster.Name.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) != -1)
+			if (entry.Name.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) != -1)
 			{
-				foundEntries.Add(monster);
+				foundEntries.Add(entry);
 				if (foundEntries.Count >= MaxResults) break;
 			}
 		}
 		
 		return foundEntries;
 	} 
+}
+
+[Flags]
+public enum SearchFilter
+{
+	Nothing  = 0,
+	Monsters = 1 << 0,
+	Items    = 1 << 1,
+
+	All = Monsters | Items,
 }

@@ -8,7 +8,8 @@ public class SearchResultGizmo : Gizmo
 	[SerializeField] private TMP_Text nameLabel;
 	[SerializeField] private Image spritePicture;
 	[SerializeField] private Button selectButton;
-	private MonstersTable.Entry _monster;
+	
+	private SearchableEntry _searchable;
 
 	private void Awake ()
 	{
@@ -17,18 +18,18 @@ public class SearchResultGizmo : Gizmo
 	
 	private void OnClicked ()
 	{
-		Ui.Get<MapMenu>().SetSelected(_monster);
+		Ui.Get<MapMenu>().SetSelected(_searchable);
 	}
 
-	public void Initialize (MonstersTable.Entry monster, string searchText)
+	public void Initialize (SearchableEntry searchable, string searchText)
 	{
-		_monster = monster;
-		var nameText = monster.Name;
+		_searchable = searchable;
+		var nameText = searchable.Name;
 		int startIdx = nameText.IndexOf(searchText, StringComparison.OrdinalIgnoreCase);
 		int endIdx = startIdx + searchText.Length;
 		nameText = nameText.Insert(endIdx, "</b>");
 		nameText = nameText.Insert(startIdx, "<b>");
 		nameLabel.text = nameText;
-		spritePicture.sprite = monster.Sprite;
+		spritePicture.sprite = searchable.Sprite;
 	}
 }

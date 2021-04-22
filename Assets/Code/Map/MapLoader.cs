@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using UnityEngine;
+
 public class MapLoader
 {
 
@@ -30,17 +32,16 @@ public class MapLoader
 
 			var key = mapLine.Substring(1, keyEndIndex - 1);
 
-			// Debug.Log($"key: {key}");
 			var mapData = new MapLineData(key);
-
 			if (spaceIndex != -1)
 			{
 				var args = mapLine.Substring(keyEndIndex + 1, mapLine.Length - keyEndIndex - 1);
 
-				//var regx = new Regex(' ' + "(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))"); 
-				//foreach (var arg in regx.Split(args))
+				var separatorChar = ' ';
+				Regex regx = new Regex(separatorChar + "(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))"); 
+				string[] argsSplit = regx.Split(args);
 
-				foreach (var arg in args.Split(' '))
+				foreach (var arg in argsSplit)
 				{
 					if (arg.Contains("--")) break;
 					mapData.AddArg(arg);

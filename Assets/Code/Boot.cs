@@ -4,7 +4,9 @@ using UnityEngine;
 public class Boot : MonoBehaviour
 {
 	[SerializeField] private MonstersTable monsters;
+	[SerializeField] private ItemsTable items;
 	[SerializeField] private NationsTable nations;
+	
 	private void Awake ()
 	{
 		var searcher = new Searcher();
@@ -24,10 +26,12 @@ public class Boot : MonoBehaviour
 		}
 
 		mapMan.Monsters = monsters;
+		mapMan.Items = items;
 		mapMan.Nations = nations;
 		uiMan.GizmoTemplates = gizmoTemplates;
 		uiMan.Menus = menus;
 		searcher.Monsters = monsters;
+		searcher.Items = items;
 		
 		menus.OfType<LoadMapMenu>().Single().Show();
 		menus.OfType<ControlButtonsMenu>().Single().Show();

@@ -363,7 +363,7 @@ public class BodyguardsElement : MonsterElement, IOwnedByCommander
 [MapKeyName("additem")]
 public class ItemElement : MapElement, IOwnedByCommander
 {
-	public string ItemName { get; private set; }
+	public string ItemName { get; set; }
 	public CommanderElement Commander { get; set; }
 
 	public override void ParseArgs (string[] args)
@@ -373,7 +373,7 @@ public class ItemElement : MapElement, IOwnedByCommander
 	
 	public override string[] SaveArgs ()
 	{
-		return new[] { ItemName };
+		return new[] { $"\"{ItemName}\"" };
 	}
 }
 
