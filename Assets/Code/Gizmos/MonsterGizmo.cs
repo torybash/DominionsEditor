@@ -9,7 +9,7 @@ public abstract class MonsterGizmo : Gizmo
 public abstract class MonsterGizmo<T> : MonsterGizmo where T : Monster
 {
 	public const float DEFAULT_HEIGHT = 30f;
-	public const float EXPANDED_HEIGHT = 55f;
+	public const float EXPANDED_HEIGHT = 60f;
 	
 	[SerializeField] protected TMP_Text nameLabel;
 	[SerializeField] protected Image spritePicture;

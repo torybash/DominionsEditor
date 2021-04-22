@@ -8,5 +8,6 @@ public class ItemGizmo : Gizmo
 	{
 		var itemEntry = Map.Items.GetItem(item.ItemName);
 		icon.sprite = itemEntry.Sprite;
+		// icon.SetNativeSize();
 	}
 }
