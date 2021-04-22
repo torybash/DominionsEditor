@@ -86,7 +86,7 @@ public class MapMenu : Menu
 	
 	private void ChangeUnitCount (int sign)
 	{
-		RaycastGizmos(out var monsterGizmo, out var provinceGizmo);
+		RaycastGizmos(out var monsterGizmo, out var provinceGizmo, out var itemGizmo);
 
 		if (!(monsterGizmo is UnitGizmo unitsGizmo)) return;
 
@@ -99,7 +99,7 @@ public class MapMenu : Menu
 	{
 		if (!(_selectedEntry is MonsterEntry monsterEntry)) return;
 		
-		RaycastGizmos(out var monsterGizmo, out var provinceGizmo);
+		RaycastGizmos(out var monsterGizmo, out var provinceGizmo, out var itemGizmo);
 
 		if (provinceGizmo == null) return;
 
@@ -115,7 +115,7 @@ public class MapMenu : Menu
 	{
 		if (!(_selectedEntry is MonsterEntry monsterEntry)) return;
 
-		RaycastGizmos(out var monsterGizmo, out var provinceGizmo);
+		RaycastGizmos(out var monsterGizmo, out var provinceGizmo, out var itemGizmo);
 
 		if (provinceGizmo == null) return;
 
@@ -137,7 +137,7 @@ public class MapMenu : Menu
 	{
 		if (!(_selectedEntry is ItemEntry itemEntry)) return;
 
-		RaycastGizmos(out var monsterGizmo, out var provinceGizmo);
+		RaycastGizmos(out var monsterGizmo, out var provinceGizmo, out var itemGizmo);
 
 		if (provinceGizmo == null) return;
 		if (!(monsterGizmo is CommanderGizmo commanderGizmo)) return;
@@ -150,9 +150,12 @@ public class MapMenu : Menu
 	
 	private void Remove ()
 	{
-		RaycastGizmos(out var monsterGizmo, out var provinceGizmo);
+		RaycastGizmos(out var monsterGizmo, out var provinceGizmo, out var itemGizmo);
 
-		if (monsterGizmo != null)
+		if (itemGizmo != null)
+		{
+			RemoveItem(itemGizmo, (CommanderGizmo) monsterGizmo);
+		}else if (monsterGizmo != null)
 		{
 			RemoveMonster(monsterGizmo, provinceGizmo);
 		}else if (provinceGizmo != null)
@@ -160,7 +163,12 @@ public class MapMenu : Menu
 			ClearProvinceOwner(provinceGizmo);
 		}
 	}
-	
+	private void RemoveItem (ItemGizmo itemGizmo, CommanderGizmo commanderGizmo)
+	{
+		commanderGizmo.Data.Items.Remove(itemGizmo.Item);
+		commanderGizmo.SetData(commanderGizmo.Data);
+	}
+
 	private void RemoveMonster(MonsterGizmo monsterGizmo, ProvinceGizmo provinceGizmo)
 	{
 		var province = provinceGizmo.Province;
@@ -192,7 +200,7 @@ public class MapMenu : Menu
 
 	private void SetProvinceOwner (int numberPressed)
 	{
-		RaycastGizmos(out var monsterGizmo, out var provinceGizmo);
+		RaycastGizmos(out var monsterGizmo, out var provinceGizmo, out var itemGizmo);
 
 		if (provinceGizmo == null) return;
 		
@@ -212,7 +220,7 @@ public class MapMenu : Menu
 		provinceGizmo.Refresh();
 	}
 	
-	private void RaycastGizmos (out MonsterGizmo monsterGizmo, out ProvinceGizmo provinceGizmo)
+	private void RaycastGizmos (out MonsterGizmo monsterGizmo, out ProvinceGizmo provinceGizmo, out ItemGizmo itemGizmo)
 	{
 		var raycaster = GetComponentInParent<GraphicRaycaster>();
 		var pointerEventData = new PointerEventData(EventSystem.current);
@@ -222,6 +230,7 @@ public class MapMenu : Menu
 
 		monsterGizmo = null;
 		provinceGizmo = null;
+		itemGizmo = null;
 		foreach (var result in resultAppendList)
 		{
 			var monster = result.gameObject.GetComponentInParent<MonsterGizmo>();
@@ -234,6 +243,12 @@ public class MapMenu : Menu
 			if (province != null)
 			{
 				provinceGizmo = province;
+			}
+			
+			var item = result.gameObject.GetComponentInParent<ItemGizmo>();
+			if (item != null)
+			{
+				itemGizmo = item;
 			}
 		}
 	}

@@ -123,22 +123,38 @@ d6 ?
 
 X Handle spawning 2 nations on same province (for instant fight)
 - Commander
-	- Magic
 	- Items
+		X Searchable
+		X Add to commander
+		X Parse when loading
+		X Write when saving
+		X Remove from commander
+	- Magic
+		- Show existing magic
+		- Show if magic overriden
+		- Parse when loading (#mag_fire/air etc.)
+		- Write when saving
+		- Add to commander 
+		- Remove from commander
 	- Bodyguard
 - Nation editing, adding/removing nation
 - Game settings (research speed, magic site freq etc.)
 - Fix map graphics loading
-- Show units info 
-	- In search results show nation
-	- Show extra unit when double-clicking(?) unit
+- Monster info 
+	- In search results: Show nation
 - Display button and/or change button-scheme
 - Fill in nations table
 
 
 ## Nice to haves
 
+- Limit items depending on item slots.
 - Improve ux for spawning 2 nations on same province
+- Popup for commanders, for easier editing items & magic
+- Popup for monsters when double-clicking(?), for showing combat values etc.
+- Commander
+	- XP
+	- Clear all magic (#clearmagic)
 
 
 ## Next steps
