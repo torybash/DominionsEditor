@@ -163,6 +163,15 @@ public class MapLoader
 						var unit = Unit.Create(unitsElement.MonsterId, unitsElement.Amount, commander.Nationality);
 						commander.UnitsUnderCommand.Add(unit);
 						break;
+					case Experience experience:
+						//TODO
+						break;
+					case Magic magic:
+						//TODO
+						break;
+					case ClearMagic clearMagic:
+						//TODO
+						break;
 					default:
 						throw new ArgumentOutOfRangeException(nameof(ownedByCommander));
 

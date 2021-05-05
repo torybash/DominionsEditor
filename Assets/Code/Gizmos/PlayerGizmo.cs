@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class PlayerGizmo : Gizmo, IPointerDownHandler
 {
-	[SerializeField] private Button typeButton;
+	[SerializeField] private Button removeButton;
 	[SerializeField] private TMP_Text numberText;
 	[SerializeField] private TMP_Text typeText;
 	
@@ -18,7 +18,7 @@ public class PlayerGizmo : Gizmo, IPointerDownHandler
 
 	private void Awake ()
 	{
-		// typeButton.onClick.AddListener(OnClicked);
+		removeButton.onClick.AddListener(OnRemove);
 	}
 
 	public void Initialize (int idx, GamePlayer gamePlayer)
@@ -32,12 +32,12 @@ public class PlayerGizmo : Gizmo, IPointerDownHandler
 
 		UpdateGizmo();
 	}
-
-	private void OnClicked ()
+	
+	private void OnRemove ()
 	{
-		// Man.GameSetup.IncrementType(Index, 1);
+		
 	}
-
+	
 	public void UpdateGizmo ()
 	{
 		numberText.text = (Index + 1).ToString();

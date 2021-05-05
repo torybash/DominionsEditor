@@ -14,4 +14,7 @@ public class Province
 	public int ProvinceNumber { get; set; }
 	public Nation Owner { get; set; }
 	public List<Monster> Monsters { get; set; } = new List<Monster>();
+	public bool HasLab { get; set; }
+	public bool HasTemple { get; set; }
+	public bool HasFort { get; set; }
 }

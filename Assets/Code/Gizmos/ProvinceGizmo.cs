@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+
 public class ProvinceGizmo : Gizmo
 {
 	[SerializeField] private TMP_Text numLabel;
 	[SerializeField] private RectTransform rosterGroup;
+	[SerializeField] private GameObject labMarker;
+	[SerializeField] private GameObject templeMarker;
+	[SerializeField] private GameObject fortMarker;
 
 	private List<MonsterGizmo> monsterGizmos = new List<MonsterGizmo>();
 	private NationGizmo _nationGizmo;
+	
+	
 	public Province Province { get; private set; }
 
 	public void Initialize (Province province)
@@ -46,6 +52,10 @@ public class ProvinceGizmo : Gizmo
 		RectTrans.anchoredPosition = Province.CenterPos;
 		
 		SetOwner(Province.Owner);
+
+		labMarker.SetActive(Province.HasLab);
+		templeMarker.SetActive(Province.HasTemple);
+		fortMarker.SetActive(Province.HasFort);
 	}
 
 	public void RemoveElementGizmo (Monster elem)

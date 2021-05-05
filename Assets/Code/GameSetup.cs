@@ -24,6 +24,15 @@ public class GameSetup
 		}
 	}
 
+	public void AddNation ()
+	{
+		int playerIdx = Players.Count;
+		var player = new GamePlayer(PlayerType.Human);
+		Players.Add(player);
+		
+		Ui.Get<PlayersMenu>().CreateGizmo(playerIdx, player);
+	}
+	
 	public void RemovePlayer (int playerIdx)
 	{
 		var player = Players[playerIdx];
@@ -51,7 +60,6 @@ public class GameSetup
 		Ui.Get<PlayersMenu>().UpdateGizmo(player);
 	}
 	
-
 	public void RunMap ()
 	{
 		var mapRunner = new MapRunner(Map, this);

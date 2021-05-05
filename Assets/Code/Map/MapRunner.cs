@@ -41,11 +41,13 @@ public class MapRunner
 	{
 		var args = new List<string>();
 
-		int HARDCODED_ERA_NUMBER_TODO = 3;
+		const int HARDCODED_ERA_NUMBER_TODO = 3;
+		const string DEBUG_MOD = "Debug_509.dm";
 		args.Add($"--newgame {Constants.GameName}");
 		args.Add($"--mapfile {_man.SavedMapFileName}");
 		args.Add($"--era {HARDCODED_ERA_NUMBER_TODO}");
-		args.Add($"--conqall"); // Win by eliminating all opponents only
+		args.Add($"--conqall");               // Win by eliminating all opponents only
+		args.Add($"--enablemod {DEBUG_MOD}"); 
 		
 		foreach (var player in _game.Players)
 		{
@@ -86,9 +88,9 @@ public class MapRunner
 		int exitCode;
 		using (Process proc = Process.Start(start)) // Run the external process & wait for it to finish
 		{
-			proc.WaitForExit();
-			exitCode = proc.ExitCode;
+			// proc.WaitForExit();
+			// exitCode = proc.ExitCode;
 		}
-		Debug.Log("Run game process. ExitCode: " + exitCode);
+		// Debug.Log("Run game process. ExitCode: " + exitCode);
 	}
 }

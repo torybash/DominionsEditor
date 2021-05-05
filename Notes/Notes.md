@@ -136,25 +136,44 @@ X Handle spawning 2 nations on same province (for instant fight)
 		- Write when saving
 		- Add to commander 
 		- Remove from commander
-	- Bodyguard
-- Nation editing, adding/removing nation
+	- Bodyguards
+- Nations
+	- Adding and removing nations
+	- Menu for loading pretenders/nations
+	- Fill in nations table
 - Game settings (research speed, magic site freq etc.)
 - Fix map graphics loading
 - Monster info 
 	- In search results: Show nation
 - Display button and/or change button-scheme
-- Fill in nations table
+- Figure out a way to easily give gems to commanders (mod?)
+- Province features
+	- Add/remove temple/lab/fort
 
 
 ## Nice to haves
 
-- Limit items depending on item slots.
-- Improve ux for spawning 2 nations on same province
-- Popup for commanders, for easier editing items & magic
-- Popup for monsters when double-clicking(?), for showing combat values etc.
+- Maps
+	- Menu for selecting map
+	- Option to override or "save as" map
+- Limit items depending on item slots
+- Improve funtionality for spawning 2 nations on same province
+	- Option to skip to next turn (--host?) 
+- Improve UX
+	- Allow dragging unit elements
+	- Feedback on saving
+	- Popup for commanders, for easier editing items & magic
+	- Popup for monsters when double-clicking(?), for showing combat values etc.
+	- Mario Maker-like "recent element" boxes (~8 boxes for easy storing/accessing often used units/items)
 - Commander
 	- XP
 	- Clear all magic (#clearmagic)
+- Province features
+	- Change territory on provinces 
+	- Change scales on provinces
+	- Change dominions strength on provinces
+	- Population type (#poptype)
+	- Add/remove magic sites
 
 
 ## Next steps
@@ -162,3 +181,4 @@ X Handle spawning 2 nations on same province (for instant fight)
 - Pretender creation/editing
 - Check if unit or commander
 - Enable casting spells at limited levels. Dynamically change dominions mod file 
+- Integration with BattleFortune? https://github.com/pfassina/BattleFortune

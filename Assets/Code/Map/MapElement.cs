@@ -254,6 +254,119 @@ public abstract class ProvinceDataElement : MapElement, IOwnedByProvince
 	public int ProvinceNum { get; set; }
 }
 
+[MapKeyName("lab")]
+public class Laboratory : ProvinceDataElement
+{
+	public override void ParseArgs (string[] args)
+	{
+	}
+	public override string[] SaveArgs ()
+	{
+		return new string[0];
+	}
+}
+
+[MapKeyName("temple")]
+public class Temple : ProvinceDataElement
+{
+	public override void ParseArgs (string[] args)
+	{
+	}
+	public override string[] SaveArgs ()
+	{
+		return new string[0];
+	}
+}
+
+[MapKeyName("fort")]
+public class Fort : ProvinceDataElement
+{
+	public int FortId { get; set; }
+
+	public override void ParseArgs (string[] args)
+	{
+		FortId = int.Parse(args[0]);
+	}
+
+	public override string[] SaveArgs ()
+	{
+		return new[] { FortId.ToString() };
+	}
+}
+
+[MapKeyName("defence")]
+public class ProvinceDefence : ProvinceDataElement
+{
+	public int Amount { get; set; }
+	
+	public override void ParseArgs (string[] args)
+	{
+		Amount = int.Parse(args[0]);
+	}
+	
+	public override string[] SaveArgs ()
+	{
+		return new[] { Amount.ToString() };
+	}
+}
+
+[MapKeyName("killfeatures")]
+public class KillFeatures : ProvinceDataElement
+{
+	public override void ParseArgs (string[] args) {}
+	
+	public override string[] SaveArgs ()
+	{
+		return new string[0];
+	}
+}
+
+[MapKeyName("feature")]
+public class HiddenMagicSite : ProvinceDataElement
+{
+	public int SiteId { get; set; }
+	public string SiteName { get; set; }
+	
+	public override void ParseArgs (string[] args)
+	{
+		if (int.TryParse(args[0], out int unitId))
+		{
+			SiteId = unitId;
+		} else
+		{
+			SiteName = args[1];
+		}
+	}
+	
+	public override string[] SaveArgs ()
+	{
+		return new[] { SiteId.ToString() };
+	}
+}
+
+[MapKeyName("knownfeature")]
+public class KnownMagicSite : ProvinceDataElement
+{
+	public int SiteId { get; set; }
+	public string SiteName { get; set; }
+	
+	public override void ParseArgs (string[] args)
+	{
+		if (int.TryParse(args[0], out int unitId))
+		{
+			SiteId = unitId;
+		} else
+		{
+			SiteName = args[1];
+		}
+	}
+	
+	public override string[] SaveArgs ()
+	{
+		return new[] { SiteId.ToString() };
+	}
+}
+
 [MapKeyName("owner")]
 public class ProvinceOwner : ProvinceDataElement
 {
@@ -366,16 +479,45 @@ public class ItemElement : MapElement, IOwnedByCommander
 	public string ItemName { get; set; }
 	public CommanderElement Commander { get; set; }
 
-	public override void ParseArgs (string[] args)
-	{
-		ItemName = args[0];
-	}
-	
-	public override string[] SaveArgs ()
-	{
-		return new[] { $"\"{ItemName}\"" };
-	}
+	public override void ParseArgs (string[] args) => ItemName = args[0];
+	public override string[] SaveArgs () => new[] { $"\"{ItemName}\"" };
 }
+
+public abstract class Magic : MapElement, IOwnedByCommander
+{
+	public CommanderElement Commander { get; set; }
+	public int MagicLevel { get; set; }
+	public override void ParseArgs (string[] args) => MagicLevel = int.Parse(args[0]);
+	public override string[] SaveArgs () => new[] { MagicLevel.ToString() };
+}
+
+[MapKeyName("xp")] 
+public abstract class Experience : MapElement, IOwnedByCommander
+{
+	public CommanderElement Commander { get; set; }
+	public int Amount { get; set; }
+	public override void ParseArgs (string[] args) => Amount = int.Parse(args[0]);
+	public override string[] SaveArgs () => new[] { Amount.ToString() };
+}
+
+[MapKeyName("clearmagic")] 
+public abstract class ClearMagic : MapElement, IOwnedByCommander
+{
+	public CommanderElement Commander { get; set; }
+	public override void ParseArgs (string[] args) {}
+	public override string[] SaveArgs () => new string[0];
+}
+
+[MapKeyName("mag_fire ")]  public class FireMagic : Magic {}
+[MapKeyName("mag_air")]  public class AirMagic : Magic {}
+[MapKeyName("mag_water")]  public class WaterMagic : Magic {}
+[MapKeyName("mag_earth")]  public class EarthMagic : Magic {}
+[MapKeyName("mag_astral")]  public class AstralMagic : Magic {}
+[MapKeyName("mag_death")]  public class DeathMagic : Magic {}
+[MapKeyName("mag_nature")]  public class NatureMagic : Magic {}
+[MapKeyName("mag_blood")]  public class BloodMagic : Magic {}
+[MapKeyName("mag_priest")]  public class HolyMagic : Magic {}
+
 
 
 public interface IOwnedByCommander

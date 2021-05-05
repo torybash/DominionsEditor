@@ -1,12 +1,25 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayersMenu : Menu
 {
 	[SerializeField] private RectTransform playersGroup;
+	[SerializeField] private Button addButton;
 	
-	private List<PlayerGizmo> _gizmos = new List<PlayerGizmo>();
+	private readonly List<PlayerGizmo> _gizmos = new List<PlayerGizmo>();
+
+	private void Awake ()
+	{
+		addButton.onClick.AddListener(OnAddClicked);
+	}
+	
+	private void OnAddClicked ()
+	{
+		Game.AddNation();
+	}
 
 	public void CreateGizmo (int idx, GamePlayer player)
 	{
@@ -14,6 +27,8 @@ public class PlayersMenu : Menu
 		playerGizmo.Initialize(idx, player);
 
 		_gizmos.Add(playerGizmo);
+		
+		addButton.transform.SetAsLastSibling();
 	}
 	
 	public void UpdateGizmo (GamePlayer player)

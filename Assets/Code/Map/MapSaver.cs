@@ -45,6 +45,14 @@ public class MapSaver
 				if (!isIndieProvince)
 				{
 					elems.Add(new ProvinceOwner{NationNum = province.Owner.Number});
+					if (province.HasLab) elems.Add(new Laboratory());
+					if (province.HasTemple) elems.Add(new Temple());
+					if (province.HasFort) elems.Add(new Fort{FortId = 1});
+					
+					if (_map.Players.Any(x => x.CapitalProvinceNum == province.ProvinceNumber))
+					{
+						elems.Add(new KnownMagicSite{ProvinceNum = province.ProvinceNumber, SiteId = 1500});
+					}
 				}
 			}
 		}

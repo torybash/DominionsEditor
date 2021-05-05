@@ -13,7 +13,8 @@ public class MapMenu : Menu
 	[SerializeField] private Button clearSearchButton;
 	[SerializeField] private Button saveMapButton;
 	[SerializeField] private Button runButton;
-	[SerializeField] private Image selectedSprite;
+	[SerializeField] private EntryGizmo selectedEntry;
+	[SerializeField] private List<EntryGizmo> previousSelectedEntries;
 
 	private readonly List<SearchResultGizmo> searchGizmos = new List<SearchResultGizmo>();
 	private SearchableEntry _selectedEntry;
@@ -24,7 +25,11 @@ public class MapMenu : Menu
 		clearSearchButton.onClick.AddListener(() => searchField.text = "");
 		saveMapButton.onClick.AddListener(OnSaveClicked);
 		runButton.onClick.AddListener(OnRunClicked);
-		selectedSprite.gameObject.SetActive(false);
+		selectedEntry.gameObject.SetActive(false);
+		foreach (var previousSelectedEntry in previousSelectedEntries)
+		{
+			previousSelectedEntry.gameObject.SetActive(false);
+		}
 	}
 	
 	private void OnRunClicked ()
@@ -39,27 +44,49 @@ public class MapMenu : Menu
 
 	private void Update ()
 	{
-		//TODO // if (_selectedMonster.IS_COMMANDER) 
-		if (Input.GetKeyDown(KeyCode.U))
+		switch (_selectedEntry)
 		{
-			AddUnit();
-		}
+			case MonsterEntry _:
+				//TODO // if (_selectedMonster.IS_COMMANDER) 
+				// if (Input.GetKeyDown(KeyCode.U))
+				// if (Input.GetMouseButtonDown(1))
+				// {
+				// 	
+				// }
 
-		if (Input.GetKeyDown(KeyCode.C))
-		{
-			AddCommander();
+				// if (Input.GetKeyDown(KeyCode.C))
+				if (Input.GetMouseButtonDown(0))
+				{
+					if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+					{
+						AddUnit();
+					} else
+					{
+						AddCommander();
+					}
+					
+				}
+				break;
+			
+			case ItemEntry _:
+				// if (Input.GetKeyDown(KeyCode.I))
+				if (Input.GetMouseButtonDown(0))
+				{
+					AddItem();
+				}
+				break;
 		}
 		
-		if (Input.GetKeyDown(KeyCode.I))
-		{
-			AddItem();
-		}
-
 		if (Input.GetKeyDown(KeyCode.R))
 		{
 			Remove();
 		}
+		
+		if (Input.GetKeyDown(KeyCode.L)) ToggleLab();
+		if (Input.GetKeyDown(KeyCode.T)) ToggleTemple();		
+		if (Input.GetKeyDown(KeyCode.F)) ToggleFort();
 
+		
 		if (InputHelper.GetKeyNumberPressed(out int numberPressed))
 		{
 			SetProvinceOwner(numberPressed);
@@ -72,7 +99,7 @@ public class MapMenu : Menu
 			ChangeUnitCount(change);
 		}
 	}
-	
+
 	public override void Show ()
 	{
 		base.Show();
@@ -148,6 +175,39 @@ public class MapMenu : Menu
 		commanderGizmo.SetData(commanderGizmo.Data);
 	}
 	
+	private void ToggleLab ()
+	{
+		RaycastGizmos(out var monsterGizmo, out var provinceGizmo, out var itemGizmo);
+
+		if (provinceGizmo == null) return;
+
+		provinceGizmo.Province.HasLab = !provinceGizmo.Province.HasLab;
+		
+		provinceGizmo.Refresh();
+	}
+	
+	private void ToggleTemple ()
+	{
+		RaycastGizmos(out var monsterGizmo, out var provinceGizmo, out var itemGizmo);
+
+		if (provinceGizmo == null) return;
+
+		provinceGizmo.Province.HasTemple = !provinceGizmo.Province.HasTemple;
+		
+		provinceGizmo.Refresh();
+	}
+
+	private void ToggleFort ()
+	{
+		RaycastGizmos(out var monsterGizmo, out var provinceGizmo, out var itemGizmo);
+
+		if (provinceGizmo == null) return;
+
+		provinceGizmo.Province.HasFort = !provinceGizmo.Province.HasFort;
+		
+		provinceGizmo.Refresh();
+	}
+	
 	private void Remove ()
 	{
 		RaycastGizmos(out var monsterGizmo, out var provinceGizmo, out var itemGizmo);
@@ -163,6 +223,7 @@ public class MapMenu : Menu
 			ClearProvinceOwner(provinceGizmo);
 		}
 	}
+	
 	private void RemoveItem (ItemGizmo itemGizmo, CommanderGizmo commanderGizmo)
 	{
 		commanderGizmo.Data.Items.Remove(itemGizmo.Item);
@@ -280,7 +341,7 @@ public class MapMenu : Menu
 	{
 		foreach (var province in Map.ProvinceMap.Values)
 		{
-			var gizmo = Ui.Create<ProvinceGizmo>();
+			var gizmo = Ui.Create<ProvinceGizmo>(mapImage.transform);
 			gizmo.Initialize(province);
 		}
 	}
@@ -288,7 +349,7 @@ public class MapMenu : Menu
 	public void SetSelected (SearchableEntry entry)
 	{
 		_selectedEntry = entry;
-		selectedSprite.gameObject.SetActive(true);
-		selectedSprite.sprite = entry.Sprite;
+		selectedEntry.gameObject.SetActive(true);
+		selectedEntry.SetEntry(entry);
 	}
 }
