@@ -72,22 +72,10 @@ public class Scenario : MapElement
 [MapKeyName("imagefile")]
 public class ImageFile : MapElement
 {
-	private string _mapImageName;
+	public string MapImageName { get; private set; }
 
-	public Texture2D GetTexture ()
-	{
-		// string mapImagePath = $"{Map.MapFolderPath}{_mapImageName}";
-		// Debug.Log($"GetTexture mapImagePath: {mapImagePath}");
-		// var texture2D = TGALoader.LoadTGA(mapImagePath);
-		// Debug.Log($"GetTexture tex: {texture2D}, (w,h): ({texture2D.width}, {texture2D.height})");
-		// return texture2D;
-		// byte[] mapImageBytes = File.ReadAllBytes(mapImagePath);
-		// return mapImageBytes;
-		return null;
-	}
-	
-	public override void ParseArgs (string[] args) => _mapImageName = args[0];
-	public override string[] SaveArgs () => new[] { _mapImageName };
+	public override void ParseArgs (string[] args) => MapImageName = args[0];
+	public override string[] SaveArgs () => new[] { MapImageName };
 }
 
 [MapKeyName("winterimagefile")]

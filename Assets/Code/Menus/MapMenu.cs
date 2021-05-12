@@ -8,7 +8,6 @@ using UnityEngine.UI;
 
 public class MapMenu : Menu
 {
-	[SerializeField] private RawImage mapImage;
 	[SerializeField] private TMP_InputField searchField;
 	[SerializeField] private Button clearSearchButton;
 	[SerializeField] private Button saveMapButton;
@@ -107,10 +106,9 @@ public class MapMenu : Menu
 		// var mapTex = Man.MapElements.OfType<ImageFile>().Single().GetTexture(); //TODO Fix TGA loading
 		// mapImage.texture = mapTex;
 
-		mapImage.gameObject.SetActive(true);
 		CreateProvinceGizmos();
 	}
-	
+
 	private void ChangeUnitCount (int sign)
 	{
 		RaycastGizmos(out var monsterGizmo, out var provinceGizmo, out var itemGizmo);
@@ -339,9 +337,10 @@ public class MapMenu : Menu
 	
 	private void CreateProvinceGizmos ()
 	{
+		var mapPicture = Ui.Get<MapPicture>();
 		foreach (var province in Map.ProvinceMap.Values)
 		{
-			var gizmo = Ui.Create<ProvinceGizmo>(mapImage.transform);
+			var gizmo = Ui.Create<ProvinceGizmo>(mapPicture.MapImage.transform);
 			gizmo.Initialize(province);
 		}
 	}

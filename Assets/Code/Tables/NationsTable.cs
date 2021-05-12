@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -5,30 +6,19 @@ using UnityEngine;
 [CreateAssetMenu]
 public class NationsTable : ScriptableObject
 {
-	[System.Serializable]
-	public class Entry
-	{
-		[SerializeField] private string name;
-		[SerializeField] private string epithet;
-		[SerializeField] private int nationNum;
-		[SerializeField] private string pretenderFileName;
-		[SerializeField] private Sprite sprite;
-		[SerializeField] private string samplePretenderFilePath;
-		[SerializeField] private Color tintColor;
 
-		public string Name => name;
-		public string Epithet => epithet;
-		public int NationNum => nationNum;
-		public string PretenderFileName => pretenderFileName;
-		public Sprite Sprite => sprite;
-		public string SamplePretenderFilePath => samplePretenderFilePath;
-		public Color TintColor => tintColor;
+	[SerializeField] private List<NationEntry> nations;
+	public List<NationEntry> Nations => nations;
+
+	public NationEntry GetNationEntry (Nation nation)
+	{
+		return nations.SingleOrDefault(x => x.NationNum == nation.Number);
 	}
 	
-	[SerializeField] private List<Entry> nations;
-
-	public Entry GetNationEntry (Nation nation)
+	public Nation GetNationByName (string nationName)
 	{
-		return nations.Single(x => x.NationNum == nation.Number);
+		var entry = nations.SingleOrDefault(x => x.Name.Equals(nationName, StringComparison.OrdinalIgnoreCase));
+		if (entry == null) return Nation.Invalid;
+		return entry.NationNum;
 	}
 }

@@ -5,10 +5,14 @@ using UnityEngine.UI;
 
 public class NationGizmo : Gizmo
 {
+	[Header("Components")]
 	[SerializeField] private Image flagImage;
 	[SerializeField] private TMP_Text nameLabel;
 	[SerializeField] private GameObject capitalMarker;
 
+	[Header("Assets")]
+	[SerializeField] private Sprite blankSprite;
+	
 	public Nation Nation { get; private set; }
 
 	private void Awake ()
@@ -20,9 +24,17 @@ public class NationGizmo : Gizmo
 	{
 		Nation = nation;
 		
-		var entry = Map.Nations.GetNationEntry(nation);
-		flagImage.sprite = entry.Sprite;
-		nameLabel.text = entry.Name;
+		var nationEntry = Map.Nations.GetNationEntry(nation);
+		if (nationEntry == null)
+		{
+			flagImage.sprite = blankSprite;
+			nameLabel.text = "";
+		} 
+		else
+		{
+			flagImage.sprite = nationEntry.Sprite;
+			nameLabel.text = nationEntry.Name;
+		}
 	}
 
 	public void ShowCapitalMarker (bool show)

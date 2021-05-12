@@ -5,6 +5,7 @@ public struct Nation
 {
 	public int Number;
 
+	public static Nation Invalid => new Nation { Number = -1 };
 	public static Nation Independents => new Nation { Number = 0 };
 	public static Nation Arco => new Nation { Number = 80 };
 	public static Nation Phlegra => new Nation { Number = 102 };

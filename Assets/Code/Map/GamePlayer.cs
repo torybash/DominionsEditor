@@ -3,6 +3,7 @@ public class GamePlayer
 	public PlayerType Type { get; set; }
 	public int NationNum { get; set; } = -1;
 	public int CapitalProvinceNum { get; set; } = -1;
+	public Pretender Pretender { get; set; }
 
 	public GamePlayer (PlayerType type)
 	{

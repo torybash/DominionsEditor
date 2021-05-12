@@ -104,11 +104,10 @@ public class MapLoader
 	}
 
 	
-	public static Dictionary<int, Province> CreateMapProvinces (List<MapElement> mapElements)
+	public static Dictionary<int, Province> CreateMap (List<MapElement> mapElements)
 	{
-		var provinces = new Dictionary<int, Province>();
-
 		//Create all provinces
+		var provinces = new Dictionary<int, Province>();
 		int provinceCount = mapElements.OfType<Terrain>().Max(x => x.ProvinceNum);
 		for (int num = 1; num <= provinceCount; num++)
 		{

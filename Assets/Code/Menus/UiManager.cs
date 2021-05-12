@@ -8,7 +8,7 @@ public class UiManager
 
 	public T Get<T> () where T : Menu => Menus.OfType<T>().SingleOrDefault();
 
-	public T Create<T> (Transform parent = null) where T : Component
+	public T Create<T> (Transform parent = null) where T : Gizmo
 	{
 		var template = (Component) GizmoTemplates.OfType<T>().First();
 		

@@ -10,8 +10,8 @@ public class Boot : MonoBehaviour
 	private void Awake ()
 	{
 		var searcher = new Searcher();
-		var mapMan = new MapManager(searcher);
 		var uiMan = new UiManager();
+		var mapMan = new MapManager(searcher, uiMan);
 		var gameSetup = new GameSetup(mapMan, uiMan);
 		
 		var canvas = FindObjectOfType<Canvas>();

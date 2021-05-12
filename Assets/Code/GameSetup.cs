@@ -17,41 +17,36 @@ public class GameSetup
 
 	public void Initialize ()
 	{
-		for (int i = 0; i < Map.Players.Count; i++)
+		foreach (var player in Map.Players)
 		{
-			var player = Map.Players[i];
-			Ui.Get<PlayersMenu>().CreateGizmo(i, player);
+			Ui.Get<PlayersMenu>().CreateGizmo(player);
 		}
 	}
 
 	public void AddNation ()
 	{
-		int playerIdx = Players.Count;
 		var player = new GamePlayer(PlayerType.Human);
 		Players.Add(player);
 		
-		Ui.Get<PlayersMenu>().CreateGizmo(playerIdx, player);
+		Ui.Get<PlayersMenu>().CreateGizmo(player);
 	}
 	
-	public void RemovePlayer (int playerIdx)
+	public void RemovePlayer (GamePlayer player)
 	{
-		var player = Players[playerIdx];
 		Players.Remove(player);
 		
 		Ui.Get<PlayersMenu>().DestroyGizmo(player);
 	}
 
-	public void ChangeNation (int playerIdx, int nationNum)
+	public void ChangeNation (GamePlayer player, int nationNum)
 	{
-		var player = Players[playerIdx];
 		player.NationNum = nationNum;
 		
 		Ui.Get<PlayersMenu>().UpdateGizmo(player);
 	}
 	
-	public void IncrementType (int playerIdx, int change)
+	public void IncrementType (GamePlayer player, int change)
 	{
-		var player = Players[playerIdx];
 		var newType = player.Type;
 		int newTypeInt = ((int)newType + change) % Enum.GetValues(typeof(PlayerType)).Length;
 		if (newTypeInt < 0) newTypeInt += Enum.GetValues(typeof(PlayerType)).Length;
