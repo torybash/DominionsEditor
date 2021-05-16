@@ -1,8 +1,11 @@
 using UnityEngine;
-public static class PrefManager
+public static class Prefs
 {
-	public static readonly PrefString ExecutablePath = new PrefString(Constants.PrefKey_ExecutablePath, "[game folder]/Dominions.exe");
-	public static readonly PrefString DataFolderPath = new PrefString(Constants.PrefKey_DataFolderPath, "[data folder]/Dominions5/");
+	public static readonly PrefString ExecutablePath = new PrefString(nameof(ExecutablePath), "[game folder]/Dominions.exe");
+	public static readonly PrefString DataFolderPath = new PrefString(nameof(DataFolderPath), "[data folder]/Dominions5/");
+	public static readonly PrefString DefaultPretenderA = new PrefString(nameof(DefaultPretenderA));
+	public static readonly PrefString DefaultPretenderB = new PrefString(nameof(DefaultPretenderB));
+	public static readonly PrefInt Era = new PrefInt(nameof(Era), 2);
 }
 
 
@@ -19,11 +22,16 @@ public abstract class PrefValue<T>
 
 	public abstract T Get();
 	public abstract void Set(T value);
+	
+	public void Clear ()
+	{
+		PlayerPrefs.DeleteKey(Key);
+		PlayerPrefs.Save();
+	}
 }
 
 public class PrefString : PrefValue<string>
 {
-
 	public PrefString (string key, string defaultValue = default) : base(key, defaultValue) {}
 	
 	public override string Get ()
@@ -35,6 +43,11 @@ public class PrefString : PrefValue<string>
 	{
 		PlayerPrefs.SetString(Key, value);
 		PlayerPrefs.Save();
+	}
+	
+	public static implicit operator string(PrefString value)
+	{
+		return value.Get();
 	}
 }
 

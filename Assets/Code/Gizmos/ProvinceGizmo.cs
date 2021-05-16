@@ -85,7 +85,7 @@ public class ProvinceGizmo : Gizmo
 			
 		_nationGizmo.SetNation(nation);
 
-		bool isStartLocation = Map.Players.Any(x => x.CapitalProvinceNum == Province.ProvinceNumber);
+		bool isStartLocation = Game.Players.Any(x => x.CapitalProvinceNum == Province.ProvinceNumber);
 		_nationGizmo.ShowCapitalMarker(isStartLocation);
 	}
 

@@ -1,4 +1,3 @@
-using System.Linq;
 using UnityEngine;
 
 public class Boot : MonoBehaviour
@@ -10,30 +9,53 @@ public class Boot : MonoBehaviour
 	private void Awake ()
 	{
 		var searcher = new Searcher();
-		var uiMan = new UiManager();
-		var mapMan = new MapManager(searcher, uiMan);
-		var gameSetup = new GameSetup(mapMan, uiMan);
+		var ui = new UiManager();
+		var gameSetup = new GameSetup(ui);
+		var map = new MapManager(searcher, ui, gameSetup);
 		
 		var canvas = FindObjectOfType<Canvas>();
 		
 		var menus = canvas.GetComponentsInChildren<Menu>(true);
-		foreach (var menu in menus) menu.Initialize(mapMan, uiMan, gameSetup);
+		foreach (var menu in menus)
+		{
+			menu.Initialize(map, ui, gameSetup);
+			menu.gameObject.SetActive(false);
+		}
+		
 		var gizmoTemplates = canvas.GetComponentsInChildren<Gizmo>(true);
 		foreach (var gizmoTemplate in gizmoTemplates)
 		{
-			gizmoTemplate.Init(mapMan, uiMan, gameSetup);
+			gizmoTemplate.Init(map, ui, gameSetup);
 			gizmoTemplate.gameObject.SetActive(false);
 		}
 
-		mapMan.Monsters = monsters;
-		mapMan.Items = items;
-		mapMan.Nations = nations;
-		uiMan.GizmoTemplates = gizmoTemplates;
-		uiMan.Menus = menus;
+		map.Monsters = monsters;
+		map.Items = items;
+		map.Nations = nations;
+		ui.GizmoTemplates = gizmoTemplates;
+		ui.Menus = menus;
 		searcher.Monsters = monsters;
 		searcher.Items = items;
+
+		ui.Get<ControlButtonsMenu>().Show();
 		
-		menus.OfType<LoadMapMenu>().Single().Show();
-		menus.OfType<ControlButtonsMenu>().Single().Show();
+		if (IsSetup())
+		{
+			map.LoadMap();
+		} 
+		else
+		{
+			ui.Get<IntroMenu>().Show();
+		}
+	}
+	
+	private bool IsSetup ()
+	{
+		var pretenderA = Prefs.DefaultPretenderA.Get();
+		var pretenderB = Prefs.DefaultPretenderB.Get();
+		if (string.IsNullOrEmpty(pretenderA)) return false;
+		if (string.IsNullOrEmpty(pretenderB)) return false;
+
+		return true;
 	}
 }

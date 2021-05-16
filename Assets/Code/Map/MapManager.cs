@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
@@ -8,45 +9,72 @@ public class MapManager
 {
 	public Searcher Searcher { get; }
 
-	public string SavedGamesFolderPath => $@"{PrefManager.DataFolderPath.Get()}savedgames/";
-	public string PretendersFolderPath => $@"{PrefManager.DataFolderPath.Get()}savedgames/newlords/";
+	public string SavedGamesFolderPath => $@"{Prefs.DataFolderPath.Get()}savedgames/";
+	public string PretendersFolderPath => $@"{Prefs.DataFolderPath.Get()}savedgames/newlords/";
 	public Dictionary<int, Province> ProvinceMap { get; set; } = new Dictionary<int, Province>();
-	public List<GamePlayer> Players { get; set;  } = new List<GamePlayer>();
 
 	public Province this [int provinceNum] => ProvinceMap[provinceNum];
 	
 	public MonstersTable Monsters { get; set; }
 	public ItemsTable Items { get; set; }
-	public string MapFilePath { get; set; }
+	public string MapFilePath => $"{MapFolderPath}/{Constants.MapName}.map";
 	public string SavedMapFileName  { get; set; }
 	public NationsTable Nations { get; set; }
 	public MapConfig Config { get; set; }
 	public UiManager Ui { get; set; }
-	public string MapFolderPath { get; set; }
+	public string MapFolderPath => $"{Prefs.DataFolderPath.Get()}/maps/{Constants.MapName}/";
+	public GameSetup Game { get; set; }
 
-	public MapManager (Searcher searcher, UiManager uiManager)
+	public MapManager (Searcher searcher, UiManager uiManager, GameSetup gameSetup)
 	{
+		Game = gameSetup;
 		Searcher = searcher;
 		Ui = uiManager;
 	}
 
-	public void ParseMap (string mapFilePath)
+	public void LoadMap ()
 	{
-		Debug.Log($"Loading map at {mapFilePath}");
+		Debug.Log($"Loading map at {MapFilePath}");
 		
-		MapFilePath = mapFilePath;
-		
-		int lastSepIdx = mapFilePath.LastIndexOf('\\');
-		MapFolderPath = mapFilePath.Substring(0, lastSepIdx);
-		SavedMapFileName = mapFilePath.Substring(lastSepIdx + 1);
+		SavedMapFileName = Path.GetFileName(MapFilePath);
 
-		var mapElements = MapLoader.LoadMapElements(mapFilePath);
-		Players = MapLoader.CreatePlayers(mapElements);
+		var mapElements = MapLoader.LoadMapElements(MapFilePath);
+		Game.Players = MapLoader.CreatePlayers(mapElements);
 		Config = MapLoader.CreateConfig(mapElements);
 		ProvinceMap = MapLoader.CreateMap(mapElements);
+
+		LoadPretender(Prefs.DefaultPretenderA.Get());
+		LoadPretender(Prefs.DefaultPretenderB.Get());
+
+
 		
+
+		// if (Game.Players.Count == 0)
+		// {
+		// 	// var pretenderA = LoadPretender(Prefs.DefaultPretenderA.Get());
+		// 	// var pretenderB = LoadPretender(Prefs.DefaultPretenderB.Get());
+		// 	
+		// 	var pretendA = Prefs.DefaultPretenderA.Get();
+		// 	if (!string.IsNullOrEmpty(pretendA))
+		// 	{
+		// 		var pretender = new Pretender(pretendA);
+		// 		var nation = Nations.GetNationByNameAndEra(pretender.NationName, pretender.Era);
+		// 		pretender.Nation = nation;
+		// 		Game.Players.Add(new GamePlayer(PlayerType.Human, nation, -1));
+		// 	}
+		// 	
+		// 	var pretendB = Prefs.DefaultPretenderB.Get();
+		// 	if (!string.IsNullOrEmpty(pretendB))
+		// 	{
+		// 		var pretender = new Pretender(pretendB);
+		// 		var nation = Nations.GetNationByNameAndEra(pretender.NationName, pretender.Era);
+		// 		pretender.Nation = nation;
+		// 		Game.Players.Add(new GamePlayer(PlayerType.Human, nation, -1));
+		// 	}
+		// }
+
 		
-		Debug.Log("mapFilePath: " + mapFilePath + ", SavedMapFileName: "+ SavedMapFileName + ", MapFolderPath: "+ MapFolderPath);
+		Debug.Log("MapFilePath: " + MapFilePath + ", SavedMapFileName: "+ SavedMapFileName + ", MapFolderPath: "+ MapFolderPath);
 		
 		//Create map texture
 		var imageFile = mapElements.OfType<ImageFile>().FirstOrDefault();
@@ -58,6 +86,30 @@ public class MapManager
 			Ui.Get<MapPicture>().SetMapImage(mapImagePath);
 		}
 		
+		Ui.Get<LoadMapMenu>().Hide();
+		Ui.Get<MapMenu>().Show();
+		Ui.Get<PlayersMenu>().Show();
+
+		foreach (var player in Game.Players)
+		{
+			Ui.Get<PlayersMenu>().CreateGizmo(player);
+		}
+	}
+	
+	private void LoadPretender (string path)
+	{
+		if (string.IsNullOrEmpty(path)) return;
+
+		var pretender = new Pretender(path);
+		pretender.Nation = Nations.GetNationByNameAndEra(pretender.NationName, pretender.Era);
+
+		var player = Game.Players.SingleOrDefault(p => p.Nation == pretender.Nation);
+		if (player == null)
+		{
+			player = new GamePlayer(PlayerType.Human, pretender.Nation);
+			Game.Players.Add(player);
+		}
+		player.Pretender = pretender;
 	}
 
 	public MonsterEntry GetMonster(int monsterId)
@@ -73,17 +125,15 @@ public class MapManager
 	public void SaveMap ()
 	{
 		var mapSaver = new MapSaver(this);
-
 		var savePath = MapFilePath;
-		if (MapFilePath.IndexOf(Constants.EditedMapTag, StringComparison.InvariantCultureIgnoreCase) == -1)
-		{
-			int extIdx = savePath.LastIndexOf('.');
-			savePath = savePath.Insert(extIdx, Constants.EditedMapTag);
-			
-			int lastSepIdx = savePath.LastIndexOf('\\');
-			SavedMapFileName = savePath.Substring(lastSepIdx + 1);
-		}
+		// if (MapFilePath.IndexOf(Constants.EditedMapTag, StringComparison.InvariantCultureIgnoreCase) == -1)
+		// {
+		// 	int extIdx = savePath.LastIndexOf('.');
+		// 	// savePath = savePath.Insert(extIdx, Constants.EditedMapTag);
+		//
+		// 	SavedMapFileName = Path.GetFileName(savePath);
+		// }
 
-		mapSaver.SaveMap(savePath);
+		mapSaver.SaveMap(MapFilePath);
 	}
 }

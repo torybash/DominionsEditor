@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,18 +10,38 @@ public class PlayersMenu : Menu
 	[SerializeField] private RectTransform playersGroup;
 	[SerializeField] private Button addButton;
 	[SerializeField] private RectTransform addGizmo;	
+	[SerializeField] private TMP_Dropdown eraDropdown;	
 	private readonly List<PlayerGizmo> _gizmos = new List<PlayerGizmo>();
 
 	private void Awake ()
 	{
 		addButton.onClick.AddListener(OnAddClicked);
+		eraDropdown.onValueChanged.AddListener(OnEraChanged);
+	}
+
+	private void Start ()
+	{
+		eraDropdown.SetValueWithoutNotify(Prefs.Era.Get() - 1);
 	}
 	
+	private void OnEraChanged (int eraIdx)
+	{
+		Prefs.Era.Set(eraIdx + 1);
+	}
+
 	private void OnAddClicked ()
 	{
 		Game.AddNation();
 	}
 
+	public override void Show ()
+	{
+		base.Show();
+		
+		foreach (var gizmo in _gizmos) Destroy(gizmo.gameObject);
+		_gizmos.Clear();
+	}
+	
 	public void CreateGizmo (GamePlayer player)
 	{
 		var playerGizmo = Ui.Create<PlayerGizmo>(playersGroup);

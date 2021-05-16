@@ -27,10 +27,10 @@ public class MapSaver
 		elems.AddRange(_map.Config.MapElements);
 
 		//Players
-		foreach (var player in _map.Players)
+		foreach (var player in _map.Game.Players)
 		{
-			elems.Add(new AllowedPlayer{NationNum = player.NationNum});
-			elems.Add(new StartLocation{NationNum = player.NationNum, ProvinceNum = player.CapitalProvinceNum});
+			elems.Add(new AllowedPlayer{NationNum = player.Nation.Number});
+			elems.Add(new StartLocation{NationNum = player.Nation.Number, ProvinceNum = player.CapitalProvinceNum});
 		}
 
 		//Provinces
@@ -49,7 +49,7 @@ public class MapSaver
 					if (province.HasTemple) elems.Add(new Temple());
 					if (province.HasFort) elems.Add(new Fort{FortId = 1});
 					
-					if (_map.Players.Any(x => x.CapitalProvinceNum == province.ProvinceNumber))
+					if (_map.Game.Players.Any(x => x.CapitalProvinceNum == province.ProvinceNumber))
 					{
 						elems.Add(new KnownMagicSite{ProvinceNum = province.ProvinceNumber, SiteId = 1500});
 					}

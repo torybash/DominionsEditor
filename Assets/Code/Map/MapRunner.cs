@@ -2,16 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using Debug = UnityEngine.Debug;
 
 public class MapRunner
 {
-	private readonly MapManager _man;
+	private readonly MapManager _map;
 	private readonly GameSetup _game;
 
-	public MapRunner (MapManager man, GameSetup gameSetup)
+	public MapRunner (MapManager map, GameSetup gameSetup)
 	{
-		_man = man;
+		_map = map;
 		_game = gameSetup;
 	}
 	
@@ -24,16 +25,20 @@ public class MapRunner
 
 	private void CreateGameFolder ()
 	{
-		var folderPath = _man.SavedGamesFolderPath + Constants.GameName;
-		Directory.Delete(folderPath, true);
+		var folderPath = _map.SavedGamesFolderPath + Constants.GameName;
+		if (Directory.Exists(folderPath))
+		{
+			Directory.Delete(folderPath, true);
+		}
+		
 		Directory.CreateDirectory(folderPath);
 
-		foreach (var player in _man.Players)
+		foreach (var player in _game.Players)
 		{
-			var nationEntry = _man.Nations.GetNationEntry(player.NationNum);
-			var nationPath = $"{_man.SavedGamesFolderPath}{Constants.GameName}\\{nationEntry.PretenderFileName}.2h";
-
-			File.Copy(nationEntry.SamplePretenderFilePath, nationPath);
+			var nationEntry = _map.Nations.GetNationEntry(player.Nation);
+			var newPretenderFilePath = $"{_map.SavedGamesFolderPath}{Constants.GameName}\\{nationEntry.PretenderFileName}.2h";
+			
+			File.Copy(player.Pretender.FilePath, newPretenderFilePath);
 		}
 	}
 	
@@ -41,13 +46,13 @@ public class MapRunner
 	{
 		var args = new List<string>();
 
-		const int HARDCODED_ERA_NUMBER_TODO = 3;
-		const string DEBUG_MOD = "Debug_509.dm";
+		int eraNumber = Prefs.Era.Get();
+		string debugMod = $"{Constants.ModName}.dm";
 		args.Add($"--newgame {Constants.GameName}");
-		args.Add($"--mapfile {_man.SavedMapFileName}");
-		args.Add($"--era {HARDCODED_ERA_NUMBER_TODO}");
+		args.Add($"--mapfile {_map.SavedMapFileName}");
+		args.Add($"--era {eraNumber}");
 		args.Add($"--conqall");               // Win by eliminating all opponents only
-		args.Add($"--enablemod {DEBUG_MOD}"); 
+		args.Add($"--enablemod {debugMod}"); 
 		
 		foreach (var player in _game.Players)
 		{
@@ -55,7 +60,7 @@ public class MapRunner
 			if (player.Type == PlayerType.Human) continue;
 
 			var aiName = PlayerTypeUtil.GetAiName(player);
-			args.Add($"--{aiName} {player.NationNum}");
+			args.Add($"--{aiName} {player.Nation}");
 		}
 
 		var start = new ProcessStartInfo
@@ -63,7 +68,7 @@ public class MapRunner
 			Arguments = string.Join(" ", args),
 			// Arguments = $"--newgame {Constants.GameName} --mapfile {_man.SavedMapFileName} --era 3 {playerAiArgs}", // ", --easyai 102
 			// FileName = @"G:\Games\steamapps\common\Dominions5\Dominions5.exe",
-			FileName = PrefManager.ExecutablePath.Get(),
+			FileName = Prefs.ExecutablePath.Get(),
 		};
 
 		int exitCode;
@@ -82,7 +87,7 @@ public class MapRunner
 		var start = new ProcessStartInfo
 		{
 			Arguments = $"{Constants.GameName}",
-			FileName = PrefManager.ExecutablePath.Get(),
+			FileName = Prefs.ExecutablePath.Get(),
 		};
 
 		int exitCode;

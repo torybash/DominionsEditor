@@ -14,21 +14,14 @@ public class LoadMapMenu : Menu
 	{
 		button.onClick.AddListener(OnClickButton);
 
-		var mapPath = PrefManager.DataFolderPath.Get() + DefaultMapPath;
+		var mapPath = Prefs.DataFolderPath.Get() + DefaultMapPath;
 		mapPathField.text = mapPath;
 	}
 	
 	private void OnClickButton ()
 	{
 		var mapFilePath = mapPathField.text;
-		
-		Map.ParseMap(mapFilePath);
-		
-		Ui.Get<LoadMapMenu>().Hide();
-		Ui.Get<MapMenu>().Show();
-		Ui.Get<PlayersMenu>().Show();
-
-		Game.Initialize();
+		Map.LoadMap();
 	}
 
 }

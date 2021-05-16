@@ -19,749 +19,655 @@ MonoBehaviour:
     pretenderFileName: early_arcoscephale
     era: 1
     sprite: {fileID: 21300000, guid: 87b70eb3ab37a8d45a57588b81e7cb49, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.32156864, g: 0.69803923, b: 0.6784314, a: 1}
   - name: Ermor
     epithet: New Faith
     nationNum: 6
     pretenderFileName: early_ermor
     era: 1
     sprite: {fileID: 21300000, guid: 2293a71e7d8f693489687a943b7906d8, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.5803922, g: 0.34901962, b: 0.6784314, a: 1}
   - name: Ulm
     epithet: Enigma of Steel
     nationNum: 7
     pretenderFileName: early_ulm
     era: 1
     sprite: {fileID: 21300000, guid: 46ad035363e0c2f45ac7795728129c59, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.16078432, g: 0.33333334, b: 0.3882353, a: 1}
   - name: Marverni
     epithet: Time of Druids
     nationNum: 8
     pretenderFileName: early_marverni
     era: 1
     sprite: {fileID: 21300000, guid: 8286bd21ff22bec49938b12f57d9e57a, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.22352941, g: 0.50980395, b: 0.0627451, a: 1}
   - name: Sauromatia
     epithet: Amazon Queens
     nationNum: 9
     pretenderFileName: early_sauromatia
     era: 1
     sprite: {fileID: 21300000, guid: 4045d2669f80c594e9b4784a21292ed8, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.39607844, g: 0.32156864, b: 0.22352941, a: 1}
   - name: T'ien Ch'i
     epithet: Spring and Autumn
     nationNum: 10
     pretenderFileName: early_tienchi
     era: 1
     sprite: {fileID: 21300000, guid: c7c18edbbb4defd4d930a4b09f1dbe40, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.7764706, g: 0.25490198, b: 0.25882354, a: 1}
   - name: Machaka
     epithet: Lion Kings
     nationNum: 11
     pretenderFileName: early_machaka
     era: 1
     sprite: {fileID: 21300000, guid: ce0f94024e6a9dd41aed41d22f1cafb7, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.7411765, g: 0.5254902, b: 0.0627451, a: 1}
   - name: Mictlan
     epithet: Reign of Blood
     nationNum: 12
     pretenderFileName: early_mictlan
     era: 1
     sprite: {fileID: 21300000, guid: 2d5568ff0d7590049a317729d2ec99b9, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.22352941, g: 0.7137255, b: 0.41960785, a: 1}
   - name: Abysia
     epithet: Children of Flame
     nationNum: 13
     pretenderFileName: early_abysia
     era: 1
     sprite: {fileID: 21300000, guid: 75b71f374d17750469c59c8b6eeaa422, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.64705884, g: 0.078431375, b: 0, a: 1}
   - name: Caelum
     epithet: Eagle Kings
     nationNum: 14
     pretenderFileName: early_caelum
     era: 1
     sprite: {fileID: 21300000, guid: 38a508e4ad7cb324dbefef3a788e16f6, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.5803922, g: 0.61960787, b: 0.87058824, a: 1}
   - name: C'tis
     epithet: Lizard Kings
     nationNum: 15
     pretenderFileName: early_ctis
     era: 1
     sprite: {fileID: 21300000, guid: 9d4ca2d92efe08b4ba8bea4d1f4bff9b, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.5803922, g: 0.68235296, b: 0.16078432, a: 1}
   - name: Pangaea
     epithet: Age of Revelry
     nationNum: 16
     pretenderFileName: early_pangaea
     era: 1
     sprite: {fileID: 21300000, guid: 9ae596ccb16f1ba40bd86126010349e7, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.0627451, g: 0.09411765, b: 0.0627451, a: 1}
   - name: Agartha
     epithet: Pale Ones
     nationNum: 17
     pretenderFileName: early_agartha
     era: 1
     sprite: {fileID: 21300000, guid: 050326dd9ab2cf6469a5d5f6f8fdeeaf, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.16078432, g: 0.15686275, b: 0.16078432, a: 1}
   - name: Tir na n'Og
     epithet: Land of the Ever Young
     nationNum: 18
     pretenderFileName: early_tirnanog
     era: 1
     sprite: {fileID: 21300000, guid: 1e74c2b1ef3e395488994fa39578ffb9, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.0627451, g: 0.5882353, b: 0.0627451, a: 1}
   - name: Fomoria
     epithet: The Cursed Ones
     nationNum: 19
     pretenderFileName: early_fomoria
     era: 1
     sprite: {fileID: 21300000, guid: 2a8aca06ac9e23b49a5c0d0fae017cdf, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.64705884, g: 0.61960787, b: 0.54901963, a: 1}
   - name: Vanheim
     epithet: Age of Vanir
     nationNum: 20
     pretenderFileName: early_vanheim
     era: 1
     sprite: {fileID: 21300000, guid: cf5c04893b7180545a9d825fb4589ed8, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.3529412, g: 0.4745098, b: 0.4509804, a: 1}
   - name: Helheim
     epithet: Dusk and Death
     nationNum: 21
     pretenderFileName: early_helheim
     era: 1
     sprite: {fileID: 21300000, guid: 516b73ca5e6a97940b3ed8b5a1ff6530, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.3529412, g: 0.4745098, b: 0.4509804, a: 1}
   - name: Niefelheim
     epithet: Sons of Winter
     nationNum: 22
     pretenderFileName: early_niefelheim
     era: 1
     sprite: {fileID: 21300000, guid: 80cbe14561db78a44a7a503e3b8805e3, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.2901961, g: 0.14117648, b: 0.0627451, a: 1}
   - name: Rus
     epithet: Sons of Heaven
     nationNum: 24
     pretenderFileName: early_bogarus
     era: 1
-    sprite: {fileID: 0}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    sprite: {fileID: 21300000, guid: cbc0e706e4871c74d953e09eb3f7bfb2, type: 3}
+    tintColor: {r: 0.7411765, g: 0.79607844, b: 0.7764706, a: 1}
   - name: Kailasa
     epithet: Rise of the Ape Kings
     nationNum: 25
     pretenderFileName: early_kailasa
     era: 1
     sprite: {fileID: 21300000, guid: 1348dfeec64bb4c43b74106e847a1ff7, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.7764706, g: 0.6509804, b: 0.32156864, a: 1}
   - name: Lanka
     epithet: Land of Demons
     nationNum: 26
     pretenderFileName: early_lanka
     era: 1
     sprite: {fileID: 21300000, guid: ce4284bf5043f7c4d893cc1184416033, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.6666667, g: 0.11372549, b: 0.0627451, a: 1}
   - name: Yomi
     epithet: Oni Kings
     nationNum: 27
     pretenderFileName: early_yomi
     era: 1
     sprite: {fileID: 21300000, guid: 097178aa80901ea41b63778e531de510, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.41960785, g: 0.42745098, b: 0.41960785, a: 1}
   - name: Hinnom
     epithet: Sons of the Fallen
     nationNum: 28
     pretenderFileName: early_gath
     era: 1
-    sprite: {fileID: 0}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    sprite: {fileID: 21300000, guid: 7433a0d6be71fa64da7ffbb218f4e412, type: 3}
+    tintColor: {r: 0.6784314, g: 0.61960787, b: 0.5176471, a: 1}
   - name: Ur
     epithet: The First City
     nationNum: 29
     pretenderFileName: early_ur
     era: 1
     sprite: {fileID: 21300000, guid: c63647baede4c504a8b2cdf7923a79f0, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.5803922, g: 0.44313726, b: 0.32156864, a: 1}
   - name: Berytos
     epithet: The Phoenix Empire
     nationNum: 30
     pretenderFileName: early_berytos
     era: 1
     sprite: {fileID: 21300000, guid: f1331369ea6a9384db85db231575eaed, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.5803922, g: 0.078431375, b: 0.32156864, a: 1}
   - name: Xibalba
     epithet: Vigil of the Sun
     nationNum: 31
     pretenderFileName: early_xibalba
     era: 1
     sprite: {fileID: 21300000, guid: a0ec4371ec9e21b45acce4b0937f0219, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.16078432, g: 0.15686275, b: 0.16078432, a: 1}
   - name: Mekone
     epithet: Brazen Giants
     nationNum: 32
     pretenderFileName: early_mekone
     era: 1
     sprite: {fileID: 21300000, guid: 1410fd42003680a4e87b93ca5f8a4843, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.7411765, g: 0.61960787, b: 0.32156864, a: 1}
   - name: Ubar
     epithet: Kingdom of the Unseen
     nationNum: 33
     pretenderFileName: early_ubar
     era: 1
     sprite: {fileID: 21300000, guid: 1e74f6724b8529c4cb4922eab9da1b54, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.0627451, g: 0.078431375, b: 0.16078432, a: 1}
   - name: Atlantis
     epithet: Emergence of the Deep Ones
     nationNum: 36
     pretenderFileName: early_atlantis
     era: 1
     sprite: {fileID: 21300000, guid: 4a8da7bdcadca4548a1ea58db4643c7a, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.32156864, g: 0.28627452, b: 0.25882354, a: 1}
   - name: R'lyeh
     epithet: Time of Aboleths
     nationNum: 37
     pretenderFileName: early_rlyeh
     era: 1
     sprite: {fileID: 21300000, guid: ca4fb1026ea133a4f93414e2b8cf1af3, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0, g: 0.15686275, b: 0.22352941, a: 1}
   - name: Pelagia
     epithet: Pearl Kings
     nationNum: 38
     pretenderFileName: early_pelagia
     era: 1
     sprite: {fileID: 21300000, guid: 27b8c5369f2d39f46a5a3881278c3733, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.87058824, g: 0.34901962, b: 0.32156864, a: 1}
   - name: Oceania
     epithet: Coming of the Capricorns
     nationNum: 39
     pretenderFileName: early_oceania
     era: 1
     sprite: {fileID: 21300000, guid: 9364fc5cdb8ef4a43be5af70306b6e57, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.0627451, g: 0.50980395, b: 0.32156864, a: 1}
   - name: Therodos
     epithet: Telkhine Spectre
     nationNum: 40
     pretenderFileName: early_therodos
     era: 1
     sprite: {fileID: 21300000, guid: d46a82cf77c1ec04f9604a7ec0ec495c, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.7411765, g: 0.79607844, b: 0.7764706, a: 1}
   - name: Arcoscephale
     epithet: The Old Kingdom
     nationNum: 43
     pretenderFileName: mid_arcoscephale
     era: 2
     sprite: {fileID: 21300000, guid: b15ca5fd5f1f4a746b15cc2b39171ba9, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.32156864, g: 0.69803923, b: 0.6784314, a: 1}
   - name: Ermor
     epithet: Ashen Empire
     nationNum: 44
     pretenderFileName: mid_ermor
     era: 2
     sprite: {fileID: 21300000, guid: b92599e98386b6247a155c698e761c02, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.3882353, g: 0.15686275, b: 0.32156864, a: 1}
   - name: Sceleria
     epithet: The Reformed Empire
     nationNum: 45
     pretenderFileName: mid_sceleria
     era: 2
     sprite: {fileID: 21300000, guid: 10697ec08cc26f94b8bc5b43727edb90, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.5176471, g: 0.25490198, b: 0.41960785, a: 1}
   - name: Pythium
     epithet: Emerald Empire
     nationNum: 46
     pretenderFileName: mid_pythium
     era: 2
     sprite: {fileID: 21300000, guid: 0795692eb6c5dab4fbe1caa01936d8b1, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.5803922, g: 0.25490198, b: 0.6784314, a: 1}
   - name: Man
     epithet: Tower of Avalon
     nationNum: 47
     pretenderFileName: mid_man
     era: 2
     sprite: {fileID: 21300000, guid: f48ce90a1ae216844880bcb977dce213, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0, g: 0.50980395, b: 0, a: 1}
   - name: Eriu
     epithet: Last of the Tuatha
     nationNum: 48
     pretenderFileName: mid_eriu
     era: 2
     sprite: {fileID: 21300000, guid: 3cd54cf20760fba4591d3165c6673d6b, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.41960785, g: 0.61960787, b: 0.0627451, a: 1}
   - name: Ulm
     epithet: Forges of Ulm
     nationNum: 49
     pretenderFileName: mid_ulm
     era: 2
     sprite: {fileID: 21300000, guid: 0293c98d6deaa3748820bb43dedb7d64, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.0627451, g: 0.078431375, b: 0.48235294, a: 1}
   - name: Marignon
     epithet: Fiery Justice
     nationNum: 50
     pretenderFileName: mid_marignon
     era: 2
     sprite: {fileID: 21300000, guid: d87fab69907a88440903a087a68e640f, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.7411765, g: 0.34901962, b: 0, a: 1}
   - name: Mictlan
     epithet: Reign of the Lawgiver
     nationNum: 51
     pretenderFileName: mid_mictlan
     era: 2
     sprite: {fileID: 21300000, guid: e8dd793fca970344bb033e2bec806a67, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.22352941, g: 0.7137255, b: 0.41960785, a: 1}
   - name: T'ien Ch'i
     epithet: Imperial Bureaucracy
     nationNum: 52
     pretenderFileName: mid_tienchi
     era: 2
-    sprite: {fileID: 0}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    sprite: {fileID: 21300000, guid: c9b8f3a065eb2584bb9485b4afc9d0bd, type: 3}
+    tintColor: {r: 0.7764706, g: 0.25490198, b: 0.25882354, a: 1}
   - name: Machaka
     epithet: Reign of Sorcerors
     nationNum: 53
     pretenderFileName: mid_machaka
     era: 2
     sprite: {fileID: 21300000, guid: ba93b9e925c1fda4883030c672da5322, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.16078432, g: 0.15686275, b: 0.12941177, a: 1}
   - name: Agartha
     epithet: Golem Cult
     nationNum: 54
     pretenderFileName: mid_agartha
     era: 2
     sprite: {fileID: 21300000, guid: 142d771cbd51dd04aacf552371f58e8b, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.16078432, g: 0.15686275, b: 0.16078432, a: 1}
   - name: Abysia
     epithet: Blood and Fire
     nationNum: 55
     pretenderFileName: mid_abysia
     era: 2
     sprite: {fileID: 21300000, guid: 85dc1b08cb2be414a9f48019eba8a64e, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.64705884, g: 0.078431375, b: 0, a: 1}
   - name: Caelum
     epithet: Reign of the Seraphim
     nationNum: 56
     pretenderFileName: mid_caelum
     era: 2
     sprite: {fileID: 21300000, guid: f5cd89ec6e593f44e8158bdc411347d6, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.5803922, g: 0.61960787, b: 0.87058824, a: 1}
   - name: C'tis
     epithet: Miasma
     nationNum: 57
     pretenderFileName: mid_ctis
     era: 2
     sprite: {fileID: 21300000, guid: f22e08763a1ab614da14ad8310661db6, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.5803922, g: 0.78039217, b: 0.16078432, a: 1}
   - name: Pangaea
     epithet: Age of Bronze
     nationNum: 58
     pretenderFileName: mid_pangaea
     era: 2
     sprite: {fileID: 21300000, guid: 1afe59b1d3f50114ea007a99d813ce75, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.03137255, g: 0.078431375, b: 0.03137255, a: 1}
   - name: Asphodel
     epithet: Carrion Woods
     nationNum: 59
     pretenderFileName: mid_asphodel
     era: 2
     sprite: {fileID: 21300000, guid: 5dc6cf717c2937745b27ae7d365839e2, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.09411765, g: 0.25490198, b: 0, a: 1}
   - name: Vanheim
     epithet: Arrival of Man
     nationNum: 60
     pretenderFileName: mid_vanheim
     era: 2
     sprite: {fileID: 21300000, guid: 27dcb1a7fa38e05419703082d6a13141, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.3529412, g: 0.4745098, b: 0.4509804, a: 1}
   - name: Jotunheim
     epithet: Iron Woods
     nationNum: 61
     pretenderFileName: mid_jotunheim
     era: 2
     sprite: {fileID: 21300000, guid: 955529220d4522e45bb16b7250e2e8f2, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.2901961, g: 0.14117648, b: 0.0627451, a: 1}
   - name: Vanarus
     epithet: Land of the Chuds
     nationNum: 62
     pretenderFileName: mid_rus
     era: 2
-    sprite: {fileID: 0}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    sprite: {fileID: 21300000, guid: f5db613c4f345fd4fb2d16397d30937b, type: 3}
+    tintColor: {r: 0.3529412, g: 0.4745098, b: 0.4509804, a: 1}
   - name: Bandar Log
     epithet: Land of the Apes
     nationNum: 63
     pretenderFileName: mid_bandarlog
     era: 2
     sprite: {fileID: 21300000, guid: ba2c147695423c6478d83d92770faa91, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.7764706, g: 0.6509804, b: 0.32156864, a: 1}
   - name: Shinuyama
     epithet: Land of the Bakemono
     nationNum: 64
     pretenderFileName: mid_bakemono
     era: 2
-    sprite: {fileID: 0}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    sprite: {fileID: 21300000, guid: 9361ff59323133b449df4e4b1f71c760, type: 3}
+    tintColor: {r: 0.41960785, g: 0.42745098, b: 0.41960785, a: 1}
   - name: Ashdod
     epithet: Reign of the Anakim
     nationNum: 65
     pretenderFileName: mid_gath
     era: 2
-    sprite: {fileID: 0}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    sprite: {fileID: 21300000, guid: fcfd4fe86340ac5409d04d6bd435b9da, type: 3}
+    tintColor: {r: 0.6784314, g: 0.61960787, b: 0.5176471, a: 1}
   - name: Uruk
     epithet: City States
     nationNum: 66
     pretenderFileName: mid_ur
     era: 2
-    sprite: {fileID: 0}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    sprite: {fileID: 21300000, guid: e491c364f9527c649bdc82a57b5dc90b, type: 3}
+    tintColor: {r: 0.5803922, g: 0.44313726, b: 0.32156864, a: 1}
   - name: Nazca
     epithet: Kingdom of the Sun
     nationNum: 67
     pretenderFileName: mid_nazca
     era: 2
     sprite: {fileID: 21300000, guid: 9b5b71ef37df3b04ca41bd0d054bbe24, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.5176471, g: 0.44313726, b: 0.32156864, a: 1}
   - name: Xibalba
     epithet: Flooded Caves
     nationNum: 68
     pretenderFileName: mid_xibalba
     era: 2
     sprite: {fileID: 21300000, guid: ecbfe32c36aa0a04ca0bbcc623deaf25, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.16078432, g: 0.15686275, b: 0.16078432, a: 1}
   - name: Phlegra
     epithet: Deformed Giants
     nationNum: 69
     pretenderFileName: mid_phlegra
     era: 2
     sprite: {fileID: 21300000, guid: c9e0e06e5dc2e074da2413c0890f31ce, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.7411765, g: 0.61960787, b: 0.32156864, a: 1}
   - name: Phaeacia
     epithet: Isle of the Dark Ships
     nationNum: 70
     pretenderFileName: mid_phaeacia
     era: 2
     sprite: {fileID: 21300000, guid: 7dcfed7a83791bd45978790290b65325, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.16078432, g: 0.23529412, b: 0.32156864, a: 1}
   - name: Ind
     epithet: Magnificent Kingdom of Exalted Virtue
     nationNum: 71
     pretenderFileName: mid_ind
     era: 2
     sprite: {fileID: 21300000, guid: c9efe8c1ed146244694871a4187e6c3f, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.87058824, g: 0.79607844, b: 0.5176471, a: 1}
   - name: Na'Ba
     epithet: Queens of the Desert
     nationNum: 72
     pretenderFileName: mid_naba
     era: 2
     sprite: {fileID: 21300000, guid: c2aa19dd649380d4c9bca99176327f00, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.0627451, g: 0.078431375, b: 0.16078432, a: 1}
   - name: Atlantis
     epithet: Kings of the Deep
     nationNum: 73
     pretenderFileName: mid_atlantis
     era: 2
     sprite: {fileID: 21300000, guid: 19d1c151ddca512489c5bd84724ee73a, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.16078432, g: 0.15686275, b: 0.7411765, a: 1}
   - name: R'lyeh
     epithet: Fallen Star
     nationNum: 74
     pretenderFileName: mid_rlyeh
     era: 2
     sprite: {fileID: 21300000, guid: 71329a484b3ba94438b8632f7687837f, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0, g: 0.15686275, b: 0.22352941, a: 1}
   - name: Pelagia
     epithet: Triton Kings
     nationNum: 75
     pretenderFileName: mid_pelagia
     era: 2
     sprite: {fileID: 21300000, guid: 732222c4dc553804c92f5ea10207b275, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.87058824, g: 0.34901962, b: 0.32156864, a: 1}
   - name: Oceania
     epithet: Mermidons
     nationNum: 76
     pretenderFileName: mid_oceania
     era: 2
     sprite: {fileID: 21300000, guid: 83e293c58ea2653499d9906318f615d1, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.0627451, g: 0.50980395, b: 0.32156864, a: 1}
   - name: Ys
     epithet: Morgen Queens
     nationNum: 77
     pretenderFileName: mid_ys
     era: 2
     sprite: {fileID: 21300000, guid: b4d12775479468d44930821a9770cfaf, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.22352941, g: 0.34901962, b: 0.6784314, a: 1}
   - name: Arcoscephale
     epithet: Sibylline Guidance
     nationNum: 80
     pretenderFileName: late_arcoscephale
     era: 3
     sprite: {fileID: 21300000, guid: fa8d0dc8f8bfd224b8ace722dbc44053, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.34901962, g: 0.7176471, b: 0.69803923, a: 1}
   - name: Pythium
     epithet: Serpent Cult
     nationNum: 81
     pretenderFileName: late_pythium
     era: 3
-    sprite: {fileID: 0}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    sprite: {fileID: 21300000, guid: c5fb017fc72cebf469a8e88515e8d7b0, type: 3}
+    tintColor: {r: 0.22352941, g: 0.5254902, b: 0.16078432, a: 1}
   - name: Lemuria
     epithet: Soul Gates
     nationNum: 82
     pretenderFileName: late_lemur
     era: 3
-    sprite: {fileID: 0}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    sprite: {fileID: 21300000, guid: a397cd0023bf9ab4487601cdef747634, type: 3}
+    tintColor: {r: 0.41960785, g: 0.25490198, b: 0.5176471, a: 1}
   - name: Man
     epithet: Towers of Chelms
     nationNum: 83
     pretenderFileName: late_chelms
     era: 3
-    sprite: {fileID: 0}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    sprite: {fileID: 21300000, guid: 5953fd0c5fc50df4f9f9ad3d8072b5ff, type: 3}
+    tintColor: {r: 0, g: 0.50980395, b: 0, a: 1}
   - name: Ulm
     epithet: Black Forest
     nationNum: 84
     pretenderFileName: late_ulm
     era: 3
     sprite: {fileID: 21300000, guid: 846b8f1c3bacf7344a2f6912f033fa0f, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.0627451, g: 0.078431375, b: 0.3882353, a: 1}
   - name: Marignon
     epithet: Conquerors of the Sea
     nationNum: 85
     pretenderFileName: late_marignon
     era: 3
     sprite: {fileID: 21300000, guid: c0aea29bffc9de843bbc961b5ab566e9, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.7411765, g: 0.34901962, b: 0, a: 1}
   - name: Mictlan
     epithet: Blood and Rain
     nationNum: 86
     pretenderFileName: late_mictlan
     era: 3
     sprite: {fileID: 21300000, guid: 6588b62c11969154cbfeedc4c30415c3, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.22352941, g: 0.7137255, b: 0.41960785, a: 1}
   - name: T'ien Ch'i
     epithet: Barbarian Kings
     nationNum: 87
     pretenderFileName: late_tienchi
     era: 3
     sprite: {fileID: 21300000, guid: dbd87dd2c1d4b2541907eb851f1c75e8, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.7764706, g: 0.25490198, b: 0.25882354, a: 1}
   - name: Jomon
     epithet: Human Daimyos
     nationNum: 89
     pretenderFileName: late_jomon
     era: 3
     sprite: {fileID: 21300000, guid: 5d4b933043dfc364ba5fe16721bfe5a6, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.41960785, g: 0.42745098, b: 0.41960785, a: 1}
   - name: Agartha
     epithet: Ktonian Dead
     nationNum: 90
     pretenderFileName: late_agartha
     era: 3
     sprite: {fileID: 21300000, guid: 6386e5843964e3348806b3a3d7da3a7a, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.16078432, g: 0.15686275, b: 0.16078432, a: 1}
   - name: Abysia
     epithet: Blood of Humans
     nationNum: 91
     pretenderFileName: late_abysia
     era: 3
     sprite: {fileID: 21300000, guid: 9b665769d2713ba4aad9a63e9ffb4159, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.64705884, g: 0.078431375, b: 0, a: 1}
   - name: Caelum
     epithet: Return of the Raptors
     nationNum: 92
     pretenderFileName: late_caelum
     era: 3
     sprite: {fileID: 21300000, guid: d36ab84d3aead6e41adccce3e0785fce, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.48235294, g: 0.5254902, b: 0.87058824, a: 1}
   - name: C'tis
     epithet: Desert Tombs
     nationNum: 93
     pretenderFileName: late_ctis
     era: 3
     sprite: {fileID: 21300000, guid: 1175268dccf8f0e4bb13a1f83ee4be13, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.5803922, g: 0.78039217, b: 0.16078432, a: 1}
   - name: Pangaea
     epithet: New Era
     nationNum: 94
     pretenderFileName: late_pangaea
     era: 3
     sprite: {fileID: 21300000, guid: 4898d3a375079644cbd055e0334de2bd, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.16078432, g: 0.69803923, b: 0.16078432, a: 1}
   - name: "Midg\xE5rd"
     epithet: Age of Men
     nationNum: 95
     pretenderFileName: late_midgard
     era: 3
     sprite: {fileID: 21300000, guid: 18ce3a493f7b96b47b6fd275d8bc5da9, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.3529412, g: 0.4745098, b: 0.4509804, a: 1}
   - name: "Utg\xE5rd"
     epithet: Well of Urd
     nationNum: 96
     pretenderFileName: late_utgard
     era: 3
     sprite: {fileID: 21300000, guid: b725dae847bd2104da0b71802615e08e, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.2901961, g: 0.14117648, b: 0.0627451, a: 1}
   - name: Bogarus
     epithet: Age of Heroes
     nationNum: 97
     pretenderFileName: late_rus
     era: 3
-    sprite: {fileID: 0}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    sprite: {fileID: 21300000, guid: f7fe1b58df6b2e14dae9699f3f2d6504, type: 3}
+    tintColor: {r: 0.32156864, g: 0.34901962, b: 0.6784314, a: 1}
   - name: Patala
     epithet: Reign of the Nagas
     nationNum: 98
     pretenderFileName: late_patala
     era: 3
     sprite: {fileID: 21300000, guid: f9ebb34596da4234bb61438a203ed530, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.7764706, g: 0.6509804, b: 0.32156864, a: 1}
   - name: Gath
     epithet: Last of the Giants
     nationNum: 99
     pretenderFileName: late_gath
     era: 3
     sprite: {fileID: 21300000, guid: 0f00b35454726a2469b9a684b4fe8407, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.6784314, g: 0.61960787, b: 0.5176471, a: 1}
   - name: Ragha
     epithet: Dual Kingdom
     nationNum: 100
     pretenderFileName: late_ragha
     era: 3
     sprite: {fileID: 21300000, guid: 392f93af4c0838642b27648f1daf21aa, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.64705884, g: 0.078431375, b: 0, a: 1}
   - name: Xibalba
     epithet: Return of the Zotz
     nationNum: 101
     pretenderFileName: late_xibalba
     era: 3
     sprite: {fileID: 21300000, guid: e2b7634b65f54af49ab4c3b540b78b85, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.16078432, g: 0.15686275, b: 0.16078432, a: 1}
   - name: Phlegra
     epithet: Sleeping Giants
     nationNum: 102
     pretenderFileName: late_phlegra
     era: 3
     sprite: {fileID: 21300000, guid: 7c3516463a7304b42beb6f0ee384ee6e, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.7411765, g: 0.61960787, b: 0.32156864, a: 1}
   - name: Vaettiheim
     epithet: Wolf Kin Jarldom
     nationNum: 103
     pretenderFileName: late_vaetti
     era: 3
     sprite: {fileID: 21300000, guid: e459cebaa321a324a8e97c93a1b47a8e, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.41960785, g: 0.42745098, b: 0.5803922, a: 1}
   - name: Atlantis
     epithet: Frozen Sea
     nationNum: 106
     pretenderFileName: late_atlantis
     era: 3
     sprite: {fileID: 21300000, guid: 490a423278b1c2c44b57738a309b8083, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.16078432, g: 0.15686275, b: 0.7411765, a: 1}
   - name: R'lyeh
     epithet: Dreamlands
     nationNum: 107
     pretenderFileName: late_rlyeh
     era: 3
     sprite: {fileID: 21300000, guid: 47a42266035b74745aee83e59d4659fd, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0, g: 0.15686275, b: 0.22352941, a: 1}
   - name: Erytheia
     epithet: Kingdom of Two Worlds
     nationNum: 108
     pretenderFileName: late_erytheia
     era: 3
     sprite: {fileID: 21300000, guid: e8496801448b46348acef70579d5e7af, type: 3}
-    samplePretenderFilePath: 
-    tintColor: {r: 0, g: 0, b: 0, a: 0}
+    tintColor: {r: 0.87058824, g: 0.8117647, b: 0.41960785, a: 1}

@@ -45,11 +45,24 @@ public class NationsTableEditor : Editor
 			int nationNum = int.Parse(line[ID_IDX]);
 			var nationName = line[NAME_IDX];
 			var epithet = line[EPITHET_IDX];
-			var fileNameBase = line[FILE_NAME_BASE_IDX];
+			var nationFileName = line[FILE_NAME_BASE_IDX];
 			int era = int.Parse(line[ERA_IDX]);
+
+			var sprite = GetSprite(nationFileName);
+
+
 			
-			var sprite = GetSprite(fileNameBase);
-			var monsterEntry = new NationEntry(nationName, epithet, nationNum, fileNameBase, era, sprite );
+			Color color;
+			if (sprite != null)
+			{
+				color = sprite.texture.GetPixel(sprite.texture.width/2, sprite.texture.height/2);
+			} else
+			{
+				Debug.LogError($"No sprite found for nation {nationName} with filename {nationFileName}");
+
+				color = Color.clear;
+			}
+			var monsterEntry = new NationEntry(nationName, epithet, nationNum, nationFileName, era, sprite, color );
 			
 			if (Target.Nations.Any(x => x.NationNum == nationNum)) continue;
 			

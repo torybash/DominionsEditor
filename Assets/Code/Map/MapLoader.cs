@@ -189,7 +189,7 @@ public class MapLoader
 		{
 			var startLocation = mapElements.OfType<StartLocation>().SingleOrDefault(x => x.NationNum == allowedPlayer.NationNum);
 			var capitalProvinceNum = startLocation?.ProvinceNum ?? -1;
-			var player = new GamePlayer(PlayerType.Human, allowedPlayer.NationNum, capitalProvinceNum);
+			var player = new GamePlayer(PlayerType.Human, allowedPlayer.NationNum){CapitalProvinceNum = capitalProvinceNum};
 			players.Add(player);
 		}
 		return players;

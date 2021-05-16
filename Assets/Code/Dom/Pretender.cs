@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 
 public class Pretender
 {
@@ -6,12 +7,21 @@ public class Pretender
 	public string FileName { get; set; }
 	public string NationName { get; set; }
 	public Nation Nation { get; set; }
+	public int Era { get; set; }
 
 	public Pretender (string pretenderFilePath)
 	{
 		FilePath = pretenderFilePath;
-		FileName = pretenderFilePath.Substring(pretenderFilePath.LastIndexOf("/", StringComparison.Ordinal) + 1);
+		FileName = Path.GetFileName(pretenderFilePath);
 
 		NationName = FileName.Split('_')[1];
+		var eraName = FileName.Split('_')[0];
+		Era = eraName switch 
+		{
+			"early" => 1,
+			"mid" => 2,
+			"late" => 3,
+			_ => throw new ArgumentOutOfRangeException()
+		} ;
 	}
 }

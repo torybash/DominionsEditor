@@ -21,8 +21,8 @@ public class SettingsMenu : Menu
 
 	private void Start ()
 	{
-		executablePathField.text = PrefManager.ExecutablePath.Get();
-		dataPathField.text = PrefManager.DataFolderPath.Get();
+		executablePathField.text = Prefs.ExecutablePath.Get();
+		dataPathField.text = Prefs.DataFolderPath.Get();
 	}
 
 	public override void Show ()
@@ -34,12 +34,12 @@ public class SettingsMenu : Menu
 
 	private void OnExecutablePathChanged (string arg0)
 	{
-		PrefManager.ExecutablePath.Set(arg0);
+		Prefs.ExecutablePath.Set(arg0);
 	}
 	
 	private void OnDataPathChanged (string arg0)
 	{
-		PrefManager.DataFolderPath.Set(arg0);
+		Prefs.DataFolderPath.Set(arg0);
 	}
 
 }

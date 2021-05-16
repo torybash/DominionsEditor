@@ -6,7 +6,6 @@ using UnityEngine;
 [CreateAssetMenu]
 public class NationsTable : ScriptableObject
 {
-
 	[SerializeField] private List<NationEntry> nations;
 	public List<NationEntry> Nations => nations;
 
@@ -15,9 +14,9 @@ public class NationsTable : ScriptableObject
 		return nations.SingleOrDefault(x => x.NationNum == nation.Number);
 	}
 	
-	public Nation GetNationByName (string nationName)
+	public Nation GetNationByNameAndEra (string nationName, int pretenderEra)
 	{
-		var entry = nations.SingleOrDefault(x => x.Name.Equals(nationName, StringComparison.OrdinalIgnoreCase));
+		var entry = nations.SingleOrDefault(x => x.Name.Equals(nationName, StringComparison.OrdinalIgnoreCase) && x.Era == pretenderEra);
 		if (entry == null) return Nation.Invalid;
 		return entry.NationNum;
 	}

@@ -1,6 +1,5 @@
-using System;
 using System.IO;
-using UnityEngine;
+
 public static class PretenderLoad
 {
 
@@ -8,7 +7,7 @@ public static class PretenderLoad
 	public static Pretender LoadFile (string pretenderFilePath)
 	{
 		var fileBytes = File.ReadAllBytes(pretenderFilePath);
-		Debug.Log($"file: {pretenderFilePath}, fileBytes: {fileBytes.Length}");
+		// Debug.Log($"file: {pretenderFilePath}, fileBytes: {fileBytes.Length}");
 
 		int counter = 0;
 		

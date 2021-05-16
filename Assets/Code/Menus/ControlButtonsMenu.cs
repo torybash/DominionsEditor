@@ -6,6 +6,6 @@ public class ControlButtonsMenu : Menu
 {
 	public void ClickedSettings ()
 	{
-		Ui.Get<SettingsMenu>().Show();
+		Ui.Get<IntroMenu>().Show();
 	}
 }

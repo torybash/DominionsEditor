@@ -15,6 +15,13 @@ public class PretenderLoadMenu : Menu
 		closeButton.onClick.AddListener(Hide);
 	}
 
+	public override void Show ()
+	{
+		base.Show();
+		
+		transform.SetAsLastSibling();
+	}
+
 	public override void Hide ()
 	{
 		base.Hide();
@@ -33,7 +40,7 @@ public class PretenderLoadMenu : Menu
 
 			var pretender = PretenderLoad.LoadFile(pretenderFile);
 
-			var nation = Map.Nations.GetNationByName(pretender.NationName);
+			var nation = Map.Nations.GetNationByNameAndEra(pretender.NationName, pretender.Era);
 			pretender.Nation = nation;
 			
 			var gizmo = Ui.Create<PretenderFileGizmo>(pretendersContainer);

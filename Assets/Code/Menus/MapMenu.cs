@@ -33,7 +33,14 @@ public class MapMenu : Menu
 	
 	private void OnRunClicked ()
 	{
-		Game.RunMap();
+		if (Game.Players.Any(x => x.Pretender == null || string.IsNullOrEmpty(x.Pretender.FilePath)))
+		{
+			Ui.Create<MessageGizmo>().Write("Player missing pretender reference");
+			return;
+		}
+		
+		var mapRunner = new MapRunner(Map, Game);
+		mapRunner.Run();
 	}
 
 	private void OnSaveClicked ()
@@ -84,6 +91,7 @@ public class MapMenu : Menu
 		if (Input.GetKeyDown(KeyCode.L)) ToggleLab();
 		if (Input.GetKeyDown(KeyCode.T)) ToggleTemple();		
 		if (Input.GetKeyDown(KeyCode.F)) ToggleFort();
+		if (Input.GetKeyDown(KeyCode.C)) ToggleCapital();
 
 		
 		if (InputHelper.GetKeyNumberPressed(out int numberPressed))
@@ -206,6 +214,27 @@ public class MapMenu : Menu
 		provinceGizmo.Refresh();
 	}
 	
+	private void ToggleCapital ()
+	{
+		RaycastGizmos(out var monsterGizmo, out var provinceGizmo, out var itemGizmo);
+
+		if (provinceGizmo == null) return;
+
+		var playerOwner = Game.Players.SingleOrDefault(x => x.Nation == provinceGizmo.Province.Owner);
+		if (playerOwner == null) return;
+
+		var provinceNum = provinceGizmo.Province.ProvinceNumber;
+		if (playerOwner.CapitalProvinceNum == provinceNum)
+		{
+			playerOwner.CapitalProvinceNum = -1;
+		} else
+		{
+			playerOwner.CapitalProvinceNum = provinceNum;
+		}
+
+		provinceGizmo.Refresh();
+	}
+	
 	private void Remove ()
 	{
 		RaycastGizmos(out var monsterGizmo, out var provinceGizmo, out var itemGizmo);
@@ -267,7 +296,7 @@ public class MapMenu : Menu
 		if (player == null) return;
 
 		var province = provinceGizmo.Province;
-		province.Owner = player.NationNum;
+		province.Owner = player.Nation;
 		provinceGizmo.Refresh();
 	}
 

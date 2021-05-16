@@ -66,7 +66,7 @@ public class PlayerGizmo : Gizmo
 	{
 		numberText.text = Number.ToString();
 
-		_nationGizmo.SetNation(Player.NationNum);
+		_nationGizmo.SetNation(Player.Nation);
 		typeText.text = Player.Type.ToString();
 	}
 }

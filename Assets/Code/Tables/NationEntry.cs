@@ -8,7 +8,6 @@ public class NationEntry
 	[SerializeField] private string pretenderFileName;
 	[SerializeField] private int era;
 	[SerializeField] private Sprite sprite;
-	[SerializeField] private string samplePretenderFilePath;
 	[SerializeField] private Color tintColor;
 
 	public string Name => name;
@@ -16,11 +15,10 @@ public class NationEntry
 	public int NationNum => nationNum;
 	public string PretenderFileName => pretenderFileName;
 	public Sprite Sprite => sprite;
-	public string SamplePretenderFilePath => samplePretenderFilePath;
 	public Color TintColor => tintColor;
 	public int Era => era;
 
-	public NationEntry (string name, string epithet, int nationNum, string pretenderFileName, int era, Sprite sprite)
+	public NationEntry (string name, string epithet, int nationNum, string pretenderFileName, int era, Sprite sprite, Color tintColor)
 	{
 		this.name = name;
 		this.epithet = epithet;
@@ -28,5 +26,6 @@ public class NationEntry
 		this.pretenderFileName = pretenderFileName;
 		this.era = era;
 		this.sprite = sprite;
+		this.tintColor = tintColor;
 	}
 }
