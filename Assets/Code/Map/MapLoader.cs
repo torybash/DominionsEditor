@@ -7,20 +7,28 @@ using UnityEngine;
 
 public class MapLoader
 {
+	public static Map Load (string mapPath)
+	{
+		var mapElements = LoadMapElements(mapPath);
+		var map         = CreateConfig(mapElements);
+		map.ProvinceMap = CreateMap(mapElements);
 
+		return map;
+	}
+	
 	public static List<MapElement> LoadMapElements (string mapPath)
 	{
 		var mapLineTexts = File.ReadAllLines(mapPath);
 
-		var mapLineDatas = CreateLineDatas(mapLineTexts);
-		var mapElements = CreateMapElements(mapLineDatas);
+		var mapLine = ParseMapLines(mapLineTexts);
+		var mapElements = ParseMapElements(mapLine);
 		
 		return mapElements;
 	}
 
-	private static List<MapLineData> CreateLineDatas (string[] mapLineTexts)
+	private static List<MapLine> ParseMapLines (string[] mapLineTexts)
 	{
-		var mapLineDatas = new List<MapLineData>();
+		var mapLineDatas = new List<MapLine>();
 		for (int i = 0; i < mapLineTexts.Length; i++)
 		{
 			var mapLine = mapLineTexts[i];
@@ -32,7 +40,7 @@ public class MapLoader
 
 			var key = mapLine.Substring(1, keyEndIndex - 1);
 
-			var mapData = new MapLineData(key);
+			var mapData = new MapLine(key);
 			if (spaceIndex != -1)
 			{
 				var args = mapLine.Substring(keyEndIndex + 1, mapLine.Length - keyEndIndex - 1);
@@ -53,7 +61,7 @@ public class MapLoader
 		return mapLineDatas;
 	}
 	
-	private static List<MapElement> CreateMapElements (List<MapLineData> mapLineDatas)
+	private static List<MapElement> ParseMapElements (List<MapLine> mapLineDatas)
 	{
 		var mapElements = new List<MapElement>();;
 
@@ -96,7 +104,7 @@ public class MapLoader
 			if (typeof(MapElement) == type) continue;
 			if (type.IsAbstract) continue;
 
-			var mapKeyName = ((MapKeyName[])type.GetCustomAttributes(typeof(MapKeyName), false)).Single();
+			var mapKeyName = ((MapKeyNameAttribute[])type.GetCustomAttributes(typeof(MapKeyNameAttribute), false)).Single();
 
 			if (mapKeyName.Name == nameKey) return type;
 		}
@@ -195,9 +203,9 @@ public class MapLoader
 		return players;
 	}
 	
-	public static MapConfig CreateConfig (List<MapElement> mapElements)
+	public static Map CreateConfig (List<MapElement> mapElements)
 	{
-		var mapConfig = new MapConfig();
+		var mapConfig = new Map();
 		foreach (var mapElement in mapElements)
 		{
 			if (mapElement is ProvinceDataElement) continue;
@@ -206,10 +214,10 @@ public class MapLoader
 			if (mapElement is IOwnedByCommander) continue;
 			if (mapElement is Land) continue;
 			
-			mapConfig.MapElements.Add(mapElement);
+			mapConfig.Elements.Add(mapElement);
 		}
 		
-		mapConfig.MapElements = mapConfig.MapElements.OrderBy(x => x.GetType().Name).ToList();
+		mapConfig.Elements = mapConfig.Elements.OrderBy(x => x.GetType().Name).ToList();
 
 		return mapConfig;
 	}

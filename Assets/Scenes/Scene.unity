@@ -12651,7 +12651,7 @@ MonoBehaviour:
 
     LMB + shift: Add as unit
 
-    R:
+    RMB:
     Remove commander/unit/item/owner
 
 

@@ -3,38 +3,31 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+
 public class MapSaver
 {
-	private MapManager _map;
-	
-	public MapSaver (MapManager map)
-	{
-		_map = map;
-	}
-	
-	public void SaveMap (string path)
+
+	public void SaveMap (Map map, string path)
 	{
 		Debug.Log("Saving map at: "+ path);
 
 		var mapLines = new List<string>();
 		MapElement lastMapElem = null;
 		
-		// throw new Exception("TODO Reimplement!");
-
 		var elems = new List<MapElement>();
 		
 		//Config
-		elems.AddRange(_map.Config.MapElements);
+		elems.AddRange(map.Elements);
 
 		//Players
-		foreach (var player in _map.Game.Players)
+		foreach (var player in DomEdit.I.PlayerSetup.Players)
 		{
 			elems.Add(new AllowedPlayer{NationNum = player.Nation.Number});
 			elems.Add(new StartLocation{NationNum = player.Nation.Number, ProvinceNum = player.CapitalProvinceNum});
 		}
 
 		//Provinces
-		foreach (var province in _map.ProvinceMap.Values)
+		foreach (var province in map.ProvinceMap.Values)
 		{
 			bool isIndieProvince = province.Owner == Nation.Independents;
 			bool hasIndieMonsters = isIndieProvince && province.Monsters.Any();
@@ -49,7 +42,7 @@ public class MapSaver
 					if (province.HasTemple) elems.Add(new Temple());
 					if (province.HasFort) elems.Add(new Fort{FortId = 1});
 					
-					if (_map.Game.Players.Any(x => x.CapitalProvinceNum == province.ProvinceNumber))
+					if (DomEdit.I.PlayerSetup.Players.Any(x => x.CapitalProvinceNum == province.ProvinceNumber))
 					{
 						elems.Add(new KnownMagicSite{ProvinceNum = province.ProvinceNumber, SiteId = 1500});
 					}
@@ -58,7 +51,7 @@ public class MapSaver
 		}
 		
 		//Monsters
-		foreach (var province in _map.ProvinceMap.Values.Where(x => x.Monsters.Any()))
+		foreach (var province in map.ProvinceMap.Values.Where(x => x.Monsters.Any()))
 		{
 			elems.Add(new SetLand{ProvinceNum = province.ProvinceNumber});
 
@@ -127,7 +120,7 @@ public class MapSaver
 	
 	private static string GetMapElementKey (Type type)
 	{
-		var mapKeyName = ((MapKeyName[])type.GetCustomAttributes(typeof(MapKeyName), false)).Single();
+		var mapKeyName = ((MapKeyNameAttribute[])type.GetCustomAttributes(typeof(MapKeyNameAttribute), false)).Single();
 		return mapKeyName.Name;
 	}
 }
