@@ -7,13 +7,13 @@ using UnityEngine;
 
 public class MapLoader
 {
-	public static Map Load (string mapPath)
+	public static void Load (string mapPath, out Map map, out List<GamePlayer> players)
 	{
-		var mapElements = LoadMapElements(mapPath);
-		var map         = CreateConfig(mapElements);
-		map.ProvinceMap = CreateMap(mapElements);
-
-		return map;
+		var allElements = LoadMapElements(mapPath);
+		map         = CreateConfig(allElements);
+		map.ProvinceMap = CreateMap(allElements);
+		
+		players = CreatePlayers(allElements);
 	}
 	
 	public static List<MapElement> LoadMapElements (string mapPath)
@@ -138,11 +138,18 @@ public class MapLoader
 		//Set owner of provinces
 		foreach (var provinceOwner in mapElements.OfType<ProvinceOwner>())
 		{
-			provinces[provinceOwner.ProvinceNum].Owner = provinceOwner.NationNum;
+			if (provinces.ContainsKey(provinceOwner.ProvinceNum))
+			{
+				provinces[provinceOwner.ProvinceNum].Owner = provinceOwner.NationNum;
+			}
 		}
+		
 		foreach (var startLocation in mapElements.OfType<StartLocation>())
 		{
-			provinces[startLocation.ProvinceNum].Owner = startLocation.NationNum;
+			if (provinces.ContainsKey(startLocation.ProvinceNum))
+			{
+				provinces[startLocation.ProvinceNum].Owner = startLocation.NationNum;
+			}
 		}
 		
 		//Create commanders
@@ -205,7 +212,7 @@ public class MapLoader
 	
 	public static Map CreateConfig (List<MapElement> mapElements)
 	{
-		var mapConfig = new Map();
+		var map = new Map();
 		foreach (var mapElement in mapElements)
 		{
 			if (mapElement is ProvinceDataElement) continue;
@@ -214,11 +221,11 @@ public class MapLoader
 			if (mapElement is IOwnedByCommander) continue;
 			if (mapElement is Land) continue;
 			
-			mapConfig.Elements.Add(mapElement);
+			map.Elements.Add(mapElement);
 		}
 		
-		mapConfig.Elements = mapConfig.Elements.OrderBy(x => x.GetType().Name).ToList();
+		map.Elements = map.Elements.OrderBy(x => x.GetType().Name).ToList();
 
-		return mapConfig;
+		return map;
 	}
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
@@ -38,13 +39,15 @@ public class ItemsTableEditor : Editor
 			
 			const int ID_IDX = 0;
 			const int NAME_IDX = 1;
+			const int TYPE_IDX = 1;
 			int id = int.Parse(itemValues[ID_IDX]);
 			var itemName = itemValues[NAME_IDX];
+			var itemType = ItemTypeUtil.GetItemType(itemValues[TYPE_IDX]);
 
 			// var attributes = new Dictionary<string, int>();
 			
 			var sprite = GetSprite(id);
-			var itemEntry = new ItemEntry(id, itemName, sprite );
+			var itemEntry = new ItemEntry(id, itemName, itemType, sprite );
 			Target.Entries.Add(itemEntry);
 		}
 	}

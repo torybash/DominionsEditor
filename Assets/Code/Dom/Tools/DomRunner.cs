@@ -7,12 +7,10 @@ using Debug = UnityEngine.Debug;
 public class DomRunner
 {
 	private readonly MapManager map;
-	private readonly PlayerSetup game;
 
-	public DomRunner (MapManager map, PlayerSetup playerSetup)
+	public DomRunner (MapManager map)
 	{
 		this.map = map;
-		game = playerSetup;
 	}
 	
 	public void Run ()
@@ -32,7 +30,7 @@ public class DomRunner
 		
 		Directory.CreateDirectory(folderPath);
 
-		foreach (var player in game.Players)
+		foreach (var player in map.Players)
 		{
 			var nationEntry          = DomEdit.I.nations.GetNationEntry(player.Nation);
 			var newPretenderFilePath = $"{map.SavedGamesFolderPath}{Constants.GameName}\\{nationEntry.PretenderFileName}.2h";
@@ -53,7 +51,7 @@ public class DomRunner
 		args.Add($"--conqall");               // Win by eliminating all opponents only
 		args.Add($"--enablemod {debugMod}"); 
 		
-		foreach (var player in game.Players)
+		foreach (var player in map.Players)
 		{
 			if (player.Type == PlayerType.Closed) throw new Exception("Closed player type not handled!");
 			if (player.Type == PlayerType.Human) continue;

@@ -20,7 +20,7 @@ public class MapSaver
 		elems.AddRange(map.Elements);
 
 		//Players
-		foreach (var player in DomEdit.I.PlayerSetup.Players)
+		foreach (var player in DomEdit.I.MapMan.Players)
 		{
 			elems.Add(new AllowedPlayer{NationNum = player.Nation.Number});
 			elems.Add(new StartLocation{NationNum = player.Nation.Number, ProvinceNum = player.CapitalProvinceNum});
@@ -42,7 +42,7 @@ public class MapSaver
 					if (province.HasTemple) elems.Add(new Temple());
 					if (province.HasFort) elems.Add(new Fort{FortId = 1});
 					
-					if (DomEdit.I.PlayerSetup.Players.Any(x => x.CapitalProvinceNum == province.ProvinceNumber))
+					if (DomEdit.I.MapMan.Players.Any(x => x.CapitalProvinceNum == province.ProvinceNumber))
 					{
 						elems.Add(new KnownMagicSite{ProvinceNum = province.ProvinceNumber, SiteId = 1500});
 					}

@@ -5,7 +5,7 @@ public class Searcher
 {
 	private const int MAX_RESULTS = 10;
 	
-	private readonly SearchFilter searchFilter = SearchFilter.All;
+	public SearchFilter searchFilter = SearchFilter.All;
 	
 	public List<SearchableEntry> Search (string searchText)
 	{

@@ -31,7 +31,7 @@ public class PlayersMenu : Menu
 
 	private void OnAddClicked ()
 	{
-		DomEdit.I.PlayerSetup.AddNation();
+		DomEdit.I.MapMan.AddNation();
 	}
 
 	public override void Show ()

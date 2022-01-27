@@ -160,7 +160,7 @@ public class MapControls : MonoBehaviour
 
 		if (provinceGizmo == null) return;
 
-		var playerOwner = DomEdit.I.PlayerSetup.Players.SingleOrDefault(x => x.Nation == provinceGizmo.Province.Owner);
+		var playerOwner = DomEdit.I.MapMan.Players.SingleOrDefault(x => x.Nation == provinceGizmo.Province.Owner);
 		if (playerOwner == null) return;
 
 		var provinceNum = provinceGizmo.Province.ProvinceNumber;
@@ -232,7 +232,7 @@ public class MapControls : MonoBehaviour
 
 		if (provinceGizmo == null) return;
 		
-		var player = DomEdit.I.PlayerSetup.GetPlayer(numberPressed);
+		var player = DomEdit.I.MapMan.GetPlayer(numberPressed);
 		if (player == null) return;
 
 		var province = provinceGizmo.Province;

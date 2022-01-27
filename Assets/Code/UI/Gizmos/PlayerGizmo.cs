@@ -17,7 +17,7 @@ public class PlayerGizmo : Gizmo
 	private NationGizmo _nationGizmo;
 	public  GamePlayer  Player { get; set; }
 	
-	public  int         Number => DomEdit.I.PlayerSetup.Players.IndexOf(Player) + 1;
+	public int Number => DomEdit.I.MapMan.Players.IndexOf(Player) + 1;
 
 	private void Awake ()
 	{
@@ -37,7 +37,7 @@ public class PlayerGizmo : Gizmo
 	
 	private void OnRemove ()
 	{
-		DomEdit.I.PlayerSetup.RemovePlayer(Player);
+		DomEdit.I.MapMan.RemovePlayer(Player);
 	}
 	
 	private void OnPlayerTypeButton ()
@@ -50,7 +50,7 @@ public class PlayerGizmo : Gizmo
 		// };
 
 		int change = Input.GetMouseButton(0) ? 1 : -1;
-		DomEdit.I.PlayerSetup.IncrementType(Player, change);
+		DomEdit.I.MapMan.IncrementType(Player, change);
 	}
 	
 	private void OnNationButton ()
@@ -59,7 +59,7 @@ public class PlayerGizmo : Gizmo
 		{
 			Player.Pretender = pretender;
 			
-			DomEdit.I.PlayerSetup.ChangeNation(Player, pretender.nation.Number);
+			DomEdit.I.MapMan.ChangeNation(Player, pretender.nation.Number);
 		});
 	}
 

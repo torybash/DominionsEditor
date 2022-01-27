@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class DomEdit : MonoBehaviour
@@ -7,9 +6,8 @@ public class DomEdit : MonoBehaviour
 	public ItemsTable    items;
 	public NationsTable  nations;
 
-	public UiManager   Ui          { get; private set; }
-	public PlayerSetup PlayerSetup { get; private set; }
-	public MapManager  MapMan      { get; private set; }
+	public UiManager  Ui     { get; private set; }
+	public MapManager MapMan { get; private set; }
 
 	public static DomEdit I;
 
@@ -17,9 +15,8 @@ public class DomEdit : MonoBehaviour
 	{
 		I = this;
 
-		Ui          = new UiManager();
-		PlayerSetup = new PlayerSetup();
-		MapMan      = new MapManager();
+		Ui     = new UiManager();
+		MapMan = new MapManager();
 
 		Ui.Get<ControlButtonsMenu>().Show();
 

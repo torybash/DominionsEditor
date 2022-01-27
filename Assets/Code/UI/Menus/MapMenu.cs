@@ -7,9 +7,9 @@ using UnityEngine.UI;
 public class MapMenu : Menu
 {
 	[SerializeField] private TMP_InputField   searchField;
+	[SerializeField] private Toggle           unitsToggle;
+	[SerializeField] private Toggle           itemsToggle;
 	[SerializeField] private Button           clearSearchButton;
-	[SerializeField] private Button           saveMapButton;
-	[SerializeField] private Button           runButton;
 	[SerializeField] private EntryGizmo       activeEntryGizmo;
 	[SerializeField] private List<EntryGizmo> previousSelectedEntries;
 
@@ -22,9 +22,9 @@ public class MapMenu : Menu
 	private void Awake ()
 	{
 		searchField.onValueChanged.AddListener(OnSearchChanged);
+		unitsToggle.onValueChanged.AddListener(OnToggleUnits);
+		itemsToggle.onValueChanged.AddListener(OnToggleItems);
 		clearSearchButton.onClick.AddListener(() => searchField.text = "");
-		saveMapButton.onClick.AddListener(OnSaveClicked);
-		runButton.onClick.AddListener(OnRunClicked);
 		activeEntryGizmo.gameObject.SetActive(false);
 		foreach (var previousSelectedEntry in previousSelectedEntries)
 		{
@@ -33,22 +33,27 @@ public class MapMenu : Menu
 
 		_searcher = new Searcher();
 	}
-
-	private void OnRunClicked ()
+	
+	private void OnToggleUnits (bool enable)
 	{
-		if (DomEdit.I.PlayerSetup.Players.Any(x => string.IsNullOrEmpty(x.Pretender.filePath)))
+		if (enable)
 		{
-			DomEdit.I.Ui.Create<MessageGizmo>().Write("Player missing pretender reference");
-			return;
+			_searcher.searchFilter |= SearchFilter.Monsters;
+		} else
+		{
+			_searcher.searchFilter &= ~SearchFilter.Monsters;
 		}
-
-		var mapRunner = new DomRunner(DomEdit.I.MapMan, DomEdit.I.PlayerSetup);
-		mapRunner.Run();
 	}
 
-	private void OnSaveClicked ()
+	private void OnToggleItems (bool enable)
 	{
-		DomEdit.I.MapMan.SaveMap();
+		if (enable)
+		{
+			_searcher.searchFilter |= SearchFilter.Items;
+		} else
+		{
+			_searcher.searchFilter &= ~SearchFilter.Items;
+		}
 	}
 
 	public override void Show ()
