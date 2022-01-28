@@ -17,4 +17,5 @@ public class Province
 	public bool HasLab { get; set; }
 	public bool HasTemple { get; set; }
 	public bool HasFort { get; set; }
+	// public bool HasThrone { get; set; }
 }

@@ -2,9 +2,10 @@ using UnityEngine;
 
 public class DomEdit : MonoBehaviour
 {
-	public MonstersTable monsters;
-	public ItemsTable    items;
-	public NationsTable  nations;
+	public MonstersTable  monsters;
+	public ItemsTable     items;
+	public NationsTable   nations;
+	public MagicPathTable magicPaths;
 
 	public UiManager  Ui     { get; private set; }
 	public MapManager MapMan { get; private set; }

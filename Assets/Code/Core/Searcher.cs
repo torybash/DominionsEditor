@@ -13,6 +13,7 @@ public class Searcher
 		var entriesToSearchIn = new List<SearchableEntry>();
 		if (searchFilter.HasFlag(SearchFilter.Monsters)) entriesToSearchIn.AddRange(DomEdit.I.monsters.Entries);
 		if (searchFilter.HasFlag(SearchFilter.Items)) entriesToSearchIn.AddRange(DomEdit.I.items.Entries);
+		if (searchFilter.HasFlag(SearchFilter.Magic)) entriesToSearchIn.AddRange(DomEdit.I.magicPaths.magics);
 		
 		foreach (var entry in entriesToSearchIn)
 		{
@@ -33,6 +34,7 @@ public enum SearchFilter
 	Nothing  = 0,
 	Monsters = 1 << 0,
 	Items    = 1 << 1,
+	Magic    = 1 << 2,
 
-	All = Monsters | Items,
+	All = Monsters | Items | Magic,
 }

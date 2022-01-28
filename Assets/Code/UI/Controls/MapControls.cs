@@ -8,47 +8,55 @@ public class MapControls : MonoBehaviour
 {
 	private void Update ()
 	{
-		switch (DomEdit.I.Ui.Get<MapMenu>().SelectedEntry)
+		switch (DomEdit.I.Ui.Get<MapMenu>().ActiveEntry)
 		{
-			case MonsterEntry _:
+			case MonsterEntry monsterEntry:
 				//TODO // if (_selectedMonster.IS_COMMANDER) 
 				if (Input.GetMouseButtonDown(0))
 				{
 					if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
 					{
-						AddUnit();
+						AddUnit(monsterEntry);
 					} else
 					{
-						AddCommander();
+						AddCommander(monsterEntry);
 					}
-					
+
 				}
 				break;
-			
-			case ItemEntry _:
+
+			case ItemEntry itemEntry:
 				if (Input.GetMouseButtonDown(0))
 				{
-					AddItem();
+					AddItem(itemEntry);
+				}
+				break;
+
+			case MagicEntry magicEntry:
+				if (Input.GetMouseButtonDown(0))
+				{
+					AddMagic(magicEntry);
 				}
 				break;
 		}
-		
+
 		if (Input.GetMouseButtonDown(1))
 		{
 			Remove();
 		}
-		
+
 		if (Input.GetKeyDown(KeyCode.L)) ToggleLab();
-		if (Input.GetKeyDown(KeyCode.T)) ToggleTemple();		
+		if (Input.GetKeyDown(KeyCode.T)) ToggleTemple();
 		if (Input.GetKeyDown(KeyCode.F)) ToggleFort();
 		if (Input.GetKeyDown(KeyCode.C)) ToggleCapital();
+		// if (Input.GetKeyDown(KeyCode.Y)) ToggleThrone();
 
-		
+
 		if (InputHelper.GetKeyNumberPressed(out int numberPressed))
 		{
 			SetProvinceOwner(numberPressed);
 		}
-		
+
 		if (Input.mouseScrollDelta.y != 0)
 		{
 			int change                             = (int)Input.mouseScrollDelta.y;
@@ -56,109 +64,131 @@ public class MapControls : MonoBehaviour
 			ChangeUnitCount(change);
 		}
 	}
-	
+
+
 	private void ChangeUnitCount (int sign)
 	{
-		RaycastGizmos(out var monsterGizmo, out var provinceGizmo, out var itemGizmo);
+		RaycastGizmos(out var gizmo);
 
-		if (!(monsterGizmo is UnitGizmo unitsGizmo)) return;
+		if (!(gizmo is UnitGizmo unitsGizmo)) return;
 
 		unitsGizmo.Data.Amount = Mathf.Clamp(unitsGizmo.Data.Amount + sign, 1, 100000);
 
 		unitsGizmo.SetData(unitsGizmo.Data);
 	}
 
-	private void AddCommander ()
+	private void AddCommander (MonsterEntry monsterEntry)
 	{
-		if (!(DomEdit.I.Ui.Get<MapMenu>().SelectedEntry is MonsterEntry monsterEntry)) return;
-		
-		RaycastGizmos(out var monsterGizmo, out var provinceGizmo, out var itemGizmo);
+		RaycastGizmos(out var gizmo);
 
-		if (provinceGizmo == null) return;
+		if (!(gizmo is ProvinceGizmo provinceGizmo)) return;
 
-		var province = provinceGizmo.Province;
+		var province  = provinceGizmo.Province;
 		var commander = Commander.Create(monsterEntry.Id, province.Owner);
-		
+
 		province.Monsters.Add(commander);
-		
-		provinceGizmo.CreateCommanderGizmo(commander);;
+
+		provinceGizmo.CreateCommanderGizmo(commander, provinceGizmo);
 	}
 
-	private void AddUnit ()
+	private void AddUnit (MonsterEntry monsterEntry)
 	{
-		if (!(DomEdit.I.Ui.Get<MapMenu>().SelectedEntry is MonsterEntry monsterEntry)) return;
+		RaycastGizmos(out var gizmo);
 
-		RaycastGizmos(out var monsterGizmo, out var provinceGizmo, out var itemGizmo);
-
-		if (provinceGizmo == null) return;
-
-		var province = provinceGizmo.Province;
-		var unit = Unit.Create(monsterEntry.Id, 1, province.Owner);
-
-		if (monsterGizmo is CommanderGizmo commanderGizmo)
+		if (gizmo is ProvinceGizmo provinceGizmo)
 		{
-			commanderGizmo.Data.UnitsUnderCommand.Add(unit);
-		} 
-		else
-		{
+			var province = provinceGizmo.Province;
+			var unit     = Unit.Create(monsterEntry.Id, 1, province.Owner);
+
 			province.Monsters.Add(unit);
+			provinceGizmo.CreateUnitGizmo(unit);
+		} else if (gizmo is CommanderGizmo commanderGizmo)
+		{
+			var unit = Unit.Create(monsterEntry.Id, 1, commanderGizmo.OwnerProvince.Province.Owner);
+
+			commanderGizmo.Data.UnitsUnderCommand.Add(unit);
+			commanderGizmo.OwnerProvince.CreateUnitGizmo(unit);
 		}
-		provinceGizmo.CreateUnitGizmo(unit);
 	}
 
-	private void AddItem ()
+	private void AddItem (ItemEntry itemEntry)
 	{
-		if (!(DomEdit.I.Ui.Get<MapMenu>().SelectedEntry is ItemEntry itemEntry)) return;
+		RaycastGizmos(out var gizmo);
 
-		RaycastGizmos(out var monsterGizmo, out var provinceGizmo, out var itemGizmo);
-
-		if (provinceGizmo == null) return;
-		if (!(monsterGizmo is CommanderGizmo commanderGizmo)) return;
+		if (!(gizmo is CommanderGizmo commanderGizmo)) return;
 
 		var item = Item.Create(itemEntry.Name);
-		
+
 		commanderGizmo.Data.Items.Add(item);
 		commanderGizmo.SetData(commanderGizmo.Data);
 	}
-	
+
+	private void AddMagic (MagicEntry magicEntry)
+	{
+		RaycastGizmos(out var gizmo);
+
+		if (!(gizmo is CommanderGizmo commanderGizmo)) return;
+
+		var magicOverride = commanderGizmo.Data.MagicOverrides.SingleOrDefault(x => x.Path == magicEntry.magicPath);
+		if (magicOverride == null)
+		{
+			magicOverride = new MagicOverride(magicEntry.magicPath, 0);
+			commanderGizmo.Data.MagicOverrides.Add(magicOverride);
+		}
+		magicOverride.MagicValue++;
+
+		commanderGizmo.SetData(commanderGizmo.Data);
+	}
+
 	private void ToggleLab ()
 	{
-		RaycastGizmos(out var monsterGizmo, out var provinceGizmo, out var itemGizmo);
+		RaycastGizmos(out var gizmo);
 
-		if (provinceGizmo == null) return;
+		if (!(gizmo is ProvinceGizmo provinceGizmo)) return;
 
 		provinceGizmo.Province.HasLab = !provinceGizmo.Province.HasLab;
-		
+
 		provinceGizmo.Refresh();
 	}
-	
+
 	private void ToggleTemple ()
 	{
-		RaycastGizmos(out var monsterGizmo, out var provinceGizmo, out var itemGizmo);
+		RaycastGizmos(out var gizmo);
 
-		if (provinceGizmo == null) return;
+		if (!(gizmo is ProvinceGizmo provinceGizmo)) return;
 
 		provinceGizmo.Province.HasTemple = !provinceGizmo.Province.HasTemple;
-		
+
 		provinceGizmo.Refresh();
 	}
 
 	private void ToggleFort ()
 	{
-		RaycastGizmos(out var monsterGizmo, out var provinceGizmo, out var itemGizmo);
+		RaycastGizmos(out var gizmo);
 
-		if (provinceGizmo == null) return;
+		if (!(gizmo is ProvinceGizmo provinceGizmo)) return;
 
 		provinceGizmo.Province.HasFort = !provinceGizmo.Province.HasFort;
-		
+
 		provinceGizmo.Refresh();
 	}
 	
+	// private void ToggleThrone ()
+	// {
+	// 	RaycastGizmos(out var gizmo);
+	//
+	// 	if (!(gizmo is ProvinceGizmo provinceGizmo)) return;
+	//
+	// 	provinceGizmo.Province.HasThrone = !provinceGizmo.Province.HasThrone;
+	//
+	// 	provinceGizmo.Refresh();
+	// }
+
 	private void ToggleCapital ()
 	{
-		RaycastGizmos(out var monsterGizmo, out var provinceGizmo, out var itemGizmo);
+		RaycastGizmos(out var gizmo);
 
-		if (provinceGizmo == null) return;
+		if (!(gizmo is ProvinceGizmo provinceGizmo)) return;
 
 		var playerOwner = DomEdit.I.MapMan.Players.SingleOrDefault(x => x.Nation == provinceGizmo.Province.Owner);
 		if (playerOwner == null) return;
@@ -174,50 +204,60 @@ public class MapControls : MonoBehaviour
 
 		provinceGizmo.Refresh();
 	}
-	
+
 	private void Remove ()
 	{
-		RaycastGizmos(out var monsterGizmo, out var provinceGizmo, out var itemGizmo);
+		RaycastGizmos(out var gizmo);
 
-		if (itemGizmo != null)
+		if (gizmo is ItemGizmo itemGizmo)
 		{
-			RemoveItem(itemGizmo, (CommanderGizmo) monsterGizmo);
-		}else if (monsterGizmo != null)
+			RemoveItem(itemGizmo);
+		} else if (gizmo is MonsterGizmo monsterGizmo)
 		{
-			RemoveMonster(monsterGizmo, provinceGizmo);
-		}else if (provinceGizmo != null)
+			RemoveMonster(monsterGizmo);
+		} else if (gizmo is MagicGizmo magicGizmo)
+		{
+			RemoveMagic(magicGizmo);
+		} else if (gizmo is ProvinceGizmo provinceGizmo)
 		{
 			ClearProvinceOwner(provinceGizmo);
 		}
 	}
-	
-	private void RemoveItem (ItemGizmo itemGizmo, CommanderGizmo commanderGizmo)
+
+	private void RemoveItem (ItemGizmo itemGizmo)
 	{
+		var commanderGizmo = itemGizmo.OwnerGizmo;
 		commanderGizmo.Data.Items.Remove(itemGizmo.Item);
 		commanderGizmo.SetData(commanderGizmo.Data);
 	}
-
-	private void RemoveMonster(MonsterGizmo monsterGizmo, ProvinceGizmo provinceGizmo)
+	
+	private void RemoveMagic (MagicGizmo magicGizmo)
 	{
-		var province = provinceGizmo.Province;
+		var commanderGizmo = magicGizmo.OwnerGizmo;
+		commanderGizmo.Data.MagicOverrides.Remove(magicGizmo.Magic);
+		commanderGizmo.SetData(commanderGizmo.Data);
+	}
+
+	private void RemoveMonster (MonsterGizmo monsterGizmo)
+	{
+		var province       = monsterGizmo.OwnerProvince.Province;
 		var ownerCommander = province.Monsters.OfType<Commander>().SingleOrDefault(x => x.UnitsUnderCommand.Contains(monsterGizmo.MonsterData));
 		if (ownerCommander != null)
 		{
 			ownerCommander.UnitsUnderCommand.Remove((Unit)monsterGizmo.MonsterData);
-		} 
-		else
+		} else
 		{
 			province.Monsters.Remove(monsterGizmo.MonsterData);
 		}
 
-		provinceGizmo.RemoveElementGizmo(monsterGizmo.MonsterData);
+		monsterGizmo.OwnerProvince.RemoveElementGizmo(monsterGizmo.MonsterData);
 
 		if (monsterGizmo.MonsterData is Commander commander)
 		{
-			RemoveAllCommanderElements(provinceGizmo, commander);
+			RemoveAllCommanderElements(monsterGizmo.OwnerProvince, commander);
 		}
 	}
-	
+
 	private void RemoveAllCommanderElements (ProvinceGizmo provinceGizmo, Commander commander)
 	{
 		foreach (var unit in commander.UnitsUnderCommand)
@@ -228,10 +268,10 @@ public class MapControls : MonoBehaviour
 
 	private void SetProvinceOwner (int numberPressed)
 	{
-		RaycastGizmos(out var monsterGizmo, out var provinceGizmo, out var itemGizmo);
+		RaycastGizmos(out var gizmo);
 
-		if (provinceGizmo == null) return;
-		
+		if (!(gizmo is ProvinceGizmo provinceGizmo)) return;
+
 		var player = DomEdit.I.MapMan.GetPlayer(numberPressed);
 		if (player == null) return;
 
@@ -247,36 +287,50 @@ public class MapControls : MonoBehaviour
 		province.Owner = Nation.Independents;
 		provinceGizmo.Refresh();
 	}
-	
-	private void RaycastGizmos (out MonsterGizmo monsterGizmo, out ProvinceGizmo provinceGizmo, out ItemGizmo itemGizmo)
+
+	private void RaycastGizmos (out Gizmo gizmo)
 	{
-		var pointerEventData = new PointerEventData(EventSystem.current);
-		pointerEventData.position = Input.mousePosition;
+		var pointerEventData = new PointerEventData(EventSystem.current)
+		{
+			position = Input.mousePosition
+		};
+
 		var resultAppendList = new List<RaycastResult>();
 		DomEdit.I.Ui.Raycaster.Raycast(pointerEventData, resultAppendList);
 
-		monsterGizmo  = null;
-		provinceGizmo = null;
-		itemGizmo     = null;
+		gizmo = null;
+		// monsterGizmo  = null;
+		// provinceGizmo = null;
+		// itemGizmo     = null;
+
+		Debug.Log("resultAppendList: " + string.Join(", ", resultAppendList.Select(x => x.gameObject.name)));
 		foreach (var result in resultAppendList)
 		{
-			var monster = result.gameObject.GetComponentInParent<MonsterGizmo>();
-			if (monster != null)
-			{
-				monsterGizmo = monster;
-			}
-
-			var province = result.gameObject.GetComponentInParent<ProvinceGizmo>();
-			if (province != null)
-			{
-				provinceGizmo = province;
-			}
 			
-			var item = result.gameObject.GetComponentInParent<ItemGizmo>();
-			if (item != null)
+			var raycastedGizmo = result.gameObject.GetComponentInParent<Gizmo>();
+			if (raycastedGizmo != null)
 			{
-				itemGizmo = item;
+				gizmo = raycastedGizmo;
+				Debug.Log($"gizmo: {gizmo}");
+				return;
 			}
+			// var monster = result.gameObject.GetComponentInParent<Gizmo>();
+			// if (monster != null)
+			// {
+			// 	monsterGizmo = monster;
+			// }
+			//
+			// var province = result.gameObject.GetComponentInParent<ProvinceGizmo>();
+			// if (province != null)
+			// {
+			// 	provinceGizmo = province;
+			// }
+			//
+			// var item = result.gameObject.GetComponentInParent<ItemGizmo>();
+			// if (item != null)
+			// {
+			// 	itemGizmo = item;
+			// }
 		}
 	}
 

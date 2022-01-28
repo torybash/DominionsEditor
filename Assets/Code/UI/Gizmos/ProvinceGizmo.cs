@@ -11,6 +11,7 @@ public class ProvinceGizmo : Gizmo
 	[SerializeField] private GameObject labMarker;
 	[SerializeField] private GameObject templeMarker;
 	[SerializeField] private GameObject fortMarker;
+	[SerializeField] private GameObject throneMarker;
 
 	private List<MonsterGizmo> monsterGizmos = new List<MonsterGizmo>();
 	private NationGizmo _nationGizmo;
@@ -27,7 +28,7 @@ public class ProvinceGizmo : Gizmo
 			switch (monster)
 			{
 				case Commander commander:
-					CreateCommanderGizmo(commander);
+					CreateCommanderGizmo(commander, this);
 
 					foreach (var unit in commander.UnitsUnderCommand)
 					{
@@ -56,6 +57,7 @@ public class ProvinceGizmo : Gizmo
 		labMarker.SetActive(Province.HasLab);
 		templeMarker.SetActive(Province.HasTemple);
 		fortMarker.SetActive(Province.HasFort);
+		// throneMarker.SetActive(Province.HasThrone);
 	}
 
 	public void RemoveElementGizmo (Monster elem)
@@ -89,9 +91,10 @@ public class ProvinceGizmo : Gizmo
 		_nationGizmo.ShowCapitalMarker(isStartLocation);
 	}
 
-	public void CreateCommanderGizmo (Commander commander)
+	public void CreateCommanderGizmo (Commander commander, ProvinceGizmo provinceGizmo)
 	{
 		var commanderGizmo = DomEdit.I.Ui.Create<CommanderGizmo>(rosterGroup);
+		commanderGizmo.Initialize(provinceGizmo);
 		commanderGizmo.SetData(commander);
 		monsterGizmos.Add(commanderGizmo);
 	}

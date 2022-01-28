@@ -1,16 +1,18 @@
 using UnityEngine;
 using UnityEngine.UI;
+
 public class ItemGizmo : Gizmo
 {
 	[SerializeField] private Image icon;
 	public Item Item { get; private set; }
+	public CommanderGizmo OwnerGizmo { get; set; }
 
-	public void Initialize (Item item)
+	public void Initialize (CommanderGizmo commanderGizmo, Item item)
 	{
-		Item = item;
+		OwnerGizmo = commanderGizmo;
+		Item       = item;
 		
 		var itemEntry = DomEdit.I.items.GetItem(item.ItemName);
 		icon.sprite = itemEntry.Sprite;
-		// icon.SetNativeSize();
 	}
 }

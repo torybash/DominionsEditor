@@ -10,19 +10,19 @@ public class MapLoader
 	public static void Load (string mapPath, out Map map, out List<GamePlayer> players)
 	{
 		var allElements = LoadMapElements(mapPath);
-		map         = CreateConfig(allElements);
+		map             = CreateConfig(allElements);
 		map.ProvinceMap = CreateMap(allElements);
-		
+
 		players = CreatePlayers(allElements);
 	}
-	
+
 	public static List<MapElement> LoadMapElements (string mapPath)
 	{
 		var mapLineTexts = File.ReadAllLines(mapPath);
 
-		var mapLine = ParseMapLines(mapLineTexts);
+		var mapLine     = ParseMapLines(mapLineTexts);
 		var mapElements = ParseMapElements(mapLine);
-		
+
 		return mapElements;
 	}
 
@@ -33,9 +33,9 @@ public class MapLoader
 		{
 			var mapLine = mapLineTexts[i];
 			if (mapLine.Length == 0) continue;
-			if (mapLine[0] != '#') continue;
+			if (mapLine[0]     != '#') continue;
 
-			int spaceIndex = mapLine.IndexOf(' ');
+			int spaceIndex  = mapLine.IndexOf(' ');
 			int keyEndIndex = spaceIndex == -1 ? mapLine.Length : spaceIndex;
 
 			var key = mapLine.Substring(1, keyEndIndex - 1);
@@ -45,9 +45,9 @@ public class MapLoader
 			{
 				var args = mapLine.Substring(keyEndIndex + 1, mapLine.Length - keyEndIndex - 1);
 
-				var separatorChar = ' ';
-				Regex regx = new Regex(separatorChar + "(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))"); 
-				string[] argsSplit = regx.Split(args);
+				var      separatorChar = ' ';
+				Regex    regx          = new Regex(separatorChar + "(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))");
+				string[] argsSplit     = regx.Split(args);
 
 				foreach (var arg in argsSplit)
 				{
@@ -60,12 +60,13 @@ public class MapLoader
 		}
 		return mapLineDatas;
 	}
-	
+
 	private static List<MapElement> ParseMapElements (List<MapLine> mapLineDatas)
 	{
-		var mapElements = new List<MapElement>();;
+		var mapElements = new List<MapElement>();
+		;
 
-		Land currentLand = null;
+		Land             currentLand      = null;
 		CommanderElement currentCommander = null;
 		for (var i = 0; i < mapLineDatas.Count; i++)
 		{
@@ -77,7 +78,7 @@ public class MapLoader
 			mapElem.ParseArgs(mapLineData.Args.ToArray());
 			mapElements.Add(mapElem);
 
-			if (mapElem is Land land) currentLand = land;
+			if (mapElem is Land land) currentLand                       = land;
 			if (mapElem is CommanderElement commander) currentCommander = commander;
 			if (mapElem is IOwnedByProvince landDataElement)
 			{
@@ -93,7 +94,7 @@ public class MapLoader
 
 		return mapElements;
 	}
-	
+
 	private static Type GetMapElementType (string nameKey)
 	{
 
@@ -111,15 +112,15 @@ public class MapLoader
 		return null;
 	}
 
-	
+
 	public static Dictionary<int, Province> CreateMap (List<MapElement> mapElements)
 	{
 		//Create all provinces
-		var provinces = new Dictionary<int, Province>();
+		var provinces     = new Dictionary<int, Province>();
 		int provinceCount = mapElements.OfType<Terrain>().Max(x => x.ProvinceNum);
 		for (int num = 1; num <= provinceCount; num++)
 		{
-			
+
 			var pbs = mapElements.OfType<ProvinceBorders>().Where(x => x.ProvinceNum == num).ToList();
 			if (pbs.Count == 0) continue;
 
@@ -130,7 +131,7 @@ public class MapLoader
 				centerPos.y += pb.Y;
 			}
 			centerPos /= pbs.Count();
-			
+
 			var province = new Province(num, centerPos);
 			provinces.Add(num, province);
 		}
@@ -143,7 +144,7 @@ public class MapLoader
 				provinces[provinceOwner.ProvinceNum].Owner = provinceOwner.NationNum;
 			}
 		}
-		
+
 		foreach (var startLocation in mapElements.OfType<StartLocation>())
 		{
 			if (provinces.ContainsKey(startLocation.ProvinceNum))
@@ -151,15 +152,15 @@ public class MapLoader
 				provinces[startLocation.ProvinceNum].Owner = startLocation.NationNum;
 			}
 		}
-		
+
 		//Create commanders
 		foreach (var commanderElement in mapElements.OfType<CommanderElement>())
 		{
-			var province = provinces[commanderElement.ProvinceNum];
+			var province  = provinces[commanderElement.ProvinceNum];
 			var commander = Commander.Create(commanderElement.MonsterId, province.Owner);
 			commander.Nationality = province.Owner;
 			province.Monsters.Add(commander);
-			
+
 			//Create owned-be-commander objects
 			foreach (var ownedByCommander in mapElements.OfType<IOwnedByCommander>().Where(x => x.Commander == commanderElement))
 			{
@@ -177,13 +178,27 @@ public class MapLoader
 						var unit = Unit.Create(unitsElement.MonsterId, unitsElement.Amount, commander.Nationality);
 						commander.UnitsUnderCommand.Add(unit);
 						break;
-					case Experience experience:
+					case Experience _:
 						//TODO
 						break;
 					case Magic magic:
-						//TODO
+						var path = magic switch
+						{
+							AirMagic _    => MagicPath.Air,
+							AstralMagic _ => MagicPath.Astral,
+							BloodMagic _  => MagicPath.Blood,
+							DeathMagic _  => MagicPath.Death,
+							EarthMagic _  => MagicPath.Earth,
+							FireMagic _   => MagicPath.Fire,
+							HolyMagic _   => MagicPath.Holy,
+							NatureMagic _ => MagicPath.Nature,
+							WaterMagic _  => MagicPath.Water,
+							_             => throw new ArgumentOutOfRangeException(nameof(magic))
+						};
+						var magicOverride = new MagicOverride(path, magic.MagicLevel);
+						commander.MagicOverrides.Add(magicOverride);
 						break;
-					case ClearMagic clearMagic:
+					case ClearMagic _:
 						//TODO
 						break;
 					default:
@@ -192,24 +207,24 @@ public class MapLoader
 				}
 			}
 		}
-		
+
 		return provinces;
 	}
-	
+
 	public static List<GamePlayer> CreatePlayers (List<MapElement> mapElements)
 	{
 		var players = new List<GamePlayer>();
 
 		foreach (var allowedPlayer in mapElements.OfType<AllowedPlayer>())
 		{
-			var startLocation = mapElements.OfType<StartLocation>().SingleOrDefault(x => x.NationNum == allowedPlayer.NationNum);
+			var startLocation      = mapElements.OfType<StartLocation>().SingleOrDefault(x => x.NationNum == allowedPlayer.NationNum);
 			var capitalProvinceNum = startLocation?.ProvinceNum ?? -1;
-			var player = new GamePlayer(PlayerType.Human, allowedPlayer.NationNum){CapitalProvinceNum = capitalProvinceNum};
+			var player             = new GamePlayer(PlayerType.Human, allowedPlayer.NationNum) { CapitalProvinceNum = capitalProvinceNum };
 			players.Add(player);
 		}
 		return players;
 	}
-	
+
 	public static Map CreateConfig (List<MapElement> mapElements)
 	{
 		var map = new Map();
@@ -220,10 +235,10 @@ public class MapLoader
 			if (mapElement is StartLocation) continue;
 			if (mapElement is IOwnedByCommander) continue;
 			if (mapElement is Land) continue;
-			
+
 			map.Elements.Add(mapElement);
 		}
-		
+
 		map.Elements = map.Elements.OrderBy(x => x.GetType().Name).ToList();
 
 		return map;

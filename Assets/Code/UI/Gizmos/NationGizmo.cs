@@ -20,7 +20,7 @@ public class NationGizmo : Gizmo
 		ShowCapitalMarker(false);
 	}
 	
-	public void SetNation (Nation nation)
+	public void SetNation (Nation nation, bool showName = true)
 	{
 		Nation = nation;
 		
@@ -33,7 +33,7 @@ public class NationGizmo : Gizmo
 		else
 		{
 			flagImage.sprite = nationEntry.Sprite;
-			nameLabel.text = nationEntry.Name;
+			nameLabel.text   = showName ? nationEntry.Name : "";
 		}
 	}
 

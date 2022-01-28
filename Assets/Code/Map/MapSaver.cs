@@ -81,6 +81,24 @@ public class MapSaver
 							foreach (var item in commander.Items)
 							{
 								elems.Add(new ItemElement{ItemName = item.ItemName});
+							}	
+							foreach (var magicOverride in commander.MagicOverrides)
+							{
+								Magic magic = magicOverride.Path switch
+								{
+									MagicPath.Fire   => new FireMagic(),
+									MagicPath.Air    => new AirMagic(),
+									MagicPath.Water  => new WaterMagic(),
+									MagicPath.Earth  => new EarthMagic(),
+									MagicPath.Astral => new AstralMagic(),
+									MagicPath.Death  => new DeathMagic(),
+									MagicPath.Nature => new NatureMagic(),
+									MagicPath.Blood  => new BloodMagic(),
+									MagicPath.Holy   => new HolyMagic(),
+									_                => throw new ArgumentOutOfRangeException()
+								};
+								magic.MagicLevel = magicOverride.MagicValue;
+								elems.Add(magic);
 							}
 						
 							break;
