@@ -17,13 +17,13 @@ public class MapSaver
 		var elems = new List<MapElement>();
 		
 		//Config
-		elems.AddRange(map.Elements);
+		elems.AddRange(map.UnchangedElements);
 
 		//Players
-		foreach (var player in DomEdit.I.MapMan.Players)
+		foreach (var player in DomEdit.I.MapMan.Map.Players)
 		{
-			elems.Add(new AllowedPlayer{NationNum = player.Nation.Number});
-			elems.Add(new StartLocation{NationNum = player.Nation.Number, ProvinceNum = player.CapitalProvinceNum});
+			elems.Add(new AllowedPlayer{NationNum = player.Nation.number});
+			elems.Add(new StartLocation{NationNum = player.Nation.number, ProvinceNum = player.CapitalProvinceNum});
 		}
 
 		//Provinces
@@ -37,12 +37,12 @@ public class MapSaver
 
 				if (!isIndieProvince)
 				{
-					elems.Add(new ProvinceOwner{NationNum = province.Owner.Number});
+					elems.Add(new ProvinceOwner{NationNum = province.Owner.number});
 					if (province.HasLab) elems.Add(new Laboratory());
 					if (province.HasTemple) elems.Add(new Temple());
 					if (province.HasFort) elems.Add(new Fort{FortId = 1});
 					
-					if (DomEdit.I.MapMan.Players.Any(x => x.CapitalProvinceNum == province.ProvinceNumber))
+					if (DomEdit.I.MapMan.Map.Players.Any(x => x.CapitalProvinceNum == province.ProvinceNumber))
 					{
 						elems.Add(new KnownMagicSite{ProvinceNum = province.ProvinceNumber, SiteId = 1500});
 					}
@@ -63,7 +63,7 @@ public class MapSaver
 
 				// if (nation != Nation.Independents)
 				// {
-					elems.Add(new ProvinceOwner{NationNum = nation.Number});
+					elems.Add(new ProvinceOwner{NationNum = nation.number});
 				// }
 
 				foreach (var monster in group)
@@ -114,7 +114,7 @@ public class MapSaver
 			
 			if (province.Owner != Nation.Independents)
 			{
-				elems.Add(new ProvinceOwner{NationNum = province.Owner.Number});
+				elems.Add(new ProvinceOwner{NationNum = province.Owner.number});
 			}
 		}
 

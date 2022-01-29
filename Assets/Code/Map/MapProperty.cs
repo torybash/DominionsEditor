@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 
-public class MapLine
+public class MapProperty
 {
 	public string Key { get; set; }
 	public List<string> Args { get; set; } = new List<string>();
 
-	public MapLine (string key)
+	public MapProperty (string key)
 	{
 		Key = key;
 	}

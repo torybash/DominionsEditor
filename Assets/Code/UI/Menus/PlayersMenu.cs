@@ -11,6 +11,7 @@ public class PlayersMenu : Menu
 	[SerializeField] private Button addButton;
 	[SerializeField] private RectTransform addGizmo;	
 	[SerializeField] private TMP_Dropdown eraDropdown;	
+	
 	private readonly List<PlayerGizmo> _gizmos = new List<PlayerGizmo>();
 
 	private void Awake ()
@@ -40,6 +41,11 @@ public class PlayersMenu : Menu
 		
 		foreach (var gizmo in _gizmos) Destroy(gizmo.gameObject);
 		_gizmos.Clear();
+		
+		foreach (var player in DomEdit.I.MapMan.Map.Players)
+		{
+			DomEdit.I.Ui.Get<PlayersMenu>().CreateGizmo(player);
+		}
 	}
 	
 	public void CreateGizmo (GamePlayer player)

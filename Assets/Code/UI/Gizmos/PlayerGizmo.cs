@@ -17,7 +17,7 @@ public class PlayerGizmo : Gizmo
 	private NationGizmo _nationGizmo;
 	public  GamePlayer  Player { get; set; }
 	
-	public int Number => DomEdit.I.MapMan.Players.IndexOf(Player) + 1;
+	public int Number => DomEdit.I.MapMan.Map.Players.IndexOf(Player) + 1;
 
 	private void Awake ()
 	{
@@ -28,6 +28,7 @@ public class PlayerGizmo : Gizmo
 
 	public void Initialize (GamePlayer gamePlayer)
 	{
+		Debug.Log($"Initialize: {gamePlayer.Nation}");
 		Player = gamePlayer;
 		
 		_nationGizmo = DomEdit.I.Ui.Create<NationGizmo>(transform);
@@ -59,7 +60,7 @@ public class PlayerGizmo : Gizmo
 		{
 			Player.Pretender = pretender;
 			
-			DomEdit.I.MapMan.ChangeNation(Player, pretender.nation.Number);
+			DomEdit.I.MapMan.ChangeNation(Player, pretender.nation.number);
 		});
 	}
 

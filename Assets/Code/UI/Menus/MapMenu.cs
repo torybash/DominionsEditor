@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using ThisOtherThing.UI.Shapes;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,7 +15,8 @@ public class MapMenu : Menu
 	[SerializeField] private EntryGizmo       activeEntryGizmo;
 	[SerializeField] private List<EntryGizmo> previousSelectedEntries;
 
-	private readonly List<SearchResultGizmo> searchGizmos = new List<SearchResultGizmo>();
+	private readonly List<ProvinceGizmo>     _provinceGizmos = new List<ProvinceGizmo>();
+	private readonly List<SearchResultGizmo> searchGizmos    = new List<SearchResultGizmo>();
 
 	private Searcher _searcher;
 
@@ -36,6 +38,25 @@ public class MapMenu : Menu
 		_searcher = new Searcher();
 	}
 
+	public void LoadMap (Map map)
+	{
+		_provinceGizmos.SafeDestroy();
+		
+		var mapPicture = DomEdit.I.Ui.Get<MapPicture>();
+		
+		
+		// mapPicture.MapTexture.width
+		foreach (var province in map.ProvinceMap.Values)
+		{
+			var gizmo = DomEdit.I.Ui.Create<ProvinceGizmo>(mapPicture.transform);
+			gizmo.RectTrans.anchoredPosition = province.CenterPos;
+			gizmo.Initialize(province);
+			
+			_provinceGizmos.Add(gizmo);
+		}
+		
+		Show();
+	}
 
 	private void OnToggleUnits (bool enable)
 	{
@@ -62,17 +83,17 @@ public class MapMenu : Menu
 		// var mapTex = Man.MapElements.OfType<ImageFile>().Single().GetTexture(); //TODO Fix TGA loading
 		// mapImage.texture = mapTex;
 
-		CreateProvinceGizmos();
+		// CreateProvinceGizmos();
 	}
 
 	private void CreateProvinceGizmos ()
 	{
-		var mapPicture = DomEdit.I.Ui.Get<MapPicture>();
-		foreach (var province in DomEdit.I.MapMan.Map.ProvinceMap.Values)
-		{
-			var gizmo = DomEdit.I.Ui.Create<ProvinceGizmo>(mapPicture.MapImage.transform);
-			gizmo.Initialize(province);
-		}
+		// var mapPicture = DomEdit.I.Ui.Get<MapPicture>();
+		// foreach (var province in DomEdit.I.MapMan.Map.ProvinceMap.Values)
+		// {
+		// 	var gizmo = DomEdit.I.Ui.Create<ProvinceGizmo>(mapPicture.MapImage.transform);
+		// 	gizmo.Initialize(province);
+		// }
 	}
 
 	private void OnSearchChanged (string searchText)

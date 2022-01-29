@@ -7,20 +7,21 @@ public class UiManager
 	private readonly Menu[]  menus;
 	private readonly Gizmo[] gizmoTemplates;
 	
-	public GraphicRaycaster Raycaster      { get; }
+	public Canvas           Canvas { get; }
+	public GraphicRaycaster Raycaster { get; }
 
 	public UiManager ()
 	{
-		var canvas = Object.FindObjectOfType<Canvas>();
-		Raycaster = canvas.GetComponent<GraphicRaycaster>();
+		Canvas    = Object.FindObjectOfType<Canvas>();
+		Raycaster = Canvas.GetComponent<GraphicRaycaster>();
 
-		menus = canvas.GetComponentsInChildren<Menu>(true);
+		menus = Canvas.GetComponentsInChildren<Menu>(true);
 		foreach (var menu in menus)
 		{
 			menu.gameObject.SetActive(false);
 		}
 
-		gizmoTemplates = canvas.GetComponentsInChildren<Gizmo>(true);
+		gizmoTemplates = Canvas.GetComponentsInChildren<Gizmo>(true);
 		foreach (var gizmoTemplate in gizmoTemplates)
 		{
 			gizmoTemplate.gameObject.SetActive(false);

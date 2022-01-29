@@ -7,28 +7,39 @@ using UnityEngine;
 
 public class MapLoader
 {
-	public static void Load (string mapPath, out Map map, out List<GamePlayer> players)
+	public static Map Load (MapFile mapFile)
 	{
-		var allElements = LoadMapElements(mapPath);
-		map             = CreateConfig(allElements);
-		map.ProvinceMap = CreateMap(allElements);
+		var allElements = LoadMapElements(mapFile.path);
 
-		players = CreatePlayers(allElements);
+		var map = CreateMap(allElements);
+		map.MapFile = mapFile;
+
+		map.MapTexture  = LoadMapTexture(map);
+		map.ProvinceMap = LoadProvinces(map);
+		map.Players     = LoadPlayers(map);
+
+		return map;
+	}
+
+	private static Texture2D LoadMapTexture (Map map)
+	{
+		var    imageFile    = map.UnchangedElements.OfType<ImageFile>().First();
+		string mapImagePath = $"{map.MapFile.folder}\\{imageFile.MapImageName}";
+		return MapImageLoader.LoadMapTexture(mapImagePath);
 	}
 
 	public static List<MapElement> LoadMapElements (string mapPath)
 	{
-		var mapLineTexts = File.ReadAllLines(mapPath);
+		var texts      = File.ReadAllLines(mapPath);
+		var properties = ParseProperties(texts);
+		var elements   = ParseMapElements(properties);
 
-		var mapLine     = ParseMapLines(mapLineTexts);
-		var mapElements = ParseMapElements(mapLine);
-
-		return mapElements;
+		return elements;
 	}
 
-	private static List<MapLine> ParseMapLines (string[] mapLineTexts)
+	private static List<MapProperty> ParseProperties (string[] mapLineTexts)
 	{
-		var mapLineDatas = new List<MapLine>();
+		var mapProperties = new List<MapProperty>();
 		for (int i = 0; i < mapLineTexts.Length; i++)
 		{
 			var mapLine = mapLineTexts[i];
@@ -40,7 +51,7 @@ public class MapLoader
 
 			var key = mapLine.Substring(1, keyEndIndex - 1);
 
-			var mapData = new MapLine(key);
+			var mapProperty = new MapProperty(key);
 			if (spaceIndex != -1)
 			{
 				var args = mapLine.Substring(keyEndIndex + 1, mapLine.Length - keyEndIndex - 1);
@@ -52,19 +63,18 @@ public class MapLoader
 				foreach (var arg in argsSplit)
 				{
 					if (arg.Contains("--")) break;
-					mapData.AddArg(arg);
+					mapProperty.AddArg(arg);
 				}
 			}
 
-			mapLineDatas.Add(mapData);
+			mapProperties.Add(mapProperty);
 		}
-		return mapLineDatas;
+		return mapProperties;
 	}
 
-	private static List<MapElement> ParseMapElements (List<MapLine> mapLineDatas)
+	private static List<MapElement> ParseMapElements (List<MapProperty> mapLineDatas)
 	{
 		var mapElements = new List<MapElement>();
-		;
 
 		Land             currentLand      = null;
 		CommanderElement currentCommander = null;
@@ -113,26 +123,40 @@ public class MapLoader
 	}
 
 
-	public static Dictionary<int, Province> CreateMap (List<MapElement> mapElements)
+	public static Dictionary<int, Province> LoadProvinces (Map map)
 	{
+		var mapElements = map.AllElements;
+		
+		//Find province points (white pixels)
+		var provincePoints = new List<Vector2>();
+		for (int y = 0; y < map.MapTexture.height; y++)
+		{
+			for (int x = 0; x < map.MapTexture.width; x++)
+			{
+				var pixel = map.MapTexture.GetPixel(x, y);
+				if (pixel == Color.white) provincePoints.Add(new Vector2(x, y));
+			}
+		}
+		
 		//Create all provinces
 		var provinces     = new Dictionary<int, Province>();
 		int provinceCount = mapElements.OfType<Terrain>().Max(x => x.ProvinceNum);
 		for (int num = 1; num <= provinceCount; num++)
 		{
+			var provinceBorders = mapElements.OfType<ProvinceBorders>().Where(x => x.ProvinceNum == num).ToList();
+			if (provinceBorders.Count == 0) continue;
 
-			var pbs = mapElements.OfType<ProvinceBorders>().Where(x => x.ProvinceNum == num).ToList();
-			if (pbs.Count == 0) continue;
+			var provincePoint = provincePoints[num-1];
+			// var centerPos = Vector2.zero;
+			// foreach (var pb in provinceBorders)
+			// {
+			// 	centerPos.x += pb.X;
+			// 	centerPos.y += pb.Y;
+			// }
+			// centerPos /= provinceBorders.Count();
 
-			var centerPos = Vector2.zero;
-			foreach (var pb in pbs)
-			{
-				centerPos.x += pb.X;
-				centerPos.y += pb.Y;
-			}
-			centerPos /= pbs.Count();
-
-			var province = new Province(num, centerPos);
+			var province = new Province(num, provincePoint);
+			province.ProvinceBorders = provinceBorders;
 			provinces.Add(num, province);
 		}
 
@@ -211,8 +235,10 @@ public class MapLoader
 		return provinces;
 	}
 
-	public static List<GamePlayer> CreatePlayers (List<MapElement> mapElements)
+	public static List<GamePlayer> LoadPlayers (Map map)
 	{
+		var mapElements = map.AllElements;
+
 		var players = new List<GamePlayer>();
 
 		foreach (var allowedPlayer in mapElements.OfType<AllowedPlayer>())
@@ -225,9 +251,11 @@ public class MapLoader
 		return players;
 	}
 
-	public static Map CreateConfig (List<MapElement> mapElements)
+	public static Map CreateMap (List<MapElement> mapElements)
 	{
 		var map = new Map();
+		map.AllElements = mapElements;
+		
 		foreach (var mapElement in mapElements)
 		{
 			if (mapElement is ProvinceDataElement) continue;
@@ -236,10 +264,10 @@ public class MapLoader
 			if (mapElement is IOwnedByCommander) continue;
 			if (mapElement is Land) continue;
 
-			map.Elements.Add(mapElement);
+			map.UnchangedElements.Add(mapElement);
 		}
 
-		map.Elements = map.Elements.OrderBy(x => x.GetType().Name).ToList();
+		map.UnchangedElements = map.UnchangedElements.OrderBy(x => x.GetType().Name).ToList();
 
 		return map;
 	}

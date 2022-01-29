@@ -19,7 +19,8 @@ public abstract class MonsterGizmo : Gizmo
 
 public abstract class MonsterGizmo<T> : MonsterGizmo where T : Monster
 {
-	private Color? defaultColor;
+	private Color?      defaultColor;
+	private NationGizmo _nationGizmo;
 
 	public T Data { get; private set; }
 
@@ -41,8 +42,8 @@ public abstract class MonsterGizmo<T> : MonsterGizmo where T : Monster
 			var nationEntry = DomEdit.I.nations.GetNationEntry(data.Nationality);
 			background.color = defaultColor.Value*nationEntry.TintColor;
 
-			var nationGizmo = DomEdit.I.Ui.Create<NationGizmo>(nationContainer);
-			nationGizmo.SetNation(data.Nationality, false);
+			if (_nationGizmo == null) _nationGizmo = DomEdit.I.Ui.Create<NationGizmo>(nationContainer);
+			_nationGizmo.SetNation(data.Nationality, false);
 		}
 	}
 }

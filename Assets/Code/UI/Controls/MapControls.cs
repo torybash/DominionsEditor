@@ -190,7 +190,7 @@ public class MapControls : MonoBehaviour
 
 		if (!(gizmo is ProvinceGizmo provinceGizmo)) return;
 
-		var playerOwner = DomEdit.I.MapMan.Players.SingleOrDefault(x => x.Nation == provinceGizmo.Province.Owner);
+		var playerOwner = DomEdit.I.MapMan.Map.Players.SingleOrDefault(x => x.Nation == provinceGizmo.Province.Owner);
 		if (playerOwner == null) return;
 
 		var provinceNum = provinceGizmo.Province.ProvinceNumber;
@@ -303,15 +303,13 @@ public class MapControls : MonoBehaviour
 		// provinceGizmo = null;
 		// itemGizmo     = null;
 
-		Debug.Log("resultAppendList: " + string.Join(", ", resultAppendList.Select(x => x.gameObject.name)));
 		foreach (var result in resultAppendList)
 		{
-			
 			var raycastedGizmo = result.gameObject.GetComponentInParent<Gizmo>();
 			if (raycastedGizmo != null)
 			{
+				Debug.Log($"Clicking {raycastedGizmo}");
 				gizmo = raycastedGizmo;
-				Debug.Log($"gizmo: {gizmo}");
 				return;
 			}
 			// var monster = result.gameObject.GetComponentInParent<Gizmo>();

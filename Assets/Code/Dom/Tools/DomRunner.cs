@@ -30,7 +30,7 @@ public class DomRunner
 		
 		Directory.CreateDirectory(folderPath);
 
-		foreach (var player in map.Players)
+		foreach (var player in map.Map.Players)
 		{
 			var nationEntry          = DomEdit.I.nations.GetNationEntry(player.Nation);
 			var newPretenderFilePath = $"{map.SavedGamesFolderPath}{Constants.GameName}\\{nationEntry.PretenderFileName}.2h";
@@ -52,7 +52,7 @@ public class DomRunner
 		// args.Add($"--thrones 0 1 0");               // Win by eliminating all opponents only
 		args.Add($"--enablemod {debugMod}"); 
 		
-		foreach (var player in map.Players)
+		foreach (var player in map.Map.Players)
 		{
 			if (player.Type == PlayerType.Closed) throw new Exception("Closed player type not handled!");
 			if (player.Type == PlayerType.Human) continue;
@@ -88,7 +88,7 @@ public class DomRunner
 			FileName = Prefs.ExecutablePath.Get(),
 		};
 
-		int exitCode;
+		// int exitCode;
 		using (Process proc = Process.Start(start)) // Run the external process & wait for it to finish
 		{
 			// proc.WaitForExit();

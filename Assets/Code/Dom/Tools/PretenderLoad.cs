@@ -39,7 +39,7 @@ public static class PretenderLoad
 		{
 			//if no lock:
 			//1:		78?
-			byte asd = 0x78;
+			// byte asd = 0x78;
 			counter += 1;
 		} else
 		{

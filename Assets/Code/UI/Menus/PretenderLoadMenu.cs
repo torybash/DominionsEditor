@@ -8,6 +8,7 @@ public class PretenderLoadMenu : Menu
 {
 	[SerializeField] private RectTransform pretendersContainer;
 	[SerializeField] private Button closeButton;
+	
 	private List<PretenderFileGizmo> _gizmos = new List<PretenderFileGizmo>();
 
 	private void Awake ()
@@ -39,6 +40,7 @@ public class PretenderLoadMenu : Menu
 			if (!pretenderFile.EndsWith("2h")) continue;
 
 			var pretender = PretenderLoad.LoadFile(pretenderFile);
+			if (pretender.era == -1) continue;
 			
 			var gizmo = DomEdit.I.Ui.Create<PretenderFileGizmo>(pretendersContainer);
 			gizmo.Initialize(pretender);

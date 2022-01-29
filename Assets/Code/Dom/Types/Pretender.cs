@@ -14,16 +14,16 @@ public struct Pretender
 		filePath = pretenderFilePath;
 		fileName = Path.GetFileName(pretenderFilePath);
 
-		nationName = fileName.Split('_')[1];
 		var eraName = fileName.Split('_')[0];
+		nationName = fileName.Split('_')[1];
 		era = eraName switch 
 		{
 			"early" => 1,
 			"mid" => 2,
 			"late" => 3,
-			_ => throw new ArgumentOutOfRangeException()
+			_ => -1
 		} ;
-		
-		nation = DomEdit.I.nations.GetNationByNameAndEra(nationName, era);
+
+		nation = era != -1 ? DomEdit.I.nations.GetNationByNameAndEra(nationName, era) : Nation.Independents;
 	}
 }

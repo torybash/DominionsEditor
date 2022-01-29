@@ -213,6 +213,11 @@ public class ProvinceBorders : MapElement
 	{
 		return new[] { X.ToString(), Y.ToString(), Len.ToString(), ProvinceNum.ToString() };
 	}
+
+	public override string ToString ()
+	{
+		return $"{nameof(X)}: {X}, {nameof(Y)}: {Y}, {nameof(Len)}: {Len}";
+	}
 }
 
 	

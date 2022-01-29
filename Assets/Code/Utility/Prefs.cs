@@ -1,11 +1,12 @@
 using UnityEngine;
 public static class Prefs
 {
-	public static readonly PrefString ExecutablePath = new PrefString(nameof(ExecutablePath), "[game folder]/Dominions5.exe");
-	public static readonly PrefString DataFolderPath = new PrefString(nameof(DataFolderPath), "[data folder]/Dominions5/");
+	public static readonly PrefString ExecutablePath    = new PrefString(nameof(ExecutablePath), "[game folder]/Dominions5.exe");
+	public static readonly PrefString DataFolderPath    = new PrefString(nameof(DataFolderPath), "[data folder]/Dominions5/");
 	public static readonly PrefString DefaultPretenderA = new PrefString(nameof(DefaultPretenderA));
 	public static readonly PrefString DefaultPretenderB = new PrefString(nameof(DefaultPretenderB));
-	public static readonly PrefInt Era = new PrefInt(nameof(Era), 2);
+	public static readonly PrefString PreviousMapPath   = new PrefString(nameof(PreviousMapPath));
+	public static readonly PrefInt    Era               = new PrefInt(nameof(Era), 2);
 }
 
 

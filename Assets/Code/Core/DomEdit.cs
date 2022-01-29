@@ -19,18 +19,20 @@ public class DomEdit : MonoBehaviour
 		Ui     = new UiManager();
 		MapMan = new MapManager();
 
-		Ui.Get<ControlButtonsMenu>().Show();
+		Ui.Get<MainMenu>().Show();
 
-		if (HasDefaultPretenders())
-		{
-			MapMan.LoadMap();
-		} else
-		{
-			Ui.Get<IntroMenu>().Show();
-		}
+		// if (HasDefaultPretenders())
+		// {
+		// 	MapMan.LoadMap();
+		// } else
+		// {
+		// 	Ui.Get<IntroMenu>().Show();
+		// }
+		//
+		// var maMonsters = new Monsters();
 	}
 
-	private static bool HasDefaultPretenders ()
+	public static bool HasDefaultPretenders ()
 	{
 		if (string.IsNullOrEmpty(Prefs.DefaultPretenderA.Get())) return false;
 		if (string.IsNullOrEmpty(Prefs.DefaultPretenderB.Get())) return false;
