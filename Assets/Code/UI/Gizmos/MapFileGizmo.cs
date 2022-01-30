@@ -1,25 +1,31 @@
 using System;
 using TMPro;
+using UI.Menus;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MapFileGizmo : Gizmo
+namespace UI.Gizmos
 {
-	public event Action<MapFile> LoadClicked;
 
-	[SerializeField] private TMP_Text fileText;
-	[SerializeField] private Button   loadButton;
-
-	private MapFile _mapFile;
-
-	private void Awake ()
+	public class MapFileGizmo : Gizmo
 	{
-		loadButton.onClick.AddListener(() => LoadClicked?.Invoke(_mapFile));
+		public event Action<MapFile> LoadClicked;
+
+		[SerializeField] private TMP_Text fileText;
+		[SerializeField] private Button   loadButton;
+
+		private MapFile _mapFile;
+
+		private void Awake ()
+		{
+			loadButton.onClick.AddListener(() => LoadClicked?.Invoke(_mapFile));
+		}
+
+		public void Initialize (MapFile mapFile)
+		{
+			_mapFile      = mapFile;
+			fileText.text = mapFile.name;
+		}
 	}
 
-	public void Initialize (MapFile mapFile)
-	{
-		_mapFile      = mapFile;
-		fileText.text = mapFile.name;
-	}
 }

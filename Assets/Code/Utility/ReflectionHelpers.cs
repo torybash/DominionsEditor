@@ -1,42 +1,48 @@
 using System.Collections.Generic;
-public static class ReflectionHelpers
+
+namespace Utility
 {
-	public static System.Type[] GetAllDerivedTypes(this System.AppDomain aAppDomain, System.Type aType)
+
+	public static class ReflectionHelpers
 	{
-		var result = new List<System.Type>();
-		var assemblies = aAppDomain.GetAssemblies();
-		foreach (var assembly in assemblies)
+		public static System.Type[] GetAllDerivedTypes(this System.AppDomain aAppDomain, System.Type aType)
 		{
-			var types = assembly.GetTypes();
-			foreach (var type in types)
+			var result     = new List<System.Type>();
+			var assemblies = aAppDomain.GetAssemblies();
+			foreach (var assembly in assemblies)
 			{
-				if (type.IsSubclassOf(aType))
-					result.Add(type);
+				var types = assembly.GetTypes();
+				foreach (var type in types)
+				{
+					if (type.IsSubclassOf(aType))
+						result.Add(type);
+				}
 			}
+			return result.ToArray();
 		}
-		return result.ToArray();
-	}
-	public static System.Type[] GetAllDerivedTypes<T>(this System.AppDomain aAppDomain)
-	{
-		return GetAllDerivedTypes(aAppDomain, typeof(T));
-	}
-	public static System.Type[] GetTypesWithInterface(this System.AppDomain aAppDomain, System.Type aInterfaceType)
-	{
-		var result = new List<System.Type>();
-		var assemblies = aAppDomain.GetAssemblies();
-		foreach (var assembly in assemblies)
+		public static System.Type[] GetAllDerivedTypes<T>(this System.AppDomain aAppDomain)
 		{
-			var types = assembly.GetTypes();
-			foreach (var type in types)
-			{
-				if (aInterfaceType.IsAssignableFrom(type))
-					result.Add(type);
-			}
+			return GetAllDerivedTypes(aAppDomain, typeof(T));
 		}
-		return result.ToArray();
+		public static System.Type[] GetTypesWithInterface(this System.AppDomain aAppDomain, System.Type aInterfaceType)
+		{
+			var result     = new List<System.Type>();
+			var assemblies = aAppDomain.GetAssemblies();
+			foreach (var assembly in assemblies)
+			{
+				var types = assembly.GetTypes();
+				foreach (var type in types)
+				{
+					if (aInterfaceType.IsAssignableFrom(type))
+						result.Add(type);
+				}
+			}
+			return result.ToArray();
+		}
+		public static System.Type[] GetTypesWithInterface<T>(this System.AppDomain aAppDomain)
+		{
+			return GetTypesWithInterface(aAppDomain, typeof(T));
+		}
 	}
-	public static System.Type[] GetTypesWithInterface<T>(this System.AppDomain aAppDomain)
-	{
-		return GetTypesWithInterface(aAppDomain, typeof(T));
-	}
+
 }

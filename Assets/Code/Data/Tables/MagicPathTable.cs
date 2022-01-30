@@ -1,14 +1,21 @@
 using System.Collections.Generic;
 using System.Linq;
+using Data.Entries;
+using Dom;
 using UnityEngine;
 
-[CreateAssetMenu]
-public class MagicPathTable : ScriptableObject
+namespace Data.Tables
 {
-	public List<MagicEntry> magics;
 
-	public MagicEntry GetEntry (MagicPath path)
+	[CreateAssetMenu]
+	public class MagicPathTable : ScriptableObject
 	{
-		return magics.SingleOrDefault(x => x.magicPath == path);
+		public List<MagicEntry> magics;
+
+		public MagicEntry GetEntry (MagicPath path)
+		{
+			return magics.SingleOrDefault(x => x.magicPath == path);
+		}
 	}
+
 }

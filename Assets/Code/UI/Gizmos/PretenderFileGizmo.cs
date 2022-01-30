@@ -1,21 +1,27 @@
 using System;
+using Dom;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PretenderFileGizmo : Gizmo
+namespace UI.Gizmos
 {
-    public event Action LoadClicked;
-    
-    [SerializeField] private TMP_Text fileText;
-    [SerializeField] private Button loadButton;
 
-    private void Awake ()
+    public class PretenderFileGizmo : Gizmo
     {
-        loadButton.onClick.AddListener(() => LoadClicked?.Invoke());
+        public event Action LoadClicked;
+    
+        [SerializeField] private TMP_Text fileText;
+        [SerializeField] private Button   loadButton;
+
+        private void Awake ()
+        {
+            loadButton.onClick.AddListener(() => LoadClicked?.Invoke());
+        }
+        public void Initialize (Pretender pretender)
+        {
+            fileText.text = pretender.fileName;
+        }
     }
-    public void Initialize (Pretender pretender)
-    {
-        fileText.text = pretender.fileName;
-    }
+
 }

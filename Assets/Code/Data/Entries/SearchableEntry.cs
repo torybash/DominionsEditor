@@ -1,7 +1,12 @@
 using UnityEngine;
 
-public abstract class SearchableEntry
+namespace Data.Entries
 {
-	public abstract string Name { get; }
-	public abstract Sprite Sprite { get; }
+
+	public abstract class SearchableEntry
+	{
+		public abstract string Name   { get; }
+		public abstract Sprite Sprite { get; }
+	}
+
 }

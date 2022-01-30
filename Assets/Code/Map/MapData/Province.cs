@@ -1,22 +1,29 @@
 using System;
 using System.Collections.Generic;
+using Data;
+using Map.MapElements;
 using UnityEngine;
 
-[Serializable]
-public class Province
+namespace Map.MapData
 {
-	public Province (int provinceNum, Vector2 centerPos)
+
+	[Serializable]
+	public class Province
 	{
-		ProvinceNumber = provinceNum;
-		CenterPos = centerPos;
+		public Province (int provinceNum, Vector2 centerPos)
+		{
+			ProvinceNumber = provinceNum;
+			CenterPos      = centerPos;
+		}
+		public Vector2               CenterPos       { get; set; }
+		public int                   ProvinceNumber  { get; set; }
+		public Nation                Owner           { get; set; }
+		public List<Monster>         Monsters        { get; set; } = new List<Monster>();
+		public bool                  HasLab          { get; set; }
+		public bool                  HasTemple       { get; set; }
+		public bool                  HasFort         { get; set; }
+		public List<ProvinceBorders> ProvinceBorders { get; set; }
+		// public bool HasThrone { get; set; }
 	}
-	public Vector2               CenterPos       { get; set; }
-	public int                   ProvinceNumber  { get; set; }
-	public Nation                Owner           { get; set; }
-	public List<Monster>         Monsters        { get; set; } = new List<Monster>();
-	public bool                  HasLab          { get; set; }
-	public bool                  HasTemple       { get; set; }
-	public bool                  HasFort         { get; set; }
-	public List<ProvinceBorders> ProvinceBorders { get; set; }
-	// public bool HasThrone { get; set; }
+
 }

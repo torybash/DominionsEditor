@@ -1,12 +1,18 @@
 using System;
+using Data;
 
-[Serializable]
-public class Unit : Monster
+namespace Map.MapData
 {
-	public int Amount { get; set; }
 
-	public static Unit Create (int monsterId, int unitsElementAmount, Nation nationality)
+	[Serializable]
+	public class Unit : Monster
 	{
-		return new Unit { MonsterId = monsterId, Amount = unitsElementAmount, Nationality = nationality};
+		public int Amount { get; set; }
+
+		public static Unit Create (int monsterId, int unitsElementAmount, Nation nationality)
+		{
+			return new Unit { MonsterId = monsterId, Amount = unitsElementAmount, Nationality = nationality};
+		}
 	}
+
 }

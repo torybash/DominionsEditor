@@ -1,29 +1,35 @@
-using System;
 using System.IO;
+using Core;
+using Data;
 
-public struct Pretender
+namespace Dom
 {
-	public string filePath;
-	public string fileName;
-	public string nationName;
-	public Nation nation;
-	public int    era;
 
-	public Pretender (string pretenderFilePath)
+	public struct Pretender
 	{
-		filePath = pretenderFilePath;
-		fileName = Path.GetFileName(pretenderFilePath);
+		public string filePath;
+		public string fileName;
+		public string nationName;
+		public Nation nation;
+		public int    era;
 
-		var eraName = fileName.Split('_')[0];
-		nationName = fileName.Split('_')[1];
-		era = eraName switch 
+		public Pretender (string pretenderFilePath)
 		{
-			"early" => 1,
-			"mid" => 2,
-			"late" => 3,
-			_ => -1
-		} ;
+			filePath = pretenderFilePath;
+			fileName = Path.GetFileName(pretenderFilePath);
 
-		nation = era != -1 ? DomEdit.I.nations.GetNationByNameAndEra(nationName, era) : Nation.Independents;
+			var eraName = fileName.Split('_')[0];
+			nationName = fileName.Split('_')[1];
+			era = eraName switch 
+			{
+				"early" => 1,
+				"mid"   => 2,
+				"late"  => 3,
+				_       => -1
+			} ;
+
+			nation = era != -1 ? DomEdit.I.nations.GetNationByNameAndEra(nationName, era) : Nation.Independents;
+		}
 	}
+
 }

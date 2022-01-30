@@ -1,16 +1,22 @@
+using Data.Entries;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EntryGizmo : MonoBehaviour
+namespace UI.Gizmos
 {
-	[SerializeField] private Image image;
 
-	public SearchableEntry Entry { get; set; }
-	
-	public void SetEntry (SearchableEntry entry)
+	public class EntryGizmo : MonoBehaviour
 	{
-		Entry = entry;
+		[SerializeField] private Image image;
 
-		image.sprite = entry.Sprite;
+		public SearchableEntry Entry { get; set; }
+	
+		public void SetEntry (SearchableEntry entry)
+		{
+			Entry = entry;
+
+			image.sprite = entry.Sprite;
+		}
 	}
+
 }

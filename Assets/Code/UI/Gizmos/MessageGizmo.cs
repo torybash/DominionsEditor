@@ -1,17 +1,23 @@
 using TMPro;
 using UnityEngine;
-public class MessageGizmo : Gizmo
+
+namespace UI.Gizmos
 {
-	[SerializeField] private TMP_Text label;
 
-	public void Write (string message)
+	public class MessageGizmo : Gizmo
 	{
-		label.text = message;
-		Invoke(nameof(SelfDestruct), 1f);
+		[SerializeField] private TMP_Text label;
+
+		public void Write (string message)
+		{
+			label.text = message;
+			Invoke(nameof(SelfDestruct), 1f);
+		}
+
+		private void SelfDestruct ()
+		{
+			Destroy(gameObject);
+		}
 	}
 
-	private void SelfDestruct ()
-	{
-		Destroy(gameObject);
-	}
 }

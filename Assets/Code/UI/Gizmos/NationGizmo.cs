@@ -1,43 +1,48 @@
-using System;
+using Data;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NationGizmo : Gizmo
+namespace UI.Gizmos
 {
-	[Header("Components")]
-	[SerializeField] private Image flagImage;
-	[SerializeField] private TMP_Text nameLabel;
-	[SerializeField] private GameObject capitalMarker;
 
-	[Header("Assets")]
-	[SerializeField] private Sprite blankSprite;
-	
-	public Nation Nation { get; private set; }
+	public class NationGizmo : Gizmo
+	{
+		[Header("Components")]
+		[SerializeField] private Image flagImage;
+		[SerializeField] private TMP_Text   nameLabel;
+		[SerializeField] private GameObject capitalMarker;
 
-	private void Awake ()
-	{
-		ShowCapitalMarker(false);
-	}
+		[Header("Assets")]
+		[SerializeField] private Sprite blankSprite;
 	
-	public void SetNation (Nation nation, bool showName = true)
-	{
-		Nation = nation;
+		public Nation Nation { get; private set; }
+
+		private void Awake ()
+		{
+			ShowCapitalMarker(false);
+		}
+	
+		public void SetNation (Nation nation, bool showName = true)
+		{
+			Nation = nation;
 		
-		if (nation == Nation.Independents)
+			if (nation == Nation.Independents)
+			{
+				flagImage.sprite = blankSprite;
+				nameLabel.text   = "";
+			} 
+			else
+			{
+				flagImage.sprite = nation.icon;
+				nameLabel.text   = showName ? nation.name : "";
+			}
+		}
+
+		public void ShowCapitalMarker (bool show)
 		{
-			flagImage.sprite = blankSprite;
-			nameLabel.text = "";
-		} 
-		else
-		{
-			flagImage.sprite = nation.icon;
-			nameLabel.text   = showName ? nation.name : "";
+			capitalMarker.SetActive(show);
 		}
 	}
 
-	public void ShowCapitalMarker (bool show)
-	{
-		capitalMarker.SetActive(show);
-	}
 }

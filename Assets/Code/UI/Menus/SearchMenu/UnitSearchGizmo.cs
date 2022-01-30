@@ -1,15 +1,21 @@
+using UI.Gizmos;
 using UnityEngine.EventSystems;
 
-public class UnitSearchGizmo : Gizmo, IPointerDownHandler
+namespace UI.Menus.SearchMenu
 {
-	// public event Action<SearchableEntry> Selected;
-	//
-	// private void OnClicked ()
-	// {
-	// 	Selected?.Invoke(_searchable);
-	// }
-	void IPointerDownHandler.OnPointerDown (PointerEventData eventData)
+
+	public class UnitSearchGizmo : Gizmo, IPointerDownHandler
 	{
-		// Selected?.Invoke(_searchable);
+		// public event Action<SearchableEntry> Selected;
+		//
+		// private void OnClicked ()
+		// {
+		// 	Selected?.Invoke(_searchable);
+		// }
+		void IPointerDownHandler.OnPointerDown (PointerEventData eventData)
+		{
+			// Selected?.Invoke(_searchable);
+		}
 	}
+
 }

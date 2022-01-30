@@ -1,6 +1,13 @@
-public abstract class Monster
+using Data;
+
+namespace Map.MapData
 {
-	public Nation Nationality { get; set; }
-	public int MonsterId { get; set; }
+
+	public abstract class Monster
+	{
+		public Nation Nationality { get; set; }
+		public int    MonsterId   { get; set; }
 	
+	}
+
 }

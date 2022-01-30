@@ -1,9 +1,14 @@
-public class Item
+namespace Map.MapData
 {
-	public string ItemName { get; set; }
-	
-	public static Item Create (string itemName)
+
+	public class Item
 	{
-		return new Item { ItemName = itemName};
+		public string ItemName { get; set; }
+	
+		public static Item Create (string itemName)
+		{
+			return new Item { ItemName = itemName};
+		}
 	}
+
 }

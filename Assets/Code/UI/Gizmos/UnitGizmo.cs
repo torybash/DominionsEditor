@@ -1,10 +1,17 @@
-public class UnitGizmo : MonsterGizmo<Unit>
+using Map.MapData;
+
+namespace UI.Gizmos
 {
-	public override void SetData (Monster data)
+
+	public class UnitGizmo : MonsterGizmo<Unit>
 	{
-		base.SetData(data);
+		public override void SetData (Monster data)
+		{
+			base.SetData(data);
 		
-		nameLabel.text += $" ({Data.Amount})";
+			nameLabel.text += $" ({Data.Amount})";
+		}
+
 	}
 
 }

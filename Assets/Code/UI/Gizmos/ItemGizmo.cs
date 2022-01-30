@@ -1,18 +1,25 @@
+using Core;
+using Map.MapData;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemGizmo : Gizmo
+namespace UI.Gizmos
 {
-	[SerializeField] private Image icon;
-	public Item Item { get; private set; }
-	public CommanderGizmo OwnerGizmo { get; set; }
 
-	public void Initialize (CommanderGizmo commanderGizmo, Item item)
+	public class ItemGizmo : Gizmo
 	{
-		OwnerGizmo = commanderGizmo;
-		Item       = item;
+		[SerializeField] private Image          icon;
+		public                   Item           Item       { get; private set; }
+		public                   CommanderGizmo OwnerGizmo { get; set; }
+
+		public void Initialize (CommanderGizmo commanderGizmo, Item item)
+		{
+			OwnerGizmo = commanderGizmo;
+			Item       = item;
 		
-		var itemEntry = DomEdit.I.items.GetItem(item.ItemName);
-		icon.sprite = itemEntry.Sprite;
+			var itemEntry = DomEdit.I.items.GetItem(item.ItemName);
+			icon.sprite = itemEntry.Sprite;
+		}
 	}
+
 }

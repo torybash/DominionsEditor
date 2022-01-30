@@ -1,5 +1,11 @@
 using UnityEngine;
-public abstract class Gizmo : MonoBehaviour
+
+namespace UI.Gizmos
 {
-	public RectTransform RectTrans => GetComponent<RectTransform>();
+
+	public abstract class Gizmo : MonoBehaviour
+	{
+		public RectTransform RectTrans => GetComponent<RectTransform>();
+	}
+
 }

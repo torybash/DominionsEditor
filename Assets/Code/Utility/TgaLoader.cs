@@ -1,7 +1,7 @@
 using System;
-using System.Drawing;
 using System.IO;
-namespace Tga
+
+namespace Utility
 {
 	/// <summary>
 	/// Source: http://www.gpwiki.org/index.php/LoadTGACpp

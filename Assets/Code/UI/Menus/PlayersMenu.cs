@@ -1,85 +1,92 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using Core;
 using TMPro;
+using UI.Gizmos;
 using UnityEngine;
 using UnityEngine.UI;
+using Utility;
 
-public class PlayersMenu : Menu
+namespace UI.Menus
 {
-	[SerializeField] private RectTransform playersGroup;
-	[SerializeField] private Button addButton;
-	[SerializeField] private RectTransform addGizmo;	
-	[SerializeField] private TMP_Dropdown eraDropdown;	
+
+	public class PlayersMenu : Menu
+	{
+		[SerializeField] private RectTransform playersGroup;
+		[SerializeField] private Button        addButton;
+		[SerializeField] private RectTransform addGizmo;	
+		[SerializeField] private TMP_Dropdown  eraDropdown;	
 	
-	private readonly List<PlayerGizmo> _gizmos = new List<PlayerGizmo>();
+		private readonly List<PlayerGizmo> _gizmos = new List<PlayerGizmo>();
 
-	private void Awake ()
-	{
-		addButton.onClick.AddListener(OnAddClicked);
-		eraDropdown.onValueChanged.AddListener(OnEraChanged);
-	}
-
-	private void Start ()
-	{
-		eraDropdown.SetValueWithoutNotify(Prefs.Era.Get() - 1);
-	}
-	
-	private void OnEraChanged (int eraIdx)
-	{
-		Prefs.Era.Set(eraIdx + 1);
-	}
-
-	private void OnAddClicked ()
-	{
-		DomEdit.I.MapMan.AddNation();
-	}
-
-	public override void Show ()
-	{
-		base.Show();
-		
-		foreach (var gizmo in _gizmos) Destroy(gizmo.gameObject);
-		_gizmos.Clear();
-		
-		foreach (var player in DomEdit.I.MapMan.Map.Players)
+		private void Awake ()
 		{
-			DomEdit.I.Ui.Get<PlayersMenu>().CreateGizmo(player);
+			addButton.onClick.AddListener(OnAddClicked);
+			eraDropdown.onValueChanged.AddListener(OnEraChanged);
 		}
-	}
-	
-	public void CreateGizmo (GamePlayer player)
-	{
-		var playerGizmo = DomEdit.I.Ui.Create<PlayerGizmo>(playersGroup);
-		playerGizmo.Initialize(player);
 
-		_gizmos.Add(playerGizmo);
-		
-		addGizmo.transform.SetAsLastSibling();
-
-		UpdateAllGizmos();
-	}
-
-	public void DestroyGizmo (GamePlayer player)
-	{
-		var gizmo = _gizmos.Single(x => x.Player == player);
-		Destroy(gizmo.gameObject);
-		_gizmos.Remove(gizmo);
-
-		UpdateAllGizmos();
-	}
-	
-	public void UpdateAllGizmos ()
-	{
-		foreach (var gizmo in _gizmos)
+		private void Start ()
 		{
+			eraDropdown.SetValueWithoutNotify(Prefs.Era.Get() - 1);
+		}
+	
+		private void OnEraChanged (int eraIdx)
+		{
+			Prefs.Era.Set(eraIdx + 1);
+		}
+
+		private void OnAddClicked ()
+		{
+			DomEdit.I.MapMan.AddNation();
+		}
+
+		public override void Show ()
+		{
+			base.Show();
+		
+			foreach (var gizmo in _gizmos) Destroy(gizmo.gameObject);
+			_gizmos.Clear();
+		
+			foreach (var player in DomEdit.I.MapMan.Map.Players)
+			{
+				DomEdit.I.Ui.Get<PlayersMenu>().CreateGizmo(player);
+			}
+		}
+	
+		public void CreateGizmo (GamePlayer player)
+		{
+			var playerGizmo = DomEdit.I.Ui.Create<PlayerGizmo>(playersGroup);
+			playerGizmo.Initialize(player);
+
+			_gizmos.Add(playerGizmo);
+		
+			addGizmo.transform.SetAsLastSibling();
+
+			UpdateAllGizmos();
+		}
+
+		public void DestroyGizmo (GamePlayer player)
+		{
+			var gizmo = _gizmos.Single(x => x.Player == player);
+			Destroy(gizmo.gameObject);
+			_gizmos.Remove(gizmo);
+
+			UpdateAllGizmos();
+		}
+	
+		public void UpdateAllGizmos ()
+		{
+			foreach (var gizmo in _gizmos)
+			{
+				gizmo.UpdateGizmo();
+			}
+		}
+	
+		public void UpdateGizmo (GamePlayer player)
+		{
+			var gizmo = _gizmos.Single(x => x.Player == player);
 			gizmo.UpdateGizmo();
 		}
 	}
-	
-	public void UpdateGizmo (GamePlayer player)
-	{
-		var gizmo = _gizmos.Single(x => x.Player == player);
-		gizmo.UpdateGizmo();
-	}
+
 }

@@ -1,155 +1,163 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Core;
+using Data;
+using Map.MapData;
 using ThisOtherThing.UI.Shapes;
-using ThisOtherThing.UI.ShapeUtils;
 using TMPro;
 using UnityEngine;
+using Utility.Extensions;
 
-public class ProvinceGizmo : Gizmo
+namespace UI.Gizmos
 {
-	[SerializeField] private TMP_Text      numLabel;
-	[SerializeField] private RectTransform rosterGroup;
-	[SerializeField] private Line          borderLineTemplate;
-	[SerializeField] private Polygon       borderPolygonTemplate;
 
-	[SerializeField] private GameObject labMarker;
-	[SerializeField] private GameObject templeMarker;
-	[SerializeField] private GameObject fortMarker;
-	[SerializeField] private GameObject throneMarker;
-
-	private List<MonsterGizmo> _monsterGizmos = new List<MonsterGizmo>();
-	private List<Line>         _borderLines = new List<Line>();
-	private NationGizmo        _nationGizmo;
-
-
-	public Province Province { get; private set; }
-
-	private void Awake ()
+	public class ProvinceGizmo : Gizmo
 	{
-		borderLineTemplate.gameObject.SetActive(false);
-		borderPolygonTemplate.gameObject.SetActive(false);
-	}
+		[SerializeField] private TMP_Text      numLabel;
+		[SerializeField] private RectTransform rosterGroup;
+		[SerializeField] private Line          borderLineTemplate;
+		[SerializeField] private Polygon       borderPolygonTemplate;
 
-	public void Initialize (Province province)
-	{
-		Province = province;
+		[SerializeField] private GameObject labMarker;
+		[SerializeField] private GameObject templeMarker;
+		[SerializeField] private GameObject fortMarker;
+		[SerializeField] private GameObject throneMarker;
 
-		numLabel.text = Province.ProvinceNumber.ToString();
+		private List<MonsterGizmo> _monsterGizmos = new List<MonsterGizmo>();
+		private List<Line>         _borderLines   = new List<Line>();
+		private NationGizmo        _nationGizmo;
 
-		var edgePoints = new List<Vector2Int>();
-		foreach (var pb in province.ProvinceBorders)
+
+		public Province Province { get; private set; }
+
+		private void Awake ()
 		{
-			var minPos = new Vector2Int(pb.X,          pb.Y);
-			var maxPos = new Vector2Int(pb.X + pb.Len, pb.Y);
-			edgePoints.Add(minPos);
-			edgePoints.Add(maxPos);
+			borderLineTemplate.gameObject.SetActive(false);
+			borderPolygonTemplate.gameObject.SetActive(false);
 		}
 
-		//TODO Do this in a smarter way!! Optimize!
-		var open         = new List<Vector2Int>(edgePoints);
-		var currentPoint = open.First();
-		var sortedPoints       = new List<Vector2>();
-		while (open.Count > 4)
+		public void Initialize (Province province)
 		{
-			open.Remove(currentPoint);
-			var closestPoint = open.OrderBy(p => Vector2Int.Distance(currentPoint, p)).First();
-			
-			currentPoint = closestPoint;
-			
-			sortedPoints.Add(currentPoint);
-		}
+			Province = province;
 
-		var polygon      = borderPolygonTemplate.InstantiateTemplate(transform.parent);
-		polygon.PointListsProperties.PointListProperties[0].Positions = sortedPoints.ToArray();
-		polygon.PointListsProperties.PointListProperties[0].SetPoints();
-		polygon.transform.SetParent(transform); //TODO Transform point instead
+			numLabel.text = Province.ProvinceNumber.ToString();
 
-		foreach (var monster in Province.Monsters)
-		{
-			switch (monster)
+			var edgePoints = new List<Vector2Int>();
+			foreach (var pb in province.ProvinceBorders)
 			{
-				case Commander commander:
-					CreateCommanderGizmo(commander, this);
+				var minPos = new Vector2Int(pb.X,          pb.Y);
+				var maxPos = new Vector2Int(pb.X + pb.Len, pb.Y);
+				edgePoints.Add(minPos);
+				edgePoints.Add(maxPos);
+			}
 
-					foreach (var unit in commander.UnitsUnderCommand)
-					{
+			//TODO Do this in a smarter way!! Optimize!
+			var open         = new List<Vector2Int>(edgePoints);
+			var currentPoint = open.First();
+			var sortedPoints = new List<Vector2>();
+			while (open.Count > 4)
+			{
+				open.Remove(currentPoint);
+				var closestPoint = open.OrderBy(p => Vector2Int.Distance(currentPoint, p)).First();
+			
+				currentPoint = closestPoint;
+			
+				sortedPoints.Add(currentPoint);
+			}
+
+			var polygon = borderPolygonTemplate.InstantiateTemplate(transform.parent);
+			polygon.PointListsProperties.PointListProperties[0].Positions = sortedPoints.ToArray();
+			polygon.PointListsProperties.PointListProperties[0].SetPoints();
+			polygon.transform.SetParent(transform); //TODO Transform point instead
+
+			foreach (var monster in Province.Monsters)
+			{
+				switch (monster)
+				{
+					case Commander commander:
+						CreateCommanderGizmo(commander, this);
+
+						foreach (var unit in commander.UnitsUnderCommand)
+						{
+							CreateUnitGizmo(unit);
+						}
+						break;
+					case Unit unit:
 						CreateUnitGizmo(unit);
-					}
-					break;
-				case Unit unit:
-					CreateUnitGizmo(unit);
-					break;
-				default:
-					throw new ArgumentOutOfRangeException(nameof(monster));
+						break;
+					default:
+						throw new ArgumentOutOfRangeException(nameof(monster));
 
+				}
 			}
+
+			Refresh();
 		}
 
-		Refresh();
-	}
-
-	public void Refresh ()
-	{
-		SetOwner(Province.Owner);
-
-		labMarker.SetActive(Province.HasLab);
-		templeMarker.SetActive(Province.HasTemple);
-		fortMarker.SetActive(Province.HasFort);
-		// throneMarker.SetActive(Province.HasThrone);
-	}
-
-	public void RemoveElementGizmo (Monster elem)
-	{
-		var elemGizmo = _monsterGizmos.SingleOrDefault(x => x.MonsterData == elem);
-		if (elemGizmo != null)
+		public void Refresh ()
 		{
-			Destroy(elemGizmo.gameObject);
+			SetOwner(Province.Owner);
+
+			labMarker.SetActive(Province.HasLab);
+			templeMarker.SetActive(Province.HasTemple);
+			fortMarker.SetActive(Province.HasFort);
+			// throneMarker.SetActive(Province.HasThrone);
 		}
-	}
 
-	public void SetOwner (Nation nation)
-	{
-		if (nation.Equals(Nation.Independents))
+		public void RemoveElementGizmo (Monster elem)
 		{
-			if (_nationGizmo != null)
+			var elemGizmo = _monsterGizmos.SingleOrDefault(x => x.MonsterData == elem);
+			if (elemGizmo != null)
 			{
-				Destroy(_nationGizmo.gameObject);
+				Destroy(elemGizmo.gameObject);
 			}
-			return;
 		}
 
-		if (_nationGizmo == null)
+		public void SetOwner (Nation nation)
 		{
-			_nationGizmo = DomEdit.I.Ui.Create<NationGizmo>(transform);
+			if (nation.Equals(Nation.Independents))
+			{
+				if (_nationGizmo != null)
+				{
+					Destroy(_nationGizmo.gameObject);
+				}
+				return;
+			}
+
+			if (_nationGizmo == null)
+			{
+				_nationGizmo = DomEdit.I.Ui.Create<NationGizmo>(transform);
+			}
+
+			_nationGizmo.SetNation(nation);
+
+			bool isStartLocation = DomEdit.I.MapMan.Map.Players.Any(x => x.CapitalProvinceNum == Province.ProvinceNumber);
+			_nationGizmo.ShowCapitalMarker(isStartLocation);
 		}
 
-		_nationGizmo.SetNation(nation);
-
-		bool isStartLocation = DomEdit.I.MapMan.Map.Players.Any(x => x.CapitalProvinceNum == Province.ProvinceNumber);
-		_nationGizmo.ShowCapitalMarker(isStartLocation);
-	}
-
-	public void CreateCommanderGizmo (Commander commander, ProvinceGizmo provinceGizmo)
-	{
-		var commanderGizmo = DomEdit.I.Ui.Create<CommanderGizmo>(rosterGroup);
-		commanderGizmo.Initialize(provinceGizmo);
-		commanderGizmo.SetData(commander);
-		_monsterGizmos.Add(commanderGizmo);
-	}
-
-	public void CreateUnitGizmo (Unit unit)
-	{
-		var unitGizmo = DomEdit.I.Ui.Create<UnitGizmo>(rosterGroup);
-		unitGizmo.SetData(unit);
-		_monsterGizmos.Add(unitGizmo);
-
-		var ownerCommander = Province.Monsters.OfType<Commander>().SingleOrDefault(x => x.UnitsUnderCommand.Contains(unit));
-		if (ownerCommander != null)
+		public void CreateCommanderGizmo (Commander commander, ProvinceGizmo provinceGizmo)
 		{
-			var ownerCommanderGizmo = _monsterGizmos.OfType<CommanderGizmo>().Single(x => x.Data == ownerCommander);
-			int commanderIdx        = ownerCommanderGizmo.transform.GetSiblingIndex();
-			unitGizmo.transform.SetSiblingIndex(commanderIdx + 1);
+			var commanderGizmo = DomEdit.I.Ui.Create<CommanderGizmo>(rosterGroup);
+			commanderGizmo.Initialize(provinceGizmo);
+			commanderGizmo.SetData(commander);
+			_monsterGizmos.Add(commanderGizmo);
+		}
+
+		public void CreateUnitGizmo (Unit unit)
+		{
+			var unitGizmo = DomEdit.I.Ui.Create<UnitGizmo>(rosterGroup);
+			unitGizmo.SetData(unit);
+			_monsterGizmos.Add(unitGizmo);
+
+			var ownerCommander = Province.Monsters.OfType<Commander>().SingleOrDefault(x => x.UnitsUnderCommand.Contains(unit));
+			if (ownerCommander != null)
+			{
+				var ownerCommanderGizmo = _monsterGizmos.OfType<CommanderGizmo>().Single(x => x.Data == ownerCommander);
+				int commanderIdx        = ownerCommanderGizmo.transform.GetSiblingIndex();
+				unitGizmo.transform.SetSiblingIndex(commanderIdx + 1);
+			}
 		}
 	}
+
 }

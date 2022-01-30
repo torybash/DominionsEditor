@@ -1,35 +1,43 @@
 using System.Collections.Generic;
+using Core;
+using UI.Gizmos;
 using UnityEngine;
 using UnityEngine.UI;
+using Utility.Extensions;
 
-public class MapPicture : Menu
+namespace UI.Menus
 {
-	[SerializeField] public RawImage mapImage;
+
+	public class MapPicture : Menu
+	{
+		[SerializeField] public RawImage mapImage;
 	
-	private readonly List<ProvinceGizmo> _provinceGizmos = new List<ProvinceGizmo>();
+		private readonly List<ProvinceGizmo> _provinceGizmos = new List<ProvinceGizmo>();
 
-	public void LoadMap (Map map)
-	{
-		_provinceGizmos.SafeDestroy();
-		
-		foreach (var province in map.ProvinceMap.Values)
+		public void LoadMap (Map.Map map)
 		{
-			var gizmo = DomEdit.I.Ui.Create<ProvinceGizmo>(transform);
-			gizmo.RectTrans.anchoredPosition = province.CenterPos;
-			gizmo.Initialize(province);
-			
-			_provinceGizmos.Add(gizmo);
-		}
+			_provinceGizmos.SafeDestroy();
 		
-		LoadMapTexture(map.MapTexture);
+			foreach (var province in map.ProvinceMap.Values)
+			{
+				var gizmo = DomEdit.I.Ui.Create<ProvinceGizmo>(transform);
+				gizmo.RectTrans.anchoredPosition = province.CenterPos;
+				gizmo.Initialize(province);
+			
+				_provinceGizmos.Add(gizmo);
+			}
+		
+			LoadMapTexture(map.MapTexture);
 
-		Show();
-	}
+			Show();
+		}
 
-	private void LoadMapTexture (Texture2D mapTex)
-	{
-		mapImage.texture    = mapTex;
-		RectTrans.sizeDelta = new Vector2(mapTex.width, mapTex.height);
+		private void LoadMapTexture (Texture2D mapTex)
+		{
+			mapImage.texture    = mapTex;
+			RectTrans.sizeDelta = new Vector2(mapTex.width, mapTex.height);
+		}
+
 	}
 
 }

@@ -1,11 +1,18 @@
-public class MagicOverride
+using Dom;
+
+namespace Map.MapData
 {
-	public MagicPath Path { get; set; }
-	public int MagicValue { get; set; }
-	
-	public MagicOverride (MagicPath path, int value)
+
+	public class MagicOverride
 	{
-		Path       = path;
-		MagicValue = value;
+		public MagicPath Path       { get; set; }
+		public int       MagicValue { get; set; }
+	
+		public MagicOverride (MagicPath path, int value)
+		{
+			Path       = path;
+			MagicValue = value;
+		}
 	}
+
 }

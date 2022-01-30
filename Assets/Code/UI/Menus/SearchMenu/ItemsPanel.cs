@@ -1,12 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemsPanel : MonoBehaviour
+namespace UI.Menus.SearchMenu
 {
 
-	public void Initialize ()
+	public class ItemsPanel : MonoBehaviour
 	{
+
+		public void Initialize ()
+		{
 		
+		}
 	}
+
 }

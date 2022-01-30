@@ -1,49 +1,56 @@
-using System;
 using System.Linq;
+using Core;
+using Tools;
+using UI.Gizmos;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ControlButtonsMenu : Menu
+namespace UI.Menus
 {
-	[SerializeField] private Button runButton;
-	[SerializeField] private Button saveMapButton;
-	[SerializeField] private Button loadMapButton;
-	[SerializeField] private Button settingsButton;
 
-	private void Awake ()
+	public class ControlButtonsMenu : Menu
 	{
-		saveMapButton.onClick.AddListener(OnSaveClicked);
-		loadMapButton.onClick.AddListener(OnLoadClicked);
-		runButton.onClick.AddListener(OnRunClicked);
-		settingsButton.onClick.AddListener(OnSettingsClicked);
-	}
-	private void OnLoadClicked ()
-	{
-		DomEdit.I.Ui.Get<LoadMapMenu>().SelectMap(file =>
-		{
-			DomEdit.I.MapMan.LoadMap(file);
-		});
-	}
+		[SerializeField] private Button runButton;
+		[SerializeField] private Button saveMapButton;
+		[SerializeField] private Button loadMapButton;
+		[SerializeField] private Button settingsButton;
 
-	public void OnSettingsClicked ()
-	{
-		DomEdit.I.Ui.Get<IntroMenu>().Show();
-	}
-	
-	private void OnRunClicked ()
-	{
-		if (DomEdit.I.MapMan.Map.Players.Any(x => string.IsNullOrEmpty(x.Pretender.filePath)))
+		private void Awake ()
 		{
-			DomEdit.I.Ui.Create<MessageGizmo>().Write("Player missing pretender reference");
-			return;
+			saveMapButton.onClick.AddListener(OnSaveClicked);
+			loadMapButton.onClick.AddListener(OnLoadClicked);
+			runButton.onClick.AddListener(OnRunClicked);
+			settingsButton.onClick.AddListener(OnSettingsClicked);
+		}
+		private void OnLoadClicked ()
+		{
+			DomEdit.I.Ui.Get<LoadMapMenu>().SelectMap(file =>
+			{
+				DomEdit.I.MapMan.LoadMap(file);
+			});
 		}
 
-		var mapRunner = new DomRunner(DomEdit.I.MapMan);
-		mapRunner.Run();
+		public void OnSettingsClicked ()
+		{
+			DomEdit.I.Ui.Get<IntroMenu>().Show();
+		}
+	
+		private void OnRunClicked ()
+		{
+			if (DomEdit.I.MapMan.Map.Players.Any(x => string.IsNullOrEmpty(x.Pretender.filePath)))
+			{
+				DomEdit.I.Ui.Create<MessageGizmo>().Write("Player missing pretender reference");
+				return;
+			}
+
+			var mapRunner = new DomRunner(DomEdit.I.MapMan);
+			mapRunner.Run();
+		}
+
+		private void OnSaveClicked ()
+		{
+			DomEdit.I.MapMan.SaveMap();
+		}
 	}
 
-	private void OnSaveClicked ()
-	{
-		DomEdit.I.MapMan.SaveMap();
-	}
 }

@@ -1,44 +1,51 @@
+using Core;
 using UnityEngine;
 using UnityEngine.UI;
+using Utility;
 
-public class MainMenu : Menu
+namespace UI.Menus
 {
-	[SerializeField] private Button loadPreviousMap;
-	[SerializeField] private Button loadMap;
-	[SerializeField] private Button settings;
-	[SerializeField] private Button quit;
 
-	private void Awake ()
+	public class MainMenu : Menu
 	{
-		loadPreviousMap.onClick.AddListener(() =>
+		[SerializeField] private Button loadPreviousMap;
+		[SerializeField] private Button loadMap;
+		[SerializeField] private Button settings;
+		[SerializeField] private Button quit;
+
+		private void Awake ()
 		{
-			var mapFile = MapFile.LoadPath(Prefs.PreviousMapPath.Get());
-			DomEdit.I.MapMan.LoadMap(mapFile);
-			Hide();
-		});
-		loadMap.onClick.AddListener(() =>
-		{
-			DomEdit.I.Ui.Get<LoadMapMenu>().SelectMap(file =>
+			loadPreviousMap.onClick.AddListener(() =>
 			{
-				DomEdit.I.MapMan.LoadMap(file);
+				var mapFile = MapFile.LoadPath(Prefs.PreviousMapPath.Get());
+				DomEdit.I.MapMan.LoadMap(mapFile);
 				Hide();
 			});
-		});
-		settings.onClick.AddListener(() =>
+			loadMap.onClick.AddListener(() =>
+			{
+				DomEdit.I.Ui.Get<LoadMapMenu>().SelectMap(file =>
+				{
+					DomEdit.I.MapMan.LoadMap(file);
+					Hide();
+				});
+			});
+			settings.onClick.AddListener(() =>
+			{
+				DomEdit.I.Ui.Get<SettingsMenu>().Show();
+			});
+			quit.onClick.AddListener(() =>
+			{
+				Application.Quit();
+			});
+		}
+
+		public override void Show ()
 		{
-			DomEdit.I.Ui.Get<SettingsMenu>().Show();
-		});
-		quit.onClick.AddListener(() =>
-		{
-			Application.Quit();
-		});
+			base.Show();
+
+			bool hasPreviousMap = !string.IsNullOrEmpty(Prefs.PreviousMapPath.Get());
+			loadPreviousMap.gameObject.SetActive(hasPreviousMap);
+		}
 	}
 
-	public override void Show ()
-	{
-		base.Show();
-
-		bool hasPreviousMap = !string.IsNullOrEmpty(Prefs.PreviousMapPath.Get());
-		loadPreviousMap.gameObject.SetActive(hasPreviousMap);
-	}
 }

@@ -1,22 +1,28 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Data.Entries;
 using UnityEngine;
 
-[CreateAssetMenu]
-public class NationsTable : ScriptableObject
+namespace Data.Tables
 {
-	public List<NationEntry> nations;
 
-	public NationEntry GetNationEntry (Nation nation)
+	[CreateAssetMenu]
+	public class NationsTable : ScriptableObject
 	{
-		return nations.SingleOrDefault(x => x.NationNum == nation.id);
-	}
+		public List<NationEntry> nations;
+
+		public NationEntry GetNationEntry (Nation nation)
+		{
+			return nations.SingleOrDefault(x => x.NationNum == nation.id);
+		}
 	
-	public Nation GetNationByNameAndEra (string nationName, int pretenderEra)
-	{
-		var entry = nations.SingleOrDefault(x => x.Name.Equals(nationName, StringComparison.OrdinalIgnoreCase) && x.Era == pretenderEra);
-		if (entry == null) return Nation.Invalid;
-		return entry.NationNum;
+		public Nation GetNationByNameAndEra (string nationName, int pretenderEra)
+		{
+			var entry = nations.SingleOrDefault(x => x.Name.Equals(nationName, StringComparison.OrdinalIgnoreCase) && x.Era == pretenderEra);
+			if (entry == null) return Nation.Invalid;
+			return entry.NationNum;
+		}
 	}
+
 }

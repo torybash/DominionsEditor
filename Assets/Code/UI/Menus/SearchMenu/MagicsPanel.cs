@@ -1,10 +1,15 @@
 using UnityEngine;
 
-public class MagicsPanel : MonoBehaviour
+namespace UI.Menus.SearchMenu
 {
 
-
-	public void Initialize ()
+	public class MagicsPanel : MonoBehaviour
 	{
+
+
+		public void Initialize ()
+		{
+		}
 	}
+
 }

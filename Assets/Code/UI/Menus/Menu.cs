@@ -1,16 +1,21 @@
 using UnityEngine;
 
-public abstract class Menu : MonoBehaviour
+namespace UI.Menus
 {
-    public RectTransform RectTrans => GetComponent<RectTransform>();
-    
-    public virtual void Show ()
+
+    public abstract class Menu : MonoBehaviour
     {
-        gameObject.SetActive(true);
+        public RectTransform RectTrans => GetComponent<RectTransform>();
+    
+        public virtual void Show ()
+        {
+            gameObject.SetActive(true);
+        }
+
+        public virtual void Hide ()
+        {
+            gameObject.SetActive(false);
+        }
     }
 
-    public virtual void Hide ()
-    {
-        gameObject.SetActive(false);
-    }
 }

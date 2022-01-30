@@ -1,23 +1,28 @@
 using System.IO;
 
-public struct MapFile
+namespace UI.Menus
 {
-	public string path;
-	public string name;
-	public string folder;
 
-	public static MapFile LoadPath (string mapPath)
+	public struct MapFile
 	{
-		MapFile mapFile = new MapFile();
-		mapFile.path   = mapPath;
-		mapFile.name   = Path.GetFileName(mapPath);
-		mapFile.folder = Path.GetDirectoryName(mapPath);
+		public string path;
+		public string name;
+		public string folder;
 
-		return mapFile;
+		public static MapFile LoadPath (string mapPath)
+		{
+			MapFile mapFile = new MapFile();
+			mapFile.path   = mapPath;
+			mapFile.name   = Path.GetFileName(mapPath);
+			mapFile.folder = Path.GetDirectoryName(mapPath);
+
+			return mapFile;
+		}
+
+		public override string ToString ()
+		{
+			return $"{nameof(path)}: {path}, {nameof(name)}: {name}, {nameof(folder)}: {folder}";
+		}
 	}
 
-	public override string ToString ()
-	{
-		return $"{nameof(path)}: {path}, {nameof(name)}: {name}, {nameof(folder)}: {folder}";
-	}
 }

@@ -2,143 +2,153 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Core;
+using Data;
+using Dom;
+using Map.MapData;
+using Map.MapElements;
 using UnityEngine;
 
-public class MapSaver
+namespace Map
 {
 
-	public void SaveMap (Map map, string path)
+	public class MapSaver
 	{
-		Debug.Log("Saving map at: "+ path);
 
-		var mapLines = new List<string>();
-		MapElement lastMapElem = null;
-		
-		var elems = new List<MapElement>();
-		
-		//Config
-		elems.AddRange(map.UnchangedElements);
-
-		//Players
-		foreach (var player in DomEdit.I.MapMan.Map.Players)
+		public void SaveMap (Map map, string path)
 		{
-			elems.Add(new AllowedPlayer{NationNum = player.Nation.id});
-			elems.Add(new StartLocation{NationNum = player.Nation.id, ProvinceNum = player.CapitalProvinceNum});
-		}
+			Debug.Log("Saving map at: " + path);
 
-		//Provinces
-		foreach (var province in map.ProvinceMap.Values)
-		{
-			bool isIndieProvince = province.Owner == Nation.Independents;
-			bool hasIndieMonsters = isIndieProvince && province.Monsters.Any();
-			if (!isIndieProvince || hasIndieMonsters)
+			var        mapLines    = new List<string>();
+			MapElement lastMapElem = null;
+		
+			var elems = new List<MapElement>();
+		
+			//Config
+			elems.AddRange(map.UnchangedElements);
+
+			//Players
+			foreach (var player in DomEdit.I.MapMan.Map.Players)
 			{
-				elems.Add(new Land{ProvinceNum = province.ProvinceNumber});
+				elems.Add(new AllowedPlayer{NationNum = player.Nation.id});
+				elems.Add(new StartLocation{NationNum = player.Nation.id, ProvinceNum = player.CapitalProvinceNum});
+			}
 
-				if (!isIndieProvince)
+			//Provinces
+			foreach (var province in map.ProvinceMap.Values)
+			{
+				bool isIndieProvince  = province.Owner == Nation.Independents;
+				bool hasIndieMonsters = isIndieProvince && province.Monsters.Any();
+				if (!isIndieProvince || hasIndieMonsters)
+				{
+					elems.Add(new Land{ProvinceNum = province.ProvinceNumber});
+
+					if (!isIndieProvince)
+					{
+						elems.Add(new ProvinceOwner{NationNum = province.Owner.id});
+						if (province.HasLab) elems.Add(new Laboratory());
+						if (province.HasTemple) elems.Add(new Temple());
+						if (province.HasFort) elems.Add(new Fort{FortId = 1});
+					
+						if (DomEdit.I.MapMan.Map.Players.Any(x => x.CapitalProvinceNum == province.ProvinceNumber))
+						{
+							elems.Add(new KnownMagicSite{ProvinceNum = province.ProvinceNumber, SiteId = 1500});
+						}
+					}
+				}
+			}
+		
+			//Monsters
+			foreach (var province in map.ProvinceMap.Values.Where(x => x.Monsters.Any()))
+			{
+				elems.Add(new SetLand{ProvinceNum = province.ProvinceNumber});
+
+				var nationalityMonsterGroups = province.Monsters.GroupBy(x => x.Nationality);
+
+				foreach (var group in nationalityMonsterGroups)
+				{
+					var nation = group.Key;
+
+					// if (nation != Nation.Independents)
+					// {
+					elems.Add(new ProvinceOwner{NationNum = nation.id});
+					// }
+
+					foreach (var monster in group)
+					{
+						switch (monster)
+						{
+							case Commander commander:
+								elems.Add(new CommanderElement{MonsterId = commander.MonsterId, ProvinceNum = province.ProvinceNumber});
+
+								foreach (var unit in commander.UnitsUnderCommand)
+								{
+									elems.Add(new UnitsElement{MonsterId = unit.MonsterId, Amount = unit.Amount, ProvinceNum = province.ProvinceNumber});
+								}
+							
+								foreach (var item in commander.Items)
+								{
+									elems.Add(new ItemElement{ItemName = item.ItemName});
+								}	
+								foreach (var magicOverride in commander.MagicOverrides)
+								{
+									Magic magic = magicOverride.Path switch
+									{
+										MagicPath.Fire   => new FireMagic(),
+										MagicPath.Air    => new AirMagic(),
+										MagicPath.Water  => new WaterMagic(),
+										MagicPath.Earth  => new EarthMagic(),
+										MagicPath.Astral => new AstralMagic(),
+										MagicPath.Death  => new DeathMagic(),
+										MagicPath.Nature => new NatureMagic(),
+										MagicPath.Blood  => new BloodMagic(),
+										MagicPath.Holy   => new HolyMagic(),
+										_                => throw new ArgumentOutOfRangeException()
+									};
+									magic.MagicLevel = magicOverride.MagicValue;
+									elems.Add(magic);
+								}
+						
+								break;
+							case Unit unit:
+								elems.Add(new UnitsElement{MonsterId = unit.MonsterId, Amount = unit.Amount, ProvinceNum = province.ProvinceNumber});
+								break;
+							default:
+								throw new ArgumentOutOfRangeException(nameof(monster));
+
+						}
+					}
+				}
+			
+				if (province.Owner != Nation.Independents)
 				{
 					elems.Add(new ProvinceOwner{NationNum = province.Owner.id});
-					if (province.HasLab) elems.Add(new Laboratory());
-					if (province.HasTemple) elems.Add(new Temple());
-					if (province.HasFort) elems.Add(new Fort{FortId = 1});
-					
-					if (DomEdit.I.MapMan.Map.Players.Any(x => x.CapitalProvinceNum == province.ProvinceNumber))
-					{
-						elems.Add(new KnownMagicSite{ProvinceNum = province.ProvinceNumber, SiteId = 1500});
-					}
 				}
 			}
-		}
-		
-		//Monsters
-		foreach (var province in map.ProvinceMap.Values.Where(x => x.Monsters.Any()))
-		{
-			elems.Add(new SetLand{ProvinceNum = province.ProvinceNumber});
 
-			var nationalityMonsterGroups = province.Monsters.GroupBy(x => x.Nationality);
 
-			foreach (var group in nationalityMonsterGroups)
+			foreach (var mapElement in elems)
 			{
-				var nation = group.Key;
+				var key     = GetMapElementKey(mapElement.GetType());
+				var mapLine = $"#{key} {string.Join(" ", mapElement.SaveArgs())}";
 
-				// if (nation != Nation.Independents)
-				// {
-					elems.Add(new ProvinceOwner{NationNum = nation.id});
-				// }
-
-				foreach (var monster in group)
-				{
-					switch (monster)
-					{
-						case Commander commander:
-							elems.Add(new CommanderElement{MonsterId = commander.MonsterId, ProvinceNum = province.ProvinceNumber});
-
-							foreach (var unit in commander.UnitsUnderCommand)
-							{
-								elems.Add(new UnitsElement{MonsterId = unit.MonsterId, Amount = unit.Amount, ProvinceNum = province.ProvinceNumber});
-							}
-							
-							foreach (var item in commander.Items)
-							{
-								elems.Add(new ItemElement{ItemName = item.ItemName});
-							}	
-							foreach (var magicOverride in commander.MagicOverrides)
-							{
-								Magic magic = magicOverride.Path switch
-								{
-									MagicPath.Fire   => new FireMagic(),
-									MagicPath.Air    => new AirMagic(),
-									MagicPath.Water  => new WaterMagic(),
-									MagicPath.Earth  => new EarthMagic(),
-									MagicPath.Astral => new AstralMagic(),
-									MagicPath.Death  => new DeathMagic(),
-									MagicPath.Nature => new NatureMagic(),
-									MagicPath.Blood  => new BloodMagic(),
-									MagicPath.Holy   => new HolyMagic(),
-									_                => throw new ArgumentOutOfRangeException()
-								};
-								magic.MagicLevel = magicOverride.MagicValue;
-								elems.Add(magic);
-							}
-						
-							break;
-						case Unit unit:
-							elems.Add(new UnitsElement{MonsterId = unit.MonsterId, Amount = unit.Amount, ProvinceNum = province.ProvinceNumber});
-							break;
-						default:
-							throw new ArgumentOutOfRangeException(nameof(monster));
-
-					}
-				}
-			}
+				bool isDifferentTypeFromPrevious                                                                   = lastMapElem != null && lastMapElem.GetType() != mapElement.GetType();
+				if (mapElement is IOwnedByProvince && lastMapElem is IOwnedByProvince) isDifferentTypeFromPrevious = false;
+				if (isDifferentTypeFromPrevious) mapLines.Add("");
 			
-			if (province.Owner != Nation.Independents)
-			{
-				elems.Add(new ProvinceOwner{NationNum = province.Owner.id});
+				mapLines.Add(mapLine);
+		
+				lastMapElem = mapElement;
 			}
-		}
-
-
-		foreach (var mapElement in elems)
-		{
-			var key = GetMapElementKey(mapElement.GetType());
-			var mapLine = $"#{key} {string.Join(" ", mapElement.SaveArgs())}";
-
-			bool isDifferentTypeFromPrevious = lastMapElem != null && lastMapElem.GetType() != mapElement.GetType();
-			if (mapElement is IOwnedByProvince && lastMapElem is IOwnedByProvince) isDifferentTypeFromPrevious = false;
-			if (isDifferentTypeFromPrevious) mapLines.Add("");
-			
-			mapLines.Add(mapLine);
 		
-			lastMapElem = mapElement;
+			File.WriteAllLines(path, mapLines);
 		}
-		
-		File.WriteAllLines(path, mapLines);
-	}
 	
-	private static string GetMapElementKey (Type type)
-	{
-		var mapKeyName = ((MapKeyNameAttribute[])type.GetCustomAttributes(typeof(MapKeyNameAttribute), false)).Single();
-		return mapKeyName.Name;
+		private static string GetMapElementKey (Type type)
+		{
+			var mapKeyName = ((MapKeyNameAttribute[])type.GetCustomAttributes(typeof(MapKeyNameAttribute), false)).Single();
+			return mapKeyName.Name;
+		}
 	}
+
 }
