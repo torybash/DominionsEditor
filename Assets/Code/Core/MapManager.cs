@@ -21,10 +21,10 @@ public class MapManager
 		Map = MapLoader.Load(mapFile);
 
 		//Create map texture
-		DomEdit.I.Ui.Get<MapPicture>().LoadMapTexture(Map.MapTexture);
+		DomEdit.I.Ui.Get<MapPicture>().LoadMap(Map);
 
 		//Open menus
-		DomEdit.I.Ui.Get<MapMenu>().LoadMap(Map);
+		DomEdit.I.Ui.Get<SearchMenu>().Show();
 		DomEdit.I.Ui.Get<PlayersMenu>().Show();
 		DomEdit.I.Ui.Get<ControlButtonsMenu>().Show();
 	}

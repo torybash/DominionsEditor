@@ -32,8 +32,7 @@ public class DomRunner
 
 		foreach (var player in map.Map.Players)
 		{
-			var nationEntry          = DomEdit.I.nations.GetNationEntry(player.Nation);
-			var newPretenderFilePath = $"{map.SavedGamesFolderPath}{Constants.GameName}\\{nationEntry.PretenderFileName}.2h";
+			var newPretenderFilePath = $"{map.SavedGamesFolderPath}{Constants.GameName}\\{player.Nation.file_name_base}.2h";
 			
 			File.Copy(player.Pretender.filePath, newPretenderFilePath);
 		}

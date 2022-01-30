@@ -39,8 +39,7 @@ public abstract class MonsterGizmo<T> : MonsterGizmo where T : Monster
 		{
 			if (defaultColor == null) defaultColor = background.color;
 
-			var nationEntry = DomEdit.I.nations.GetNationEntry(data.Nationality);
-			background.color = defaultColor.Value*nationEntry.TintColor;
+			// background.color = defaultColor.Value*nationEntry.TintColor;
 
 			if (_nationGizmo == null) _nationGizmo = DomEdit.I.Ui.Create<NationGizmo>(nationContainer);
 			_nationGizmo.SetNation(data.Nationality, false);

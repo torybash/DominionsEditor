@@ -10,7 +10,7 @@ public class NationsTable : ScriptableObject
 
 	public NationEntry GetNationEntry (Nation nation)
 	{
-		return nations.SingleOrDefault(x => x.NationNum == nation.number);
+		return nations.SingleOrDefault(x => x.NationNum == nation.id);
 	}
 	
 	public Nation GetNationByNameAndEra (string nationName, int pretenderEra)

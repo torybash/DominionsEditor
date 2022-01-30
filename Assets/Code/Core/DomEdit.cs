@@ -4,11 +4,13 @@ public class DomEdit : MonoBehaviour
 {
 	public MonstersTable  monsters;
 	public ItemsTable     items;
-	public NationsTable   nations;
+	// public NationsTable   nations;
 	public MagicPathTable magicPaths;
+	public IconsTable     icons;
 
-	public UiManager  Ui     { get; private set; }
-	public MapManager MapMan { get; private set; }
+	public UiManager  Ui      { get; private set; }
+	public MapManager MapMan  { get; private set; }
+	public Nations    nations { get; private set; }
 
 	public static DomEdit I;
 
@@ -16,8 +18,9 @@ public class DomEdit : MonoBehaviour
 	{
 		I = this;
 
-		Ui     = new UiManager();
-		MapMan = new MapManager();
+		Ui      = new UiManager();
+		MapMan  = new MapManager();
+		nations = new Nations();
 
 		Ui.Get<MainMenu>().Show();
 

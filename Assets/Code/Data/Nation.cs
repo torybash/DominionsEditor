@@ -1,20 +1,25 @@
 using System;
+using UnityEngine;
 
 [Serializable]
 public struct Nation
 {
-	public int number;
-
-	public static Nation Invalid => new Nation { number = -1 };
-	public static Nation Independents => new Nation { number = 0 };
-	public static Nation Arco => new Nation { number = 80 };
-	public static Nation Phlegra => new Nation { number = 102 };
+	public int id;
+	public string name;
+	public string epithet;
+	public string file_name_base;
+	public int era;
 	
+	public Sprite icon;
+
+	public static Nation Invalid => new Nation { id = -1 };
+	public static Nation Independents => new Nation { id = 0 };
+
 	public static implicit operator Nation(int value)
 	{
 		var nation = new Nation
 		{
-			number = value
+			id = value
 		};
 		return nation;
 	}
@@ -30,7 +35,7 @@ public struct Nation
 
 	public bool Equals (Nation other)
 	{
-		return number == other.number;
+		return id == other.id;
 	}
 	public override bool Equals (object obj)
 	{
@@ -38,11 +43,11 @@ public struct Nation
 	}
 	public override int GetHashCode ()
 	{
-		return number;
+		return id;
 	}
 
 	public override string ToString ()
 	{
-		return $"{nameof(number)}: {number}";
+		return $"{nameof(id)}: {id}";
 	}
 }

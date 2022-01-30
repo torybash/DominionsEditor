@@ -24,16 +24,15 @@ public class NationGizmo : Gizmo
 	{
 		Nation = nation;
 		
-		var nationEntry = DomEdit.I.nations.GetNationEntry(nation);
-		if (nationEntry == null)
+		if (nation == Nation.Independents)
 		{
 			flagImage.sprite = blankSprite;
 			nameLabel.text = "";
 		} 
 		else
 		{
-			flagImage.sprite = nationEntry.Sprite;
-			nameLabel.text   = showName ? nationEntry.Name : "";
+			flagImage.sprite = nation.icon;
+			nameLabel.text   = showName ? nation.name : "";
 		}
 	}
 

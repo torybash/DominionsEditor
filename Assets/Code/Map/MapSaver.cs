@@ -22,8 +22,8 @@ public class MapSaver
 		//Players
 		foreach (var player in DomEdit.I.MapMan.Map.Players)
 		{
-			elems.Add(new AllowedPlayer{NationNum = player.Nation.number});
-			elems.Add(new StartLocation{NationNum = player.Nation.number, ProvinceNum = player.CapitalProvinceNum});
+			elems.Add(new AllowedPlayer{NationNum = player.Nation.id});
+			elems.Add(new StartLocation{NationNum = player.Nation.id, ProvinceNum = player.CapitalProvinceNum});
 		}
 
 		//Provinces
@@ -37,7 +37,7 @@ public class MapSaver
 
 				if (!isIndieProvince)
 				{
-					elems.Add(new ProvinceOwner{NationNum = province.Owner.number});
+					elems.Add(new ProvinceOwner{NationNum = province.Owner.id});
 					if (province.HasLab) elems.Add(new Laboratory());
 					if (province.HasTemple) elems.Add(new Temple());
 					if (province.HasFort) elems.Add(new Fort{FortId = 1});
@@ -63,7 +63,7 @@ public class MapSaver
 
 				// if (nation != Nation.Independents)
 				// {
-					elems.Add(new ProvinceOwner{NationNum = nation.number});
+					elems.Add(new ProvinceOwner{NationNum = nation.id});
 				// }
 
 				foreach (var monster in group)
@@ -114,7 +114,7 @@ public class MapSaver
 			
 			if (province.Owner != Nation.Independents)
 			{
-				elems.Add(new ProvinceOwner{NationNum = province.Owner.number});
+				elems.Add(new ProvinceOwner{NationNum = province.Owner.id});
 			}
 		}
 

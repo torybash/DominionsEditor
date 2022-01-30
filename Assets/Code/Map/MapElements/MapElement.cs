@@ -1,10 +1,10 @@
-using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
+
 public abstract class MapElement
 {
-	
-	public abstract void ParseArgs (string[] args);
+
+	public abstract void     ParseArgs (string[] args);
 	public abstract string[] SaveArgs ();
 
 }
@@ -12,9 +12,9 @@ public abstract class MapElement
 [MapKeyName("dom2title")]
 public class Dom2Title : MapElement
 {
-	private string _title;
-	public override void ParseArgs (string[] args) => _title = args[0];
-	public override string[] SaveArgs () => new[] { _title };
+	private         string   _title;
+	public override void     ParseArgs (string[] args) => _title = args[0];
+	public override string[] SaveArgs ()               => new[] { _title };
 }
 
 [MapKeyName("mapsize")]
@@ -22,11 +22,13 @@ public class MapSize : MapElement
 {
 	private int _width;
 	private int _height;
+
 	public override void ParseArgs (string[] args)
 	{
-		_width = int.Parse(args[0]);
+		_width  = int.Parse(args[0]);
 		_height = int.Parse(args[1]);
 	}
+
 	public override string[] SaveArgs ()
 	{
 		return new[] { _width.ToString(), _height.ToString() };
@@ -36,25 +38,25 @@ public class MapSize : MapElement
 [MapKeyName("domversion")]
 public class DomVersion : MapElement
 {
-	private int _version;
-	public override void ParseArgs (string[] args) => _version = int.Parse(args[0]);
-	public override string[] SaveArgs () => new[] { _version.ToString() };
+	private         int      _version;
+	public override void     ParseArgs (string[] args) => _version = int.Parse(args[0]);
+	public override string[] SaveArgs ()               => new[] { _version.ToString() };
 }
 
 [MapKeyName("maptextcol")]
 public class MapTextColor : MapElement
 {
-	private Color _color;
-	public override void ParseArgs (string[] args) => _color = new Color(float.Parse(args[0]), float.Parse(args[1]), float.Parse(args[2]), float.Parse(args[3]));
-	public override string[] SaveArgs () => new[] { _color.r.ToString(CultureInfo.InvariantCulture), _color.g.ToString(CultureInfo.InvariantCulture), _color.b.ToString(CultureInfo.InvariantCulture), _color.a.ToString(CultureInfo.InvariantCulture) };
+	private         Color    _color;
+	public override void     ParseArgs (string[] args) => _color = new Color(float.Parse(args[0]), float.Parse(args[1]), float.Parse(args[2]), float.Parse(args[3]));
+	public override string[] SaveArgs ()               => new[] { _color.r.ToString(CultureInfo.InvariantCulture), _color.g.ToString(CultureInfo.InvariantCulture), _color.b.ToString(CultureInfo.InvariantCulture), _color.a.ToString(CultureInfo.InvariantCulture) };
 }
 
 [MapKeyName("description")]
 public class Description : MapElement
 {
-	private string _description;
-	public override void ParseArgs (string[] args) => _description = "\"TODO Parse strings\"";
-	public override string[] SaveArgs () => new[] { _description };
+	private         string   _description;
+	public override void     ParseArgs (string[] args) => _description = "\"TODO Parse strings\"";
+	public override string[] SaveArgs ()               => new[] { _description };
 }
 
 [MapKeyName("scenario")]
@@ -63,6 +65,7 @@ public class Scenario : MapElement
 	public override void ParseArgs (string[] args)
 	{
 	}
+
 	public override string[] SaveArgs ()
 	{
 		return new string[0];
@@ -74,8 +77,8 @@ public class ImageFile : MapElement
 {
 	public string MapImageName { get; private set; }
 
-	public override void ParseArgs (string[] args) => MapImageName = args[0];
-	public override string[] SaveArgs () => new[] { MapImageName };
+	public override void     ParseArgs (string[] args) => MapImageName = args[0];
+	public override string[] SaveArgs ()               => new[] { MapImageName };
 }
 
 [MapKeyName("winterimagefile")]
@@ -87,12 +90,12 @@ public class WinterImageFile : ImageFile
 public class AllowedPlayer : MapElement
 {
 	public int NationNum { get; set; }
-	
+
 	public override void ParseArgs (string[] args)
 	{
 		NationNum = int.Parse(args[0]);
 	}
-	
+
 	public override string[] SaveArgs ()
 	{
 		return new[] { NationNum.ToString() };
@@ -102,15 +105,15 @@ public class AllowedPlayer : MapElement
 [MapKeyName("specstart")]
 public class StartLocation : MapElement
 {
-	public int NationNum { get; set; }
+	public int NationNum   { get; set; }
 	public int ProvinceNum { get; set; }
 
 	public override void ParseArgs (string[] args)
 	{
-		NationNum = int.Parse(args[0]);
+		NationNum   = int.Parse(args[0]);
 		ProvinceNum = int.Parse(args[1]);
 	}
-	
+
 	public override string[] SaveArgs ()
 	{
 		return new[] { NationNum.ToString(), ProvinceNum.ToString() };
@@ -122,14 +125,14 @@ public class StartLocation : MapElement
 public class DominionStrength : MapElement
 {
 	public int NationNum { get; private set; }
-	public int Strength { get; private set; }
+	public int Strength  { get; private set; }
 
 	public override void ParseArgs (string[] args)
 	{
 		NationNum = int.Parse(args[0]);
-		Strength = int.Parse(args[1]);
+		Strength  = int.Parse(args[1]);
 	}
-	
+
 	public override string[] SaveArgs ()
 	{
 		return new[] { NationNum.ToString(), Strength.ToString() };
@@ -141,13 +144,13 @@ public class Terrain : MapElement
 {
 	public int ProvinceNum { get; private set; }
 	public int TerrainMask { get; private set; }
-	
+
 	public override void ParseArgs (string[] args)
 	{
 		ProvinceNum = int.Parse(args[0]);
 		TerrainMask = int.Parse(args[1]);
 	}
-	
+
 	public override string[] SaveArgs ()
 	{
 		return new[] { ProvinceNum.ToString(), TerrainMask.ToString() };
@@ -158,13 +161,13 @@ public class Terrain : MapElement
 [MapKeyName("landname")]
 public class LandName : MapElement
 {
-	public int ProvinceNum { get; private set; }
-	public string Name { get; private set; }
+	public int    ProvinceNum { get; private set; }
+	public string Name        { get; private set; }
 
 	public override void ParseArgs (string[] args)
 	{
 		ProvinceNum = int.Parse(args[0]);
-		Name = args[1];
+		Name        = args[1];
 	}
 
 	public override string[] SaveArgs ()
@@ -179,14 +182,14 @@ public class LandName : MapElement
 public class Neighbour : MapElement
 {
 	public int FromProvinceNum { get; private set; }
-	public int ToProvinceNum { get; private set; }
+	public int ToProvinceNum   { get; private set; }
 
 	public override void ParseArgs (string[] args)
 	{
 		FromProvinceNum = int.Parse(args[0]);
-		ToProvinceNum = int.Parse(args[1]);
+		ToProvinceNum   = int.Parse(args[1]);
 	}
-	
+
 	public override string[] SaveArgs ()
 	{
 		return new[] { FromProvinceNum.ToString(), ToProvinceNum.ToString() };
@@ -196,19 +199,19 @@ public class Neighbour : MapElement
 [MapKeyName("pb")]
 public class ProvinceBorders : MapElement
 {
-	public int X { get; private set; }
-	public int Y { get; private set; }
-	public int Len { get; private set; }
+	public int X           { get; private set; }
+	public int Y           { get; private set; }
+	public int Len         { get; private set; }
 	public int ProvinceNum { get; private set; }
 
 	public override void ParseArgs (string[] args)
 	{
-		X = int.Parse(args[0]);
-		Y = int.Parse(args[1]);
-		Len = int.Parse(args[2]);
+		X           = int.Parse(args[0]);
+		Y           = int.Parse(args[1]);
+		Len         = int.Parse(args[2]);
 		ProvinceNum = int.Parse(args[3]);
 	}
-	
+
 	public override string[] SaveArgs ()
 	{
 		return new[] { X.ToString(), Y.ToString(), Len.ToString(), ProvinceNum.ToString() };
@@ -220,13 +223,13 @@ public class ProvinceBorders : MapElement
 	}
 }
 
-	
+
 [MapKeyName("setland")]
 public class SetLand : Land
 {
-	
+
 }
-	
+
 [MapKeyName("land")]
 public class Land : MapElement
 {
@@ -236,6 +239,7 @@ public class Land : MapElement
 	{
 		ProvinceNum = int.Parse(args[0]);
 	}
+
 	public override string[] SaveArgs ()
 	{
 		return new[] { ProvinceNum.ToString() };
@@ -253,6 +257,7 @@ public class Laboratory : ProvinceDataElement
 	public override void ParseArgs (string[] args)
 	{
 	}
+
 	public override string[] SaveArgs ()
 	{
 		return new string[0];
@@ -265,6 +270,7 @@ public class Temple : ProvinceDataElement
 	public override void ParseArgs (string[] args)
 	{
 	}
+
 	public override string[] SaveArgs ()
 	{
 		return new string[0];
@@ -291,12 +297,12 @@ public class Fort : ProvinceDataElement
 public class ProvinceDefence : ProvinceDataElement
 {
 	public int Amount { get; set; }
-	
+
 	public override void ParseArgs (string[] args)
 	{
 		Amount = int.Parse(args[0]);
 	}
-	
+
 	public override string[] SaveArgs ()
 	{
 		return new[] { Amount.ToString() };
@@ -307,7 +313,7 @@ public class ProvinceDefence : ProvinceDataElement
 public class KillFeatures : ProvinceDataElement
 {
 	public override void ParseArgs (string[] args) {}
-	
+
 	public override string[] SaveArgs ()
 	{
 		return new string[0];
@@ -317,9 +323,9 @@ public class KillFeatures : ProvinceDataElement
 [MapKeyName("feature")]
 public class HiddenMagicSite : ProvinceDataElement
 {
-	public int SiteId { get; set; }
+	public int    SiteId   { get; set; }
 	public string SiteName { get; set; }
-	
+
 	public override void ParseArgs (string[] args)
 	{
 		if (int.TryParse(args[0], out int unitId))
@@ -330,7 +336,7 @@ public class HiddenMagicSite : ProvinceDataElement
 			SiteName = args[1];
 		}
 	}
-	
+
 	public override string[] SaveArgs ()
 	{
 		return new[] { SiteId.ToString() };
@@ -340,9 +346,9 @@ public class HiddenMagicSite : ProvinceDataElement
 [MapKeyName("knownfeature")]
 public class KnownMagicSite : ProvinceDataElement
 {
-	public int SiteId { get; set; }
+	public int    SiteId   { get; set; }
 	public string SiteName { get; set; }
-	
+
 	public override void ParseArgs (string[] args)
 	{
 		if (int.TryParse(args[0], out int unitId))
@@ -353,7 +359,7 @@ public class KnownMagicSite : ProvinceDataElement
 			SiteName = args[1];
 		}
 	}
-	
+
 	public override string[] SaveArgs ()
 	{
 		return new[] { SiteId.ToString() };
@@ -364,22 +370,23 @@ public class KnownMagicSite : ProvinceDataElement
 public class ProvinceOwner : ProvinceDataElement
 {
 	public int NationNum { get; set; }
-	
+
 	public override void ParseArgs (string[] args)
 	{
 		NationNum = int.Parse(args[0]);
 	}
+
 	public override string[] SaveArgs ()
 	{
 		return new[] { NationNum.ToString() };
 	}
-}	
+}
 
 public abstract class MonsterElement : ProvinceDataElement
 {
-	public int MonsterId { get; set; }
+	public int    MonsterId   { get; set; }
 	public string MonsterName { get; protected set; }
-	
+
 	public override string[] SaveArgs ()
 	{
 		return new[] { MonsterId.ToString() };
@@ -396,13 +403,13 @@ public class PopType : ProvinceDataElement
 	{
 		PopulationId = int.Parse(args[0]);
 	}
-	
+
 	public override string[] SaveArgs ()
 	{
 		return new[] { PopulationId.ToString() };
 	}
 }
-	
+
 [MapKeyName("commander")]
 public class CommanderElement : MonsterElement
 {
@@ -421,7 +428,7 @@ public class CommanderElement : MonsterElement
 [MapKeyName("units")]
 public class UnitsElement : MonsterElement, IOwnedByCommander
 {
-	public int Amount { get; set; }
+	public int              Amount    { get; set; }
 	public CommanderElement Commander { get; set; }
 
 	public override void ParseArgs (string[] args)
@@ -445,7 +452,7 @@ public class UnitsElement : MonsterElement, IOwnedByCommander
 [MapKeyName("bodyguards")]
 public class BodyguardsElement : MonsterElement, IOwnedByCommander
 {
-	public int Amount { get; private set; }
+	public int              Amount    { get; private set; }
 	public CommanderElement Commander { get; set; }
 
 	public override void ParseArgs (string[] args)
@@ -459,7 +466,7 @@ public class BodyguardsElement : MonsterElement, IOwnedByCommander
 			MonsterName = args[1];
 		}
 	}
-	
+
 	public override string[] SaveArgs ()
 	{
 		return new[] { Amount.ToString(), MonsterId.ToString() };
@@ -469,49 +476,73 @@ public class BodyguardsElement : MonsterElement, IOwnedByCommander
 [MapKeyName("additem")]
 public class ItemElement : MapElement, IOwnedByCommander
 {
-	public string ItemName { get; set; }
+	public string           ItemName  { get; set; }
 	public CommanderElement Commander { get; set; }
 
-	public override void ParseArgs (string[] args) => ItemName = args[0];
-	public override string[] SaveArgs () => new[] { $"\"{ItemName}\"" };
+	public override void     ParseArgs (string[] args) => ItemName = args[0];
+	public override string[] SaveArgs ()               => new[] { $"\"{ItemName}\"" };
 }
 
 public abstract class Magic : MapElement, IOwnedByCommander
 {
-	public CommanderElement Commander { get; set; }
-	public int MagicLevel { get; set; }
-	public override void ParseArgs (string[] args) => MagicLevel = int.Parse(args[0]);
-	public override string[] SaveArgs () => new[] { MagicLevel.ToString() };
+	public          CommanderElement Commander                 { get; set; }
+	public          int              MagicLevel                { get; set; }
+	public override void             ParseArgs (string[] args) => MagicLevel = int.Parse(args[0]);
+	public override string[]         SaveArgs ()               => new[] { MagicLevel.ToString() };
 }
 
-[MapKeyName("xp")] 
+[MapKeyName("xp")]
 public abstract class Experience : MapElement, IOwnedByCommander
 {
-	public CommanderElement Commander { get; set; }
-	public int Amount { get; set; }
-	public override void ParseArgs (string[] args) => Amount = int.Parse(args[0]);
-	public override string[] SaveArgs () => new[] { Amount.ToString() };
+	public          CommanderElement Commander                 { get; set; }
+	public          int              Amount                    { get; set; }
+	public override void             ParseArgs (string[] args) => Amount = int.Parse(args[0]);
+	public override string[]         SaveArgs ()               => new[] { Amount.ToString() };
 }
 
-[MapKeyName("clearmagic")] 
+[MapKeyName("clearmagic")]
 public abstract class ClearMagic : MapElement, IOwnedByCommander
 {
-	public CommanderElement Commander { get; set; }
-	public override void ParseArgs (string[] args) {}
-	public override string[] SaveArgs () => new string[0];
+	public          CommanderElement Commander                 { get; set; }
+	public override void             ParseArgs (string[] args) {}
+	public override string[]         SaveArgs ()               => new string[0];
 }
 
-[MapKeyName("mag_fire ")]  public class FireMagic : Magic {}
-[MapKeyName("mag_air")]  public class AirMagic : Magic {}
-[MapKeyName("mag_water")]  public class WaterMagic : Magic {}
-[MapKeyName("mag_earth")]  public class EarthMagic : Magic {}
-[MapKeyName("mag_astral")]  public class AstralMagic : Magic {}
-[MapKeyName("mag_death")]  public class DeathMagic : Magic {}
-[MapKeyName("mag_nature")]  public class NatureMagic : Magic {}
-[MapKeyName("mag_blood")]  public class BloodMagic : Magic {}
-[MapKeyName("mag_priest")]  public class HolyMagic : Magic {}
+[MapKeyName("mag_fire ")] public class FireMagic : Magic
+{
+}
 
+[MapKeyName("mag_air")] public class AirMagic : Magic
+{
+}
 
+[MapKeyName("mag_water")] public class WaterMagic : Magic
+{
+}
+
+[MapKeyName("mag_earth")] public class EarthMagic : Magic
+{
+}
+
+[MapKeyName("mag_astral")] public class AstralMagic : Magic
+{
+}
+
+[MapKeyName("mag_death")] public class DeathMagic : Magic
+{
+}
+
+[MapKeyName("mag_nature")] public class NatureMagic : Magic
+{
+}
+
+[MapKeyName("mag_blood")] public class BloodMagic : Magic
+{
+}
+
+[MapKeyName("mag_priest")] public class HolyMagic : Magic
+{
+}
 
 public interface IOwnedByCommander
 {

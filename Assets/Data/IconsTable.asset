@@ -1,0 +1,203 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a7a86f90d68470a8ddbc8000756c8cb, type: 3}
+  m_Name: IconsTable
+  m_EditorClassIdentifier: 
+  nationIcons:
+  - fileNameBase: early_abysia
+    icon: {fileID: 21300000, guid: 75b71f374d17750469c59c8b6eeaa422, type: 3}
+  - fileNameBase: early_agartha
+    icon: {fileID: 21300000, guid: 050326dd9ab2cf6469a5d5f6f8fdeeaf, type: 3}
+  - fileNameBase: early_arcoscephale
+    icon: {fileID: 21300000, guid: 87b70eb3ab37a8d45a57588b81e7cb49, type: 3}
+  - fileNameBase: early_atlantis
+    icon: {fileID: 21300000, guid: 4a8da7bdcadca4548a1ea58db4643c7a, type: 3}
+  - fileNameBase: early_berytos
+    icon: {fileID: 21300000, guid: f1331369ea6a9384db85db231575eaed, type: 3}
+  - fileNameBase: early_bogarus
+    icon: {fileID: 21300000, guid: cbc0e706e4871c74d953e09eb3f7bfb2, type: 3}
+  - fileNameBase: early_caelum
+    icon: {fileID: 21300000, guid: 38a508e4ad7cb324dbefef3a788e16f6, type: 3}
+  - fileNameBase: early_ctis
+    icon: {fileID: 21300000, guid: 9d4ca2d92efe08b4ba8bea4d1f4bff9b, type: 3}
+  - fileNameBase: early_ermor
+    icon: {fileID: 21300000, guid: 2293a71e7d8f693489687a943b7906d8, type: 3}
+  - fileNameBase: early_fomoria
+    icon: {fileID: 21300000, guid: 2a8aca06ac9e23b49a5c0d0fae017cdf, type: 3}
+  - fileNameBase: early_gath
+    icon: {fileID: 21300000, guid: 7433a0d6be71fa64da7ffbb218f4e412, type: 3}
+  - fileNameBase: early_helheim
+    icon: {fileID: 21300000, guid: 516b73ca5e6a97940b3ed8b5a1ff6530, type: 3}
+  - fileNameBase: early_kailasa
+    icon: {fileID: 21300000, guid: 1348dfeec64bb4c43b74106e847a1ff7, type: 3}
+  - fileNameBase: early_lanka
+    icon: {fileID: 21300000, guid: ce4284bf5043f7c4d893cc1184416033, type: 3}
+  - fileNameBase: early_machaka
+    icon: {fileID: 21300000, guid: ce0f94024e6a9dd41aed41d22f1cafb7, type: 3}
+  - fileNameBase: early_marverni
+    icon: {fileID: 21300000, guid: 8286bd21ff22bec49938b12f57d9e57a, type: 3}
+  - fileNameBase: early_mekone
+    icon: {fileID: 21300000, guid: 1410fd42003680a4e87b93ca5f8a4843, type: 3}
+  - fileNameBase: early_mictlan
+    icon: {fileID: 21300000, guid: 2d5568ff0d7590049a317729d2ec99b9, type: 3}
+  - fileNameBase: early_niefelheim
+    icon: {fileID: 21300000, guid: 80cbe14561db78a44a7a503e3b8805e3, type: 3}
+  - fileNameBase: early_oceania
+    icon: {fileID: 21300000, guid: 9364fc5cdb8ef4a43be5af70306b6e57, type: 3}
+  - fileNameBase: early_pangaea
+    icon: {fileID: 21300000, guid: 9ae596ccb16f1ba40bd86126010349e7, type: 3}
+  - fileNameBase: early_pelagia
+    icon: {fileID: 21300000, guid: 27b8c5369f2d39f46a5a3881278c3733, type: 3}
+  - fileNameBase: early_rlyeh
+    icon: {fileID: 21300000, guid: ca4fb1026ea133a4f93414e2b8cf1af3, type: 3}
+  - fileNameBase: early_sauromatia
+    icon: {fileID: 21300000, guid: 4045d2669f80c594e9b4784a21292ed8, type: 3}
+  - fileNameBase: early_therodos
+    icon: {fileID: 21300000, guid: d46a82cf77c1ec04f9604a7ec0ec495c, type: 3}
+  - fileNameBase: early_tienchi
+    icon: {fileID: 21300000, guid: c7c18edbbb4defd4d930a4b09f1dbe40, type: 3}
+  - fileNameBase: early_tirnanog
+    icon: {fileID: 21300000, guid: 1e74c2b1ef3e395488994fa39578ffb9, type: 3}
+  - fileNameBase: early_ubar
+    icon: {fileID: 21300000, guid: 1e74f6724b8529c4cb4922eab9da1b54, type: 3}
+  - fileNameBase: early_ulm
+    icon: {fileID: 21300000, guid: 46ad035363e0c2f45ac7795728129c59, type: 3}
+  - fileNameBase: early_ur
+    icon: {fileID: 21300000, guid: c63647baede4c504a8b2cdf7923a79f0, type: 3}
+  - fileNameBase: early_vanheim
+    icon: {fileID: 21300000, guid: cf5c04893b7180545a9d825fb4589ed8, type: 3}
+  - fileNameBase: early_xibalba
+    icon: {fileID: 21300000, guid: a0ec4371ec9e21b45acce4b0937f0219, type: 3}
+  - fileNameBase: early_yomi
+    icon: {fileID: 21300000, guid: 097178aa80901ea41b63778e531de510, type: 3}
+  - fileNameBase: late_abysia
+    icon: {fileID: 21300000, guid: 9b665769d2713ba4aad9a63e9ffb4159, type: 3}
+  - fileNameBase: late_agartha
+    icon: {fileID: 21300000, guid: 6386e5843964e3348806b3a3d7da3a7a, type: 3}
+  - fileNameBase: late_arcoscephale
+    icon: {fileID: 21300000, guid: fa8d0dc8f8bfd224b8ace722dbc44053, type: 3}
+  - fileNameBase: late_atlantis
+    icon: {fileID: 21300000, guid: 490a423278b1c2c44b57738a309b8083, type: 3}
+  - fileNameBase: late_caelum
+    icon: {fileID: 21300000, guid: d36ab84d3aead6e41adccce3e0785fce, type: 3}
+  - fileNameBase: late_chelms
+    icon: {fileID: 21300000, guid: 5953fd0c5fc50df4f9f9ad3d8072b5ff, type: 3}
+  - fileNameBase: late_ctis
+    icon: {fileID: 21300000, guid: 1175268dccf8f0e4bb13a1f83ee4be13, type: 3}
+  - fileNameBase: late_erytheia
+    icon: {fileID: 21300000, guid: e8496801448b46348acef70579d5e7af, type: 3}
+  - fileNameBase: late_gath
+    icon: {fileID: 21300000, guid: 0f00b35454726a2469b9a684b4fe8407, type: 3}
+  - fileNameBase: late_jomon
+    icon: {fileID: 21300000, guid: 5d4b933043dfc364ba5fe16721bfe5a6, type: 3}
+  - fileNameBase: late_lemur
+    icon: {fileID: 21300000, guid: a397cd0023bf9ab4487601cdef747634, type: 3}
+  - fileNameBase: late_marignon
+    icon: {fileID: 21300000, guid: c0aea29bffc9de843bbc961b5ab566e9, type: 3}
+  - fileNameBase: late_mictlan
+    icon: {fileID: 21300000, guid: 6588b62c11969154cbfeedc4c30415c3, type: 3}
+  - fileNameBase: late_midgard
+    icon: {fileID: 21300000, guid: 18ce3a493f7b96b47b6fd275d8bc5da9, type: 3}
+  - fileNameBase: late_pangaea
+    icon: {fileID: 21300000, guid: 4898d3a375079644cbd055e0334de2bd, type: 3}
+  - fileNameBase: late_patala
+    icon: {fileID: 21300000, guid: f9ebb34596da4234bb61438a203ed530, type: 3}
+  - fileNameBase: late_phlegra
+    icon: {fileID: 21300000, guid: 7c3516463a7304b42beb6f0ee384ee6e, type: 3}
+  - fileNameBase: late_pythium
+    icon: {fileID: 21300000, guid: c5fb017fc72cebf469a8e88515e8d7b0, type: 3}
+  - fileNameBase: late_ragha
+    icon: {fileID: 21300000, guid: 392f93af4c0838642b27648f1daf21aa, type: 3}
+  - fileNameBase: late_rlyeh
+    icon: {fileID: 21300000, guid: 47a42266035b74745aee83e59d4659fd, type: 3}
+  - fileNameBase: late_rus
+    icon: {fileID: 21300000, guid: f7fe1b58df6b2e14dae9699f3f2d6504, type: 3}
+  - fileNameBase: late_tienchi
+    icon: {fileID: 21300000, guid: dbd87dd2c1d4b2541907eb851f1c75e8, type: 3}
+  - fileNameBase: late_ulm
+    icon: {fileID: 21300000, guid: 846b8f1c3bacf7344a2f6912f033fa0f, type: 3}
+  - fileNameBase: late_utgard
+    icon: {fileID: 21300000, guid: b725dae847bd2104da0b71802615e08e, type: 3}
+  - fileNameBase: late_vaetti
+    icon: {fileID: 21300000, guid: e459cebaa321a324a8e97c93a1b47a8e, type: 3}
+  - fileNameBase: late_xibalba
+    icon: {fileID: 21300000, guid: e2b7634b65f54af49ab4c3b540b78b85, type: 3}
+  - fileNameBase: mid_abysia
+    icon: {fileID: 21300000, guid: 85dc1b08cb2be414a9f48019eba8a64e, type: 3}
+  - fileNameBase: mid_agartha
+    icon: {fileID: 21300000, guid: 142d771cbd51dd04aacf552371f58e8b, type: 3}
+  - fileNameBase: mid_arcoscephale
+    icon: {fileID: 21300000, guid: b15ca5fd5f1f4a746b15cc2b39171ba9, type: 3}
+  - fileNameBase: mid_asphodel
+    icon: {fileID: 21300000, guid: 5dc6cf717c2937745b27ae7d365839e2, type: 3}
+  - fileNameBase: mid_atlantis
+    icon: {fileID: 21300000, guid: 19d1c151ddca512489c5bd84724ee73a, type: 3}
+  - fileNameBase: mid_bakemono
+    icon: {fileID: 21300000, guid: 9361ff59323133b449df4e4b1f71c760, type: 3}
+  - fileNameBase: mid_bandarlog
+    icon: {fileID: 21300000, guid: ba2c147695423c6478d83d92770faa91, type: 3}
+  - fileNameBase: mid_caelum
+    icon: {fileID: 21300000, guid: f5cd89ec6e593f44e8158bdc411347d6, type: 3}
+  - fileNameBase: mid_ctis
+    icon: {fileID: 21300000, guid: f22e08763a1ab614da14ad8310661db6, type: 3}
+  - fileNameBase: mid_eriu
+    icon: {fileID: 21300000, guid: 3cd54cf20760fba4591d3165c6673d6b, type: 3}
+  - fileNameBase: mid_ermor
+    icon: {fileID: 21300000, guid: b92599e98386b6247a155c698e761c02, type: 3}
+  - fileNameBase: mid_gath
+    icon: {fileID: 21300000, guid: fcfd4fe86340ac5409d04d6bd435b9da, type: 3}
+  - fileNameBase: mid_ind
+    icon: {fileID: 21300000, guid: c9efe8c1ed146244694871a4187e6c3f, type: 3}
+  - fileNameBase: mid_jotunheim
+    icon: {fileID: 21300000, guid: 955529220d4522e45bb16b7250e2e8f2, type: 3}
+  - fileNameBase: mid_machaka
+    icon: {fileID: 21300000, guid: ba93b9e925c1fda4883030c672da5322, type: 3}
+  - fileNameBase: mid_man
+    icon: {fileID: 21300000, guid: f48ce90a1ae216844880bcb977dce213, type: 3}
+  - fileNameBase: mid_marignon
+    icon: {fileID: 21300000, guid: d87fab69907a88440903a087a68e640f, type: 3}
+  - fileNameBase: mid_mictlan
+    icon: {fileID: 21300000, guid: e8dd793fca970344bb033e2bec806a67, type: 3}
+  - fileNameBase: mid_naba
+    icon: {fileID: 21300000, guid: c2aa19dd649380d4c9bca99176327f00, type: 3}
+  - fileNameBase: mid_nazca
+    icon: {fileID: 21300000, guid: 9b5b71ef37df3b04ca41bd0d054bbe24, type: 3}
+  - fileNameBase: mid_oceania
+    icon: {fileID: 21300000, guid: 83e293c58ea2653499d9906318f615d1, type: 3}
+  - fileNameBase: mid_pangaea
+    icon: {fileID: 21300000, guid: 1afe59b1d3f50114ea007a99d813ce75, type: 3}
+  - fileNameBase: mid_pelagia
+    icon: {fileID: 21300000, guid: 732222c4dc553804c92f5ea10207b275, type: 3}
+  - fileNameBase: mid_phaeacia
+    icon: {fileID: 21300000, guid: 7dcfed7a83791bd45978790290b65325, type: 3}
+  - fileNameBase: mid_phlegra
+    icon: {fileID: 21300000, guid: c9e0e06e5dc2e074da2413c0890f31ce, type: 3}
+  - fileNameBase: mid_pythium
+    icon: {fileID: 21300000, guid: 0795692eb6c5dab4fbe1caa01936d8b1, type: 3}
+  - fileNameBase: mid_rlyeh
+    icon: {fileID: 21300000, guid: 71329a484b3ba94438b8632f7687837f, type: 3}
+  - fileNameBase: mid_rus
+    icon: {fileID: 21300000, guid: f5db613c4f345fd4fb2d16397d30937b, type: 3}
+  - fileNameBase: mid_sceleria
+    icon: {fileID: 21300000, guid: 10697ec08cc26f94b8bc5b43727edb90, type: 3}
+  - fileNameBase: mid_tienchi
+    icon: {fileID: 21300000, guid: c9b8f3a065eb2584bb9485b4afc9d0bd, type: 3}
+  - fileNameBase: mid_ulm
+    icon: {fileID: 21300000, guid: 0293c98d6deaa3748820bb43dedb7d64, type: 3}
+  - fileNameBase: mid_ur
+    icon: {fileID: 21300000, guid: e491c364f9527c649bdc82a57b5dc90b, type: 3}
+  - fileNameBase: mid_vanheim
+    icon: {fileID: 21300000, guid: 27dcb1a7fa38e05419703082d6a13141, type: 3}
+  - fileNameBase: mid_xibalba
+    icon: {fileID: 21300000, guid: ecbfe32c36aa0a04ca0bbcc623deaf25, type: 3}
+  - fileNameBase: mid_ys
+    icon: {fileID: 21300000, guid: b4d12775479468d44930821a9770cfaf, type: 3}

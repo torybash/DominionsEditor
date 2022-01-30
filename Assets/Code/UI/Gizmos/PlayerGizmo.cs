@@ -60,7 +60,7 @@ public class PlayerGizmo : Gizmo
 		{
 			Player.Pretender = pretender;
 			
-			DomEdit.I.MapMan.ChangeNation(Player, pretender.nation.number);
+			DomEdit.I.MapMan.ChangeNation(Player, pretender.nation.id);
 		});
 	}
 

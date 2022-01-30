@@ -8,7 +8,7 @@ public class MapControls : MonoBehaviour
 {
 	private void Update ()
 	{
-		switch (DomEdit.I.Ui.Get<MapMenu>().ActiveEntry)
+		switch (DomEdit.I.Ui.Get<SearchMenu>().ActiveEntry)
 		{
 			case MonsterEntry monsterEntry:
 				//TODO // if (_selectedMonster.IS_COMMANDER) 
