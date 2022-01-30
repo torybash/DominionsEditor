@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Core;
+using Core.Entities;
 using Data;
 using Data.Entries;
-using Map.MapData;
 using UI.Gizmos;
 using UI.Menus.SearchMenu;
 using UnityEngine;
@@ -107,13 +107,13 @@ namespace Controls
 			if (gizmo is ProvinceGizmo provinceGizmo)
 			{
 				var province = provinceGizmo.Province;
-				var unit     = Unit.Create(monsterEntry.Id, 1, province.Owner);
+				var unit     = Troops.Create(monsterEntry.Id, 1, province.Owner);
 
 				province.Monsters.Add(unit);
 				provinceGizmo.CreateUnitGizmo(unit);
 			} else if (gizmo is CommanderGizmo commanderGizmo)
 			{
-				var unit = Unit.Create(monsterEntry.Id, 1, commanderGizmo.OwnerProvince.Province.Owner);
+				var unit = Troops.Create(monsterEntry.Id, 1, commanderGizmo.OwnerProvince.Province.Owner);
 
 				commanderGizmo.Data.UnitsUnderCommand.Add(unit);
 				commanderGizmo.OwnerProvince.CreateUnitGizmo(unit);
@@ -253,7 +253,7 @@ namespace Controls
 			var ownerCommander = province.Monsters.OfType<Commander>().SingleOrDefault(x => x.UnitsUnderCommand.Contains(monsterGizmo.MonsterData));
 			if (ownerCommander != null)
 			{
-				ownerCommander.UnitsUnderCommand.Remove((Unit)monsterGizmo.MonsterData);
+				ownerCommander.UnitsUnderCommand.Remove((Troops)monsterGizmo.MonsterData);
 			} else
 			{
 				province.Monsters.Remove(monsterGizmo.MonsterData);

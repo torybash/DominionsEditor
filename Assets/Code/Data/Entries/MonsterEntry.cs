@@ -12,7 +12,7 @@ namespace Data.Entries
 
 		public          int    Id     => id;
 		public override string Name   => name;
-		public override Sprite Sprite => sprite;
+		public Sprite Sprite => sprite;
 
 		public MonsterEntry (int id, string name, Sprite sprite)
 		{

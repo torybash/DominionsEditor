@@ -15,7 +15,7 @@ namespace UI.Gizmos
 		{
 			Entry = entry;
 
-			image.sprite = entry.Sprite;
+			// image.sprite = entry.Sprite;
 		}
 	}
 

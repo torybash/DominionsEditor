@@ -4,8 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Core;
+using Core.Entities;
 using Dom;
-using Map.MapData;
 using Map.MapElements;
 using Tools;
 using UI.Menus;
@@ -201,7 +201,7 @@ namespace Map
 					switch (ownedByCommander)
 					{
 						case BodyguardsElement bodyguardsElement:
-							var bodyguard = Unit.Create(bodyguardsElement.MonsterId, bodyguardsElement.Amount, commander.Nationality);
+							var bodyguard = Troops.Create(bodyguardsElement.MonsterId, bodyguardsElement.Amount, commander.Nationality);
 							commander.Bodyguards.Add(bodyguard);
 							break;
 						case ItemElement itemElement:
@@ -209,7 +209,7 @@ namespace Map
 							commander.Items.Add(item);
 							break;
 						case UnitsElement unitsElement:
-							var unit = Unit.Create(unitsElement.MonsterId, unitsElement.Amount, commander.Nationality);
+							var unit = Troops.Create(unitsElement.MonsterId, unitsElement.Amount, commander.Nationality);
 							commander.UnitsUnderCommand.Add(unit);
 							break;
 						case Experience _:

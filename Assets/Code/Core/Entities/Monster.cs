@@ -1,6 +1,6 @@
 using Data;
 
-namespace Map.MapData
+namespace Core.Entities
 {
 
 	public abstract class Monster

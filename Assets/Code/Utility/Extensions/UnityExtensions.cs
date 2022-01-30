@@ -16,13 +16,26 @@ namespace Utility.Extensions
 			}
 #endif
 			(obj as RenderTexture)?.Release();
-		
+			
 			if (Application.isPlaying)
 			{
-				Object.Destroy(obj);
+				if (obj is Component comp)
+				{
+					Object.Destroy(comp.gameObject);				
+				} else
+				{
+					Object.Destroy(obj);
+				}
+				
 			} else
 			{
-				Object.DestroyImmediate(obj, assetDelete);
+				if (obj is Component comp)
+				{
+					Object.DestroyImmediate(comp.gameObject, assetDelete);				
+				} else
+				{
+					Object.DestroyImmediate(obj, assetDelete);
+				} 
 			}
 		}
 

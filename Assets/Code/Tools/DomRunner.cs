@@ -38,7 +38,7 @@ namespace Tools
 
 			foreach (var player in map.Map.Players)
 			{
-				var newPretenderFilePath = $"{map.SavedGamesFolderPath}{Constants.GameName}\\{player.Nation.file_name_base}.2h";
+				var newPretenderFilePath = $"{map.SavedGamesFolderPath}{Constants.GameName}\\{player.Nation.fileNameBase}.2h";
 			
 				File.Copy(player.Pretender.filePath, newPretenderFilePath);
 			}

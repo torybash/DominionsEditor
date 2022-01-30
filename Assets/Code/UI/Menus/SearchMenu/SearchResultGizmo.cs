@@ -3,43 +3,39 @@ using Data.Entries;
 using TMPro;
 using UI.Gizmos;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace UI.Menus.SearchMenu
 {
 
-	public class SearchResultGizmo : Gizmo
+	public class SearchResultGizmo : Gizmo, IPointerDownHandler
 	{
-		public event Action<SearchableEntry> Selected;
+		public event Action<string> Selected;
 
 		[SerializeField] private TMP_Text nameLabel;
 		[SerializeField] private Image    spritePicture;
-		[SerializeField] private Button   selectButton;
 
-		private SearchableEntry _searchable;
+		private string _entryName;
+		
 
-		private void Awake ()
+		void IPointerDownHandler.OnPointerDown (PointerEventData eventData)
 		{
-			selectButton.onClick.AddListener(OnClicked);
+			Selected?.Invoke(_entryName);
 		}
 
-		private void OnClicked ()
+		public void Initialize (string entryName, Sprite sprite, string searchText)
 		{
-			Selected?.Invoke(_searchable);
-		}
+			_entryName = entryName;
 
-		public void Initialize (SearchableEntry searchable, string searchText)
-		{
-			_searchable = searchable;
-
-			var nameText = searchable.Name;
+			var nameText = entryName;
 			int startIdx = nameText.IndexOf(searchText, StringComparison.OrdinalIgnoreCase);
 			int endIdx   = startIdx + searchText.Length;
 			nameText = nameText.Insert(endIdx,   "</b>");
 			nameText = nameText.Insert(startIdx, "<b>");
 
 			nameLabel.text       = nameText;
-			spritePicture.sprite = searchable.Sprite;
+			spritePicture.sprite = sprite;
 		}
 	}
 

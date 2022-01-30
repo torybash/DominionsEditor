@@ -93,7 +93,7 @@ namespace Core
 			if (string.IsNullOrEmpty(path)) return;
 
 			var pretender = new Pretender(path);
-			pretender.nation = DomEdit.I.nations.GetNationByNameAndEra(pretender.nationName, pretender.era);
+			pretender.nation = DomEdit.I.Nations.GetNationByNameAndEra(pretender.nationName, pretender.era);
 
 			var player = Map.Players.SingleOrDefault(p => p.Nation == pretender.nation);
 			if (player == null)

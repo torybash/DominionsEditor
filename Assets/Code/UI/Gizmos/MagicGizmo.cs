@@ -1,5 +1,5 @@
 using Core;
-using Map.MapData;
+using Core.Entities;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

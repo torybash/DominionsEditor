@@ -13,7 +13,7 @@ namespace Data.Entries
 		[SerializeField] private Sprite   sprite;
 
 		public override string Name   => name;
-		public override Sprite Sprite => sprite;
+		public Sprite Sprite => sprite;
 
 		public ItemType Type => type;
 		public int      Id   => id;

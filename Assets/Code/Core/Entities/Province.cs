@@ -4,7 +4,7 @@ using Data;
 using Map.MapElements;
 using UnityEngine;
 
-namespace Map.MapData
+namespace Core.Entities
 {
 
 	[Serializable]

@@ -1,6 +1,6 @@
 using Dom;
 
-namespace Map.MapData
+namespace Core.Entities
 {
 
 	public class MagicOverride

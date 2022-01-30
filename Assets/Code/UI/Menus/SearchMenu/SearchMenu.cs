@@ -99,13 +99,13 @@ namespace UI.Menus.SearchMenu
 
 		private void CreateSearchGizmos (string searchText, List<SearchableEntry> results)
 		{
-			foreach (var searchResult in results)
-			{
-				var searchResultGizmo = DomEdit.I.Ui.Create<SearchResultGizmo>();
-				searchResultGizmo.Initialize(searchResult, searchText);
-				searchResultGizmo.Selected += OnSelected;
-				searchGizmos.Add(searchResultGizmo);
-			}
+			// foreach (var searchResult in results)
+			// {
+			// 	var searchResultGizmo = DomEdit.I.Ui.Create<SearchResultGizmo>();
+			// 	searchResultGizmo.Initialize(searchResult, searchText);
+			// 	searchResultGizmo.Selected += OnSelected;
+			// 	searchGizmos.Add(searchResultGizmo);
+			// }
 		}
 
 		private void OnSelected (SearchableEntry obj)

@@ -1,4 +1,4 @@
-namespace Map.MapData
+namespace Core.Entities
 {
 
 	public class Item

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Core;
+using Core.Entities;
 using Data;
 using Dom;
-using Map.MapData;
 using Map.MapElements;
 using UnityEngine;
 
@@ -110,8 +110,8 @@ namespace Map
 								}
 						
 								break;
-							case Unit unit:
-								elems.Add(new UnitsElement{MonsterId = unit.MonsterId, Amount = unit.Amount, ProvinceNum = province.ProvinceNumber});
+							case Troops troops:
+								elems.Add(new UnitsElement{MonsterId = troops.MonsterId, Amount = troops.Amount, ProvinceNum = province.ProvinceNumber});
 								break;
 							default:
 								throw new ArgumentOutOfRangeException(nameof(monster));

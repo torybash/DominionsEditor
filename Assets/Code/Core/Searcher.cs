@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Data;
 using Data.Entries;
 
 namespace Core
@@ -7,10 +8,15 @@ namespace Core
 
 	public class Searcher
 	{
-		private const int MAX_RESULTS = 10;
+		public const int MAX_RESULTS = 25;
 	
 		public SearchFilter searchFilter = SearchFilter.All;
-	
+
+		// public Searcher (List<Unit> getAll)
+		// {
+		// 	throw new NotImplementedException();
+		// }
+
 		public List<SearchableEntry> Search (string searchText)
 		{
 			var foundEntries      = new List<SearchableEntry>();
@@ -30,6 +36,8 @@ namespace Core
 		
 			return foundEntries;
 		} 
+		
+		
 	}
 
 	[Flags]

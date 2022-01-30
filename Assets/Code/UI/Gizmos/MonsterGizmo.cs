@@ -1,6 +1,6 @@
 using Core;
+using Core.Entities;
 using Data;
-using Map.MapData;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

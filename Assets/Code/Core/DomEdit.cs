@@ -15,9 +15,11 @@ namespace Core
 		public MagicPathTable magicPaths;
 		public IconsTable     icons;
 
-		public UiManager  Ui      { get; private set; }
-		public MapManager MapMan  { get; private set; }
-		public Nations    nations { get; private set; }
+		public UiManager  Ui       { get; private set; }
+		public MapManager MapMan   { get; private set; }
+		public GameData   GameData { get; set; }
+		public Nations    Nations  { get; private set; }
+		public Units      Units    { get; private set; }
 
 		public static DomEdit I;
 
@@ -25,9 +27,14 @@ namespace Core
 		{
 			I = this;
 
-			Ui      = new UiManager();
-			MapMan  = new MapManager();
-			nations = new Nations();
+			Ui       = new UiManager();
+			MapMan   = new MapManager();
+			GameData = new GameData();
+			Nations  = new Nations();
+			Units    = new Units();
+
+			Nations.LoadData();
+			Units.ParseData();
 
 			Ui.Get<MainMenu>().Show();
 
@@ -41,6 +48,7 @@ namespace Core
 			//
 			// var maMonsters = new Monsters();
 		}
+
 
 		public static bool HasDefaultPretenders ()
 		{

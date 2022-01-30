@@ -28,7 +28,7 @@ namespace Dom
 				_       => -1
 			} ;
 
-			nation = era != -1 ? DomEdit.I.nations.GetNationByNameAndEra(nationName, era) : Nation.Independents;
+			nation = era != -1 ? DomEdit.I.Nations.GetNationByNameAndEra(nationName, era) : Nation.Independents;
 		}
 	}
 

@@ -1,133 +1,95 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Map.MapData;
+using Core;
+using Core.Entities;
 using UnityEngine;
+
+// ReSharper disable StringLiteralTypo
 
 namespace Data
 {
 
 	public class Units
 	{
-		private const string BASE_U_PATH               = "Assets/Data/gamedata/BaseU.csv";
-		private const string COAST_LEADERS_BY_NATION   = "Assets/Data/gamedata/coast_leader_types_by_nation.csv";
-		private const string COAST_TROOP_BY_NATION     = "Assets/Data/gamedata/coast_leader_types_by_nation.csv";
-		private const string FORT_LEADERS_BY_NATION    = "Assets/Data/gamedata/fort_leader_types_by_nation.csv";
-		private const string FORT_TROOP_BY_NATION      = "Assets/Data/gamedata/fort_leader_types_by_nation.csv";
-		private const string NONFORT_LEADERS_BY_NATION = "Assets/Data/gamedata/nonfort_leader_types_by_nation.csv";
-		private const string NONFORT_TROOP_BY_NATION   = "Assets/Data/gamedata/nonfort_leader_types_by_nation.csv";
+		private List<Unit> _units;
 
-		private const string ICONS_FOLDER_PATH = "Assets/Art/sprites/";
-
-
-		private Dictionary<int, Sprite> _spriteMap;
-
-
-
-
-		public Units ()
+		public List<Unit> GetAll ()
 		{
-			var baseU                  = CsvData.LoadCsv(BASE_U_PATH);
-			var coastLeadersByNation   = CsvData.LoadCsv(COAST_LEADERS_BY_NATION);
-			var coastTroopByNation     = CsvData.LoadCsv(COAST_TROOP_BY_NATION);
-			var fortLeadersByNation    = CsvData.LoadCsv(FORT_LEADERS_BY_NATION);
-			var fortTroopByNation      = CsvData.LoadCsv(FORT_TROOP_BY_NATION);
-			var nonfortLeadersByNation = CsvData.LoadCsv(NONFORT_LEADERS_BY_NATION);
-			var nonfortTroopByNation   = CsvData.LoadCsv(NONFORT_TROOP_BY_NATION);
+			return _units;
+		}
 
-			Debug.Log($"Loaded units {baseU.data.Count}. Attributes: {baseU.data[0].Keys.Count}");
-
-			foreach (var unitData in baseU.data)
+		public void ParseData ()
+		{
+			_units = new List<Unit>();
+			foreach (var unitData in DomEdit.I.GameData.baseUTable)
 			{
-				var id   = unitData["id"];
-				var name = unitData["name"];
+				var unit = new Unit();
+				unit.id   = int.Parse(unitData["id"]);
+				unit.name = unitData["name"];
+				unit.icon = DomEdit.I.icons.GetUnitIcon(unit.id);
 
-				var elem299 = unitData.Values.ElementAt(299);
-				if (!string.IsNullOrEmpty(elem299))
+				_units.Add(unit);
+			}
+			
+			foreach (var nation in DomEdit.I.Nations.GetAll())
+			{
+				//////////////////////////////////////////////////
+				// associate units with this nation
+				//  if unit is already associated with a nation it creates a duplicate (with incremented id: +.01)
+				/////////////////////////////////////////////////
+				var iterations = new Dictionary<string, List<int>>
 				{
-					var elem299Key = unitData.Keys.ElementAt(299);
+					{ "unit", nation.units },
+					{ "commander", nation.commanders },
+					{ "cmdr (foreign)", nation.foreigncommanders },
+					{ "unit (foreign)", nation.foreignunits },
+					{ "unit (forest)", nation.forestrec },
+					{ "cmdr (forest)", nation.forestcom },
+					{ "unit (mountain)", nation.mountainrec },
+					{ "cmdr (mountain)", nation.mountaincom },
+					{ "unit (swamp)", nation.swamprec },
+					{ "cmdr (swamp)", nation.swampcom },
+					{ "unit (waste)", nation.wasterec },
+					{ "cmdr (waste)", nation.wastecom },
+					{ "unit (cave)", nation.caverec },
+					{ "cmdr (cave)", nation.cavecom },
+					{ "unit (coast)", nation.coastrec },
+					{ "cmdr (coast)", nation.coastcom },
+					{ "unit (plains)", nation.plainsrec },
+					{ "cmdr (plains)", nation.plainscom },
+					{ "unit (land)", nation.landunit },
+					{ "cmdr (land)", nation.landcom },
+					{ "hero (unique)", nation.heroes },
+					{ "hero (multi)", nation.multiheroes },
+					{ "unit (u-water)", nation.uwunit },
+					{ "cmdr (u-water)", nation.uwcom },
+					{ "unit (cap only)", nation.capunits },
+					{ "cmdr (cap only)", nation.capcommanders },
+					{ "unit (future cap only)", nation.futurecapunits },
+					{ "cmdr (future cap only)", nation.futurecapcommanders }
+				};
 
-					Debug.Log($"{name} ({id}) has elem299! ({elem299Key}) {elem299}");
-
-				}
-
-				bool isLeader = coastLeadersByNation.data.Any(x => x["monster_number"] == id)
-					|| fortLeadersByNation.data.Any(x => x["monster_number"]           == id)
-					|| nonfortLeadersByNation.data.Any(x => x["monster_number"]        == id);
-
-				if (isLeader)
+				foreach (var iter in iterations)
 				{
-					// Debug.Log($"{name} ({id}) is commander!");
+					var arr = iter.Value;
+					foreach (var unitId in arr)
+					{
+						var unitData = DomEdit.I.GameData.baseUTable.GetData("id", unitId.ToString());
+						if (unitData == null)
+						{
+							Debug.LogError($"Unit with id {unitId} not found for nation {nation}");
+							continue;
+						}
+
+						var unit = _units.Single(x => x.id == unitId);
+						unit.unitType = iter.Key;
+						unit.nations.Add(nation);
+					}
 				}
 			}
 		}
 
-		private List<Monster> GetMonsters ()
-		{
-			var monsters = new List<Monster>();
-
-			var monsterLines = File.ReadAllLines(BASE_U_PATH);
-
-
-			return monsters;
-		}
-
-		private void LoadMonsters ()
-		{
-			// Target.Entries.Clear();
-
-			var monsterLines   = File.ReadAllLines(BASE_U_PATH);
-			var attributeNames = monsterLines[0].Split('\t');
-
-			for (var i = 1; i < monsterLines.Length; i++)
-			{
-				var monsterValues = monsterLines[i].Split('\t');
-
-
-				const int idIdx       = 0;
-				const int nameIdx     = 1;
-				int       id          = int.Parse(monsterValues[idIdx]);
-				var       monsterName = monsterValues[nameIdx];
-
-				// var sprite       = GetSprite(id);
-				// var monsterEntry = new MonsterEntry(id, monsterName, sprite);
-			}
-		}
-
-		// private Sprite GetSprite (int monsterId)
-		// {
-		//
-		// 	if (_spriteMap == null) CreateSpriteMap();
-		// 	if (!_spriteMap.TryGetValue(monsterId, out var foundSprite))
-		// 	{
-		// 		Debug.LogError($"No sprite found for monster with id {monsterId}");
-		// 	}
-		// 	return foundSprite;
-		// }
-		//
-		// private void CreateSpriteMap ()
-		// {
-		// 	_spriteMap = new Dictionary<int, Sprite>();
-		// 	foreach (var iconPath in Directory.GetFiles(ICONS_FOLDER_PATH))
-		// 	{
-		// 		if (!iconPath.EndsWith(".png")) continue;
-		//
-		// 		int lastSepIdx = iconPath.LastIndexOf('/');
-		// 		int extIdx     = iconPath.LastIndexOf('.');
-		//
-		// 		var iconName = iconPath.Substring(lastSepIdx + 1, extIdx - lastSepIdx - 1);
-		//
-		// 		var idText   = iconName.Split('_')[0];
-		// 		int id       = int.Parse(idText);
-		// 		var typeText = iconName.Split('_')[1];
-		// 		int type     = int.Parse(typeText);
-		// 		if (type == 1)
-		// 		{
-		// 			// var sprite = AssetDatabase.LoadAssetAtPath<Sprite>(iconPath);
-		// 			// _spriteMap.Add(id, sprite);
-		// 		}
-		// 	}
-		// }
 
 	}
 

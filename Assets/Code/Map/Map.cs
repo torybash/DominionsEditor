@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Core;
-using Map.MapData;
+using Core.Entities;
 using Map.MapElements;
 using UI.Menus;
 using UnityEngine;

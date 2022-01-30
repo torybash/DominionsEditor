@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core;
+using Core.Entities;
 using Data;
-using Map.MapData;
 using ThisOtherThing.UI.Shapes;
 using TMPro;
 using UnityEngine;
@@ -83,7 +83,7 @@ namespace UI.Gizmos
 							CreateUnitGizmo(unit);
 						}
 						break;
-					case Unit unit:
+					case Troops unit:
 						CreateUnitGizmo(unit);
 						break;
 					default:
@@ -116,7 +116,7 @@ namespace UI.Gizmos
 
 		public void SetOwner (Nation nation)
 		{
-			if (nation.Equals(Nation.Independents))
+			if (nation == null || nation.Equals(Nation.Independents))
 			{
 				if (_nationGizmo != null)
 				{
@@ -144,13 +144,13 @@ namespace UI.Gizmos
 			_monsterGizmos.Add(commanderGizmo);
 		}
 
-		public void CreateUnitGizmo (Unit unit)
+		public void CreateUnitGizmo (Troops troops)
 		{
 			var unitGizmo = DomEdit.I.Ui.Create<UnitGizmo>(rosterGroup);
-			unitGizmo.SetData(unit);
+			unitGizmo.SetData(troops);
 			_monsterGizmos.Add(unitGizmo);
 
-			var ownerCommander = Province.Monsters.OfType<Commander>().SingleOrDefault(x => x.UnitsUnderCommand.Contains(unit));
+			var ownerCommander = Province.Monsters.OfType<Commander>().SingleOrDefault(x => x.UnitsUnderCommand.Contains(troops));
 			if (ownerCommander != null)
 			{
 				var ownerCommanderGizmo = _monsterGizmos.OfType<CommanderGizmo>().Single(x => x.Data == ownerCommander);

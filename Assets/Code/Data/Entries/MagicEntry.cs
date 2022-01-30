@@ -11,7 +11,7 @@ namespace Data.Entries
 		[SerializeField] private Sprite    sprite;
 
 		public override string Name   => magicPath.ToString();
-		public override Sprite Sprite => sprite;
+		public Sprite Sprite => sprite;
 	}
 
 }
