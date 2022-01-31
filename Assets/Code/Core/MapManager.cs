@@ -138,7 +138,7 @@ namespace Core
 
 		public void ChangeNation (GamePlayer player, int nationNum)
 		{
-			player.Nation = nationNum;
+			player.Nation = DomEdit.I.Nations.GetNationById(nationNum);
 
 			DomEdit.I.Ui.Get<PlayersMenu>().UpdateGizmo(player);
 		}

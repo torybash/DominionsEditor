@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Core;
 using Data;
-using Data.Entries;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,11 +19,8 @@ namespace UI.Menus.SearchMenu
 
 		private readonly List<UnitSearchGizmo> searchGizmos = new List<UnitSearchGizmo>();
 
-		private Searcher _searcher;
-
 		private void Awake ()
 		{
-
 			searchField.onValueChanged.AddListener(OnSearchChanged);
 			clearSearchButton.onClick.AddListener(() => searchField.text = "");
 		}
@@ -34,29 +30,23 @@ namespace UI.Menus.SearchMenu
 		{
 			AddNationOptions();
 			AddUnitTypeOptions();
-			
+
 			// _searcher = new Searcher(DomEdit.I.Units.GetAll());
 		}
 
 		private void OnSearchChanged (string searchText)
 		{
 			var results = Search(searchText);
-			
+
 			clearSearchButton.gameObject.SetActive(!string.IsNullOrEmpty(searchText));
 
 			searchGizmos.SafeDestroy();
 			if (!string.IsNullOrEmpty(searchText)) CreateSearchGizmos(searchText, results);
 		}
 
-		private List<Unit> Search (string searchText)
+		private List<UnitData> Search (string searchText)
 		{
-
-			var foundEntries      = new List<Unit>();
-			// var entriesToSearchIn = new List<SearchableEntry>();
-			// if (searchFilter.HasFlag(SearchFilter.Monsters)) entriesToSearchIn.AddRange(DomEdit.I.monsters.Entries);
-			// if (searchFilter.HasFlag(SearchFilter.Items)) entriesToSearchIn.AddRange(DomEdit.I.items.Entries);
-			// if (searchFilter.HasFlag(SearchFilter.Magic)) entriesToSearchIn.AddRange(DomEdit.I.magicPaths.magics);
-	
+			var foundEntries = new List<UnitData>();
 			foreach (var entry in DomEdit.I.Units.GetAll())
 			{
 				if (entry.name.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) != -1)
@@ -65,24 +55,27 @@ namespace UI.Menus.SearchMenu
 					if (foundEntries.Count >= Searcher.MAX_RESULTS) break;
 				}
 			}
-	
+
 			return foundEntries;
 		}
 
-		private void CreateSearchGizmos (string searchText, List<Unit> results)
+		private void CreateSearchGizmos (string searchText, List<UnitData> results)
 		{
-			foreach (var searchResult in results)
+			foreach (var unit in results)
 			{
 				var searchResultGizmo = DomEdit.I.Ui.Create<UnitSearchGizmo>();
-				searchResultGizmo.Initialize($"{searchResult.name} ({searchResult.unitType})", searchResult.icon, searchText);
+				searchResultGizmo.Initialize(unit);
 				searchResultGizmo.Selected += OnSelected;
+				searchResultGizmo.GetComponent<SearchResultGizmo>().Initialize($"{unit.name} ({unit.unitType})", unit.icon, searchText);
 				searchGizmos.Add(searchResultGizmo);
 			}
 		}
 
-		private void OnSelected (string obj)
+		private void OnSelected (UnitData unitData)
 		{
-			Debug.Log($"OnSelected {obj}");
+			Debug.Log($"OnSelected {unitData}");
+
+			DomEdit.I.controls.SetActiveEntity(unitData);
 		}
 
 		private void AddNationOptions ()

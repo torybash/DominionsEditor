@@ -1,3 +1,4 @@
+using Controls;
 using Data;
 using Data.Tables;
 using UI.Menus;
@@ -14,12 +15,15 @@ namespace Core
 		// public NationsTable   nations;
 		public MagicPathTable magicPaths;
 		public IconsTable     icons;
+		public MapControls    controls;
 
 		public UiManager  Ui       { get; private set; }
 		public MapManager MapMan   { get; private set; }
 		public GameData   GameData { get; set; }
-		public Nations    Nations  { get; private set; }
-		public Units      Units    { get; private set; }
+		
+		public Nations Nations { get; private set; }
+		public Units   Units   { get; private set; }
+		public Items   Items   { get; private set; }
 
 		public static DomEdit I;
 
@@ -32,9 +36,11 @@ namespace Core
 			GameData = new GameData();
 			Nations  = new Nations();
 			Units    = new Units();
+			Items    = new Items();
 
-			Nations.LoadData();
+			Nations.ParseData();
 			Units.ParseData();
+			Items.ParseData();
 
 			Ui.Get<MainMenu>().Show();
 

@@ -1,25 +1,29 @@
 using System.Collections.Generic;
+using Core.Entities;
 using UnityEngine;
 
 namespace Data
 {
-	public class Unit
+
+	public class UnitData : IEntityData
 	{
 		public int          id;
 		public string       name;
-		public string       unitType;
+		public UnitType     unitType;
 		public List<Nation> nations = new List<Nation>();
 		public Sprite       icon;
 	}
 
 	public enum UnitType
 	{
+		Unknown,
 		Commander,
 		CommanderCapOnly,
 		CommanderFutureCapOnly,
 		CommanderCave,
 		CommanderCoast,
 		CommanderForeign,
+		CommanderForest,
 		CommanderMountain,
 		CommanderSwamp,
 		CommanderUnderwater,
@@ -27,12 +31,14 @@ namespace Data
 		CommanderPlains,
 		CommanderMagicSite,
 		CommanderSummon,
+		CommanderLand,
 		Unit,
 		UnitCapOnly,
 		UnitFutureCapOnly,
 		UnitCave,
 		UnitCoast,
 		UnitForeign,
+		UnitForest,
 		UnitMountain,
 		UnitSwamp,
 		UnitUnderwater,
@@ -40,10 +46,10 @@ namespace Data
 		UnitPlains,
 		UnitMagicSite,
 		UnitSummon,
+		UnitLand,
 		Hero,
 		HeroMulti,
 		HeroUnique,
 		Pretender,
-		Unknown,
 	}
 }

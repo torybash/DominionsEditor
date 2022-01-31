@@ -175,7 +175,8 @@ namespace Map
 			{
 				if (provinces.ContainsKey(provinceOwner.ProvinceNum))
 				{
-					provinces[provinceOwner.ProvinceNum].Owner = provinceOwner.NationNum;
+					var nation = DomEdit.I.Nations.GetNationById(provinceOwner.NationNum);
+					provinces[provinceOwner.ProvinceNum].Owner = nation;
 				}
 			}
 
@@ -183,7 +184,8 @@ namespace Map
 			{
 				if (provinces.ContainsKey(startLocation.ProvinceNum))
 				{
-					provinces[startLocation.ProvinceNum].Owner = startLocation.NationNum;
+					var nation = DomEdit.I.Nations.GetNationById(startLocation.NationNum);
+					provinces[startLocation.ProvinceNum].Owner = nation;
 				}
 			}
 
@@ -255,7 +257,7 @@ namespace Map
 			{
 				var startLocation      = mapElements.OfType<StartLocation>().SingleOrDefault(x => x.NationNum == allowedPlayer.NationNum);
 				var capitalProvinceNum = startLocation?.ProvinceNum ?? -1;
-				var player             = new GamePlayer(PlayerType.Human, allowedPlayer.NationNum) { CapitalProvinceNum = capitalProvinceNum };
+				var player             = new GamePlayer(PlayerType.Human, DomEdit.I.Nations.GetNationById(allowedPlayer.NationNum)) { CapitalProvinceNum = capitalProvinceNum };
 				players.Add(player);
 			}
 			return players;

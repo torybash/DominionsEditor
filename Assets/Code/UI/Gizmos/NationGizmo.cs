@@ -27,7 +27,7 @@ namespace UI.Gizmos
 		{
 			Nation = nation;
 		
-			if (nation == Nation.Independents)
+			if (nation == null)
 			{
 				flagImage.sprite = blankSprite;
 				nameLabel.text   = "";

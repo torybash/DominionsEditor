@@ -8,12 +8,9 @@ namespace Data
 
 	public class CsvTable : List<Dictionary<string, string>>
 	{
-		// public List<Dictionary<string, string>> table;
-
 		public CsvTable (List<Dictionary<string, string>> table)
 		{
 			AddRange(table);
-			// this.table = table;
 		}
 
 		public static CsvTable LoadCsv (string path)
@@ -38,7 +35,7 @@ namespace Data
 					var key = keyNames[j];
 					var val  = values[j];
 
-					if (val != "" && val != "\r" && !dataMap.ContainsKey(key))
+					if (/*val != "" &&*/ val != "\r" && !dataMap.ContainsKey(key))
 					{
 						dataMap.Add(key, val);
 					}

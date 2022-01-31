@@ -15,7 +15,11 @@ namespace Data
 	
 		public Sprite    icon;
 		
-		public List<int> homerealm           = new List<int>();
+		public List<int> homerealm   = new List<int>();
+		public List<int> sites       = new List<int>();
+		public List<int> futuresites = new List<int>();
+		
+		//Units
 		public List<int> pretenders          = new List<int>();
 		public List<int> commanders          = new List<int>();
 		public List<int> foreigncommanders   = new List<int>();
@@ -23,8 +27,6 @@ namespace Data
 		public List<int> foreignunits        = new List<int>();
 		public List<int> coastcom            = new List<int>();
 		public List<int> coastrec            = new List<int>();
-		public List<int> sites               = new List<int>();
-		public List<int> futuresites         = new List<int>();
 		public List<int> landcom             = new List<int>();
 		public List<int> uwcom               = new List<int>();
 		public List<int> uwunit              = new List<int>();
@@ -51,14 +53,14 @@ namespace Data
 		public static Nation Invalid      => new Nation { id = -1 };
 		public static Nation Independents => new Nation { id = 0 };
 
-		public static implicit operator Nation(int value)
-		{
-			var nation = new Nation
-			{
-				id = value
-			};
-			return nation;
-		}
+		// public static implicit operator Nation(int value)
+		// {
+		// 	var nation = new Nation
+		// 	{
+		// 		id = value
+		// 	};
+		// 	return nation;
+		// }
 
 		protected bool Equals (Nation other)
 		{

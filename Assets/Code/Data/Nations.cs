@@ -17,11 +17,16 @@ namespace Data
 
 		public Nation GetNationByNameAndEra (string nationName, int era)
 		{
-			var entry = _nations.SingleOrDefault(x => x.name.Equals(nationName, StringComparison.OrdinalIgnoreCase) && x.era == era);
-			return entry;
+			var nation = _nations.SingleOrDefault(x => x.name.Equals(nationName, StringComparison.OrdinalIgnoreCase) && x.era == era);
+			return nation;
 		}
 
-		public void LoadData ()
+		public Nation GetNationById (int id)
+		{
+			return _nations.SingleOrDefault(x => x.id == id);
+		}
+		
+		public void ParseData ()
 		{
 			// bool disableold = modctx.disableoldnations;
 			// if (!disableold)
@@ -183,8 +188,8 @@ namespace Data
 				{
 					if (int.Parse(data["nation_number"]) == nation.id)
 					{
-						var unitData = DomEdit.I.GameData.baseUTable.GetData("id", data["monster_number"]);
-						if (unitData.ContainsKey("landshape"))
+						var unitData = DomEdit.I.GameData.unitsTable.GetData("id", data["monster_number"]);
+						if (unitData["landshape"] != string.Empty)
 						{
 							nation.coastcom.Add(int.Parse(unitData["landshape"]));
 						} else
@@ -199,8 +204,8 @@ namespace Data
 				{
 					if (int.Parse(data["nation_number"]) == nation.id)
 					{
-						var unitData = DomEdit.I.GameData.baseUTable.GetData("id", data["monster_number"]);
-						if (unitData.ContainsKey("landshape"))
+						var unitData = DomEdit.I.GameData.unitsTable.GetData("id", data["monster_number"]);
+						if (unitData["landshape"] != string.Empty)
 						{
 							nation.coastrec.Add(int.Parse(unitData["landshape"]));
 						} else
@@ -227,8 +232,8 @@ namespace Data
 					}
 					if (data["attribute"] == "158" || data["attribute"] == "159")
 					{
-						var unitData = DomEdit.I.GameData.baseUTable.GetData("id", data["raw_value"]);
-						if (unitData.ContainsKey("landshape"))
+						var unitData = DomEdit.I.GameData.unitsTable.GetData("id", data["raw_value"]);
+						if (unitData["landshape"] != string.Empty)
 						{
 							nation.coastcom.Add(int.Parse(unitData["landshape"]));
 						} else
@@ -238,8 +243,8 @@ namespace Data
 					}
 					if (data["attribute"] == "160" || data["attribute"] == "161" || data["attribute"] == "162")
 					{
-						var unitData = DomEdit.I.GameData.baseUTable.GetData("id", data["raw_value"]);
-						if (unitData.ContainsKey("landshape"))
+						var unitData = DomEdit.I.GameData.unitsTable.GetData("id", data["raw_value"]);
+						if (unitData["landshape"] != string.Empty)
 						{
 							nation.coastrec.Add(int.Parse(unitData["landshape"]));
 						} else
@@ -253,8 +258,8 @@ namespace Data
 					}
 					if (data["attribute"] == "186")
 					{
-						var unitData = DomEdit.I.GameData.baseUTable.GetData("id", data["raw_value"]);
-						if (unitData.ContainsKey("watershape"))
+						var unitData = DomEdit.I.GameData.unitsTable.GetData("id", data["raw_value"]);
+						if (unitData["watershape"] != string.Empty)
 						{
 							nation.uwcom.Add(int.Parse(unitData["watershape"]));
 						} else
@@ -268,8 +273,8 @@ namespace Data
 					    data["attribute"] == "191" ||
 					    data["attribute"] == "213")
 					{
-						var unitData = DomEdit.I.GameData.baseUTable.GetData("id", data["raw_value"]);
-						if (unitData.ContainsKey("watershape"))
+						var unitData = DomEdit.I.GameData.unitsTable.GetData("id", data["raw_value"]);
+						if (unitData["watershape"] != string.Empty)
 						{
 							nation.uwunit.Add(int.Parse(unitData["watershape"]));
 						} else
@@ -436,89 +441,52 @@ namespace Data
 // 					} while (spell = spell.nextspell);
 // 				}
 
-				//associate pretenders
-				// nation.pretenders = nation.pretenders.Distinct().ToList();
-				// foreach (int nationPretender in nation.pretenders)
-				// {
-				// 	var unitData = baseUTable.GetData("id", nationPretender.ToString());
-				// 	if (unitData == null) continue;
-				// }
-
-				// for (FIXME_VAR_TYPE i = 0; i < arr.length; i++)
-				// {
-				// 	if (!arr[i]) continue;
-				// 	FIXME_VAR_TYPE u = modctx.unitlookup[arr[i]];
-				// 	if (!u)
-				// 	{
-				// 		console.log(basekey + ' ' + arr[i] + ' not found (nation ' + nation.id + ')');
-				// 		continue;
-				// 	}
-				// 	if (u.typechar && u.typechar != basekey)
-				// 	{
-				// 		//find pretender version of this unit
-				// 		u = modctx.getUnitOfType(u, basekey) || modctx.cloneUnit(u);
-				// 	}
-				// 	u.typechar = basekey;
-				// 	u.nations  = u.nations || {
-				// 	}
-				// 	;
-				// 	u.nations[nation.id] = o;
-				// 	u.eracodes      = u.eracodes || {
-				// 	}
-				// 	;
-				// 	u.eracodes[nation.eracode] = true;
-				//
-				// 	for (FIXME_VAR_TYPE oj = 0, attr; attr = modctx.attributes_by_nation[oj]; oj++)
-				// 	{
-				// 		if (int.Parse(attr.nation_number) == nation.id)
-				// 		{
-				// 			//FIXME_VAR_TYPE attribute= modctx.attributes_lookup[int.Parse(attr.attribute_record_id)];
-				// 			if (attr.attribute == "314")
-				// 			{
-				// 				if (u.id == attr.raw_value)
-				// 				{
-				// 					u.cheapgod20 = u.cheapgod20 || []
-				// 					;
-				// 					u.cheapgod20.push(o);
-				// 				}
-				// 			}
-				// 			if (attr.attribute == "315")
-				// 			{
-				// 				if (u.id == attr.raw_value)
-				// 				{
-				// 					u.cheapgod40 = u.cheapgod40 || []
-				// 					;
-				// 					u.cheapgod40.push(o);
-				// 				}
-				// 			}
-				// 		}
-				// 	}
-				// }
+				
 
 				//units from sites
-				// FIXME_VAR_TYPE basekey = 'site';
-				// FIXME_VAR_TYPE arr     = nation.sites;
-				// var gemkeys = new Dictionary<string, int>{ {"F", 0}, {"A", 0}, {"W", 0}, {"E",0}, {"S",0}, {"D",0}, {"N",0}, {"B",0 }};
-				// foreach (var site in nation.sites)
-				// {
-				// 	var siteData = magicSitesTable.GetData("id", site.ToString());
-				// 	if (siteData == null)
-				// 	{
-				// 		// Debug.Log("Site " + siteData + " not found (nation ' + nation.id + ')');
-				// 		continue;
-				// 	}
-				// 	
-				// 	nation.capunits = nation.capunits.Union(site)
-				// 	// nation.capunits      = nation.capunits.concat(s.units, s.hmon, s.mon);
-				// 	// nation.capcommanders = nation.capcommanders.concat(s.commanders, s.hcom);
-				// 	// foreach (k in gemkeys) {
-				// 	// 	if (s[k])
-				// 	// 		gemkeys[k] += int.Parse(s[k]);
-				// 	// }
-				// }
+				 // FIXME_VAR_TYPE basekey = 'site';
+				 // var arr     = nation.sites;
+				 var gemkeys = new Dictionary<string, int>{ {"F", 0}, {"A", 0}, {"W", 0}, {"E",0}, {"S",0}, {"D",0}, {"N",0}, {"B",0 }};
+				 foreach (var site in nation.sites)
+				 {
+				 	var siteData = DomEdit.I.GameData.magicSitesTable.GetData("id", site.ToString());
+				 	if (siteData == null)
+				 	{
+				 		// Debug.Log("Site " + siteData + " not found (nation ' + nation.id + ')');
+				 		continue;
+				 	}
+
+				    var siteUnits = new List<string>
+				    {
+					    siteData["hmon1"],siteData["hmon2"],siteData["hmon3"],siteData["hmon4"],siteData["hmon5"],
+					    siteData["mon1"],siteData["mon2"],siteData["mon3"],siteData["mon4"],siteData["mon5"],
+				    };
+				    var siteCommanders = new List<string> { siteData["hcom1"],siteData["hcom2"],siteData["hcom3"]};
+				    nation.capunits      = nation.capunits.Union(siteUnits.Where(x => x           != string.Empty).Select(int.Parse)).ToList();
+				    nation.capcommanders = nation.capcommanders.Union(siteCommanders.Where(x => x != string.Empty).Select(int.Parse)).ToList();
+				 }
 
 				// FIXME_VAR_TYPE basekey = 'futuresite';
 				// FIXME_VAR_TYPE arr     = nation.futuresites;
+				foreach (var site in nation.futuresites)
+				{
+					var siteData = DomEdit.I.GameData.magicSitesTable.GetData("id", site.ToString());
+					if (siteData == null)
+					{
+						// Debug.Log("Site " + siteData + " not found (nation ' + nation.id + ')');
+						continue;
+					}
+
+					var siteUnits = new List<string>
+					{
+						siteData["hmon1"],siteData["hmon2"],siteData["hmon3"],siteData["hmon4"],siteData["hmon5"],
+						siteData["mon1"],siteData["mon2"],siteData["mon3"],siteData["mon4"],siteData["mon5"],
+					};
+					var siteCommanders = new List<string> { siteData["hcom1"],siteData["hcom2"],siteData["hcom3"]};
+					nation.futurecapunits      = nation.futurecapunits.Union(siteUnits.Where(x => x           != string.Empty).Select(int.Parse)).ToList();
+					nation.futurecapcommanders = nation.futurecapcommanders.Union(siteCommanders.Where(x => x != string.Empty).Select(int.Parse)).ToList();
+				}
+				
 				// for (FIXME_VAR_TYPE i = 0; i < arr.length; i++)
 				// {
 				// 	if (!arr[i]) continue;
@@ -531,22 +499,22 @@ namespace Data
 				// 	nation.futurecapunits      = nation.futurecapunits.concat(s.units, s.hmon, s.mon);
 				// 	nation.futurecapcommanders = nation.futurecapcommanders.concat(s.commanders, s.hcom);
 				// }
-
-				//remove capunits duplicated in units (etc)
-				// Utils.arrayDisect(nation.capunits,      nation.units)
-				// Utils.arrayDisect(nation.capcommanders, nation.commanders)
 				//
-				// Utils.arrayUnique(nation.units);
-				// Utils.arrayUnique(nation.commanders);
-				// Utils.arrayUnique(nation.capunits);
-				// Utils.arrayUnique(nation.capcommanders);
-				//should do it..?
-
-				// nation.gems = '';
-				// foreach (k in gemkeys) {
-				// 	if (gemkeys[k])
-				// 		nation.gems += '+' + string(gemkeys[k]) + k;
-				// }
+				// // remove capunits duplicated in units (etc)
+				//  Utils.arrayDisect(nation.capunits,      nation.units)
+				//  Utils.arrayDisect(nation.capcommanders, nation.commanders)
+				//
+				//  Utils.arrayUnique(nation.units);
+				//  Utils.arrayUnique(nation.commanders);
+				//  Utils.arrayUnique(nation.capunits);
+				//  Utils.arrayUnique(nation.capcommanders);
+				// should do it..?
+				//
+				//  nation.gems = '';
+				//  foreach (k in gemkeys) {
+				//  	if (gemkeys[k])
+				//  		nation.gems += '+' + string(gemkeys[k]) + k;
+				//  }
 			}
 
 			// foreach (var nation in _nations)
@@ -655,6 +623,7 @@ namespace Data
 			// 	}
 			// }
 		}
+
 
 
 	}

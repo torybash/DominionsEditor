@@ -5,7 +5,6 @@ using Core.Entities;
 using Data;
 using Data.Entries;
 using UI.Gizmos;
-using UI.Menus.SearchMenu;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Utility;
@@ -15,36 +14,38 @@ namespace Controls
 
 	public class MapControls : MonoBehaviour
 	{
+		private IEntityData _activeEntityData;
+
 		private void Update ()
 		{
-			switch (DomEdit.I.Ui.Get<SearchMenu>().ActiveEntry)
+			switch (_activeEntityData)
 			{
-				case MonsterEntry monsterEntry:
+				case UnitData unitData:
 					//TODO // if (_selectedMonster.IS_COMMANDER) 
 					if (Input.GetMouseButtonDown(0))
 					{
 						if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
 						{
-							AddUnit(monsterEntry);
+							AddTroop(unitData);
 						} else
 						{
-							AddCommander(monsterEntry);
+							AddCommander(unitData);
 						}
 
 					}
 					break;
 
-				case ItemEntry itemEntry:
+				case ItemData itemData:
 					if (Input.GetMouseButtonDown(0))
 					{
-						AddItem(itemEntry);
+						AddItem(itemData);
 					}
 					break;
 
-				case MagicEntry magicEntry:
+				case MagicData magicData:
 					if (Input.GetMouseButtonDown(0))
 					{
-						AddMagic(magicEntry);
+						AddMagic(magicData);
 					}
 					break;
 			}
@@ -86,62 +87,62 @@ namespace Controls
 			unitsGizmo.SetData(unitsGizmo.Data);
 		}
 
-		private void AddCommander (MonsterEntry monsterEntry)
+		private void AddCommander (UnitData monsterEntry)
 		{
 			RaycastGizmos(out var gizmo);
 
 			if (!(gizmo is ProvinceGizmo provinceGizmo)) return;
 
 			var province  = provinceGizmo.Province;
-			var commander = Commander.Create(monsterEntry.Id, province.Owner);
+			var commander = Commander.Create(monsterEntry.id, province.Owner);
 
 			province.Monsters.Add(commander);
 
 			provinceGizmo.CreateCommanderGizmo(commander, provinceGizmo);
 		}
 
-		private void AddUnit (MonsterEntry monsterEntry)
+		private void AddTroop (UnitData unitData)
 		{
 			RaycastGizmos(out var gizmo);
 
 			if (gizmo is ProvinceGizmo provinceGizmo)
 			{
 				var province = provinceGizmo.Province;
-				var unit     = Troops.Create(monsterEntry.Id, 1, province.Owner);
+				var unit     = Troops.Create(unitData.id, 1, province.Owner);
 
 				province.Monsters.Add(unit);
 				provinceGizmo.CreateUnitGizmo(unit);
 			} else if (gizmo is CommanderGizmo commanderGizmo)
 			{
-				var unit = Troops.Create(monsterEntry.Id, 1, commanderGizmo.OwnerProvince.Province.Owner);
+				var unit = Troops.Create(unitData.id, 1, commanderGizmo.OwnerProvince.Province.Owner);
 
 				commanderGizmo.Data.UnitsUnderCommand.Add(unit);
 				commanderGizmo.OwnerProvince.CreateUnitGizmo(unit);
 			}
 		}
 
-		private void AddItem (ItemEntry itemEntry)
+		private void AddItem (ItemData itemData)
 		{
 			RaycastGizmos(out var gizmo);
 
 			if (!(gizmo is CommanderGizmo commanderGizmo)) return;
 
-			var item = Item.Create(itemEntry.Name);
+			var item = Item.Create(itemData.name);
 
 			commanderGizmo.Data.Items.Add(item);
 			commanderGizmo.SetData(commanderGizmo.Data);
 		}
 
-		private void AddMagic (MagicEntry magicEntry)
+		private void AddMagic (MagicData magicData)
 		{
 			RaycastGizmos(out var gizmo);
 
 			if (!(gizmo is CommanderGizmo commanderGizmo)) return;
 
-			var magicOverride = commanderGizmo.Data.MagicOverrides.SingleOrDefault(x => x.Path == magicEntry.magicPath);
+			var magicOverride = commanderGizmo.Data.MagicOverrides.SingleOrDefault(x => x.Path == magicData.magicPath);
 			if (magicOverride == null)
 			{
-				magicOverride = new MagicOverride(magicEntry.magicPath, 0);
+				magicOverride = new MagicOverride(magicData.magicPath, 0);
 				commanderGizmo.Data.MagicOverrides.Add(magicOverride);
 			}
 			magicOverride.MagicValue++;
@@ -341,6 +342,10 @@ namespace Controls
 			}
 		}
 
+		public void SetActiveEntity (IEntityData entityData)
+		{
+			_activeEntityData = entityData;
+		}
 	}
 
 }

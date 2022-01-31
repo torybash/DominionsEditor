@@ -1,3 +1,4 @@
+using System;
 using Data;
 using UI.Gizmos;
 using UnityEngine.EventSystems;
@@ -5,20 +6,22 @@ using UnityEngine.EventSystems;
 namespace UI.Menus.SearchMenu
 {
 
-	public class UnitSearchGizmo : SearchResultGizmo
+	public class UnitSearchGizmo : Gizmo, IPointerDownHandler
 	{
-		// public event Action<SearchableEntry> Selected;
-		//
-		// private void OnClicked ()
-		// {
-		// 	Selected?.Invoke(_searchable);
-		// }
+		public event Action<UnitData> Selected;
 
+		private UnitData _unitData;
 
-		// public void Initialize (Unit searchResult, string searchText)
-		// {
-		// 	throw new System.NotImplementedException();
-		// }
+		void IPointerDownHandler.OnPointerDown (PointerEventData eventData)
+		{
+			Selected?.Invoke(_unitData);
+		}
+
+		public void Initialize (UnitData unitData)
+		{
+			_unitData = unitData;
+		}
 	}
+
 
 }

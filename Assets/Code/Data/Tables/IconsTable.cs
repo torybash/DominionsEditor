@@ -10,17 +10,24 @@ namespace Data.Tables
 	public class IconsTable : ScriptableObject
 	{
 		public List<NationIcon> nationIcons;
-		public List<UnitIcon> unitIcons;
+		public List<UnitIcon>   unitIcons;
+		public List<ItemIcon>   itemIcons;
 
 		public Sprite GetNationIcon (string fileNameBase)
 		{
 			var nationIcon = nationIcons.SingleOrDefault(x => x.fileNameBase == fileNameBase);
 			return nationIcon?.icon;
 		}
-		public Sprite GetUnitIcon (int unitId)
+		public Sprite GetUnitIcon (int id)
 		{
-			var unitIcon = unitIcons.SingleOrDefault(x => x.id == unitId);
+			var unitIcon = unitIcons.SingleOrDefault(x => x.id == id);
 			return unitIcon?.icon;
+		}
+		
+		public Sprite GetItemIcon (int id)
+		{
+			var itemIcon = itemIcons.SingleOrDefault(x => x.id == id);
+			return itemIcon?.icon;
 		}
 	}
 
@@ -50,4 +57,17 @@ namespace Data.Tables
 		}
 	}
 
+		
+	[Serializable]
+	public class ItemIcon
+	{
+		public int    id;
+		public Sprite icon;
+
+		public ItemIcon (int id, Sprite icon)
+		{
+			this.id   = id;
+			this.icon = icon;
+		}
+	}
 }
