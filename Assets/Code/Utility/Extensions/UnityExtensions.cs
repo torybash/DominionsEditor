@@ -47,7 +47,7 @@ namespace Utility.Extensions
 			return c;
 		}
 	
-		public static T InstantiateTemplate<T>(this T template, Transform parent = null) where T : Component
+		public static T Copy<T>(this T template, Transform parent = null) where T : Component
 		{
 			Debug.Assert(template != null);
 

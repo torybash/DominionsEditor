@@ -3,6 +3,7 @@ using Core;
 using Core.Entities;
 using UnityEngine;
 using UnityEngine.UI;
+using Utility.Extensions;
 
 namespace UI.Gizmos
 {
@@ -14,9 +15,11 @@ namespace UI.Gizmos
 	
 		[SerializeField] private HorizontalLayoutGroup itemGroup;
 		[SerializeField] private HorizontalLayoutGroup magicGroup;
+		[SerializeField] private ExperienceGizmo       xpGizmo;
 	
 		private readonly List<ItemGizmo>  _itemGizmos  = new List<ItemGizmo>();
 		private readonly List<MagicGizmo> _magicGizmos = new List<MagicGizmo>();
+		
 
 		public override void SetData (Monster data)
 		{
@@ -33,7 +36,10 @@ namespace UI.Gizmos
 
 			UpdateItems();
 			UpdateMagic();
+			UpdateExperience();
 		}
+
+
 
 		private void UpdateItems ()
 		{
@@ -80,6 +86,16 @@ namespace UI.Gizmos
 				float widthNeeded   = totalItemWidth - groupWidth;
 				float spacingNeeded = widthNeeded/(Data.MagicOverrides.Count - 1);
 				magicGroup.spacing = -spacingNeeded;
+			}
+		}
+		
+		private void UpdateExperience ()
+		{
+			xpGizmo.gameObject.SetActive(Data.Xp > 0);
+
+			if (Data.Xp > 0)
+			{
+				xpGizmo.amountText.text = Data.Xp.ToString();
 			}
 		}
 	}

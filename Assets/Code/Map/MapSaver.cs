@@ -37,13 +37,12 @@ namespace Map
 			//Provinces
 			foreach (var province in map.ProvinceMap.Values)
 			{
-				bool isIndieProvince  = province.Owner == Nation.Independents;
-				bool hasIndieMonsters = isIndieProvince && province.Monsters.Any();
-				if (!isIndieProvince || hasIndieMonsters)
+				bool hasIndieMonsters = province.Monsters.Any();
+				if (province.Owner != null || hasIndieMonsters)
 				{
 					elems.Add(new Land{ProvinceNum = province.ProvinceNumber});
 
-					if (!isIndieProvince)
+					if (!hasIndieMonsters)
 					{
 						elems.Add(new ProvinceOwner{NationNum = province.Owner.id});
 						if (province.HasLab) elems.Add(new Laboratory());
@@ -108,7 +107,12 @@ namespace Map
 									magic.MagicLevel = magicOverride.MagicValue;
 									elems.Add(magic);
 								}
-						
+
+								if (commander.Xp > 0)
+								{
+									elems.Add(new Experience{Amount = commander.Xp});
+								}
+
 								break;
 							case Troops troops:
 								elems.Add(new UnitsElement{MonsterId = troops.MonsterId, Amount = troops.Amount, ProvinceNum = province.ProvinceNumber});

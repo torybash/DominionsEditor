@@ -495,7 +495,7 @@ namespace Map.MapElements
 	}
 
 	[MapKeyName("xp")]
-	public abstract class Experience : MapElement, IOwnedByCommander
+	public class Experience : MapElement, IOwnedByCommander
 	{
 		public          CommanderElement Commander                 { get; set; }
 		public          int              Amount                    { get; set; }
@@ -504,7 +504,7 @@ namespace Map.MapElements
 	}
 
 	[MapKeyName("clearmagic")]
-	public abstract class ClearMagic : MapElement, IOwnedByCommander
+	public class ClearMagic : MapElement, IOwnedByCommander
 	{
 		public          CommanderElement Commander                 { get; set; }
 		public override void             ParseArgs (string[] args) {}

@@ -48,6 +48,13 @@ namespace Controls
 						AddMagic(magicData);
 					}
 					break;
+				
+				case ExperienceData experienceData:
+					if (Input.GetMouseButtonDown(0))
+					{
+						AddExperience(experienceData);
+					}
+					break;
 			}
 
 			if (Input.GetMouseButtonDown(1))
@@ -87,14 +94,16 @@ namespace Controls
 			unitsGizmo.SetData(unitsGizmo.Data);
 		}
 
-		private void AddCommander (UnitData monsterEntry)
+		private void AddCommander (UnitData unitData)
 		{
 			RaycastGizmos(out var gizmo);
 
 			if (!(gizmo is ProvinceGizmo provinceGizmo)) return;
 
+			Debug.Log($"Add Commander {unitData}");
+
 			var province  = provinceGizmo.Province;
-			var commander = Commander.Create(monsterEntry.id, province.Owner);
+			var commander = Commander.Create(unitData.id, province.Owner);
 
 			province.Monsters.Add(commander);
 
@@ -107,6 +116,8 @@ namespace Controls
 
 			if (gizmo is ProvinceGizmo provinceGizmo)
 			{
+				Debug.Log($"Add Troop to province {unitData}");
+
 				var province = provinceGizmo.Province;
 				var unit     = Troops.Create(unitData.id, 1, province.Owner);
 
@@ -114,6 +125,8 @@ namespace Controls
 				provinceGizmo.CreateUnitGizmo(unit);
 			} else if (gizmo is CommanderGizmo commanderGizmo)
 			{
+				Debug.Log($"Add Troop to commander {unitData}");
+
 				var unit = Troops.Create(unitData.id, 1, commanderGizmo.OwnerProvince.Province.Owner);
 
 				commanderGizmo.Data.UnitsUnderCommand.Add(unit);
@@ -127,6 +140,8 @@ namespace Controls
 
 			if (!(gizmo is CommanderGizmo commanderGizmo)) return;
 
+			Debug.Log($"AddItem {itemData}");
+			
 			var item = Item.Create(itemData.name);
 
 			commanderGizmo.Data.Items.Add(item);
@@ -139,6 +154,8 @@ namespace Controls
 
 			if (!(gizmo is CommanderGizmo commanderGizmo)) return;
 
+			Debug.Log($"Add Magic {magicData}");
+
 			var magicOverride = commanderGizmo.Data.MagicOverrides.SingleOrDefault(x => x.Path == magicData.magicPath);
 			if (magicOverride == null)
 			{
@@ -147,6 +164,17 @@ namespace Controls
 			}
 			magicOverride.MagicValue++;
 
+			commanderGizmo.SetData(commanderGizmo.Data);
+		}
+		private void AddExperience (ExperienceData experienceData)
+		{
+			RaycastGizmos(out var gizmo);
+
+			if (!(gizmo is CommanderGizmo commanderGizmo)) return;
+
+			Debug.Log($"Add Experience {experienceData}");
+
+			commanderGizmo.Data.Xp = Mathf.Clamp(commanderGizmo.Data.Xp + experienceData.amount, 0, int.MaxValue);
 			commanderGizmo.SetData(commanderGizmo.Data);
 		}
 
@@ -344,6 +372,7 @@ namespace Controls
 
 		public void SetActiveEntity (IEntityData entityData)
 		{
+			Debug.Log($"SetActiveEntity: {entityData}");
 			_activeEntityData = entityData;
 		}
 	}

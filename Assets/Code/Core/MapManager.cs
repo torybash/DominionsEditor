@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Linq;
 using Dom;
 using Map;
@@ -27,6 +28,9 @@ namespace Core
 
 			Map = MapLoader.Load(mapFile);
 
+			LoadPretender(Prefs.DefaultPretenderA.Get());
+			LoadPretender(Prefs.DefaultPretenderB.Get());
+			
 			//Create map texture
 			DomEdit.I.Ui.Get<MapPicture>().LoadMap(Map);
 
@@ -44,8 +48,7 @@ namespace Core
 			//
 			// Map = MapLoader.Load(MapFilePath);
 			//
-			// LoadPretender(Prefs.DefaultPretenderA.Get());
-			// LoadPretender(Prefs.DefaultPretenderB.Get());
+
 			//
 			//
 			// // if (Game.Players.Count == 0)
@@ -119,6 +122,7 @@ namespace Core
 			Prefs.PreviousMapPath.Set(savePath);
 
 			mapSaver.SaveMap(Map, MapFilePath);
+			SavedMapFileName = Path.GetFileName(MapFilePath);
 		}
 
 		public void AddNation ()

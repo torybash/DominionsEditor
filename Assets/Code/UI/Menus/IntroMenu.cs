@@ -30,8 +30,7 @@ namespace UI.Menus
 	
 		[Header("Other")]
 		[SerializeField] private Button quitButton;
-	
-	
+		
 		private void Awake ()
 		{
 			executablePathField.onValueChanged.AddListener(OnExecutablePathChanged); 
@@ -43,7 +42,6 @@ namespace UI.Menus
 			clearPretendersButton.onClick.AddListener(OnClearPretenders); 
 			startButton.onClick.AddListener(OnStart); 
 		}
-
 
 		private void OnCreateMap ()
 		{

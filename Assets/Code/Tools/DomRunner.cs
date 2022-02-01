@@ -53,8 +53,9 @@ namespace Tools
 			args.Add($"--newgame {Constants.GameName}");
 			args.Add($"--mapfile {map.SavedMapFileName}");
 			args.Add($"--era {eraNumber}");
-			args.Add($"--conqall"); // Win by eliminating all opponents only
-			// args.Add($"--thrones 0 1 0");               // Win by eliminating all opponents only
+			// args.Add($"--conqall"); // Win by eliminating all opponents only
+			args.Add($"--thrones 0 2 0");               // Win by eliminating all opponents only
+			args.Add($"--requiredap 4");               // Win by eliminating all opponents only
 			args.Add($"--enablemod {debugMod}"); 
 		
 			foreach (var player in map.Map.Players)

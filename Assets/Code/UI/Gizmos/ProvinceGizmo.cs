@@ -66,7 +66,7 @@ namespace UI.Gizmos
 				sortedPoints.Add(currentPoint);
 			}
 
-			var polygon = borderPolygonTemplate.InstantiateTemplate(transform.parent);
+			var polygon = borderPolygonTemplate.Copy(transform.parent);
 			polygon.PointListsProperties.PointListProperties[0].Positions = sortedPoints.ToArray();
 			polygon.PointListsProperties.PointListProperties[0].SetPoints();
 			polygon.transform.SetParent(transform); //TODO Transform point instead

@@ -214,8 +214,8 @@ namespace Map
 							var unit = Troops.Create(unitsElement.MonsterId, unitsElement.Amount, commander.Nationality);
 							commander.UnitsUnderCommand.Add(unit);
 							break;
-						case Experience _:
-							//TODO
+						case Experience experience:
+							commander.Xp += experience.Amount;
 							break;
 						case Magic magic:
 							var path = magic switch

@@ -11,6 +11,11 @@ namespace Data
 		public string   name;
 		public ItemType unitType;
 		public Sprite   icon;
+
+		public override string ToString ()
+		{
+			return $"{nameof(id)}: {id}, {nameof(name)}: {name}";
+		}
 	}
 
 }

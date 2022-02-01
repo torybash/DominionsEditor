@@ -92,7 +92,7 @@ namespace Data
 
 		public override string ToString ()
 		{
-			return $"{nameof(id)}: {id}";
+			return $"{nameof(id)}: {id}, {nameof(name)}: {name}";
 		}
 	}
 

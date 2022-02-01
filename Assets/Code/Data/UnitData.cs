@@ -12,6 +12,11 @@ namespace Data
 		public UnitType     unitType;
 		public List<Nation> nations = new List<Nation>();
 		public Sprite       icon;
+
+		public override string ToString ()
+		{
+			return $"{nameof(id)}: {id}, {nameof(name)}: {name}";
+		}
 	}
 
 	public enum UnitType
