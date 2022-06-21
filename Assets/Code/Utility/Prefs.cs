@@ -11,6 +11,7 @@ namespace Utility
 		public static readonly PrefString DefaultPretenderB = new PrefString(nameof(DefaultPretenderB));
 		public static readonly PrefString PreviousMapPath   = new PrefString(nameof(PreviousMapPath));
 		public static readonly PrefInt    Era               = new PrefInt(nameof(Era), 2);
+		public static readonly PrefString LastPretenders    = new PrefString(nameof(LastPretenders));
 	}
 
 
@@ -25,9 +26,9 @@ namespace Utility
 			DefaultValue = defaultValue;
 		}
 
-		public abstract T    Get();
-		public abstract void Set(T value);
-	
+		public abstract T    Get ();
+		public abstract void Set (T value);
+
 		public void Clear ()
 		{
 			PlayerPrefs.DeleteKey(Key);
@@ -38,19 +39,19 @@ namespace Utility
 	public class PrefString : PrefValue<string>
 	{
 		public PrefString (string key, string defaultValue = default) : base(key, defaultValue) {}
-	
+
 		public override string Get ()
 		{
 			return PlayerPrefs.GetString(Key, DefaultValue);
 		}
-	
+
 		public override void Set (string value)
 		{
 			PlayerPrefs.SetString(Key, value);
 			PlayerPrefs.Save();
 		}
-	
-		public static implicit operator string(PrefString value)
+
+		public static implicit operator string (PrefString value)
 		{
 			return value.Get();
 		}
@@ -59,12 +60,12 @@ namespace Utility
 	public class PrefInt : PrefValue<int>
 	{
 		public PrefInt (string key, int defaultValue = default) : base(key, defaultValue) {}
-	
+
 		public override int Get ()
 		{
 			return PlayerPrefs.GetInt(Key, DefaultValue);
 		}
-	
+
 		public override void Set (int value)
 		{
 			PlayerPrefs.SetInt(Key, value);
@@ -75,12 +76,12 @@ namespace Utility
 	public class PrefFloat : PrefValue<float>
 	{
 		public PrefFloat (string key, float defaultValue = default) : base(key, defaultValue) {}
-	
+
 		public override float Get ()
 		{
 			return PlayerPrefs.GetFloat(Key, DefaultValue);
 		}
-	
+
 		public override void Set (float value)
 		{
 			PlayerPrefs.SetFloat(Key, value);

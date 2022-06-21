@@ -12,32 +12,32 @@ namespace UI.Menus
 
 	public class PlayersMenu : Menu
 	{
-		[SerializeField] private RectTransform playersGroup;
-		[SerializeField] private Button        addButton;
-		[SerializeField] private RectTransform addGizmo;	
-		[SerializeField] private TMP_Dropdown  eraDropdown;	
-	
-		private readonly List<PlayerGizmo> _gizmos = new List<PlayerGizmo>();
+		[SerializeField] RectTransform playersGroup;
+		[SerializeField] Button        addButton;
+		[SerializeField] RectTransform addGizmo;	
+		[SerializeField] TMP_Dropdown  eraDropdown;
 
-		private void Awake ()
+		readonly List<PlayerGizmo> _gizmos = new List<PlayerGizmo>();
+
+		void Awake ()
 		{
 			addButton.onClick.AddListener(OnAddClicked);
 			eraDropdown.onValueChanged.AddListener(OnEraChanged);
 		}
 
-		private void Start ()
+		void Start ()
 		{
 			eraDropdown.SetValueWithoutNotify(Prefs.Era.Get() - 1);
 		}
-	
-		private void OnEraChanged (int eraIdx)
+
+		void OnEraChanged (int eraIdx)
 		{
 			Prefs.Era.Set(eraIdx + 1);
 		}
 
-		private void OnAddClicked ()
+		void OnAddClicked ()
 		{
-			DomEdit.I.MapMan.AddNation();
+			DomEdit.I.MapMan.map.AddPlayer();
 		}
 
 		public override void Show ()
@@ -47,7 +47,7 @@ namespace UI.Menus
 			foreach (var gizmo in _gizmos) Destroy(gizmo.gameObject);
 			_gizmos.Clear();
 		
-			foreach (var player in DomEdit.I.MapMan.Map.Players)
+			foreach (var player in DomEdit.I.MapMan.map.players)
 			{
 				DomEdit.I.Ui.Get<PlayersMenu>().CreateGizmo(player);
 			}

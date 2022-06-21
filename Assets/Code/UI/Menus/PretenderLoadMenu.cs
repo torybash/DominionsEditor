@@ -13,12 +13,12 @@ namespace UI.Menus
 
 	public class PretenderLoadMenu : Menu
 	{
-		[SerializeField] private RectTransform pretendersContainer;
-		[SerializeField] private Button        closeButton;
-	
-		private List<PretenderFileGizmo> _gizmos = new List<PretenderFileGizmo>();
+		[SerializeField] RectTransform pretendersContainer;
+		[SerializeField] Button        closeButton;
 
-		private void Awake ()
+		List<PretenderFileGizmo> _gizmos = new List<PretenderFileGizmo>();
+
+		void Awake ()
 		{
 			closeButton.onClick.AddListener(Hide);
 		}
@@ -42,7 +42,7 @@ namespace UI.Menus
 		{
 			Show();
 
-			foreach (var pretenderFile in Directory.GetFiles(DomEdit.I.MapMan.PretendersFolderPath))
+			foreach (var pretenderFile in Directory.GetFiles(Paths.PretendersFolderPath))
 			{
 				if (!pretenderFile.EndsWith("2h")) continue;
 

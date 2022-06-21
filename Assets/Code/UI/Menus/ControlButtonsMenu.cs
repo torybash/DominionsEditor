@@ -10,36 +10,45 @@ namespace UI.Menus
 
 	public class ControlButtonsMenu : Menu
 	{
-		[SerializeField] private Button runButton;
-		[SerializeField] private Button saveMapButton;
-		[SerializeField] private Button loadMapButton;
-		[SerializeField] private Button settingsButton;
+		[SerializeField] Button runButton;
+		[SerializeField] Button saveMapButton;
+		[SerializeField] Button loadMapButton;
+		[SerializeField] Button settingsButton;
+		[SerializeField] Button modEditButton;
 
-		private void Awake ()
+		void Awake ()
 		{
 			saveMapButton.onClick.AddListener(OnSaveClicked);
 			loadMapButton.onClick.AddListener(OnLoadClicked);
 			runButton.onClick.AddListener(OnRunClicked);
 			settingsButton.onClick.AddListener(OnSettingsClicked);
+			modEditButton.onClick.AddListener(OnModEditClicked);
 		}
-		private void OnLoadClicked ()
+
+		void OnLoadClicked ()
 		{
 			DomEdit.I.Ui.Get<LoadMapMenu>().SelectMap(file =>
 			{
 				DomEdit.I.MapMan.LoadMap(file);
 			});
 		}
+		
+		public void OnModEditClicked ()
+		{
+			DomEdit.I.Ui.Get<ModEditMenu>().Show();
+		}
 
 		public void OnSettingsClicked ()
 		{
-			DomEdit.I.Ui.Get<IntroMenu>().Show();
+			DomEdit.I.Ui.Get<SettingsMenu>().Show();
 		}
-	
-		private void OnRunClicked ()
+
+		void OnRunClicked ()
 		{
-			if (DomEdit.I.MapMan.Map.Players.Any(x => string.IsNullOrEmpty(x.Pretender.filePath)))
+			if (DomEdit.I.MapMan.map.players.Any(x => string.IsNullOrEmpty(x.Pretender.filePath)))
 			{
-				DomEdit.I.Ui.Create<MessageGizmo>().Write("Player missing pretender reference");
+				var messageGizmo = DomEdit.I.Ui.Create<MessageGizmo>();
+				messageGizmo.Write($"Player(s) missing pretender reference:\n{string.Join("\n", DomEdit.I.MapMan.map.players.Select(p => p.Nation))}");
 				return;
 			}
 
@@ -47,7 +56,7 @@ namespace UI.Menus
 			mapRunner.Run();
 		}
 
-		private void OnSaveClicked ()
+		void OnSaveClicked ()
 		{
 			DomEdit.I.MapMan.SaveMap();
 		}

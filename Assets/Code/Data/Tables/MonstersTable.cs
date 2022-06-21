@@ -8,11 +8,11 @@ namespace Data.Tables
 	[CreateAssetMenu]
 	public class MonstersTable : ScriptableObject
 	{
-		[SerializeField] private List<MonsterEntry> monsterEntries;
+		[SerializeField] List<MonsterEntry> monsterEntries;
 
-		private Dictionary<int, MonsterEntry>    idMap;
-		private Dictionary<string, MonsterEntry> nameMap;
-		public  List<MonsterEntry>               Entries => monsterEntries;
+		Dictionary<int, MonsterEntry>    idMap;
+		Dictionary<string, MonsterEntry> nameMap;
+		public List<MonsterEntry>        Entries => monsterEntries;
 	
 		public MonsterEntry GetMonster (int id)
 		{

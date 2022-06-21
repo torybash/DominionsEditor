@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Core;
+using Core.Entities;
 using UI.Gizmos;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,14 +12,14 @@ namespace UI.Menus
 	public class MapPicture : Menu
 	{
 		[SerializeField] public RawImage mapImage;
-	
-		private readonly List<ProvinceGizmo> _provinceGizmos = new List<ProvinceGizmo>();
 
-		public void LoadMap (Map.Map map)
+		readonly List<ProvinceGizmo> _provinceGizmos = new List<ProvinceGizmo>();
+
+		public void LoadMap (Dictionary<int, Province> provinceMap, Texture2D mapTexture)
 		{
 			_provinceGizmos.SafeDestroy();
 		
-			foreach (var province in map.ProvinceMap.Values)
+			foreach (var province in provinceMap.Values)
 			{
 				var gizmo = DomEdit.I.Ui.Create<ProvinceGizmo>(transform);
 				gizmo.RectTrans.anchoredPosition = province.CenterPos;
@@ -27,17 +28,17 @@ namespace UI.Menus
 				_provinceGizmos.Add(gizmo);
 			}
 		
-			LoadMapTexture(map.MapTexture);
+			LoadMapTexture(mapTexture);
 
 			Show();
 		}
 
-		private void LoadMapTexture (Texture2D mapTex)
+		void LoadMapTexture (Texture2D mapTex)
 		{
 			mapImage.texture    = mapTex;
 			RectTrans.sizeDelta = new Vector2(mapTex.width, mapTex.height);
 		}
-
+		
 	}
 
 }

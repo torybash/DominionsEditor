@@ -3,12 +3,12 @@ using System.Collections.Generic;
 namespace Map
 {
 
-	public class MapProperty
+	public class FileProperty
 	{
 		public string       Key  { get; set; }
 		public List<string> Args { get; set; } = new List<string>();
 
-		public MapProperty (string key)
+		public FileProperty (string key)
 		{
 			Key = key;
 		}

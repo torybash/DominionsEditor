@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using Core;
 using Data;
@@ -5,7 +6,8 @@ using Data;
 namespace Dom
 {
 
-	public struct Pretender
+	[Serializable]
+	public class Pretender
 	{
 		public string filePath;
 		public string fileName;

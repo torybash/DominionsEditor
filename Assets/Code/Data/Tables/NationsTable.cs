@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Data.Entries;
 using UnityEngine;
 
 namespace Data.Tables

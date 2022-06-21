@@ -19,25 +19,31 @@ namespace Core
 
 		public UiManager  Ui       { get; private set; }
 		public MapManager MapMan   { get; private set; }
+		public ModManager ModMan   { get; private set; }
 		public GameData   GameData { get; set; }
 		
+		public Spells  Spells  { get; private set; }
 		public Nations Nations { get; private set; }
 		public Units   Units   { get; private set; }
 		public Items   Items   { get; private set; }
 
 		public static DomEdit I;
 
-		private void Awake ()
+		void Awake ()
 		{
 			I = this;
 
-			Ui       = new UiManager();
-			MapMan   = new MapManager();
+			Ui     = new UiManager();
+			MapMan = new MapManager();
+			ModMan = new ModManager();
+			
 			GameData = new GameData();
+			Spells    = new Spells();
 			Nations  = new Nations();
 			Units    = new Units();
 			Items    = new Items();
 
+			Spells.ParseData();
 			Nations.ParseData();
 			Units.ParseData();
 			Items.ParseData();

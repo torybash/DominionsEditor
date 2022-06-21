@@ -9,19 +9,19 @@ namespace UI.Gizmos
 
 	public class MapFileGizmo : Gizmo
 	{
-		public event Action<MapFile> LoadClicked;
+		public event Action<DomFile> LoadClicked;
 
-		[SerializeField] private TMP_Text fileText;
-		[SerializeField] private Button   loadButton;
+		[SerializeField] TMP_Text fileText;
+		[SerializeField] Button   loadButton;
 
-		private MapFile _mapFile;
+		DomFile _mapFile;
 
-		private void Awake ()
+		void Awake ()
 		{
 			loadButton.onClick.AddListener(() => LoadClicked?.Invoke(_mapFile));
 		}
 
-		public void Initialize (MapFile mapFile)
+		public void Initialize (DomFile mapFile)
 		{
 			_mapFile      = mapFile;
 			fileText.text = mapFile.name;

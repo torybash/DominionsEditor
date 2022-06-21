@@ -8,9 +8,9 @@ namespace Data.Tables
 	[CreateAssetMenu]
 	public class ItemsTable : ScriptableObject
 	{
-		[SerializeField] private List<ItemEntry> entries;
-	
-		private Dictionary<string, ItemEntry> nameMap;
+		[SerializeField] List<ItemEntry> entries;
+
+		Dictionary<string, ItemEntry> nameMap;
 
 		public List<ItemEntry> Entries => entries;
 

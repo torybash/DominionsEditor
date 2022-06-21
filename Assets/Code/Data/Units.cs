@@ -1,8 +1,6 @@
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using Core;
-using Core.Entities;
 using UnityEngine;
 
 // ReSharper disable StringLiteralTypo
@@ -12,7 +10,7 @@ namespace Data
 
 	public class Units
 	{
-		private List<UnitData> _units;
+		List<UnitData> _units;
 
 		public List<UnitData> GetAll ()
 		{

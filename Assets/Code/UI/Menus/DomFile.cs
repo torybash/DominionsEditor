@@ -3,20 +3,20 @@ using System.IO;
 namespace UI.Menus
 {
 
-	public struct MapFile
+	public struct DomFile
 	{
 		public string path;
 		public string name;
 		public string folder;
 
-		public static MapFile LoadPath (string mapPath)
+		public static DomFile LoadPath (string mapPath)
 		{
-			MapFile mapFile = new MapFile();
-			mapFile.path   = mapPath;
-			mapFile.name   = Path.GetFileName(mapPath);
-			mapFile.folder = Path.GetDirectoryName(mapPath);
+			DomFile domFile = new DomFile();
+			domFile.path   = mapPath;
+			domFile.name   = Path.GetFileName(mapPath);
+			domFile.folder = Path.GetDirectoryName(mapPath);
 
-			return mapFile;
+			return domFile;
 		}
 
 		public override string ToString ()

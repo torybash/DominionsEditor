@@ -89,7 +89,7 @@ namespace UI.Menus
 		{
 			Hide();
 
-			DomEdit.I.MapMan.LoadMap();
+			// DomEdit.I.MapMan.LoadMap();
 		}
 	
 		private void OnAddPretender ()

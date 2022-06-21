@@ -228,7 +228,7 @@ namespace Controls
 
 			if (!(gizmo is ProvinceGizmo provinceGizmo)) return;
 
-			var playerOwner = DomEdit.I.MapMan.Map.Players.SingleOrDefault(x => x.Nation == provinceGizmo.Province.Owner);
+			var playerOwner = DomEdit.I.MapMan.map.players.SingleOrDefault(x => x.Nation == provinceGizmo.Province.Owner);
 			if (playerOwner == null) return;
 
 			var provinceNum = provinceGizmo.Province.ProvinceNumber;

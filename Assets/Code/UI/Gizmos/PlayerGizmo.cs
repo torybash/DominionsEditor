@@ -9,18 +9,18 @@ namespace UI.Gizmos
 
 	public class PlayerGizmo : Gizmo
 	{
-		[SerializeField] private Button   removeButton;
-		[SerializeField] private Button   playerTypeButton;
-		[SerializeField] private Button   nationButton;
-		[SerializeField] private TMP_Text numberText;
-		[SerializeField] private TMP_Text typeText;
-	
-		private NationGizmo _nationGizmo;
-		public  GamePlayer  Player { get; set; }
-	
-		public int Number => DomEdit.I.MapMan.Map.Players.IndexOf(Player) + 1;
+		[SerializeField] Button   removeButton;
+		[SerializeField] Button   playerTypeButton;
+		[SerializeField] Button   nationButton;
+		[SerializeField] TMP_Text numberText;
+		[SerializeField] TMP_Text typeText;
 
-		private void Awake ()
+		NationGizmo _nationGizmo;
+		public GamePlayer  Player { get; set; }
+	
+		public int Number => DomEdit.I.MapMan.map.players.IndexOf(Player) + 1;
+
+		void Awake ()
 		{
 			removeButton.onClick.AddListener(OnRemove);
 			playerTypeButton.onClick.AddListener(OnPlayerTypeButton);
@@ -36,13 +36,13 @@ namespace UI.Gizmos
 			nationButton.transform.SetAsLastSibling();
 			UpdateGizmo();
 		}
-	
-		private void OnRemove ()
+
+		void OnRemove ()
 		{
-			DomEdit.I.MapMan.RemovePlayer(Player);
+			DomEdit.I.MapMan.map.RemovePlayer(Player);
 		}
-	
-		private void OnPlayerTypeButton ()
+
+		void OnPlayerTypeButton ()
 		{
 			// int change = eventData.button switch
 			// {
@@ -54,14 +54,12 @@ namespace UI.Gizmos
 			int change = Input.GetMouseButton(0) ? 1 : -1;
 			DomEdit.I.MapMan.IncrementType(Player, change);
 		}
-	
-		private void OnNationButton ()
+
+		void OnNationButton ()
 		{
-			DomEdit.I.Ui.Get<PretenderLoadMenu>().SelectPretender((pretender) =>
+			DomEdit.I.Ui.Get<PretenderLoadMenu>().SelectPretender(pretender =>
 			{
-				Player.Pretender = pretender;
-			
-				DomEdit.I.MapMan.ChangeNation(Player, pretender.nation.id);
+				DomEdit.I.MapMan.map.SetPlayerPretender(Player, pretender);
 			});
 		}
 

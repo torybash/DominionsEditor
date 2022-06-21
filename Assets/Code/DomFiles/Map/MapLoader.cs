@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using Core;
 using Core.Entities;
 using Dom;
@@ -17,72 +16,36 @@ namespace Map
 
 	public class MapLoader
 	{
-		public static Map Load (MapFile mapFile)
+		public static Map Load (DomFile mapFile)
 		{
 			var allElements = LoadMapElements(mapFile.path);
 
 			var map = CreateMap(allElements);
-			map.MapFile = mapFile;
+			map.mapFile = mapFile;
 
-			map.MapTexture  = LoadMapTexture(map);
-			map.ProvinceMap = LoadProvinces(map);
-			map.Players     = LoadPlayers(map);
+			map.mapTexture  = LoadMapTexture(map);
+			map.provinceMap = LoadProvinces(map);
 
 			return map;
 		}
 
-		private static Texture2D LoadMapTexture (Map map)
+		static Texture2D LoadMapTexture (Map map)
 		{
-			var    imageFile    = map.UnchangedElements.OfType<ImageFile>().First();
-			string mapImagePath = $"{map.MapFile.folder}\\{imageFile.MapImageName}";
+			var    imageFile    = map.unchangedElements.OfType<ImageFile>().First();
+			string mapImagePath = $"{map.mapFile.folder}\\{imageFile.MapImageName}";
 			return MapImageLoader.LoadMapTexture(mapImagePath);
 		}
 
-		public static List<MapElement> LoadMapElements (string mapPath)
+		static List<MapElement> LoadMapElements (string mapPath)
 		{
 			var texts      = File.ReadAllLines(mapPath);
-			var properties = ParseProperties(texts);
-			var elements   = ParseMapElements(properties);
+			var properties = FileLoader.ParseProperties(texts);
+			var elements   = ParseElements(properties);
 
 			return elements;
 		}
 
-		private static List<MapProperty> ParseProperties (string[] mapLineTexts)
-		{
-			var mapProperties = new List<MapProperty>();
-			for (int i = 0; i < mapLineTexts.Length; i++)
-			{
-				var mapLine = mapLineTexts[i];
-				if (mapLine.Length == 0) continue;
-				if (mapLine[0]     != '#') continue;
-
-				int spaceIndex  = mapLine.IndexOf(' ');
-				int keyEndIndex = spaceIndex == -1 ? mapLine.Length : spaceIndex;
-
-				var key = mapLine.Substring(1, keyEndIndex - 1);
-
-				var mapProperty = new MapProperty(key);
-				if (spaceIndex != -1)
-				{
-					var args = mapLine.Substring(keyEndIndex + 1, mapLine.Length - keyEndIndex - 1);
-
-					var      separatorChar = ' ';
-					Regex    regx          = new Regex(separatorChar + "(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))");
-					string[] argsSplit     = regx.Split(args);
-
-					foreach (var arg in argsSplit)
-					{
-						if (arg.Contains("--")) break;
-						mapProperty.AddArg(arg);
-					}
-				}
-
-				mapProperties.Add(mapProperty);
-			}
-			return mapProperties;
-		}
-
-		private static List<MapElement> ParseMapElements (List<MapProperty> mapLineDatas)
+		static List<MapElement> ParseElements (List<FileProperty> mapLineDatas)
 		{
 			var mapElements = new List<MapElement>();
 
@@ -115,7 +78,7 @@ namespace Map
 			return mapElements;
 		}
 
-		private static Type GetMapElementType (string nameKey)
+		static Type GetMapElementType (string nameKey)
 		{
 
 			var ass = typeof(MapElement).Assembly;
@@ -135,19 +98,19 @@ namespace Map
 
 		public static Dictionary<int, Province> LoadProvinces (Map map)
 		{
-			var mapElements = map.AllElements;
-		
+			var mapElements = map.allElements;
+
 			//Find province points (white pixels)
 			var provincePoints = new List<Vector2>();
-			for (int y = 0; y < map.MapTexture.height; y++)
+			for (int y = 0; y < map.mapTexture.height; y++)
 			{
-				for (int x = 0; x < map.MapTexture.width; x++)
+				for (int x = 0; x < map.mapTexture.width; x++)
 				{
-					var pixel = map.MapTexture.GetPixel(x, y);
+					var pixel = map.mapTexture.GetPixel(x, y);
 					if (pixel == Color.white) provincePoints.Add(new Vector2(x, y));
 				}
 			}
-		
+
 			//Create all provinces
 			var provinces     = new Dictionary<int, Province>();
 			int provinceCount = mapElements.OfType<Terrain>().Max(x => x.ProvinceNum);
@@ -156,7 +119,7 @@ namespace Map
 				var provinceBorders = mapElements.OfType<ProvinceBorders>().Where(x => x.ProvinceNum == num).ToList();
 				if (provinceBorders.Count == 0) continue;
 
-				var provincePoint = provincePoints[num -1];
+				var provincePoint = provincePoints[num - 1];
 				// var centerPos = Vector2.zero;
 				// foreach (var pb in provinceBorders)
 				// {
@@ -247,27 +210,13 @@ namespace Map
 			return provinces;
 		}
 
-		public static List<GamePlayer> LoadPlayers (Map map)
-		{
-			var mapElements = map.AllElements;
 
-			var players = new List<GamePlayer>();
-
-			foreach (var allowedPlayer in mapElements.OfType<AllowedPlayer>())
-			{
-				var startLocation      = mapElements.OfType<StartLocation>().SingleOrDefault(x => x.NationNum == allowedPlayer.NationNum);
-				var capitalProvinceNum = startLocation?.ProvinceNum ?? -1;
-				var player             = new GamePlayer(PlayerType.Human, DomEdit.I.Nations.GetNationById(allowedPlayer.NationNum)) { CapitalProvinceNum = capitalProvinceNum };
-				players.Add(player);
-			}
-			return players;
-		}
 
 		public static Map CreateMap (List<MapElement> mapElements)
 		{
 			var map = new Map();
-			map.AllElements = mapElements;
-		
+			map.allElements = mapElements;
+
 			foreach (var mapElement in mapElements)
 			{
 				if (mapElement is ProvinceDataElement) continue;
@@ -276,10 +225,10 @@ namespace Map
 				if (mapElement is IOwnedByCommander) continue;
 				if (mapElement is Land) continue;
 
-				map.UnchangedElements.Add(mapElement);
+				map.unchangedElements.Add(mapElement);
 			}
 
-			map.UnchangedElements = map.UnchangedElements.OrderBy(x => x.GetType().Name).ToList();
+			map.unchangedElements = map.unchangedElements.OrderBy(x => x.GetType().Name).ToList();
 
 			return map;
 		}

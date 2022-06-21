@@ -25,17 +25,17 @@ namespace Map
 			var elems = new List<MapElement>();
 		
 			//Config
-			elems.AddRange(map.UnchangedElements);
+			elems.AddRange(map.unchangedElements);
 
 			//Players
-			foreach (var player in DomEdit.I.MapMan.Map.Players)
+			foreach (var player in DomEdit.I.MapMan.map.players)
 			{
 				elems.Add(new AllowedPlayer{NationNum = player.Nation.id});
 				elems.Add(new StartLocation{NationNum = player.Nation.id, ProvinceNum = player.CapitalProvinceNum});
 			}
 
 			//Provinces
-			foreach (var province in map.ProvinceMap.Values)
+			foreach (var province in map.provinceMap.Values)
 			{
 				bool hasIndieMonsters = province.Monsters.Any();
 				if (province.Owner != null || hasIndieMonsters)
@@ -49,7 +49,7 @@ namespace Map
 						if (province.HasTemple) elems.Add(new Temple());
 						if (province.HasFort) elems.Add(new Fort{FortId = 1});
 					
-						if (DomEdit.I.MapMan.Map.Players.Any(x => x.CapitalProvinceNum == province.ProvinceNumber))
+						if (DomEdit.I.MapMan.map.players.Any(x => x.CapitalProvinceNum == province.ProvinceNumber))
 						{
 							elems.Add(new KnownMagicSite{ProvinceNum = province.ProvinceNumber, SiteId = 1500});
 						}
@@ -58,7 +58,7 @@ namespace Map
 			}
 		
 			//Monsters
-			foreach (var province in map.ProvinceMap.Values.Where(x => x.Monsters.Any()))
+			foreach (var province in map.provinceMap.Values.Where(x => x.Monsters.Any()))
 			{
 				elems.Add(new SetLand{ProvinceNum = province.ProvinceNumber});
 
@@ -147,8 +147,8 @@ namespace Map
 		
 			File.WriteAllLines(path, mapLines);
 		}
-	
-		private static string GetMapElementKey (Type type)
+
+		static string GetMapElementKey (Type type)
 		{
 			var mapKeyName = ((MapKeyNameAttribute[])type.GetCustomAttributes(typeof(MapKeyNameAttribute), false)).Single();
 			return mapKeyName.Name;

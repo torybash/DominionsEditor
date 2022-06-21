@@ -8,16 +8,16 @@ namespace UI.Menus
 
 	public class MainMenu : Menu
 	{
-		[SerializeField] private Button loadPreviousMap;
-		[SerializeField] private Button loadMap;
-		[SerializeField] private Button settings;
-		[SerializeField] private Button quit;
+		[SerializeField] Button loadPreviousMap;
+		[SerializeField] Button loadMap;
+		[SerializeField] Button settings;
+		[SerializeField] Button quit;
 
-		private void Awake ()
+		void Awake ()
 		{
 			loadPreviousMap.onClick.AddListener(() =>
 			{
-				var mapFile = MapFile.LoadPath(Prefs.PreviousMapPath.Get());
+				var mapFile = DomFile.LoadPath(Paths.MapFilePath);
 				DomEdit.I.MapMan.LoadMap(mapFile);
 				Hide();
 			});

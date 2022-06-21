@@ -14,24 +14,24 @@ namespace UI.Gizmos
 
 	public class ProvinceGizmo : Gizmo
 	{
-		[SerializeField] private TMP_Text      numLabel;
-		[SerializeField] private RectTransform rosterGroup;
-		[SerializeField] private Line          borderLineTemplate;
-		[SerializeField] private Polygon       borderPolygonTemplate;
+		[SerializeField] TMP_Text      numLabel;
+		[SerializeField] RectTransform rosterGroup;
+		[SerializeField] Line          borderLineTemplate;
+		[SerializeField] Polygon       borderPolygonTemplate;
 
-		[SerializeField] private GameObject labMarker;
-		[SerializeField] private GameObject templeMarker;
-		[SerializeField] private GameObject fortMarker;
-		[SerializeField] private GameObject throneMarker;
+		[SerializeField] GameObject labMarker;
+		[SerializeField] GameObject templeMarker;
+		[SerializeField] GameObject fortMarker;
+		[SerializeField] GameObject throneMarker;
 
-		private List<MonsterGizmo> _monsterGizmos = new List<MonsterGizmo>();
-		private List<Line>         _borderLines   = new List<Line>();
-		private NationGizmo        _nationGizmo;
+		List<MonsterGizmo> _monsterGizmos = new List<MonsterGizmo>();
+		List<Line>         _borderLines   = new List<Line>();
+		NationGizmo        _nationGizmo;
 
 
 		public Province Province { get; private set; }
 
-		private void Awake ()
+		void Awake ()
 		{
 			borderLineTemplate.gameObject.SetActive(false);
 			borderPolygonTemplate.gameObject.SetActive(false);
@@ -132,7 +132,7 @@ namespace UI.Gizmos
 
 			_nationGizmo.SetNation(nation);
 
-			bool isStartLocation = DomEdit.I.MapMan.Map.Players.Any(x => x.CapitalProvinceNum == Province.ProvinceNumber);
+			bool isStartLocation = DomEdit.I.MapMan.map.players.Any(x => x.CapitalProvinceNum == Province.ProvinceNumber);
 			_nationGizmo.ShowCapitalMarker(isStartLocation);
 		}
 

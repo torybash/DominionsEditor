@@ -11,12 +11,12 @@ namespace UI.Menus
 
 	public class LoadMapMenu : Menu
 	{
-		[SerializeField] private RectTransform gizmoContainer;
-		[SerializeField] private Button        closeButton;
+		[SerializeField] RectTransform gizmoContainer;
+		[SerializeField] Button        closeButton;
 
-		private List<MapFileGizmo> _gizmos = new List<MapFileGizmo>();
+		List<MapFileGizmo> _gizmos = new List<MapFileGizmo>();
 
-		private void Awake ()
+		void Awake ()
 		{
 			closeButton.onClick.AddListener(Hide);
 		}
@@ -36,16 +36,16 @@ namespace UI.Menus
 			_gizmos.Clear();
 		}
 
-		public void SelectMap (Action<MapFile> onSelect)
+		public void SelectMap (Action<DomFile> onSelect)
 		{
 			Show();
 			// Directory.GetFiles()
 
-			foreach (var mapPath in Directory.GetFiles(DomEdit.I.MapMan.MapsFolderPath, "*.*", SearchOption.AllDirectories))
+			foreach (var mapPath in Directory.GetFiles(Paths.MapsFolderPath, "*.*", SearchOption.AllDirectories))
 			{
 				if (!mapPath.EndsWith("map")) continue;
 
-				var mapFile = MapFile.LoadPath(mapPath);
+				var mapFile = DomFile.LoadPath(mapPath);
 				// if (mapFile.era == -1) continue;
 		
 				var gizmo = DomEdit.I.Ui.Create<MapFileGizmo>(gizmoContainer);
