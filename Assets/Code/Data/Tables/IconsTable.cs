@@ -5,9 +5,12 @@ using UnityEngine;
 
 namespace Data.Tables
 {
-
+	public abstract class Table : ScriptableObject
+	{
+		
+	}
 	[CreateAssetMenu]
-	public class IconsTable : ScriptableObject
+	public class IconsTable : Table
 	{
 		public List<NationIcon> nationIcons;
 		public List<UnitIcon>   unitIcons;

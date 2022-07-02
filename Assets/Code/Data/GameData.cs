@@ -36,7 +36,7 @@ namespace Data
 		public readonly CsvTable realmsTable;
 		public readonly CsvTable magicSitesTable;
 
-		public GameData ()
+		GameData ()
 		{
 			nationsTable = CsvTable.LoadCsv(NATIONS_PATH);
 
@@ -56,6 +56,11 @@ namespace Data
 
 			realmsTable     = CsvTable.LoadCsv(REALMS);
 			magicSitesTable = CsvTable.LoadCsv(MAGIC_SITES);
+		}
+
+		public static GameData Load ()
+		{
+			return new GameData();
 		}
 	}
 

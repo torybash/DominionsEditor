@@ -1,12 +1,26 @@
 using System.Collections.Generic;
 using Core;
+using Data.Tables;
+using QuickCombat;
 
 namespace Data
 {
 
 	public class Items
 	{
-		private List<ItemData> _items;
+		List<ItemData> _items;
+
+		readonly GameData _gameData;
+
+		Items (GameData gameData)
+		{
+			_gameData = gameData;
+		}
+
+		public static Items Load (GameData gameData)
+		{
+			return new Items(gameData);
+		}
 
 		public List<ItemData> GetAll ()
 		{
@@ -16,12 +30,12 @@ namespace Data
 		public void ParseData ()
 		{
 			_items = new List<ItemData>();
-			foreach (var unitData in DomEdit.I.GameData.itemsTable)
+			foreach (var unitData in _gameData.itemsTable)
 			{
 				var unit = new ItemData();
 				unit.id   = int.Parse(unitData["id"]);
 				unit.name = unitData["name"];
-				unit.icon = DomEdit.I.icons.GetItemIcon(unit.id);
+				unit.icon = Tbl.Get<IconsTable>().GetItemIcon(unit.id);
 
 				_items.Add(unit);
 			}

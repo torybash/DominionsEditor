@@ -8,7 +8,7 @@ namespace Data.Tables
 {
 
 	[CreateAssetMenu]
-	public class MagicPathTable : ScriptableObject
+	public class MagicPathTable : Table
 	{
 		public List<MagicEntry> magics;
 

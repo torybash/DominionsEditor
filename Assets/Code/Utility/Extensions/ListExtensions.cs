@@ -7,7 +7,7 @@ namespace Utility.Extensions
 
 	public static class ListExtensions
 	{
-		public static void SafeDestroy<T> (this IList<T> list) where T : Component
+		public static void SafeDestroyList<T> (this IList<T> list) where T : Component
 		{
 			if (list == null) return;
 		

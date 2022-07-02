@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Dom;
 using TMPro;
 using UnityEngine;
@@ -20,7 +21,8 @@ namespace UI.Gizmos
         }
         public void Initialize (Pretender pretender)
         {
-            fileText.text = pretender.fileName;
+            var fileName = Path.GetFileName(pretender.filePath);
+            fileText.text = fileName;
         }
     }
 

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Core;
 using Data;
+using QuickCombat;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -34,14 +35,14 @@ namespace UI.Menus.SearchMenu
 
 			clearSearchButton.gameObject.SetActive(!string.IsNullOrEmpty(searchText));
 
-			searchGizmos.SafeDestroy();
+			searchGizmos.SafeDestroyList();
 			if (!string.IsNullOrEmpty(searchText)) CreateSearchGizmos(searchText, results);
 		}
 
 		private List<ItemData> Search (string searchText)
 		{
 			var foundEntries = new List<ItemData>();
-			foreach (var entry in DomEdit.I.Items.GetAll())
+			foreach (var entry in D.Items.GetAll())
 			{
 				if (entry.name.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) != -1)
 				{

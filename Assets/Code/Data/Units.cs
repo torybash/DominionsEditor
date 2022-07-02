@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Core;
+using Data.Tables;
+using QuickCombat;
 using UnityEngine;
 
 // ReSharper disable StringLiteralTypo
@@ -10,7 +12,18 @@ namespace Data
 
 	public class Units
 	{
-		List<UnitData> _units;
+		readonly GameData _gameData;
+		List<UnitData>            _units;
+
+		Units (GameData gameData)
+		{
+			_gameData = gameData;
+		}
+
+		public static Units Load (GameData gameData)
+		{
+			return new Units(gameData);
+		}
 
 		public List<UnitData> GetAll ()
 		{
@@ -20,17 +33,17 @@ namespace Data
 		public void ParseData ()
 		{
 			_units = new List<UnitData>();
-			foreach (var unitData in DomEdit.I.GameData.unitsTable)
+			foreach (var unitData in _gameData.unitsTable)
 			{
 				var unit = new UnitData();
 				unit.id   = int.Parse(unitData["id"]);
 				unit.name = unitData["name"];
-				unit.icon = DomEdit.I.icons.GetUnitIcon(unit.id);
+				unit.icon = Tbl.Get<IconsTable>().GetUnitIcon(unit.id);
 
 				_units.Add(unit);
 			}
 			
-			foreach (var nation in DomEdit.I.Nations.GetAll())
+			foreach (var nation in D.Nations.GetAll())
 			{
 				// associate pretenders
 				//  nation.pretenders = nation.pretenders.Distinct().ToList();
@@ -84,7 +97,7 @@ namespace Data
 					var arr = iter.Value;
 					foreach (var unitId in arr)
 					{
-						var unitData = DomEdit.I.GameData.unitsTable.GetData("id", unitId.ToString());
+						var unitData = _gameData.unitsTable.GetData("id", unitId.ToString());
 						if (unitData == null)
 						{
 							Debug.LogError($"Unit with id {unitId} not found for nation {nation}");

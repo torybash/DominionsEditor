@@ -2,13 +2,26 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core;
+using Data.Tables;
+using QuickCombat;
 
 namespace Data
 {
 
 	public class Nations
 	{
-		private List<Nation> _nations;
+		readonly GameData _gameData;
+		List<Nation>      _nations;
+
+		Nations (GameData gameData)
+		{
+			_gameData = gameData;
+		}
+
+		public static Nations Load (GameData gameData)
+		{
+			return new Nations(gameData);
+		}
 
 		public List<Nation> GetAll ()
 		{
@@ -55,7 +68,7 @@ namespace Data
 			// }
 			_nations = new List<Nation>();
 
-			foreach (var nationData in DomEdit.I.GameData.nationsTable)
+			foreach (var nationData in _gameData.nationsTable)
 			{
 				var nation = new Nation();
 				_nations.Add(nation);
@@ -66,7 +79,7 @@ namespace Data
 				nation.fileNameBase = nationData["file_name_base"];
 				nation.era          = int.Parse(nationData["era"]);
 
-				nation.icon = DomEdit.I.icons.GetNationIcon(nation.fileNameBase);
+				nation.icon = Tbl.Get<IconsTable>().GetNationIcon(nation.fileNameBase);
 
 				// nation.id = int.Parse(nation.id);
 				//
@@ -78,7 +91,7 @@ namespace Data
 
 				// Get realms of nation
 				var realms = new List<int>();
-				foreach (var data in DomEdit.I.GameData.attributesByNationTable)
+				foreach (var data in _gameData.attributesByNationTable)
 				{
 					if (int.Parse(data["nation_number"]) == nation.id)
 					{
@@ -94,7 +107,7 @@ namespace Data
 				// }
 
 				// get monsters in realm
-				foreach (var data in DomEdit.I.GameData.realmsTable)
+				foreach (var data in _gameData.realmsTable)
 				{
 					foreach (int realm in realms)
 					{
@@ -148,7 +161,7 @@ namespace Data
 				// }
 
 				// look for commanders
-				foreach (var data in DomEdit.I.GameData.fortLeadersByNationTable)
+				foreach (var data in _gameData.fortLeadersByNationTable)
 				{
 					if (int.Parse(data["nation_number"]) == nation.id)
 					{
@@ -157,7 +170,7 @@ namespace Data
 				}
 
 				// look for foreign commanders
-				foreach (var data in DomEdit.I.GameData.nonFortLeadersByNationTable)
+				foreach (var data in _gameData.nonFortLeadersByNationTable)
 				{
 					if (int.Parse(data["nation_number"]) == nation.id)
 					{
@@ -166,7 +179,7 @@ namespace Data
 				}
 
 				// look for units
-				foreach (var data in DomEdit.I.GameData.fortTroopByNationTable)
+				foreach (var data in _gameData.fortTroopByNationTable)
 				{
 					if (int.Parse(data["nation_number"]) == nation.id)
 					{
@@ -175,7 +188,7 @@ namespace Data
 				}
 
 				// look for foreign units
-				foreach (var data in DomEdit.I.GameData.nonFortTroopByNationTable)
+				foreach (var data in _gameData.nonFortTroopByNationTable)
 				{
 					if (int.Parse(data["nation_number"]) == nation.id)
 					{
@@ -184,11 +197,11 @@ namespace Data
 				}
 
 				// look for coast commanders
-				foreach (var data in DomEdit.I.GameData.coastLeadersByNationTable)
+				foreach (var data in _gameData.coastLeadersByNationTable)
 				{
 					if (int.Parse(data["nation_number"]) == nation.id)
 					{
-						var unitData = DomEdit.I.GameData.unitsTable.GetData("id", data["monster_number"]);
+						var unitData = _gameData.unitsTable.GetData("id", data["monster_number"]);
 						if (unitData["landshape"] != string.Empty)
 						{
 							nation.coastcom.Add(int.Parse(unitData["landshape"]));
@@ -200,11 +213,11 @@ namespace Data
 				}
 
 				// look for coast units
-				foreach (var data in DomEdit.I.GameData.coastTroopByNationTable)
+				foreach (var data in _gameData.coastTroopByNationTable)
 				{
 					if (int.Parse(data["nation_number"]) == nation.id)
 					{
-						var unitData = DomEdit.I.GameData.unitsTable.GetData("id", data["monster_number"]);
+						var unitData = _gameData.unitsTable.GetData("id", data["monster_number"]);
 						if (unitData["landshape"] != string.Empty)
 						{
 							nation.coastrec.Add(int.Parse(unitData["landshape"]));
@@ -216,7 +229,7 @@ namespace Data
 				}
 
 				// look for special stuff
-				foreach (var data in DomEdit.I.GameData.attributesByNationTable)
+				foreach (var data in _gameData.attributesByNationTable)
 				{
 					if (int.Parse(data["nation_number"]) != nation.id) continue;
 
@@ -232,7 +245,7 @@ namespace Data
 					}
 					if (data["attribute"] == "158" || data["attribute"] == "159")
 					{
-						var unitData = DomEdit.I.GameData.unitsTable.GetData("id", data["raw_value"]);
+						var unitData = _gameData.unitsTable.GetData("id", data["raw_value"]);
 						if (unitData["landshape"] != string.Empty)
 						{
 							nation.coastcom.Add(int.Parse(unitData["landshape"]));
@@ -243,7 +256,7 @@ namespace Data
 					}
 					if (data["attribute"] == "160" || data["attribute"] == "161" || data["attribute"] == "162")
 					{
-						var unitData = DomEdit.I.GameData.unitsTable.GetData("id", data["raw_value"]);
+						var unitData = _gameData.unitsTable.GetData("id", data["raw_value"]);
 						if (unitData["landshape"] != string.Empty)
 						{
 							nation.coastrec.Add(int.Parse(unitData["landshape"]));
@@ -258,7 +271,7 @@ namespace Data
 					}
 					if (data["attribute"] == "186")
 					{
-						var unitData = DomEdit.I.GameData.unitsTable.GetData("id", data["raw_value"]);
+						var unitData = _gameData.unitsTable.GetData("id", data["raw_value"]);
 						if (unitData["watershape"] != string.Empty)
 						{
 							nation.uwcom.Add(int.Parse(unitData["watershape"]));
@@ -273,7 +286,7 @@ namespace Data
 					    data["attribute"] == "191" ||
 					    data["attribute"] == "213")
 					{
-						var unitData = DomEdit.I.GameData.unitsTable.GetData("id", data["raw_value"]);
+						var unitData = _gameData.unitsTable.GetData("id", data["raw_value"]);
 						if (unitData["watershape"] != string.Empty)
 						{
 							nation.uwunit.Add(int.Parse(unitData["watershape"]));
@@ -449,7 +462,7 @@ namespace Data
 				 var gemkeys = new Dictionary<string, int>{ {"F", 0}, {"A", 0}, {"W", 0}, {"E",0}, {"S",0}, {"D",0}, {"N",0}, {"B",0 }};
 				 foreach (var site in nation.sites)
 				 {
-				 	var siteData = DomEdit.I.GameData.magicSitesTable.GetData("id", site.ToString());
+				 	var siteData = _gameData.magicSitesTable.GetData("id", site.ToString());
 				 	if (siteData == null)
 				 	{
 				 		// Debug.Log("Site " + siteData + " not found (nation ' + nation.id + ')');
@@ -470,7 +483,7 @@ namespace Data
 				// FIXME_VAR_TYPE arr     = nation.futuresites;
 				foreach (var site in nation.futuresites)
 				{
-					var siteData = DomEdit.I.GameData.magicSitesTable.GetData("id", site.ToString());
+					var siteData = _gameData.magicSitesTable.GetData("id", site.ToString());
 					if (siteData == null)
 					{
 						// Debug.Log("Site " + siteData + " not found (nation ' + nation.id + ')');
@@ -559,7 +572,7 @@ namespace Data
 			// 		var arr = iter.Value;
 			// 		foreach (var unitId in arr)
 			// 		{
-			// 			var u = DomEdit.I.GameData.baseUTable.GetData("id", unitId.ToString());
+			// 			var u = _gameData.baseUTable.GetData("id", unitId.ToString());
 			// 			//~ if (!u) {
 			// 				//~ console.log(basekey+' '+arr[i]+' not found (nation '+nation.id+')');
 			// 				//~ continue;

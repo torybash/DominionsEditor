@@ -1,5 +1,7 @@
 using Core;
 using Core.Entities;
+using Data.Tables;
+using QuickCombat;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,7 +22,7 @@ namespace UI.Gizmos
 			OwnerGizmo = owner;
 			Magic      = magic;
 		
-			var itemEntry = DomEdit.I.magicPaths.GetEntry(Magic.Path);
+			var itemEntry = Tbl.Get<MagicPathTable>().GetEntry(Magic.Path);
 			icon.sprite     = itemEntry.Sprite;
 			valueLabel.text = magic.MagicValue.ToString();
 		}

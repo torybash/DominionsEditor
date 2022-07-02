@@ -6,7 +6,18 @@ namespace Data
 
 	public class Spells
 	{
-		List<SpellData> _spells;
+		readonly GameData _gameData;
+		List<SpellData>           _spells;
+
+		Spells (GameData gameData)
+		{
+			_gameData = gameData;
+		}
+
+		public static Spells Load (GameData gameData)
+		{
+			return new Spells(gameData);
+		}
 
 		public List<SpellData> GetAll ()
 		{
@@ -16,7 +27,7 @@ namespace Data
 		public void ParseData ()
 		{
 			_spells = new List<SpellData>();
-			foreach (var spell in DomEdit.I.GameData.spellsTable)
+			foreach (var spell in _gameData.spellsTable)
 			{
 				var unit = new SpellData();
 				unit.id            = int.Parse(spell["id"]);

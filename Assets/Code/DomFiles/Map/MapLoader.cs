@@ -6,6 +6,7 @@ using Core;
 using Core.Entities;
 using Dom;
 using Map.MapElements;
+using QuickCombat;
 using Tools;
 using UI.Menus;
 using UnityEngine;
@@ -138,7 +139,7 @@ namespace Map
 			{
 				if (provinces.ContainsKey(provinceOwner.ProvinceNum))
 				{
-					var nation = DomEdit.I.Nations.GetNationById(provinceOwner.NationNum);
+					var nation = D.Nations.GetNationById(provinceOwner.NationNum);
 					provinces[provinceOwner.ProvinceNum].Owner = nation;
 				}
 			}
@@ -147,7 +148,7 @@ namespace Map
 			{
 				if (provinces.ContainsKey(startLocation.ProvinceNum))
 				{
-					var nation = DomEdit.I.Nations.GetNationById(startLocation.NationNum);
+					var nation = D.Nations.GetNationById(startLocation.NationNum);
 					provinces[startLocation.ProvinceNum].Owner = nation;
 				}
 			}

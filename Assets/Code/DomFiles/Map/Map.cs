@@ -6,6 +6,7 @@ using Core.Entities;
 using Data;
 using Dom;
 using Map.MapElements;
+using QuickCombat;
 using UI.Menus;
 using UnityEngine;
 using Utility;
@@ -29,7 +30,7 @@ namespace Map
 
 			foreach (var allowedPlayer in allElements.OfType<AllowedPlayer>())
 			{
-				Nation        nation        = DomEdit.I.Nations.GetNationById(allowedPlayer.NationNum);
+				Nation        nation        = D.Nations.GetNationById(allowedPlayer.NationNum);
 				StartLocation startLocation = allElements.OfType<StartLocation>().SingleOrDefault(x => x.NationNum == allowedPlayer.NationNum);
 				GamePlayer    player        = new GamePlayer(PlayerType.Human, nation) { CapitalProvinceNum = startLocation?.ProvinceNum ?? -1 };
 
@@ -67,7 +68,7 @@ namespace Map
 		public void SetPlayerPretender (GamePlayer player, Pretender pretender)
 		{
 			player.Pretender = pretender;
-			player.Nation    = DomEdit.I.Nations.GetNationById(pretender.nation.id);
+			player.Nation    = D.Nations.GetNationById(pretender.nation.id);
 
 			DomEdit.I.Ui.Get<PlayersMenu>().UpdateGizmo(player);
 			

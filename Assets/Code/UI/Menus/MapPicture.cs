@@ -17,7 +17,7 @@ namespace UI.Menus
 
 		public void LoadMap (Dictionary<int, Province> provinceMap, Texture2D mapTexture)
 		{
-			_provinceGizmos.SafeDestroy();
+			_provinceGizmos.SafeDestroyList();
 		
 			foreach (var province in provinceMap.Values)
 			{

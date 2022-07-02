@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Core;
 using Data;
+using QuickCombat;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -40,14 +41,14 @@ namespace UI.Menus.SearchMenu
 
 			clearSearchButton.gameObject.SetActive(!string.IsNullOrEmpty(searchText));
 
-			searchGizmos.SafeDestroy();
+			searchGizmos.SafeDestroyList();
 			if (!string.IsNullOrEmpty(searchText)) CreateSearchGizmos(searchText, results);
 		}
 
 		private List<UnitData> Search (string searchText)
 		{
 			var foundEntries = new List<UnitData>();
-			foreach (var entry in DomEdit.I.Units.GetAll())
+			foreach (var entry in D.Units.GetAll())
 			{
 				if (entry.name.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) != -1)
 				{
@@ -82,7 +83,7 @@ namespace UI.Menus.SearchMenu
 		{
 			var nationOptions = new List<TMP_Dropdown.OptionData>();
 			nationOptions.Add(new TMP_Dropdown.OptionData("Any nation"));
-			foreach (var nation in DomEdit.I.Nations.GetAll())
+			foreach (var nation in D.Nations.GetAll())
 			{
 				nationOptions.Add(new TMP_Dropdown.OptionData(nation.name + " - " + nation.epithet));
 			}

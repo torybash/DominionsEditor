@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using Core;
 using Data;
+using Data.Tables;
 using Dom;
+using QuickCombat;
 using UnityEngine;
 using Utility.Extensions;
 
@@ -24,7 +26,7 @@ namespace UI.Menus.SearchMenu
 			foreach (MagicPath magicPath in Enum.GetValues(typeof(MagicPath)))
 			{
 				var btn       = magicButtonTemplate.Copy();
-				var itemEntry = DomEdit.I.magicPaths.GetEntry(magicPath);
+				var itemEntry = Tbl.Get<MagicPathTable>().GetEntry(magicPath);
 				btn.icon.sprite    = itemEntry.Sprite;
 				btn.button.onClick.AddListener(() => DomEdit.I.controls.SetActiveEntity(new MagicData(magicPath, itemEntry.Sprite)));
 			}

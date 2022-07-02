@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using Data;
 using Data.Entries;
+using Data.Tables;
+using QuickCombat;
 
 namespace Core
 {
@@ -23,7 +25,7 @@ namespace Core
 			var entriesToSearchIn = new List<SearchableEntry>();
 			if (searchFilter.HasFlag(SearchFilter.Monsters)) entriesToSearchIn.AddRange(DomEdit.I.monsters.Entries);
 			if (searchFilter.HasFlag(SearchFilter.Items)) entriesToSearchIn.AddRange(DomEdit.I.items.Entries);
-			if (searchFilter.HasFlag(SearchFilter.Magic)) entriesToSearchIn.AddRange(DomEdit.I.magicPaths.magics);
+			if (searchFilter.HasFlag(SearchFilter.Magic)) entriesToSearchIn.AddRange(Tbl.Get<MagicPathTable>().magics);
 		
 			foreach (var entry in entriesToSearchIn)
 			{
