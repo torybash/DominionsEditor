@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Data;
 using QuickCombat.Gizmos;
 using QuickCombat.UI.Popups;
 using UnityEngine;
@@ -15,17 +14,17 @@ namespace QuickCombat
 	/// </summary>
 	public class MenuControl : MonoBehaviour
 	{
-		public NationPanel[] nationPanels;
-		public UnitsPanel    unitPanel;
-		public ItemsPanel    itemPanel;
-		
-		public Gizmo[]    gizmoPrefabs;
+		// public NationPanel[] nationPanels;
+		// public UnitsPanel    unitPanel;
+		// public ItemsPanel    itemPanel;
 
-		[NonSerialized] public List<Popup> popups;
+		public Gizmo[] gizmoPrefabs;
+
+		[NonSerialized] public List<Menu> menus;
 
 		void Awake ()
 		{
-			popups = GetComponentsInChildren<Popup>(true).ToList();
+			menus = GetComponentsInChildren<Menu>(true).ToList();
 		}
 
 		public void Init ()
@@ -38,44 +37,35 @@ namespace QuickCombat
 	{
 		static MenuControl menu;
 
-		public static NationPanel[] NationPanels => menu.nationPanels;
-		public static UnitsPanel    UnitPanel    => menu.unitPanel;
-		public static ItemsPanel    ItemPanel    => menu.itemPanel;
-
-		public static NationPanel GetNationPanel (PlayerSide side)
-		{
-			return menu.nationPanels[(int)side];
-		}
-
 		public static void SetInstance (MenuControl menuControl)
 		{
 			Debug.Assert(menu == null);
 			menu = menuControl;
 		}
 
-		public static T ShowPopup<T> () where T : Popup
+		public static T ShowMenu<T> () where T : Menu
 		{
-			var popup = GetPopup<T>();
+			var popup = GetMenu<T>();
 			popup.gameObject.SetActive(true);
 			popup.transform.SetAsLastSibling();
 			return popup;
 		}
 
-		public static void ClosePopup<T> () where T : Popup
+		public static void CloseMenu<T> () where T : Menu
 		{
-			var popup = GetPopup<T>();
+			var popup = GetMenu<T>();
 			popup.gameObject.SetActive(false);
 		}
 
-		static T GetPopup<T> () where T : Popup
+		static T GetMenu<T> () where T : Menu
 		{
-			foreach (var popup in menu.popups)
+			foreach (var popup in menu.menus)
 			{
 				if (popup is T p) return p;
 			}
-			throw new Exception($"Popup {typeof(T)} not found");
+			throw new Exception($"Menu {typeof(T)} not found");
 		}
-		
+
 		public static T CreateGizmo<T> (Transform parent) where T : Gizmo
 		{
 			var gizmoPrefab = GetGizmoPrefab<T>();
@@ -89,7 +79,7 @@ namespace QuickCombat
 			{
 				if (gizmoPrefab is T p) return p;
 			}
-			return null;
+			throw new Exception($"Gizmo {typeof(T)} not found");
 		}
 	}
 

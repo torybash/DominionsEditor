@@ -14,7 +14,7 @@ namespace QuickCombat
 		public static void Load ()
 		{
 			var domData  = new DominionsData();
-			D.SetInstance(domData);
+			DomData.SetInstance(domData);
 
 			var gameData = GameData.Load();
 			domData.spells  = Spells.Load(gameData);
@@ -30,7 +30,7 @@ namespace QuickCombat
 		}
 	}
 
-	public static class D
+	public static class DomData
 	{
 		static DominionsData data;
 

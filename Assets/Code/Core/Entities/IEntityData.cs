@@ -1,9 +1,9 @@
 namespace Core.Entities
 {
 
-	public interface IEntityData
-	{
-		
-	}
+	// public interface IEntityData
+	// {
+	// 	
+	// }
 
 }

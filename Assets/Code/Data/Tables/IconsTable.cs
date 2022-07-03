@@ -21,6 +21,7 @@ namespace Data.Tables
 			var nationIcon = nationIcons.SingleOrDefault(x => x.fileNameBase == fileNameBase);
 			return nationIcon?.icon;
 		}
+		
 		public Sprite GetUnitIcon (int id)
 		{
 			var unitIcon = unitIcons.SingleOrDefault(x => x.id == id);

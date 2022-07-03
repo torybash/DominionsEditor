@@ -24,7 +24,7 @@ namespace UI.Menus.SearchMenu
 		[SerializeField] private ItemsPanel  itemsPanel;
 		[SerializeField] private MagicsPanel magicsPanel;
 
-		private EntityType _activeTab;
+		// private EntityType _activeTab;
 
 		private void Awake ()
 		{
@@ -49,27 +49,27 @@ namespace UI.Menus.SearchMenu
 
 		private void OnToggleUnits (bool enable)
 		{
-			_activeTab = EntityType.Units;
+			// _activeTab = EntityType.Units;
 			UpdateTabPanels();
 		}
 
 		private void OnToggleItems (bool enable)
 		{
-			_activeTab = EntityType.Items;
+			// _activeTab = EntityType.Items;
 			UpdateTabPanels();
 		}
 
 		private void OnToggleMagic (bool enable)
 		{
-			_activeTab = EntityType.Magic;
+			// _activeTab = EntityType.Magic;
 			UpdateTabPanels();
 		}
 
 		private void UpdateTabPanels ()
 		{
-			unitsPanel.gameObject.SetActive(_activeTab  == EntityType.Units);
-			itemsPanel.gameObject.SetActive(_activeTab  == EntityType.Items);
-			magicsPanel.gameObject.SetActive(_activeTab == EntityType.Magic);
+			// unitsPanel.gameObject.SetActive(_activeTab  == EntityType.Units);
+			// itemsPanel.gameObject.SetActive(_activeTab  == EntityType.Items);
+			// magicsPanel.gameObject.SetActive(_activeTab == EntityType.Magic);
 		}
 
 	}

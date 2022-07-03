@@ -17,7 +17,7 @@ namespace QuickCombat
 		{
 			_selected = selected;
 			
-			var popup = M.ShowPopup<PretenderLoadPopup>();
+			var popup = M.ShowMenu<PretenderLoadMenu>();
 			foreach (Pretender pretender in LoadPretenders())
 			{
 				var gizmo = popup.gizmoTemplate.Copy();
@@ -29,7 +29,7 @@ namespace QuickCombat
 
 		void OnSelectedPretender (Pretender pretender)
 		{
-			M.ClosePopup<PretenderLoadPopup>();
+			M.CloseMenu<PretenderLoadMenu>();
 			_selected?.Invoke(pretender);
 		}
 

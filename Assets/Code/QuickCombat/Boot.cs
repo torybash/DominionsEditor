@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace QuickCombat
 {
-	public class SessionManager : MonoBehaviour
+	public class Boot : MonoBehaviour
 	{
 		public MenuControl menu;
 		public TableControl tableControl;
@@ -23,10 +23,9 @@ namespace QuickCombat
 			//TODO Load previous session
 			
 			var session = new Session();
-			// session.Run();
+			session.RunGameSetup();
 			
-			var gameSetup = new GameSetupHandler(session);
-			gameSetup.Run();
+
 		}
 	}
 

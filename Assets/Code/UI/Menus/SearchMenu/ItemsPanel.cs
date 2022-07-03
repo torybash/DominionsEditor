@@ -42,7 +42,7 @@ namespace UI.Menus.SearchMenu
 		private List<ItemData> Search (string searchText)
 		{
 			var foundEntries = new List<ItemData>();
-			foreach (var entry in D.Items.GetAll())
+			foreach (var entry in DomData.Items.GetAll())
 			{
 				if (entry.name.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) != -1)
 				{
@@ -70,7 +70,7 @@ namespace UI.Menus.SearchMenu
 		{
 			Debug.Log($"OnSelected {itemData}");
 			
-			DomEdit.I.controls.SetActiveEntity(itemData);
+			// DomEdit.I.controls.SetActiveEntity(itemData);
 
 		}
 	}

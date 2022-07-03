@@ -14,25 +14,32 @@ namespace QuickCombat
 		public Session ()
 		{
 			players = new List<Player>();
-			players.Add(new Player());
-			players.Add(new Player());
+			players.Add(new Player(PlayerSide.Left));
+			players.Add(new Player(PlayerSide.Right));
 		}
 
-		public void Run ()
+		public void RunGameSetup ()
 		{
-			var nationPanelsControl = new NationPanelsHandler();
-			
+			var gameSetup = new GameSetupHandler(this);
+			gameSetup.Run();
+		}
 
+		public void RunCombatEdit ()
+		{
+			var combatEdit = new CombatEditHandler(this);
+			combatEdit.Run();
 		}
 
 		public void SetPlayerPretender (PlayerSide side, Pretender pretender)
 		{
 			var player = players[(int)side];
 			player.pretender = pretender;
-			player.nation    = D.Nations.GetNationById(pretender.nation.id);
-			
+			player.nation    = DomData.Nations.GetNationById(pretender.nation.id);
+
 			// SavePretenders();
 		}
 	}
+
+
 
 }

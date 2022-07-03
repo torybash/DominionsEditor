@@ -139,7 +139,7 @@ namespace Map
 			{
 				if (provinces.ContainsKey(provinceOwner.ProvinceNum))
 				{
-					var nation = D.Nations.GetNationById(provinceOwner.NationNum);
+					var nation = DomData.Nations.GetNationById(provinceOwner.NationNum);
 					provinces[provinceOwner.ProvinceNum].Owner = nation;
 				}
 			}
@@ -148,65 +148,65 @@ namespace Map
 			{
 				if (provinces.ContainsKey(startLocation.ProvinceNum))
 				{
-					var nation = D.Nations.GetNationById(startLocation.NationNum);
+					var nation = DomData.Nations.GetNationById(startLocation.NationNum);
 					provinces[startLocation.ProvinceNum].Owner = nation;
 				}
 			}
 
 			//Create commanders
-			foreach (var commanderElement in mapElements.OfType<CommanderElement>())
-			{
-				var province  = provinces[commanderElement.ProvinceNum];
-				var commander = Commander.Create(commanderElement.MonsterId, province.Owner);
-				commander.Nationality = province.Owner;
-				province.Monsters.Add(commander);
-
-				//Create owned-be-commander objects
-				foreach (var ownedByCommander in mapElements.OfType<IOwnedByCommander>().Where(x => x.Commander == commanderElement))
-				{
-					switch (ownedByCommander)
-					{
-						case BodyguardsElement bodyguardsElement:
-							var bodyguard = Troops.Create(bodyguardsElement.MonsterId, bodyguardsElement.Amount, commander.Nationality);
-							commander.Bodyguards.Add(bodyguard);
-							break;
-						case ItemElement itemElement:
-							var item = Item.Create(itemElement.ItemName);
-							commander.Items.Add(item);
-							break;
-						case UnitsElement unitsElement:
-							var unit = Troops.Create(unitsElement.MonsterId, unitsElement.Amount, commander.Nationality);
-							commander.UnitsUnderCommand.Add(unit);
-							break;
-						case Experience experience:
-							commander.Xp += experience.Amount;
-							break;
-						case Magic magic:
-							var path = magic switch
-							{
-								AirMagic _    => MagicPath.Air,
-								AstralMagic _ => MagicPath.Astral,
-								BloodMagic _  => MagicPath.Blood,
-								DeathMagic _  => MagicPath.Death,
-								EarthMagic _  => MagicPath.Earth,
-								FireMagic _   => MagicPath.Fire,
-								HolyMagic _   => MagicPath.Holy,
-								NatureMagic _ => MagicPath.Nature,
-								WaterMagic _  => MagicPath.Water,
-								_             => throw new ArgumentOutOfRangeException(nameof(magic))
-							};
-							var magicOverride = new MagicOverride(path, magic.MagicLevel);
-							commander.MagicOverrides.Add(magicOverride);
-							break;
-						case ClearMagic _:
-							//TODO
-							break;
-						default:
-							throw new ArgumentOutOfRangeException(nameof(ownedByCommander));
-
-					}
-				}
-			}
+			// foreach (var commanderElement in mapElements.OfType<CommanderElement>())
+			// {
+			// 	var province  = provinces[commanderElement.ProvinceNum];
+			// 	var commander = Commander.Create(commanderElement.MonsterId, province.Owner);
+			// 	commander.Nationality = province.Owner;
+			// 	province.Monsters.Add(commander);
+			//
+			// 	//Create owned-be-commander objects
+			// 	foreach (var ownedByCommander in mapElements.OfType<IOwnedByCommander>().Where(x => x.Commander == commanderElement))
+			// 	{
+			// 		switch (ownedByCommander)
+			// 		{
+			// 			case BodyguardsElement bodyguardsElement:
+			// 				var bodyguard = Troops.Create(bodyguardsElement.MonsterId, bodyguardsElement.Amount, commander.Nationality);
+			// 				commander.Bodyguards.Add(bodyguard);
+			// 				break;
+			// 			case ItemElement itemElement:
+			// 				var item = Item.Create(itemElement.ItemName);
+			// 				commander.Items.Add(item);
+			// 				break;
+			// 			case UnitsElement unitsElement:
+			// 				var unit = Troops.Create(unitsElement.MonsterId, unitsElement.Amount, commander.Nationality);
+			// 				commander.UnitsUnderCommand.Add(unit);
+			// 				break;
+			// 			case Experience experience:
+			// 				commander.Xp += experience.Amount;
+			// 				break;
+			// 			case Magic magic:
+			// 				var path = magic switch
+			// 				{
+			// 					AirMagic _    => MagicPath.Air,
+			// 					AstralMagic _ => MagicPath.Astral,
+			// 					BloodMagic _  => MagicPath.Blood,
+			// 					DeathMagic _  => MagicPath.Death,
+			// 					EarthMagic _  => MagicPath.Earth,
+			// 					FireMagic _   => MagicPath.Fire,
+			// 					HolyMagic _   => MagicPath.Holy,
+			// 					NatureMagic _ => MagicPath.Nature,
+			// 					WaterMagic _  => MagicPath.Water,
+			// 					_             => throw new ArgumentOutOfRangeException(nameof(magic))
+			// 				};
+			// 				var magicOverride = new MagicOverride(path, magic.MagicLevel);
+			// 				commander.MagicOverrides.Add(magicOverride);
+			// 				break;
+			// 			case ClearMagic _:
+			// 				//TODO
+			// 				break;
+			// 			default:
+			// 				throw new ArgumentOutOfRangeException(nameof(ownedByCommander));
+			//
+			// 		}
+			// 	}
+			// }
 
 			return provinces;
 		}

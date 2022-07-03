@@ -24,7 +24,7 @@ namespace UI.Gizmos
 		[SerializeField] GameObject fortMarker;
 		[SerializeField] GameObject throneMarker;
 
-		List<MonsterGizmo> _monsterGizmos = new List<MonsterGizmo>();
+		// List<MonsterGizmo> _monsterGizmos = new List<MonsterGizmo>();
 		List<Line>         _borderLines   = new List<Line>();
 		NationGizmo        _nationGizmo;
 
@@ -71,26 +71,26 @@ namespace UI.Gizmos
 			polygon.PointListsProperties.PointListProperties[0].SetPoints();
 			polygon.transform.SetParent(transform); //TODO Transform point instead
 
-			foreach (var monster in Province.Monsters)
-			{
-				switch (monster)
-				{
-					case Commander commander:
-						CreateCommanderGizmo(commander, this);
-
-						foreach (var unit in commander.UnitsUnderCommand)
-						{
-							CreateUnitGizmo(unit);
-						}
-						break;
-					case Troops unit:
-						CreateUnitGizmo(unit);
-						break;
-					default:
-						throw new ArgumentOutOfRangeException(nameof(monster));
-
-				}
-			}
+			// foreach (var monster in Province.Monsters)
+			// {
+			// 	switch (monster)
+			// 	{
+			// 		case Commander commander:
+			// 			CreateCommanderGizmo(commander, this);
+			//
+			// 			foreach (var unit in commander.UnitsUnderCommand)
+			// 			{
+			// 				CreateUnitGizmo(unit);
+			// 			}
+			// 			break;
+			// 		case Troops unit:
+			// 			CreateUnitGizmo(unit);
+			// 			break;
+			// 		default:
+			// 			throw new ArgumentOutOfRangeException(nameof(monster));
+			//
+			// 	}
+			// }
 
 			Refresh();
 		}
@@ -105,14 +105,14 @@ namespace UI.Gizmos
 			// throneMarker.SetActive(Province.HasThrone);
 		}
 
-		public void RemoveElementGizmo (Monster elem)
-		{
-			var elemGizmo = _monsterGizmos.SingleOrDefault(x => x.MonsterData == elem);
-			if (elemGizmo != null)
-			{
-				Destroy(elemGizmo.gameObject);
-			}
-		}
+		// public void RemoveElementGizmo (Monster elem)
+		// {
+		// 	var elemGizmo = _monsterGizmos.SingleOrDefault(x => x.MonsterData == elem);
+		// 	if (elemGizmo != null)
+		// 	{
+		// 		Destroy(elemGizmo.gameObject);
+		// 	}
+		// }
 
 		public void SetOwner (Nation nation)
 		{
@@ -136,28 +136,28 @@ namespace UI.Gizmos
 			_nationGizmo.ShowCapitalMarker(isStartLocation);
 		}
 
-		public void CreateCommanderGizmo (Commander commander, ProvinceGizmo provinceGizmo)
-		{
-			var commanderGizmo = DomEdit.I.Ui.Create<CommanderGizmo>(rosterGroup);
-			commanderGizmo.Initialize(provinceGizmo);
-			commanderGizmo.SetData(commander);
-			_monsterGizmos.Add(commanderGizmo);
-		}
-
-		public void CreateUnitGizmo (Troops troops)
-		{
-			var unitGizmo = DomEdit.I.Ui.Create<UnitGizmo>(rosterGroup);
-			unitGizmo.SetData(troops);
-			_monsterGizmos.Add(unitGizmo);
-
-			var ownerCommander = Province.Monsters.OfType<Commander>().SingleOrDefault(x => x.UnitsUnderCommand.Contains(troops));
-			if (ownerCommander != null)
-			{
-				var ownerCommanderGizmo = _monsterGizmos.OfType<CommanderGizmo>().Single(x => x.Data == ownerCommander);
-				int commanderIdx        = ownerCommanderGizmo.transform.GetSiblingIndex();
-				unitGizmo.transform.SetSiblingIndex(commanderIdx + 1);
-			}
-		}
+		// public void CreateCommanderGizmo (Commander commander, ProvinceGizmo provinceGizmo)
+		// {
+		// 	var commanderGizmo = DomEdit.I.Ui.Create<CommanderGizmo>(rosterGroup);
+		// 	commanderGizmo.Initialize(provinceGizmo);
+		// 	commanderGizmo.SetData(commander);
+		// 	_monsterGizmos.Add(commanderGizmo);
+		// }
+		//
+		// public void CreateUnitGizmo (Troops troops)
+		// {
+		// 	var unitGizmo = DomEdit.I.Ui.Create<UnitGizmo>(rosterGroup);
+		// 	unitGizmo.SetData(troops);
+		// 	_monsterGizmos.Add(unitGizmo);
+		// 	
+		// 	var ownerCommander = Province.Monsters.OfType<Commander>().SingleOrDefault(x => x.UnitsUnderCommand.Contains(troops));
+		// 	if (ownerCommander != null)
+		// 	{
+		// 		var ownerCommanderGizmo = _monsterGizmos.OfType<CommanderGizmo>().Single(x => x.Data == ownerCommander);
+		// 		int commanderIdx        = ownerCommanderGizmo.transform.GetSiblingIndex();
+		// 		unitGizmo.transform.SetSiblingIndex(commanderIdx + 1);
+		// 	}
+		// }
 	}
 
 }

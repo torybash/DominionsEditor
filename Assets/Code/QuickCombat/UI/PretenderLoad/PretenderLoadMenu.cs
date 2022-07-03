@@ -6,7 +6,7 @@ using Utility.Extensions;
 
 namespace QuickCombat.UI.Popups
 {
-	public class PretenderLoadPopup : Popup
+	public class PretenderLoadMenu : Menu
 	{
 		public RectTransform      pretendersContainer;
 		public Button             closeButton;

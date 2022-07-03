@@ -31,7 +31,7 @@ namespace Dom
 				_       => -1
 			};
 
-			nation = era != -1 ? D.Nations.GetNationByNameAndEra(nationName, era) : Nation.Independents;
+			nation = era != -1 ? DomData.Nations.GetNationByNameAndEra(nationName, era) : Nation.Independents;
 		}
 	}
 

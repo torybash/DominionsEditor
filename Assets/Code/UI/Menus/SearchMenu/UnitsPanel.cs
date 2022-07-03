@@ -48,7 +48,7 @@ namespace UI.Menus.SearchMenu
 		private List<UnitData> Search (string searchText)
 		{
 			var foundEntries = new List<UnitData>();
-			foreach (var entry in D.Units.GetAll())
+			foreach (var entry in DomData.Units.GetAll())
 			{
 				if (entry.name.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) != -1)
 				{
@@ -76,14 +76,14 @@ namespace UI.Menus.SearchMenu
 		{
 			Debug.Log($"OnSelected {unitData}");
 
-			DomEdit.I.controls.SetActiveEntity(unitData);
+			// DomEdit.I.controls.SetActiveEntity(unitData);
 		}
 
 		private void AddNationOptions ()
 		{
 			var nationOptions = new List<TMP_Dropdown.OptionData>();
 			nationOptions.Add(new TMP_Dropdown.OptionData("Any nation"));
-			foreach (var nation in D.Nations.GetAll())
+			foreach (var nation in DomData.Nations.GetAll())
 			{
 				nationOptions.Add(new TMP_Dropdown.OptionData(nation.name + " - " + nation.epithet));
 			}

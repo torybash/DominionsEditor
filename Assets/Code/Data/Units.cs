@@ -43,7 +43,7 @@ namespace Data
 				_units.Add(unit);
 			}
 			
-			foreach (var nation in D.Nations.GetAll())
+			foreach (var nation in DomData.Nations.GetAll())
 			{
 				// associate pretenders
 				//  nation.pretenders = nation.pretenders.Distinct().ToList();

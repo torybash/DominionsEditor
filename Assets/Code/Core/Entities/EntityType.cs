@@ -1,6 +1,6 @@
 namespace Core.Entities
 {
 
-	public enum EntityType {Units, Items, Magic}
+	// public enum EntityType {Units, Items, Magic}
 
 }

@@ -7,7 +7,7 @@ namespace Data
 {
 
 	[Serializable]
-	public class MagicData : IEntityData
+	public class MagicData //: IEntityData
 	{
 		[SerializeField] public  MagicPath magicPath;
 		[SerializeField] private Sprite    sprite;
