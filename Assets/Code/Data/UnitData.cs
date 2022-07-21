@@ -83,10 +83,10 @@ namespace Data
 				UnitType.CommanderSummon        => true,
 				UnitType.CommanderLand          => true,
 
-				UnitType.Hero       => true,
-				UnitType.HeroMulti  => true,
-				UnitType.HeroUnique => true,
-				UnitType.Pretender  => true,
+				UnitType.Hero       => false,
+				UnitType.HeroMulti  => false,
+				UnitType.HeroUnique => false,
+				UnitType.Pretender  => false,
 
 				UnitType.Unit              => false,
 				UnitType.UnitCapOnly       => false,
